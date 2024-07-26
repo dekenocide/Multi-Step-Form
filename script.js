@@ -62,19 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
             'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
             'Combination-Single', 'Facial-Single', 'Add-On-Single',
-            'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
-            'Service-Single-1', 'Package-Single-1', 'Spa-del-Sol-Dream-Info-Single-1',
-            'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1',
-            'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1',
-            'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
-            'Service-Single-2', 'Package-Single-2', 'Spa-del-Sol-Dream-Info-Single-2',
-            'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
-            'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2',
-            'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
-            'Service-Single-3', 'Package-Single-3', 'Spa-del-Sol-Dream-Info-Single-3',
-            'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3',
-            'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3',
-            'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3',
+            'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single'
         ];
 
         const coupleServiceFields = [
@@ -84,28 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple',
             'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple',
             'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple',
-            'Other-Services-Info-Couple',
-            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1',
-            'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1',
-            'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1',
-            'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1',
-            'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1',
-            'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1',
-            'Other-Services-Info-Couple-1',
-            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2',
-            'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2',
-            'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2',
-            'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2',
-            'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2',
-            'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatments-Selects-Wrapper-Couple-2',
-            'Other-Services-Info-Couple-2',
-            'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3',
-            'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3',
-            'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3',
-            'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3',
-            'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3',
-            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3',
-            'Other-Services-Info-Couple-3',
+            'Other-Services-Info-Couple'
         ];
 
         singleServiceFields.forEach(id => {
@@ -133,18 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         document.getElementById('Service-Single').style.display = 'block';
-        document.getElementById('Service-Single-1').style.display = 'block';
-        document.getElementById('Service-Single-2').style.display = 'block';
-        document.getElementById('Service-Single-3').style.display = 'block';
         document.getElementById('Service-Couple').style.display = 'block';
-        document.getElementById('Service-Couple-1').style.display = 'block';
-        document.getElementById('Service-Couple-2').style.display = 'block';
-        document.getElementById('Service-Couple-3').style.display = 'block';
-    }
-
-    function resetNumberOfGuests() {
-        const numberOfGuestsSelect = document.getElementById('Number-of-Guests');
-        numberOfGuestsSelect.selectedIndex = 0;
     }
 
     nextBtn.addEventListener('click', function() {
@@ -159,8 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
     prevBtn.addEventListener('click', function() {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
-        } else if (currentStep === 'step-7') {
-            resetNumberOfGuests();
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
@@ -185,26 +139,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const guestArrangementSelect2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangementSelect3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangementSelect4 = document.getElementById('4-Guest-Arrangement');
-    const guestArrangementSelect5 = document.getElementById('5-Guest-Arrangement');
-    const guestArrangementSelect6 = document.getElementById('6-Guest-Arrangement');
     const singleTemplate = document.getElementById('Single');
     const single1Template = document.getElementById('Single-1');
     const single2Template = document.getElementById('Single-2');
     const single3Template = document.getElementById('Single-3');
+    const single4Template = document.getElementById('Single-4');
     const coupleTemplate = document.getElementById('Couple');
     const couple1Template = document.getElementById('Couple-1');
     const couple2Template = document.getElementById('Couple-2');
-    const couple3Template = document.getElementById('Couple-3');
 
     function hideAllTemplates() {
         singleTemplate.style.display = 'none';
         single1Template.style.display = 'none';
         single2Template.style.display = 'none';
         single3Template.style.display = 'none';
+        single4Template.style.display = 'none';
         coupleTemplate.style.display = 'none';
         couple1Template.style.display = 'none';
         couple2Template.style.display = 'none';
-        couple3Template.style.display = 'none';
     }
 
     function handleTemplateVisibility() {
@@ -217,53 +169,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const guestArrangementValue = guestArrangementSelect2.value;
             if (guestArrangementValue === '1-Couple') {
                 coupleTemplate.style.display = 'block';
-            } else if (guestArrangementValue === '2-Singles') {
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
             }
         } else if (numberOfGuestsValue === '3') {
             const guestArrangementValue = guestArrangementSelect3.value;
             if (guestArrangementValue === '1-Couple-1-Single') {
                 coupleTemplate.style.display = 'block';
                 singleTemplate.style.display = 'block';
-            } else if (guestArrangementValue === '3-Singles') {
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
-                single3Template.style.display = 'block';
-            }
-        } else if (numberOfGuestsValue === '4') {
-            const guestArrangementValue = guestArrangementSelect4.value;
-            if (guestArrangementValue === '2-Couples') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
-            } else if (guestArrangementValue === '1-Couple-2-Singles') {
-                coupleTemplate.style.display = 'block';
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
-            }
-        } else if (numberOfGuestsValue === '5') {
-            const guestArrangementValue = guestArrangementSelect5.value;
-            if (guestArrangementValue === '2-Couples-1-Single') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
-                singleTemplate.style.display = 'block';
-            } else if (guestArrangementValue === '1-Couple-3-Singles') {
-                coupleTemplate.style.display = 'block';
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
-                single3Template.style.display = 'block';
-            }
-        } else if (numberOfGuestsValue === '6') {
-            const guestArrangementValue = guestArrangementSelect6.value;
-            if (guestArrangementValue === '3-Couples') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
-                couple3Template.style.display = 'block';
-            } else if (guestArrangementValue === '2-Couples-2-Singles') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
             }
         }
     }
@@ -285,14 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
         handleTemplateVisibility();
     });
 
-    guestArrangementSelect5.addEventListener('change', function() {
-        handleTemplateVisibility();
-    });
-
-    guestArrangementSelect6.addEventListener('change', function() {
-        handleTemplateVisibility();
-    });
-
     // Initial setup
     hideAllTemplates();
 });
@@ -305,16 +208,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
-    const guestArrangement5 = document.getElementById('5-Guest-Arrangement');
-    const guestArrangement6 = document.getElementById('6-Guest-Arrangement');
 
     function hideAllGuestArrangements() {
         guestArrangementLabel.style.display = 'none';
         guestArrangement2.style.display = 'none';
         guestArrangement3.style.display = 'none';
         guestArrangement4.style.display = 'none';
-        guestArrangement5.style.display = 'none';
-        guestArrangement6.style.display = 'none';
     }
 
     function resetField(field) {
@@ -333,8 +232,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(guestArrangement2);
                 resetField(guestArrangement3);
                 resetField(guestArrangement4);
-                resetField(guestArrangement5);
-                resetField(guestArrangement6);
                 hideAllGuestArrangements();
                 break;
         }
@@ -353,12 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (numberOfGuestsValue === '4') {
             guestArrangementLabel.style.display = 'block';
             guestArrangement4.style.display = 'block';
-        } else if (numberOfGuestsValue === '5') {
-            guestArrangementLabel.style.display = 'block';
-            guestArrangement5.style.display = 'block';
-        } else if (numberOfGuestsValue === '6') {
-            guestArrangementLabel.style.display = 'block';
-            guestArrangement6.style.display = 'block';
         }
     }
 
@@ -1033,5 +924,3 @@ document.addEventListener('DOMContentLoaded', function() {
     addChangeEventListener('Facial-Guest-2-Couple-3', handleConditionalsCouple3);
 
     // Initial setup
-    hideAllConditionals();
-});
