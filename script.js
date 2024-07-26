@@ -103,6 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('Service-Couple').style.display = 'block';
     }
 
+    function resetNumberOfGuests() {
+        const numberOfGuests = document.getElementById('Number-of-Guests');
+        resetField(numberOfGuests);
+    }
+
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
@@ -115,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
     prevBtn.addEventListener('click', function() {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
+        }
+        if (currentStep === 'step-7') {
+            resetNumberOfGuests();
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
@@ -532,4 +540,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     hideAllConditionals();
 });
-
