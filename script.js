@@ -139,24 +139,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const guestArrangementSelect2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangementSelect3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangementSelect4 = document.getElementById('4-Guest-Arrangement');
+    const guestArrangementSelect5 = document.getElementById('5-Guest-Arrangement');
+    const guestArrangementSelect6 = document.getElementById('6-Guest-Arrangement');
     const singleTemplate = document.getElementById('Single');
     const single1Template = document.getElementById('Single-1');
     const single2Template = document.getElementById('Single-2');
     const single3Template = document.getElementById('Single-3');
-    const single4Template = document.getElementById('Single-4');
     const coupleTemplate = document.getElementById('Couple');
     const couple1Template = document.getElementById('Couple-1');
     const couple2Template = document.getElementById('Couple-2');
+    const couple3Template = document.getElementById('Couple-3');
 
     function hideAllTemplates() {
         singleTemplate.style.display = 'none';
         single1Template.style.display = 'none';
         single2Template.style.display = 'none';
         single3Template.style.display = 'none';
-        single4Template.style.display = 'none';
         coupleTemplate.style.display = 'none';
         couple1Template.style.display = 'none';
         couple2Template.style.display = 'none';
+        couple3Template.style.display = 'none';
     }
 
     function handleTemplateVisibility() {
@@ -208,12 +210,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
+    const guestArrangement5 = document.getElementById('5-Guest-Arrangement');
+    const guestArrangement6 = document.getElementById('6-Guest-Arrangement');
 
     function hideAllGuestArrangements() {
         guestArrangementLabel.style.display = 'none';
         guestArrangement2.style.display = 'none';
         guestArrangement3.style.display = 'none';
         guestArrangement4.style.display = 'none';
+        guestArrangement5.style.display = 'none';
+        guestArrangement6.style.display = 'none';
     }
 
     function resetField(field) {
@@ -232,6 +238,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(guestArrangement2);
                 resetField(guestArrangement3);
                 resetField(guestArrangement4);
+                resetField(guestArrangement5);
+                resetField(guestArrangement6);
                 hideAllGuestArrangements();
                 break;
         }
@@ -250,6 +258,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (numberOfGuestsValue === '4') {
             guestArrangementLabel.style.display = 'block';
             guestArrangement4.style.display = 'block';
+        } else if (numberOfGuestsValue === '5') {
+            guestArrangementLabel.style.display = 'block';
+            guestArrangement5.style.display = 'block';
+        } else if (numberOfGuestsValue === '6') {
+            guestArrangementLabel.style.display = 'block';
+            guestArrangement6.style.display = 'block';
         }
     }
 
