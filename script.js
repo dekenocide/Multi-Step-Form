@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const guestArrangementSelect2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangementSelect3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangementSelect4 = document.getElementById('4-Guest-Arrangement');
-    const guestArrangementSelect4 = document.getElementById('5-Guest-Arrangement');
-    const guestArrangementSelect4 = document.getElementById('6-Guest-Arrangement');
+    const guestArrangementSelect5 = document.getElementById('5-Guest-Arrangement');
+    const guestArrangementSelect6 = document.getElementById('6-Guest-Arrangement');
     const singleTemplate = document.getElementById('Single');
     const single1Template = document.getElementById('Single-1');
     const single2Template = document.getElementById('Single-2');
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const coupleTemplate = document.getElementById('Couple');
     const couple1Template = document.getElementById('Couple-1');
     const couple2Template = document.getElementById('Couple-2');
-    const couple2Template = document.getElementById('Couple-3');
+    const couple3Template = document.getElementById('Couple-3');
 
     function hideAllTemplates() {
         singleTemplate.style.display = 'none';
