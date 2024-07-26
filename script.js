@@ -266,6 +266,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     hideAllConditionals();
 });
-    hideAllSingleConditionals();
-    hideAllCoupleConditionals();
-});
