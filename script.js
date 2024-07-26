@@ -1,3 +1,220 @@
+// STEPS SCRIPTS
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Step navigation elements
+    const steps = {
+        'step-1': document.getElementById('step-1'),
+        'step-2': document.getElementById('step-2'),
+        'step-3': document.getElementById('step-3'),
+        'step-4': document.getElementById('step-4'),
+        'step-5': document.getElementById('step-5'),
+        'step-6': document.getElementById('step-6'),
+        'step-7': document.getElementById('step-7'),
+        'step-8': document.getElementById('step-8'),
+        'step-9': document.getElementById('step-9')
+    };
+
+    const nextBtn = document.getElementById('next-button');
+    const prevBtn = document.getElementById('previous-button');
+    const submitBtn = document.getElementById('submit');
+    let currentStep = 'step-1';
+
+    // Define the hierarchical order for the steps
+    const hierarchicalSteps = {
+        'step-1': { next: 'step-2' },
+        'step-2': { next: 'step-3', prev: 'step-1' },
+        'step-3': { next: 'step-4', prev: 'step-2' },
+        'step-4': { next: 'step-5', prev: 'step-3' },
+        'step-5': { next: 'step-6', prev: 'step-4' },
+        'step-6': { next: 'step-7', prev: 'step-5' },
+        'step-7': { next: 'step-8', prev: 'step-6' },
+        'step-8': { prev: 'step-7' },
+        'step-9': { prev: 'step-7' }
+    };
+
+    function showStep(step) {
+        Object.keys(steps).forEach(key => {
+            steps[key].style.display = key === step ? 'block' : 'none';
+        });
+        prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
+        nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
+        submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
+    }
+
+    function validateStep(step) {
+        const inputs = steps[step].querySelectorAll('input, select, textarea');
+        for (let input of inputs) {
+            if (input.style.display !== 'none') {
+                if (input.type === 'select-one') {
+                    if (input.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (input.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    nextBtn.addEventListener('click', function() {
+        if (validateStep(currentStep)) {
+            currentStep = getNextStep(currentStep);
+            showStep(currentStep);
+        } else {
+            alert('Please fill out all required fields before proceeding.');
+        }
+    });
+
+    prevBtn.addEventListener('click', function() {
+        currentStep = getPrevStep(currentStep);
+        showStep(currentStep);
+    });
+
+    function getNextStep(current) {
+        return hierarchicalSteps[current]?.next || current;
+    }
+
+    function getPrevStep(current) {
+        return hierarchicalSteps[current]?.prev || current;
+    }
+
+    // Initial setup
+    showStep(currentStep);
+});
+
+// SHOW STEP-8 TEMPLATE SCRIPT
+
+document.addEventListener('DOMContentLoaded', function() {
+    const numberOfGuestsSelect = document.getElementById('Number-of-Guests');
+    const guestArrangementSelect2 = document.getElementById('2-Guest-Arrangement');
+    const guestArrangementSelect3 = document.getElementById('3-Guest-Arrangement');
+    const guestArrangementSelect4 = document.getElementById('4-Guest-Arrangement');
+    const singleTemplate = document.getElementById('Single');
+    const single1Template = document.getElementById('Single-1');
+    const single2Template = document.getElementById('Single-2');
+    const single3Template = document.getElementById('Single-3');
+    const single4Template = document.getElementById('Single-4');
+    const coupleTemplate = document.getElementById('Couple');
+    const couple1Template = document.getElementById('Couple-1');
+    const couple2Template = document.getElementById('Couple-2');
+
+    function hideAllTemplates() {
+        singleTemplate.style.display = 'none';
+        single1Template.style.display = 'none';
+        single2Template.style.display = 'none';
+        single3Template.style.display = 'none';
+        single4Template.style.display = 'none';
+        coupleTemplate.style.display = 'none';
+        couple1Template.style.display = 'none';
+        couple2Template.style.display = 'none';
+    }
+
+    function handleTemplateVisibility() {
+        hideAllTemplates();
+
+        const numberOfGuestsValue = numberOfGuestsSelect.value;
+        if (numberOfGuestsValue === '1') {
+            singleTemplate.style.display = 'block';
+        } else if (numberOfGuestsValue === '2') {
+            const guestArrangementValue = guestArrangementSelect2.value;
+            if (guestArrangementValue === '1-Couple') {
+                coupleTemplate.style.display = 'block';
+            }
+        } else if (numberOfGuestsValue === '3') {
+            const guestArrangementValue = guestArrangementSelect3.value;
+            if (guestArrangementValue === '1-Couple-1-Single') {
+                coupleTemplate.style.display = 'block';
+                singleTemplate.style.display = 'block';
+            }
+        }
+    }
+
+    numberOfGuestsSelect.addEventListener('change', function() {
+        hideAllTemplates();
+        handleTemplateVisibility();
+    });
+
+    guestArrangementSelect2.addEventListener('change', function() {
+        handleTemplateVisibility();
+    });
+
+    guestArrangementSelect3.addEventListener('change', function() {
+        handleTemplateVisibility();
+    });
+
+    guestArrangementSelect4.addEventListener('change', function() {
+        handleTemplateVisibility();
+    });
+
+    // Initial setup
+    hideAllTemplates();
+});
+
+// NUMBER OF GUESTS CONDITIONALS SCRIPT
+
+document.addEventListener('DOMContentLoaded', function() {
+    const numberOfGuests = document.getElementById('Number-of-Guests');
+    const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
+    const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
+    const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
+    const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
+
+    function hideAllGuestArrangements() {
+        guestArrangementLabel.style.display = 'none';
+        guestArrangement2.style.display = 'none';
+        guestArrangement3.style.display = 'none';
+        guestArrangement4.style.display = 'none';
+    }
+
+    function resetField(field) {
+        if (field) {
+            if (field.tagName === 'SELECT') {
+                field.selectedIndex = 0;
+            } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
+                field.value = '';
+            }
+        }
+    }
+
+    function resetAndHideChildren(parentSelect) {
+        switch (parentSelect.id) {
+            case 'Number-of-Guests':
+                resetField(guestArrangement2);
+                resetField(guestArrangement3);
+                resetField(guestArrangement4);
+                hideAllGuestArrangements();
+                break;
+        }
+    }
+
+    function handleGuestArrangements() {
+        hideAllGuestArrangements();
+
+        const numberOfGuestsValue = numberOfGuests.value;
+        if (numberOfGuestsValue === '2') {
+            guestArrangementLabel.style.display = 'block';
+            guestArrangement2.style.display = 'block';
+        } else if (numberOfGuestsValue === '3') {
+            guestArrangementLabel.style.display = 'block';
+            guestArrangement3.style.display = 'block';
+        } else if (numberOfGuestsValue === '4') {
+            guestArrangementLabel.style.display = 'block';
+            guestArrangement4.style.display = 'block';
+        }
+    }
+
+    numberOfGuests.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        handleGuestArrangements();
+    });
+
+    // Initial setup
+    hideAllGuestArrangements();
+});
+
+// SERVICES CONDITIONALS SCRIPT
+
 document.addEventListener('DOMContentLoaded', function() {
     // Single Service Conditional fields
     const singleService = document.getElementById('Service-Single');
