@@ -57,6 +57,52 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
+    function resetServiceConditionals() {
+        const singleServiceFields = [
+            'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
+            'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
+            'Combination-Single', 'Facial-Single', 'Add-On-Single',
+            'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single'
+        ];
+
+        const coupleServiceFields = [
+            'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
+            'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple',
+            'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple',
+            'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple',
+            'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple',
+            'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple',
+            'Other-Services-Info-Couple'
+        ];
+
+        singleServiceFields.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none';
+                if (element.tagName === 'SELECT') {
+                    element.selectedIndex = 0;
+                } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
+                    element.value = '';
+                }
+            }
+        });
+
+        coupleServiceFields.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.display = 'none';
+                if (element.tagName === 'SELECT') {
+                    element.selectedIndex = 0;
+                } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
+                    element.value = '';
+                }
+            }
+        });
+
+        document.getElementById('Service-Single').style.display = 'block';
+        document.getElementById('Service-Couple').style.display = 'block';
+    }
+
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
@@ -67,6 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     prevBtn.addEventListener('click', function() {
+        if (currentStep === 'step-8') {
+            resetServiceConditionals();
+        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
