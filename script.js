@@ -213,12 +213,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const numberOfGuestsValue = numberOfGuestsSelect.value;
         if (numberOfGuestsValue === '1') {
             singleTemplate.style.display = 'block';
-            
         } else if (numberOfGuestsValue === '2') {
             const guestArrangementValue = guestArrangementSelect2.value;
             if (guestArrangementValue === '1-Couple') {
                 coupleTemplate.style.display = 'block';
-            } else if (numberOfGuestsValue === '2-Singles') {
+            } else if (guestArrangementValue === '2-Singles') {
                 single1Template.style.display = 'block';
                 single2Template.style.display = 'block';
             }
@@ -227,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (guestArrangementValue === '1-Couple-1-Single') {
                 coupleTemplate.style.display = 'block';
                 singleTemplate.style.display = 'block';
-            } else if (numberOfGuestsValue === '3-Singles') {
+            } else if (guestArrangementValue === '3-Singles') {
                 single1Template.style.display = 'block';
                 single2Template.style.display = 'block';
                 single3Template.style.display = 'block';
@@ -237,10 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (guestArrangementValue === '2-Couples') {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
-            } else if (numberOfGuestsValue === '1-Couple-2-Singles') {
+            } else if (guestArrangementValue === '1-Couple-2-Singles') {
                 coupleTemplate.style.display = 'block';
                 single1Template.style.display = 'block';
-                single2Tempalte.style.display = 'block';
+                single2Template.style.display = 'block';
             }
         } else if (numberOfGuestsValue === '5') {
             const guestArrangementValue = guestArrangementSelect5.value;
@@ -248,11 +247,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
                 singleTemplate.style.display = 'block';
-            } else if (numberOfGuestsValue === '1-Couple-3-Singles') {
+            } else if (guestArrangementValue === '1-Couple-3-Singles') {
                 coupleTemplate.style.display = 'block';
                 single1Template.style.display = 'block';
-                single2Tempalte.style.display = 'block';
-                single3Tempalte.style.display = 'block';
+                single2Template.style.display = 'block';
+                single3Template.style.display = 'block';
             }
         } else if (numberOfGuestsValue === '6') {
             const guestArrangementValue = guestArrangementSelect6.value;
@@ -260,11 +259,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
                 couple3Template.style.display = 'block';
-            } else if (numberOfGuestsValue === '2-Couples-2-Singles') {
+            } else if (guestArrangementValue === '2-Couples-2-Singles') {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
                 single1Template.style.display = 'block';
-                single2Tempalte.style.display = 'block';
+                single2Template.style.display = 'block';
             }
         }
     }
@@ -306,8 +305,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
-    const guestArrangement4 = document.getElementById('5-Guest-Arrangement');
-    const guestArrangement4 = document.getElementById('6-Guest-Arrangement');
+    const guestArrangement5 = document.getElementById('5-Guest-Arrangement');
+    const guestArrangement6 = document.getElementById('6-Guest-Arrangement');
 
     function hideAllGuestArrangements() {
         guestArrangementLabel.style.display = 'none';
@@ -1036,4 +1035,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     hideAllConditionals();
 });
-
