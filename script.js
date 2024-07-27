@@ -367,9 +367,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // SERVICES CONDITIONALS SCRIPT
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Define Single Service Conditional fields and copies
+    // Define the elements for single services
     const singleServiceElements = {
-        '': {
+        single: {
             service: document.getElementById('Service-Single'),
             package: document.getElementById('Package-Single'),
             spaDelSolDreamInfo: document.getElementById('Spa-del-Sol-Dream-Info-Single'),
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
             waxInfo: document.getElementById('Wax-Info-Single'),
             multipleServicesInfo: document.getElementById('Multiple-Services-Info-Single')
         },
-        '1': {
+        single1: {
             service: document.getElementById('Service-Single-1'),
             package: document.getElementById('Package-Single-1'),
             spaDelSolDreamInfo: document.getElementById('Spa-del-Sol-Dream-Info-Single-1'),
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
             waxInfo: document.getElementById('Wax-Info-Single-1'),
             multipleServicesInfo: document.getElementById('Multiple-Services-Info-Single-1')
         },
-        '2': {
+        single2: {
             service: document.getElementById('Service-Single-2'),
             package: document.getElementById('Package-Single-2'),
             spaDelSolDreamInfo: document.getElementById('Spa-del-Sol-Dream-Info-Single-2'),
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
             waxInfo: document.getElementById('Wax-Info-Single-2'),
             multipleServicesInfo: document.getElementById('Multiple-Services-Info-Single-2')
         },
-        '3': {
+        single3: {
             service: document.getElementById('Service-Single-3'),
             package: document.getElementById('Package-Single-3'),
             spaDelSolDreamInfo: document.getElementById('Spa-del-Sol-Dream-Info-Single-3'),
@@ -427,9 +427,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Define Couple Service Conditional fields and copies
+    // Define the elements for couple services
     const coupleServiceElements = {
-        '': {
+        couple: {
             service: document.getElementById('Service-Couple'),
             package: document.getElementById('Package-Couple'),
             spaDelSolDreamInfo: document.getElementById('Spa-Del-Sol-Dream-Info-Couple'),
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
             bodyTreatmentsSelectsWrapper: document.getElementById('Body-Treatments-Selects-Wrapper-Couple'),
             otherServicesInfo: document.getElementById('Other-Services-Info-Couple')
         },
-        '1': {
+        couple1: {
             service: document.getElementById('Service-Couple-1'),
             package: document.getElementById('Package-Couple-1'),
             spaDelSolDreamInfo: document.getElementById('Spa-Del-Sol-Dream-Info-Couple-1'),
@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
             bodyTreatmentsSelectsWrapper: document.getElementById('Body-Treatments-Selects-Wrapper-Couple-1'),
             otherServicesInfo: document.getElementById('Other-Services-Info-Couple-1')
         },
-        '2': {
+        couple2: {
             service: document.getElementById('Service-Couple-2'),
             package: document.getElementById('Package-Couple-2'),
             spaDelSolDreamInfo: document.getElementById('Spa-Del-Sol-Dream-Info-Couple-2'),
@@ -483,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function() {
             bodyTreatmentsSelectsWrapper: document.getElementById('Body-Treatments-Selects-Wrapper-Couple-2'),
             otherServicesInfo: document.getElementById('Other-Services-Info-Couple-2')
         },
-        '3': {
+        couple3: {
             service: document.getElementById('Service-Couple-3'),
             package: document.getElementById('Package-Couple-3'),
             spaDelSolDreamInfo: document.getElementById('Spa-Del-Sol-Dream-Info-Couple-3'),
@@ -503,203 +503,163 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Function to hide and reset single service conditionals
-    function hideAndResetSingleService(id) {
+    function hideAll(elements) {
+        for (const key in elements) {
+            const element = elements[key];
+            if (element) {
+                element.style.display = 'none';
+                resetField(element);
+            }
+        }
+    }
+
+    function resetField(field) {
+        if (field) {
+            if (field.tagName === 'SELECT') {
+                field.selectedIndex = 0;
+            } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
+                field.value = '';
+            }
+        }
+    }
+
+    function handleSingleConditionals(id) {
         const elements = singleServiceElements[id];
-        elements.package.style.display = 'none';
-        elements.spaDelSolDreamInfo.style.display = 'none';
-        elements.massage.style.display = 'none';
-        elements.durationA.style.display = 'none';
-        elements.durationB.style.display = 'none';
-        elements.combination.style.display = 'none';
-        elements.facial.style.display = 'none';
-        elements.addOn.style.display = 'none';
-        elements.bodyTreatment.style.display = 'none';
-        elements.waxInfo.style.display = 'none';
-        elements.multipleServicesInfo.style.display = 'none';
+        hideAll(elements);
 
-        elements.package.selectedIndex = 0;
-        elements.massage.selectedIndex = 0;
-        elements.facial.selectedIndex = 0;
-        elements.durationA.selectedIndex = 0;
-        elements.durationB.selectedIndex = 0;
-        elements.combination.selectedIndex = 0;
-        elements.addOn.selectedIndex = 0;
-        elements.bodyTreatment.selectedIndex = 0;
-        elements.waxInfo.selectedIndex = 0;
-        elements.multipleServicesInfo.selectedIndex = 0;
-    }
-
-    // Function to hide and reset couple service conditionals
-    function hideAndResetCoupleService(id) {
-        const elements = coupleServiceElements[id];
-        elements.package.style.display = 'none';
-        elements.spaDelSolDreamInfo.style.display = 'none';
-        elements.otherPackagesInfo.style.display = 'none';
-        elements.massage.style.display = 'none';
-        elements.durationA.style.display = 'none';
-        elements.durationB.style.display = 'none';
-        elements.prenatalMassage.style.display = 'none';
-        elements.combinationSelectsWrapper.style.display = 'none';
-        elements.differentMassagesSelectsWrapper.style.display = 'none';
-        elements.durationAGuest1And2.style.display = 'none';
-        elements.facialSelectsWrapper.style.display = 'none';
-        elements.facialAddOnGuest1.style.display = 'none';
-        elements.facialAddOnGuest2.style.display = 'none';
-        elements.bodyTreatmentsSelectsWrapper.style.display = 'none';
-        elements.otherServicesInfo.style.display = 'none';
-
-        elements.package.selectedIndex = 0;
-        elements.massage.selectedIndex = 0;
-        elements.durationA.selectedIndex = 0;
-        elements.durationB.selectedIndex = 0;
-        elements.prenatalMassage.selectedIndex = 0;
-        elements.combinationSelectsWrapper.selectedIndex = 0;
-        elements.differentMassagesSelectsWrapper.selectedIndex = 0;
-        elements.durationAGuest1And2.selectedIndex = 0;
-        elements.facialSelectsWrapper.selectedIndex = 0;
-        elements.facialAddOnGuest1.selectedIndex = 0;
-        elements.facialAddOnGuest2.selectedIndex = 0;
-        elements.bodyTreatmentsSelectsWrapper.selectedIndex = 0;
-        elements.otherServicesInfo.selectedIndex = 0;
-    }
-
-    // Add event listeners for single services
-    for (const id in singleServiceElements) {
-        const elements = singleServiceElements[id];
-        elements.service.addEventListener('change', function() {
-            hideAndResetSingleService(id);
-            handleConditionalsSingle(id);
-        });
-        elements.package.addEventListener('change', function() {
-            hideAndResetSingleService(id);
-            handleConditionalsSingle(id);
-        });
-        elements.massage.addEventListener('change', function() {
-            hideAndResetSingleService(id);
-            handleConditionalsSingle(id);
-        });
-        elements.facial.addEventListener('change', function() {
-            hideAndResetSingleService(id);
-            handleConditionalsSingle(id);
-        });
-    }
-
-    // Add event listeners for couple services
-    for (const id in coupleServiceElements) {
-        const elements = coupleServiceElements[id];
-        elements.service.addEventListener('change', function() {
-            hideAndResetCoupleService(id);
-            handleConditionalsCouple(id);
-        });
-        elements.package.addEventListener('change', function() {
-            hideAndResetCoupleService(id);
-            handleConditionalsCouple(id);
-        });
-        elements.massage.addEventListener('change', function() {
-            hideAndResetCoupleService(id);
-            handleConditionalsCouple(id);
-        });
-    }
-
-    // Conditional handling functions
-    function handleConditionalsSingle(id) {
-        const elements = singleServiceElements[id];
-        const singleServiceValue = elements.service.value;
-
-        if (singleServiceValue === 'Package') {
+        const serviceValue = elements.service.value;
+        if (serviceValue === 'Package') {
             elements.package.style.display = 'block';
-        } else if (singleServiceValue === 'Massage') {
+        } else if (serviceValue === 'Massage') {
             elements.massage.style.display = 'block';
-        } else if (singleServiceValue === 'Facial') {
+        } else if (serviceValue === 'Facial') {
             elements.facial.style.display = 'block';
-        } else if (singleServiceValue === 'Body treatment') {
+        } else if (serviceValue === 'Body treatment') {
             elements.bodyTreatment.style.display = 'block';
-        } else if (singleServiceValue === 'Wax') {
+        } else if (serviceValue === 'Wax') {
             elements.waxInfo.style.display = 'block';
-        } else if (singleServiceValue === 'Multiple services') {
+        } else if (serviceValue === 'Multiple services') {
             elements.multipleServicesInfo.style.display = 'block';
         }
 
-        const singlePackageValue = elements.package.value;
-        if (singlePackageValue === 'Spa del Sol Dream') {
-            elements.spaDelSolDreamInfo.style.display = 'block';
-        }
+        elements.package.addEventListener('change', function() {
+            if (this.value === 'Spa del Sol Dream') {
+                elements.spaDelSolDreamInfo.style.display = 'block';
+            } else {
+                elements.spaDelSolDreamInfo.style.display = 'none';
+            }
+        });
 
-        const singleMassageValue = elements.massage.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue)) {
-            elements.durationA.style.display = 'block';
-        } else if (singleMassageValue === 'Reflexology') {
-            elements.durationB.style.display = 'block';
-        } else if (singleMassageValue === 'Relaxing Combination') {
-            elements.combination.style.display = 'block';
-        }
+        elements.massage.addEventListener('change', function() {
+            if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(this.value)) {
+                elements.durationA.style.display = 'block';
+            } else if (this.value === 'Reflexology') {
+                elements.durationB.style.display = 'block';
+            } else if (this.value === 'Relaxing Combination') {
+                elements.combination.style.display = 'block';
+            } else {
+                elements.durationA.style.display = 'none';
+                elements.durationB.style.display = 'none';
+                elements.combination.style.display = 'none';
+            }
+        });
 
-        const singleFacialValue = elements.facial.value;
-        if (singleFacialValue === 'Sol Janssen') {
-            elements.addOn.style.display = 'block';
-        }
+        elements.facial.addEventListener('change', function() {
+            if (this.value === 'Sol Janssen') {
+                elements.addOn.style.display = 'block';
+            } else {
+                elements.addOn.style.display = 'none';
+            }
+        });
     }
 
-    function handleConditionalsCouple(id) {
+    function handleCoupleConditionals(id) {
         const elements = coupleServiceElements[id];
-        const coupleServiceValue = elements.service.value;
+        hideAll(elements);
 
-        if (coupleServiceValue === 'Package') {
+        const serviceValue = elements.service.value;
+        if (serviceValue === 'Package') {
             elements.package.style.display = 'block';
-        } else if (coupleServiceValue === 'Massage') {
+        } else if (serviceValue === 'Massage') {
             elements.massage.style.display = 'block';
-        } else if (coupleServiceValue === 'Facial') {
+        } else if (serviceValue === 'Facial') {
             elements.facialSelectsWrapper.style.display = 'grid';
-        } else if (coupleServiceValue === 'Body treatment') {
+        } else if (serviceValue === 'Body treatment') {
             elements.bodyTreatmentsSelectsWrapper.style.display = 'grid';
-        } else if (coupleServiceValue === 'Other') {
+        } else if (serviceValue === 'Other') {
             elements.otherServicesInfo.style.display = 'block';
         }
 
-        const couplePackageValue = elements.package.value;
-        if (couplePackageValue === '2x Spa del Sol Dream') {
-            elements.spaDelSolDreamInfo.style.display = 'block';
-        } else if (couplePackageValue === 'Two different packages') {
-            elements.otherPackagesInfo.style.display = 'block';
-        }
+        elements.package.addEventListener('change', function() {
+            if (this.value === '2x Spa del Sol Dream') {
+                elements.spaDelSolDreamInfo.style.display = 'block';
+            } else if (this.value === 'Two different packages') {
+                elements.otherPackagesInfo.style.display = 'block';
+            } else {
+                elements.spaDelSolDreamInfo.style.display = 'none';
+                elements.otherPackagesInfo.style.display = 'none';
+            }
+        });
 
-        const coupleMassageValue = elements.massage.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue)) {
-            elements.durationA.style.display = 'block';
-        } else if (coupleMassageValue === 'Reflexology') {
-            elements.durationB.style.display = 'block';
-        } else if (coupleMassageValue === 'Prenatal and other') {
-            elements.prenatalMassage.style.display = 'block';
-        } else if (coupleMassageValue === 'Relaxing Combination') {
-            elements.combinationSelectsWrapper.style.display = 'grid';
-        } else if (coupleMassageValue === 'Two different types') {
-            elements.differentMassagesSelectsWrapper.style.display = 'grid';
-        }
+        elements.massage.addEventListener('change', function() {
+            if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(this.value)) {
+                elements.durationA.style.display = 'block';
+            } else if (this.value === 'Reflexology') {
+                elements.durationB.style.display = 'block';
+            } else if (this.value === 'Prenatal and other') {
+                elements.prenatalMassage.style.display = 'block';
+            } else if (this.value === 'Relaxing Combination') {
+                elements.combinationSelectsWrapper.style.display = 'grid';
+            } else if (this.value === 'Two different types') {
+                elements.differentMassagesSelectsWrapper.style.display = 'grid';
+            } else {
+                elements.durationA.style.display = 'none';
+                elements.durationB.style.display = 'none';
+                elements.prenatalMassage.style.display = 'none';
+                elements.combinationSelectsWrapper.style.display = 'none';
+                elements.differentMassagesSelectsWrapper.style.display = 'none';
+            }
+        });
 
-        const massageGuest1Value = document.getElementById('Massage-Guest-1-Couple' + id).value;
-        const massageGuest2Value = document.getElementById('Massage-Guest-2-Couple' + id).value;
-        if (massageGuest1Value !== '' && massageGuest2Value !== '') {
-            elements.durationAGuest1And2.style.display = 'block';
-        }
+        elements.facialSelectsWrapper.addEventListener('change', function() {
+            const facialGuest1Value = document.getElementById('Facial-Guest-1-Couple-' + id.split('couple')[1]).value;
+            const facialGuest2Value = document.getElementById('Facial-Guest-2-Couple-' + id.split('couple')[1]).value;
 
-        const facialGuest1Value = document.getElementById('Facial-Guest-1-Couple' + id).value;
-        if (facialGuest1Value === 'Sol Janssen') {
-            elements.facialAddOnGuest1.style.display = 'block';
-        }
+            if (facialGuest1Value === 'Sol Janssen') {
+                elements.facialAddOnGuest1.style.display = 'block';
+            } else {
+                elements.facialAddOnGuest1.style.display = 'none';
+            }
 
-        const facialGuest2Value = document.getElementById('Facial-Guest-2-Couple' + id).value;
-        if (facialGuest2Value === 'Sol Janssen') {
-            elements.facialAddOnGuest2.style.display = 'block';
-        }
+            if (facialGuest2Value === 'Sol Janssen') {
+                elements.facialAddOnGuest2.style.display = 'block';
+            } else {
+                elements.facialAddOnGuest2.style.display = 'none';
+            }
+        });
+    }
+
+    // Add change event listeners to all select fields
+    function addChangeEventListener(id, handleChange, elements) {
+        elements.service.addEventListener('change', function() {
+            handleChange(id);
+        });
+    }
+
+    for (const id in singleServiceElements) {
+        addChangeEventListener(id, handleSingleConditionals, singleServiceElements[id]);
+    }
+
+    for (const id in coupleServiceElements) {
+        addChangeEventListener(id, handleCoupleConditionals, coupleServiceElements[id]);
     }
 
     // Initial setup
     for (const id in singleServiceElements) {
-        hideAndResetSingleService(id);
+        hideAll(singleServiceElements[id]);
     }
 
     for (const id in coupleServiceElements) {
-        hideAndResetCoupleService(id);
+        hideAll(coupleServiceElements[id]);
     }
 });
