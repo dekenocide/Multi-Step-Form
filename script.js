@@ -57,6 +57,54 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
+    function resetServiceConditionals() {
+        const singleServiceFields = [
+            'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
+            'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
+            'Combination-Single', 'Facial-Single', 'Add-On-Single',
+            'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
+            'Service-Single-1', 'Package-Single-1', 'Spa-del-Sol-Dream-Info-Single-1',
+            'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1',
+            'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1',
+            'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
+            'Service-Single-2', 'Package-Single-2', 'Spa-del-Sol-Dream-Info-Single-2',
+            'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
+            'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2',
+            'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
+            'Service-Single-3', 'Package-Single-3', 'Spa-del-Sol-Dream-Info-Single-3',
+            'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3',
+            'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3',
+            'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3'
+        ];
+
+        const coupleServiceFields = [
+            'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
+            'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple',
+            'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple',
+            'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple',
+            'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple',
+            'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple',
+            'Other-Services-Info-Couple', 'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1',
+            'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1',
+            'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1',
+            'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1',
+            'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1',
+            'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1',
+            'Other-Services-Info-Couple-1', 'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2',
+            'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2',
+            'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2',
+            'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2',
+            'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2',
+            'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatments-Selects-Wrapper-Couple-2',
+            'Other-Services-Info-Couple-2', 'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3',
+            'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3',
+            'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3',
+            'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3',
+            'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3',
+            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3',
+            'Other-Services-Info-Couple-3'
+        ];
+
         singleServiceFields.forEach(id => {
             const element = document.getElementById(id);
             if (element) {
@@ -569,335 +617,306 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to reset and hide children conditionals for Single
-    function resetAndHideChildrenSingle(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Single':
-                resetField(singlePackage);
-                resetField(spaDelSolDreamInfo);
-                resetField(singleMassage);
-                resetField(massageDurationA);
-                resetField(massageDurationB);
-                resetField(combinationType);
-                resetField(singleFacial);
-                resetField(facialAddOn);
-                resetField(bodyTreatment);
-                resetField(waxInfo);
-                resetField(multipleServicesInfo);
-                break;
+    // Function to reset and hide children conditionals
+    function resetAndHideChildren(parentSelect) {
+    switch (parentSelect.id) {
+        case 'Service-Single':
+            resetField(singlePackage);
+            resetField(spaDelSolDreamInfo);
+            resetField(singleMassage);
+            resetField(massageDurationA);
+            resetField(massageDurationB);
+            resetField(combinationType);
+            resetField(singleFacial);
+            resetField(facialAddOn);
+            resetField(bodyTreatment);
+            resetField(waxInfo);
+            resetField(multipleServicesInfo);
+            break;
 
-            case 'Package-Single':
-                resetField(spaDelSolDreamInfo);
-                break;
+        case 'Service-Single-1':
+            resetField(singlePackage1);
+            resetField(spaDelSolDreamInfo1);
+            resetField(singleMassage1);
+            resetField(massageDurationA1);
+            resetField(massageDurationB1);
+            resetField(combinationType1);
+            resetField(singleFacial1);
+            resetField(facialAddOn1);
+            resetField(bodyTreatment1);
+            resetField(waxInfo1);
+            resetField(multipleServicesInfo1);
+            break;
 
-            case 'Massage-Single':
-                resetField(massageDurationA);
-                resetField(massageDurationB);
-                resetField(combinationType);
-                break;
+        case 'Service-Single-2':
+            resetField(singlePackage2);
+            resetField(spaDelSolDreamInfo2);
+            resetField(singleMassage2);
+            resetField(massageDurationA2);
+            resetField(massageDurationB2);
+            resetField(combinationType2);
+            resetField(singleFacial2);
+            resetField(facialAddOn2);
+            resetField(bodyTreatment2);
+            resetField(waxInfo2);
+            resetField(multipleServicesInfo2);
+            break;
 
-            case 'Facial-Single':
-                resetField(facialAddOn);
-                break;
-        }
+        case 'Service-Single-3':
+            resetField(singlePackage3);
+            resetField(spaDelSolDreamInfo3);
+            resetField(singleMassage3);
+            resetField(massageDurationA3);
+            resetField(massageDurationB3);
+            resetField(combinationType3);
+            resetField(singleFacial3);
+            resetField(facialAddOn3);
+            resetField(bodyTreatment3);
+            resetField(waxInfo3);
+            resetField(multipleServicesInfo3);
+            break;
+
+        case 'Package-Single':
+            resetField(spaDelSolDreamInfo);
+            break;
+
+        case 'Package-Single-1':
+            resetField(spaDelSolDreamInfo1);
+            break;
+
+        case 'Package-Single-2':
+            resetField(spaDelSolDreamInfo2);
+            break;
+
+        case 'Package-Single-3':
+            resetField(spaDelSolDreamInfo3);
+            break;
+
+        case 'Massage-Single':
+            resetField(massageDurationA);
+            resetField(massageDurationB);
+            resetField(combinationType);
+            break;
+
+        case 'Massage-Single-1':
+            resetField(massageDurationA1);
+            resetField(massageDurationB1);
+            resetField(combinationType1);
+            break;
+
+        case 'Massage-Single-2':
+            resetField(massageDurationA2);
+            resetField(massageDurationB2);
+            resetField(combinationType2);
+            break;
+
+        case 'Massage-Single-3':
+            resetField(massageDurationA3);
+            resetField(massageDurationB3);
+            resetField(combinationType3);
+            break;
+
+        case 'Facial-Single':
+            resetField(facialAddOn);
+            break;
+
+        case 'Facial-Single-1':
+            resetField(facialAddOn1);
+            break;
+
+        case 'Facial-Single-2':
+            resetField(facialAddOn2);
+            break;
+
+        case 'Facial-Single-3':
+            resetField(facialAddOn3);
+            break;
+
+        case 'Service-Couple':
+            resetField(couplePackage);
+            resetField(spaDelSolDreamInfoCouple);
+            resetField(otherPackagesInfoCouple);
+            resetField(coupleMassage);
+            resetField(massageDurationACouple);
+            resetField(massageDurationBCouple);
+            resetField(prenatalMassageCouple);
+            resetField(document.getElementById('Combination-Guest-1-Couple'));
+            resetField(document.getElementById('Combination-Guest-2-Couple'));
+            resetField(document.getElementById('Massage-Guest-1-Couple'));
+            resetField(document.getElementById('Massage-Guest-2-Couple'));
+            resetField(durationAGuest1And2Couple);
+            resetField(document.getElementById('Facial-Guest-1-Couple'));
+            resetField(document.getElementById('Facial-Guest-2-Couple'));
+            resetField(facialAddOnGuest1Couple);
+            resetField(facialAddOnGuest2Couple);
+            resetField(document.getElementById('Body-Treatment-Guest-1-Couple'));
+            resetField(document.getElementById('Body-Treatment-Guest-2-Couple'));
+            resetField(otherServicesInfoCouple);
+            break;
+
+        case 'Service-Couple-1':
+            resetField(couplePackage1);
+            resetField(spaDelSolDreamInfoCouple1);
+            resetField(otherPackagesInfoCouple1);
+            resetField(coupleMassage1);
+            resetField(massageDurationACouple1);
+            resetField(massageDurationBCouple1);
+            resetField(prenatalMassageCouple1);
+            resetField(document.getElementById('Combination-Guest-1-Couple-1'));
+            resetField(document.getElementById('Combination-Guest-2-Couple-1'));
+            resetField(document.getElementById('Massage-Guest-1-Couple-1'));
+            resetField(document.getElementById('Massage-Guest-2-Couple-1'));
+            resetField(durationAGuest1And2Couple1);
+            resetField(document.getElementById('Facial-Guest-1-Couple-1'));
+            resetField(document.getElementById('Facial-Guest-2-Couple-1'));
+            resetField(facialAddOnGuest1Couple1);
+            resetField(facialAddOnGuest2Couple1);
+            resetField(document.getElementById('Body-Treatment-Guest-1-Couple-1'));
+            resetField(document.getElementById('Body-Treatment-Guest-2-Couple-1'));
+            resetField(otherServicesInfoCouple1);
+            break;
+
+        case 'Service-Couple-2':
+            resetField(couplePackage2);
+            resetField(spaDelSolDreamInfoCouple2);
+            resetField(otherPackagesInfoCouple2);
+            resetField(coupleMassage2);
+            resetField(massageDurationACouple2);
+            resetField(massageDurationBCouple2);
+            resetField(prenatalMassageCouple2);
+            resetField(document.getElementById('Combination-Guest-1-Couple-2'));
+            resetField(document.getElementById('Combination-Guest-2-Couple-2'));
+            resetField(document.getElementById('Massage-Guest-1-Couple-2'));
+            resetField(document.getElementById('Massage-Guest-2-Couple-2'));
+            resetField(durationAGuest1And2Couple2);
+            resetField(document.getElementById('Facial-Guest-1-Couple-2'));
+            resetField(document.getElementById('Facial-Guest-2-Couple-2'));
+            resetField(facialAddOnGuest1Couple2);
+            resetField(facialAddOnGuest2Couple2);
+            resetField(document.getElementById('Body-Treatment-Guest-1-Couple-2'));
+            resetField(document.getElementById('Body-Treatment-Guest-2-Couple-2'));
+            resetField(otherServicesInfoCouple2);
+            break;
+
+        case 'Service-Couple-3':
+            resetField(couplePackage3);
+            resetField(spaDelSolDreamInfoCouple3);
+            resetField(otherPackagesInfoCouple3);
+            resetField(coupleMassage3);
+            resetField(massageDurationACouple3);
+            resetField(massageDurationBCouple3);
+            resetField(prenatalMassageCouple3);
+            resetField(document.getElementById('Combination-Guest-1-Couple-3'));
+            resetField(document.getElementById('Combination-Guest-2-Couple-3'));
+            resetField(document.getElementById('Massage-Guest-1-Couple-3'));
+            resetField(document.getElementById('Massage-Guest-2-Couple-3'));
+            resetField(durationAGuest1And2Couple3);
+            resetField(document.getElementById('Facial-Guest-1-Couple-3'));
+            resetField(document.getElementById('Facial-Guest-2-Couple-3'));
+            resetField(facialAddOnGuest1Couple3);
+            resetField(facialAddOnGuest2Couple3);
+            resetField(document.getElementById('Body-Treatment-Guest-1-Couple-3'));
+            resetField(document.getElementById('Body-Treatment-Guest-2-Couple-3'));
+            resetField(otherServicesInfoCouple3);
+            break;
+
+        case 'Package-Couple':
+            resetField(spaDelSolDreamInfoCouple);
+            resetField(otherPackagesInfoCouple);
+            break;
+
+        case 'Package-Couple-1':
+            resetField(spaDelSolDreamInfoCouple1);
+            resetField(otherPackagesInfoCouple1);
+            break;
+
+        case 'Package-Couple-2':
+            resetField(spaDelSolDreamInfoCouple2);
+            resetField(otherPackagesInfoCouple2);
+            break;
+
+        case 'Package-Couple-3':
+            resetField(spaDelSolDreamInfoCouple3);
+            resetField(otherPackagesInfoCouple3);
+            break;
+
+        case 'Massage-Couple':
+            resetField(massageDurationACouple);
+            resetField(massageDurationBCouple);
+            resetField(prenatalMassageCouple);
+            resetField(document.getElementById('Combination-Guest-1-Couple'));
+            resetField(document.getElementById('Combination-Guest-2-Couple'));
+            resetField(document.getElementById('Massage-Guest-1-Couple'));
+            resetField(document.getElementById('Massage-Guest-2-Couple'));
+            resetField(durationAGuest1And2Couple);
+            break;
+
+        case 'Massage-Couple-1':
+            resetField(massageDurationACouple1);
+            resetField(massageDurationBCouple1);
+            resetField(prenatalMassageCouple1);
+            resetField(document.getElementById('Combination-Guest-1-Couple-1'));
+            resetField(document.getElementById('Combination-Guest-2-Couple-1'));
+            resetField(document.getElementById('Massage-Guest-1-Couple-1'));
+            resetField(document.getElementById('Massage-Guest-2-Couple-1'));
+            resetField(durationAGuest1And2Couple1);
+            break;
+
+        case 'Massage-Couple-2':
+            resetField(massageDurationACouple2);
+            resetField(massageDurationBCouple2);
+            resetField(prenatalMassageCouple2);
+            resetField(document.getElementById('Combination-Guest-1-Couple-2'));
+            resetField(document.getElementById('Combination-Guest-2-Couple-2'));
+            resetField(document.getElementById('Massage-Guest-1-Couple-2'));
+            resetField(document.getElementById('Massage-Guest-2-Couple-2'));
+            resetField(durationAGuest1And2Couple2);
+            break;
+
+        case 'Massage-Couple-3':
+            resetField(massageDurationACouple3);
+            resetField(massageDurationBCouple3);
+            resetField(prenatalMassageCouple3);
+            resetField(document.getElementById('Combination-Guest-1-Couple-3'));
+            resetField(document.getElementById('Combination-Guest-2-Couple-3'));
+            resetField(document.getElementById('Massage-Guest-1-Couple-3'));
+            resetField(document.getElementById('Massage-Guest-2-Couple-3'));
+            resetField(durationAGuest1And2Couple3);
+            break;
+
+        case 'Facial-Guest-1-Couple':
+            resetField(facialAddOnGuest1Couple);
+            break;
+
+        case 'Facial-Guest-1-Couple-1':
+            resetField(facialAddOnGuest1Couple1);
+            break;
+
+        case 'Facial-Guest-1-Couple-2':
+            resetField(facialAddOnGuest1Couple2);
+            break;
+
+        case 'Facial-Guest-1-Couple-3':
+            resetField(facialAddOnGuest1Couple3);
+            break;
+
+        case 'Facial-Guest-2-Couple':
+            resetField(facialAddOnGuest2Couple);
+            break;
+
+        case 'Facial-Guest-2-Couple-1':
+            resetField(facialAddOnGuest2Couple1);
+            break;
+
+        case 'Facial-Guest-2-Couple-2':
+            resetField(facialAddOnGuest2Couple2);
+            break;
+
+        case 'Facial-Guest-2-Couple-3':
+            resetField(facialAddOnGuest2Couple3);
+            break;
     }
-
-    function resetAndHideChildrenSingle1(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Single-1':
-                resetField(singlePackage1);
-                resetField(spaDelSolDreamInfo1);
-                resetField(singleMassage1);
-                resetField(massageDurationA1);
-                resetField(massageDurationB1);
-                resetField(combinationType1);
-                resetField(singleFacial1);
-                resetField(facialAddOn1);
-                resetField(bodyTreatment1);
-                resetField(waxInfo1);
-                resetField(multipleServicesInfo1);
-                break;
-
-            case 'Package-Single-1':
-                resetField(spaDelSolDreamInfo1);
-                break;
-
-            case 'Massage-Single-1':
-                resetField(massageDurationA1);
-                resetField(massageDurationB1);
-                resetField(combinationType1);
-                break;
-
-            case 'Facial-Single-1':
-                resetField(facialAddOn1);
-                break;
-        }
-    }
-
-    function resetAndHideChildrenSingle2(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Single-2':
-                resetField(singlePackage2);
-                resetField(spaDelSolDreamInfo2);
-                resetField(singleMassage2);
-                resetField(massageDurationA2);
-                resetField(massageDurationB2);
-                resetField(combinationType2);
-                resetField(singleFacial2);
-                resetField(facialAddOn2);
-                resetField(bodyTreatment2);
-                resetField(waxInfo2);
-                resetField(multipleServicesInfo2);
-                break;
-
-            case 'Package-Single-2':
-                resetField(spaDelSolDreamInfo2);
-                break;
-
-            case 'Massage-Single-2':
-                resetField(massageDurationA2);
-                resetField(massageDurationB2);
-                resetField(combinationType2);
-                break;
-
-            case 'Facial-Single-2':
-                resetField(facialAddOn2);
-                break;
-        }
-    }
-
-    function resetAndHideChildrenSingle3(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Single-3':
-                resetField(singlePackage3);
-                resetField(spaDelSolDreamInfo3);
-                resetField(singleMassage3);
-                resetField(massageDurationA3);
-                resetField(massageDurationB3);
-                resetField(combinationType3);
-                resetField(singleFacial3);
-                resetField(facialAddOn3);
-                resetField(bodyTreatment3);
-                resetField(waxInfo3);
-                resetField(multipleServicesInfo3);
-                break;
-
-            case 'Package-Single-3':
-                resetField(spaDelSolDreamInfo3);
-                break;
-
-            case 'Massage-Single-3':
-                resetField(massageDurationA3);
-                resetField(massageDurationB3);
-                resetField(combinationType3);
-                break;
-
-            case 'Facial-Single-3':
-                resetField(facialAddOn3);
-                break;
-        }
-    }
-
-    // Function to reset and hide children conditionals for Couple
-    function resetAndHideChildrenCouple(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Couple':
-                resetField(couplePackage);
-                resetField(spaDelSolDreamInfoCouple);
-                resetField(otherPackagesInfoCouple);
-                resetField(coupleMassage);
-                resetField(massageDurationACouple);
-                resetField(massageDurationBCouple);
-                resetField(prenatalMassageCouple);
-                resetField(document.getElementById('Combination-Guest-1-Couple'));
-                resetField(document.getElementById('Combination-Guest-2-Couple'));
-                resetField(document.getElementById('Massage-Guest-1-Couple'));
-                resetField(document.getElementById('Massage-Guest-2-Couple'));
-                resetField(durationAGuest1And2Couple);
-                resetField(document.getElementById('Facial-Guest-1-Couple'));
-                resetField(document.getElementById('Facial-Guest-2-Couple'));
-                resetField(facialAddOnGuest1Couple);
-                resetField(facialAddOnGuest2Couple);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple'));
-                resetField(otherServicesInfoCouple);
-                break;
-
-            case 'Package-Couple':
-                resetField(spaDelSolDreamInfoCouple);
-                resetField(otherPackagesInfoCouple);
-                break;
-
-            case 'Massage-Couple':
-                resetField(massageDurationACouple);
-                resetField(massageDurationBCouple);
-                resetField(prenatalMassageCouple);
-                resetField(document.getElementById('Combination-Guest-1-Couple'));
-                resetField(document.getElementById('Combination-Guest-2-Couple'));
-                resetField(document.getElementById('Massage-Guest-1-Couple'));
-                resetField(document.getElementById('Massage-Guest-2-Couple'));
-                resetField(durationAGuest1And2Couple);
-                break;
-
-            case 'Facial-Guest-1-Couple':
-                resetField(facialAddOnGuest1Couple);
-                break;
-
-            case 'Facial-Guest-2-Couple':
-                resetField(facialAddOnGuest2Couple);
-                break;
-        }
-    }
-
-    function resetAndHideChildrenCouple1(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Couple-1':
-                resetField(couplePackage1);
-                resetField(spaDelSolDreamInfoCouple1);
-                resetField(otherPackagesInfoCouple1);
-                resetField(coupleMassage1);
-                resetField(massageDurationACouple1);
-                resetField(massageDurationBCouple1);
-                resetField(prenatalMassageCouple1);
-                resetField(document.getElementById('Combination-Guest-1-Couple-1'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-1'));
-                resetField(durationAGuest1And2Couple1);
-                resetField(document.getElementById('Facial-Guest-1-Couple-1'));
-                resetField(document.getElementById('Facial-Guest-2-Couple-1'));
-                resetField(facialAddOnGuest1Couple1);
-                resetField(facialAddOnGuest2Couple1);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple-1'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple-1'));
-                resetField(otherServicesInfoCouple1);
-                break;
-
-            case 'Package-Couple-1':
-                resetField(spaDelSolDreamInfoCouple1);
-                resetField(otherPackagesInfoCouple1);
-                break;
-
-            case 'Massage-Couple-1':
-                resetField(massageDurationACouple1);
-                resetField(massageDurationBCouple1);
-                resetField(prenatalMassageCouple1);
-                resetField(document.getElementById('Combination-Guest-1-Couple-1'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-1'));
-                resetField(durationAGuest1And2Couple1);
-                break;
-
-            case 'Facial-Guest-1-Couple-1':
-                resetField(facialAddOnGuest1Couple1);
-                break;
-
-            case 'Facial-Guest-2-Couple-1':
-                resetField(facialAddOnGuest2Couple1);
-                break;
-        }
-    }
-
-    function resetAndHideChildrenCouple2(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Couple-2':
-                resetField(couplePackage2);
-                resetField(spaDelSolDreamInfoCouple2);
-                resetField(otherPackagesInfoCouple2);
-                resetField(coupleMassage2);
-                resetField(massageDurationACouple2);
-                resetField(massageDurationBCouple2);
-                resetField(prenatalMassageCouple2);
-                resetField(document.getElementById('Combination-Guest-1-Couple-2'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-2'));
-                resetField(durationAGuest1And2Couple2);
-                resetField(document.getElementById('Facial-Guest-1-Couple-2'));
-                resetField(document.getElementById('Facial-Guest-2-Couple-2'));
-                resetField(facialAddOnGuest1Couple2);
-                resetField(facialAddOnGuest2Couple2);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple-2'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple-2'));
-                resetField(otherServicesInfoCouple2);
-                break;
-
-            case 'Package-Couple-2':
-                resetField(spaDelSolDreamInfoCouple2);
-                resetField(otherPackagesInfoCouple2);
-                break;
-
-            case 'Massage-Couple-2':
-                resetField(massageDurationACouple2);
-                resetField(massageDurationBCouple2);
-                resetField(prenatalMassageCouple2);
-                resetField(document.getElementById('Combination-Guest-1-Couple-2'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-2'));
-                resetField(durationAGuest1And2Couple2);
-                break;
-
-            case 'Facial-Guest-1-Couple-2':
-                resetField(facialAddOnGuest1Couple2);
-                break;
-
-            case 'Facial-Guest-2-Couple-2':
-                resetField(facialAddOnGuest2Couple2);
-                break;
-        }
-    }
-
-    function resetAndHideChildrenCouple3(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Couple-3':
-                resetField(couplePackage3);
-                resetField(spaDelSolDreamInfoCouple3);
-                resetField(otherPackagesInfoCouple3);
-                resetField(coupleMassage3);
-                resetField(massageDurationACouple3);
-                resetField(massageDurationBCouple3);
-                resetField(prenatalMassageCouple3);
-                resetField(document.getElementById('Combination-Guest-1-Couple-3'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-3'));
-                resetField(durationAGuest1And2Couple3);
-                resetField(document.getElementById('Facial-Guest-1-Couple-3'));
-                resetField(document.getElementById('Facial-Guest-2-Couple-3'));
-                resetField(facialAddOnGuest1Couple3);
-                resetField(facialAddOnGuest2Couple3);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple-3'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple-3'));
-                resetField(otherServicesInfoCouple3);
-                break;
-
-            case 'Package-Couple-3':
-                resetField(spaDelSolDreamInfoCouple3);
-                resetField(otherPackagesInfoCouple3);
-                break;
-
-            case 'Massage-Couple-3':
-                resetField(massageDurationACouple3);
-                resetField(massageDurationBCouple3);
-                resetField(prenatalMassageCouple3);
-                resetField(document.getElementById('Combination-Guest-1-Couple-3'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-3'));
-                resetField(durationAGuest1And2Couple3);
-                break;
-
-            case 'Facial-Guest-1-Couple-3':
-                resetField(facialAddOnGuest1Couple3);
-                break;
-
-            case 'Facial-Guest-2-Couple-3':
-                resetField(facialAddOnGuest2Couple3);
-                break;
-        }
-    }
+}
 
     // Show/hide and reset conditionals based on selected values
     function handleConditionalsSingle() {
@@ -1273,64 +1292,64 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Add change event listeners to all select fields
-    function addChangeEventListener(id, handleChange, resetAndHideChildrenFunc) {
+    function addChangeEventListener(id, handleChange) {
         document.getElementById(id).addEventListener('change', function() {
-            resetAndHideChildrenFunc(this);
+            resetAndHideChildren(this);
             handleChange();
         });
     }
 
-    addChangeEventListener('Service-Single', handleConditionalsSingle, resetAndHideChildrenSingle);
-    addChangeEventListener('Package-Single', handleConditionalsSingle, resetAndHideChildrenSingle);
-    addChangeEventListener('Massage-Single', handleConditionalsSingle, resetAndHideChildrenSingle);
-    addChangeEventListener('Facial-Single', handleConditionalsSingle, resetAndHideChildrenSingle);
+    addChangeEventListener('Service-Single', handleConditionalsSingle);
+    addChangeEventListener('Package-Single', handleConditionalsSingle);
+    addChangeEventListener('Massage-Single', handleConditionalsSingle);
+    addChangeEventListener('Facial-Single', handleConditionalsSingle);
 
-    addChangeEventListener('Service-Single-1', handleConditionalsSingle1, resetAndHideChildrenSingle1);
-    addChangeEventListener('Package-Single-1', handleConditionalsSingle1, resetAndHideChildrenSingle1);
-    addChangeEventListener('Massage-Single-1', handleConditionalsSingle1, resetAndHideChildrenSingle1);
-    addChangeEventListener('Facial-Single-1', handleConditionalsSingle1, resetAndHideChildrenSingle1);
+    addChangeEventListener('Service-Single-1', handleConditionalsSingle1);
+    addChangeEventListener('Package-Single-1', handleConditionalsSingle1);
+    addChangeEventListener('Massage-Single-1', handleConditionalsSingle1);
+    addChangeEventListener('Facial-Single-1', handleConditionalsSingle1);
 
-    addChangeEventListener('Service-Single-2', handleConditionalsSingle2, resetAndHideChildrenSingle2);
-    addChangeEventListener('Package-Single-2', handleConditionalsSingle2, resetAndHideChildrenSingle2);
-    addChangeEventListener('Massage-Single-2', handleConditionalsSingle2, resetAndHideChildrenSingle2);
-    addChangeEventListener('Facial-Single-2', handleConditionalsSingle2, resetAndHideChildrenSingle2);
+    addChangeEventListener('Service-Single-2', handleConditionalsSingle2);
+    addChangeEventListener('Package-Single-2', handleConditionalsSingle2);
+    addChangeEventListener('Massage-Single-2', handleConditionalsSingle2);
+    addChangeEventListener('Facial-Single-2', handleConditionalsSingle2);
 
-    addChangeEventListener('Service-Single-3', handleConditionalsSingle3, resetAndHideChildrenSingle3);
-    addChangeEventListener('Package-Single-3', handleConditionalsSingle3, resetAndHideChildrenSingle3);
-    addChangeEventListener('Massage-Single-3', handleConditionalsSingle3, resetAndHideChildrenSingle3);
-    addChangeEventListener('Facial-Single-3', handleConditionalsSingle3, resetAndHideChildrenSingle3);
+    addChangeEventListener('Service-Single-3', handleConditionalsSingle3);
+    addChangeEventListener('Package-Single-3', handleConditionalsSingle3);
+    addChangeEventListener('Massage-Single-3', handleConditionalsSingle3);
+    addChangeEventListener('Facial-Single-3', handleConditionalsSingle3);
 
-    addChangeEventListener('Service-Couple', handleConditionalsCouple, resetAndHideChildrenCouple);
-    addChangeEventListener('Package-Couple', handleConditionalsCouple, resetAndHideChildrenCouple);
-    addChangeEventListener('Massage-Couple', handleConditionalsCouple, resetAndHideChildrenCouple);
-    addChangeEventListener('Massage-Guest-1-Couple', handleConditionalsCouple, resetAndHideChildrenCouple);
-    addChangeEventListener('Massage-Guest-2-Couple', handleConditionalsCouple, resetAndHideChildrenCouple);
-    addChangeEventListener('Facial-Guest-1-Couple', handleConditionalsCouple, resetAndHideChildrenCouple);
-    addChangeEventListener('Facial-Guest-2-Couple', handleConditionalsCouple, resetAndHideChildrenCouple);
+    addChangeEventListener('Service-Couple', handleConditionalsCouple);
+    addChangeEventListener('Package-Couple', handleConditionalsCouple);
+    addChangeEventListener('Massage-Couple', handleConditionalsCouple);
+    addChangeEventListener('Massage-Guest-1-Couple', handleConditionalsCouple);
+    addChangeEventListener('Massage-Guest-2-Couple', handleConditionalsCouple);
+    addChangeEventListener('Facial-Guest-1-Couple', handleConditionalsCouple);
+    addChangeEventListener('Facial-Guest-2-Couple', handleConditionalsCouple);
 
-    addChangeEventListener('Service-Couple-1', handleConditionalsCouple1, resetAndHideChildrenCouple1);
-    addChangeEventListener('Package-Couple-1', handleConditionalsCouple1, resetAndHideChildrenCouple1);
-    addChangeEventListener('Massage-Couple-1', handleConditionalsCouple1, resetAndHideChildrenCouple1);
-    addChangeEventListener('Massage-Guest-1-Couple-1', handleConditionalsCouple1, resetAndHideChildrenCouple1);
-    addChangeEventListener('Massage-Guest-2-Couple-1', handleConditionalsCouple1, resetAndHideChildrenCouple1);
-    addChangeEventListener('Facial-Guest-1-Couple-1', handleConditionalsCouple1, resetAndHideChildrenCouple1);
-    addChangeEventListener('Facial-Guest-2-Couple-1', handleConditionalsCouple1, resetAndHideChildrenCouple1);
+    addChangeEventListener('Service-Couple-1', handleConditionalsCouple1);
+    addChangeEventListener('Package-Couple-1', handleConditionalsCouple1);
+    addChangeEventListener('Massage-Couple-1', handleConditionalsCouple1);
+    addChangeEventListener('Massage-Guest-1-Couple-1', handleConditionalsCouple1);
+    addChangeEventListener('Massage-Guest-2-Couple-1', handleConditionalsCouple1);
+    addChangeEventListener('Facial-Guest-1-Couple-1', handleConditionalsCouple1);
+    addChangeEventListener('Facial-Guest-2-Couple-1', handleConditionalsCouple1);
 
-    addChangeEventListener('Service-Couple-2', handleConditionalsCouple2, resetAndHideChildrenCouple2);
-    addChangeEventListener('Package-Couple-2', handleConditionalsCouple2, resetAndHideChildrenCouple2);
-    addChangeEventListener('Massage-Couple-2', handleConditionalsCouple2, resetAndHideChildrenCouple2);
-    addChangeEventListener('Massage-Guest-1-Couple-2', handleConditionalsCouple2, resetAndHideChildrenCouple2);
-    addChangeEventListener('Massage-Guest-2-Couple-2', handleConditionalsCouple2, resetAndHideChildrenCouple2);
-    addChangeEventListener('Facial-Guest-1-Couple-2', handleConditionalsCouple2, resetAndHideChildrenCouple2);
-    addChangeEventListener('Facial-Guest-2-Couple-2', handleConditionalsCouple2, resetAndHideChildrenCouple2);
+    addChangeEventListener('Service-Couple-2', handleConditionalsCouple2);
+    addChangeEventListener('Package-Couple-2', handleConditionalsCouple2);
+    addChangeEventListener('Massage-Couple-2', handleConditionalsCouple2);
+    addChangeEventListener('Massage-Guest-1-Couple-2', handleConditionalsCouple2);
+    addChangeEventListener('Massage-Guest-2-Couple-2', handleConditionalsCouple2);
+    addChangeEventListener('Facial-Guest-1-Couple-2', handleConditionalsCouple2);
+    addChangeEventListener('Facial-Guest-2-Couple-2', handleConditionalsCouple2);
 
-    addChangeEventListener('Service-Couple-3', handleConditionalsCouple3, resetAndHideChildrenCouple3);
-    addChangeEventListener('Package-Couple-3', handleConditionalsCouple3, resetAndHideChildrenCouple3);
-    addChangeEventListener('Massage-Couple-3', handleConditionalsCouple3, resetAndHideChildrenCouple3);
-    addChangeEventListener('Massage-Guest-1-Couple-3', handleConditionalsCouple3, resetAndHideChildrenCouple3);
-    addChangeEventListener('Massage-Guest-2-Couple-3', handleConditionalsCouple3, resetAndHideChildrenCouple3);
-    addChangeEventListener('Facial-Guest-1-Couple-3', handleConditionalsCouple3, resetAndHideChildrenCouple3);
-    addChangeEventListener('Facial-Guest-2-Couple-3', handleConditionalsCouple3, resetAndHideChildrenCouple3);
+    addChangeEventListener('Service-Couple-3', handleConditionalsCouple3);
+    addChangeEventListener('Package-Couple-3', handleConditionalsCouple3);
+    addChangeEventListener('Massage-Couple-3', handleConditionalsCouple3);
+    addChangeEventListener('Massage-Guest-1-Couple-3', handleConditionalsCouple3);
+    addChangeEventListener('Massage-Guest-2-Couple-3', handleConditionalsCouple3);
+    addChangeEventListener('Facial-Guest-1-Couple-3', handleConditionalsCouple3);
+    addChangeEventListener('Facial-Guest-2-Couple-3', handleConditionalsCouple3);
 
     // Initial setup
     hideAllConditionals();
