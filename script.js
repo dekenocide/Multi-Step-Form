@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    function resetServiceConditionals() {
+    function resetSingleServiceConditionals() {
         const singleServiceFields = [
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
             'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
@@ -76,7 +76,13 @@ document.addEventListener('DOMContentLoaded', function() {
             'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3',
             'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3'
         ];
-
+    
+        singleServiceFields.forEach(function(field) {
+            document.getElementById(field).value = '';
+        });
+    }
+    
+    function resetCoupleServiceConditionals() {
         const coupleServiceFields = [
             'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
             'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple',
@@ -104,6 +110,23 @@ document.addEventListener('DOMContentLoaded', function() {
             'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3',
             'Other-Services-Info-Couple-3'
         ];
+    
+        coupleServiceFields.forEach(function(field) {
+            document.getElementById(field).value = '';
+        });
+    }
+    
+    // Usage of the functions based on some conditions or events
+    document.getElementById('Service-Single').addEventListener('change', function() {
+        resetSingleServiceConditionals();
+    });
+    
+    document.getElementById('Service-Couple').addEventListener('change', function() {
+        resetCoupleServiceConditionals();
+    });
+    
+    // Add similar event listeners for other elements as needed
+    
 
         singleServiceFields.forEach(id => {
             const element = document.getElementById(id);
