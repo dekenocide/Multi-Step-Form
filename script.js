@@ -1,3 +1,4 @@
+<script>
 // STEPS SCRIPTS
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -255,9 +256,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 single1Template.style.display = 'block';
                 single2Template.style.display = 'block';
             }
-        } else if (numberOfGuestsValue === '6-plus') {
-            currentStep = getNextStep(currentStep);
-            showStep(currentStep);
         }
     }
 
@@ -492,7 +490,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const otherServicesInfoCouple3 = document.getElementById('Other-Services-Info-Couple-3');
 
     // Hide all conditional fields initially
-    function hideAllConditionals() {
+    function hideSingleConditionals() {
         singlePackage.style.display = 'none';
         spaDelSolDreamInfo.style.display = 'none';
         singleMassage.style.display = 'none';
@@ -504,7 +502,9 @@ document.addEventListener('DOMContentLoaded', function() {
         bodyTreatment.style.display = 'none';
         waxInfo.style.display = 'none';
         multipleServicesInfo.style.display = 'none';
+    }
 
+    function hideSingleConditionals1() {
         singlePackage1.style.display = 'none';
         spaDelSolDreamInfo1.style.display = 'none';
         singleMassage1.style.display = 'none';
@@ -516,7 +516,9 @@ document.addEventListener('DOMContentLoaded', function() {
         bodyTreatment1.style.display = 'none';
         waxInfo1.style.display = 'none';
         multipleServicesInfo1.style.display = 'none';
+    }
 
+    function hideSingleConditionals2() {
         singlePackage2.style.display = 'none';
         spaDelSolDreamInfo2.style.display = 'none';
         singleMassage2.style.display = 'none';
@@ -528,7 +530,9 @@ document.addEventListener('DOMContentLoaded', function() {
         bodyTreatment2.style.display = 'none';
         waxInfo2.style.display = 'none';
         multipleServicesInfo2.style.display = 'none';
+    }
 
+    function hideSingleConditionals3() {
         singlePackage3.style.display = 'none';
         spaDelSolDreamInfo3.style.display = 'none';
         singleMassage3.style.display = 'none';
@@ -540,7 +544,9 @@ document.addEventListener('DOMContentLoaded', function() {
         bodyTreatment3.style.display = 'none';
         waxInfo3.style.display = 'none';
         multipleServicesInfo3.style.display = 'none';
+    }
 
+    function hideCoupleConditionals() {
         couplePackage.style.display = 'none';
         spaDelSolDreamInfoCouple.style.display = 'none';
         otherPackagesInfoCouple.style.display = 'none';
@@ -556,7 +562,9 @@ document.addEventListener('DOMContentLoaded', function() {
         facialAddOnGuest2Couple.style.display = 'none';
         bodyTreatmentsSelectsWrapperCouple.style.display = 'none';
         otherServicesInfoCouple.style.display = 'none';
+    }
 
+    function hideCoupleConditionals1() {
         couplePackage1.style.display = 'none';
         spaDelSolDreamInfoCouple1.style.display = 'none';
         otherPackagesInfoCouple1.style.display = 'none';
@@ -572,7 +580,9 @@ document.addEventListener('DOMContentLoaded', function() {
         facialAddOnGuest2Couple1.style.display = 'none';
         bodyTreatmentsSelectsWrapperCouple1.style.display = 'none';
         otherServicesInfoCouple1.style.display = 'none';
+    }
 
+    function hideCoupleConditionals2() {
         couplePackage2.style.display = 'none';
         spaDelSolDreamInfoCouple2.style.display = 'none';
         otherPackagesInfoCouple2.style.display = 'none';
@@ -588,7 +598,9 @@ document.addEventListener('DOMContentLoaded', function() {
         facialAddOnGuest2Couple2.style.display = 'none';
         bodyTreatmentsSelectsWrapperCouple2.style.display = 'none';
         otherServicesInfoCouple2.style.display = 'none';
+    }
 
+    function hideCoupleConditionals3() {
         couplePackage3.style.display = 'none';
         spaDelSolDreamInfoCouple3.style.display = 'none';
         otherPackagesInfoCouple3.style.display = 'none';
@@ -632,8 +644,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(bodyTreatment);
                 resetField(waxInfo);
                 resetField(multipleServicesInfo);
+                hideSingleConditionals();
                 break;
-
             case 'Service-Single-1':
                 resetField(singlePackage1);
                 resetField(spaDelSolDreamInfo1);
@@ -646,8 +658,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(bodyTreatment1);
                 resetField(waxInfo1);
                 resetField(multipleServicesInfo1);
+                hideSingleConditionals1();
                 break;
-
             case 'Service-Single-2':
                 resetField(singlePackage2);
                 resetField(spaDelSolDreamInfo2);
@@ -660,8 +672,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(bodyTreatment2);
                 resetField(waxInfo2);
                 resetField(multipleServicesInfo2);
+                hideSingleConditionals2();
                 break;
-
             case 'Service-Single-3':
                 resetField(singlePackage3);
                 resetField(spaDelSolDreamInfo3);
@@ -674,64 +686,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(bodyTreatment3);
                 resetField(waxInfo3);
                 resetField(multipleServicesInfo3);
+                hideSingleConditionals3();
                 break;
-
-            case 'Package-Single':
-                resetField(spaDelSolDreamInfo);
-                break;
-
-            case 'Package-Single-1':
-                resetField(spaDelSolDreamInfo1);
-                break;
-
-            case 'Package-Single-2':
-                resetField(spaDelSolDreamInfo2);
-                break;
-
-            case 'Package-Single-3':
-                resetField(spaDelSolDreamInfo3);
-                break;
-
-            case 'Massage-Single':
-                resetField(massageDurationA);
-                resetField(massageDurationB);
-                resetField(combinationType);
-                break;
-
-            case 'Massage-Single-1':
-                resetField(massageDurationA1);
-                resetField(massageDurationB1);
-                resetField(combinationType1);
-                break;
-
-            case 'Massage-Single-2':
-                resetField(massageDurationA2);
-                resetField(massageDurationB2);
-                resetField(combinationType2);
-                break;
-
-            case 'Massage-Single-3':
-                resetField(massageDurationA3);
-                resetField(massageDurationB3);
-                resetField(combinationType3);
-                break;
-
-            case 'Facial-Single':
-                resetField(facialAddOn);
-                break;
-
-            case 'Facial-Single-1':
-                resetField(facialAddOn1);
-                break;
-
-            case 'Facial-Single-2':
-                resetField(facialAddOn2);
-                break;
-
-            case 'Facial-Single-3':
-                resetField(facialAddOn3);
-                break;
-
             case 'Service-Couple':
                 resetField(couplePackage);
                 resetField(spaDelSolDreamInfoCouple);
@@ -740,20 +696,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(massageDurationACouple);
                 resetField(massageDurationBCouple);
                 resetField(prenatalMassageCouple);
-                resetField(document.getElementById('Combination-Guest-1-Couple'));
-                resetField(document.getElementById('Combination-Guest-2-Couple'));
-                resetField(document.getElementById('Massage-Guest-1-Couple'));
-                resetField(document.getElementById('Massage-Guest-2-Couple'));
+                resetField(combinationSelectsWrapperCouple);
+                resetField(differentMassagesSelectsWrapperCouple);
                 resetField(durationAGuest1And2Couple);
-                resetField(document.getElementById('Facial-Guest-1-Couple'));
-                resetField(document.getElementById('Facial-Guest-2-Couple'));
+                resetField(facialSelectsWrapperCouple);
                 resetField(facialAddOnGuest1Couple);
                 resetField(facialAddOnGuest2Couple);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple'));
+                resetField(bodyTreatmentsSelectsWrapperCouple);
                 resetField(otherServicesInfoCouple);
+                hideCoupleConditionals();
                 break;
-
             case 'Service-Couple-1':
                 resetField(couplePackage1);
                 resetField(spaDelSolDreamInfoCouple1);
@@ -762,20 +714,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(massageDurationACouple1);
                 resetField(massageDurationBCouple1);
                 resetField(prenatalMassageCouple1);
-                resetField(document.getElementById('Combination-Guest-1-Couple-1'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-1'));
+                resetField(combinationSelectsWrapperCouple1);
+                resetField(differentMassagesSelectsWrapperCouple1);
                 resetField(durationAGuest1And2Couple1);
-                resetField(document.getElementById('Facial-Guest-1-Couple-1'));
-                resetField(document.getElementById('Facial-Guest-2-Couple-1'));
+                resetField(facialSelectsWrapperCouple1);
                 resetField(facialAddOnGuest1Couple1);
                 resetField(facialAddOnGuest2Couple1);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple-1'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple-1'));
+                resetField(bodyTreatmentsSelectsWrapperCouple1);
                 resetField(otherServicesInfoCouple1);
+                hideCoupleConditionals1();
                 break;
-
             case 'Service-Couple-2':
                 resetField(couplePackage2);
                 resetField(spaDelSolDreamInfoCouple2);
@@ -784,20 +732,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(massageDurationACouple2);
                 resetField(massageDurationBCouple2);
                 resetField(prenatalMassageCouple2);
-                resetField(document.getElementById('Combination-Guest-1-Couple-2'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-2'));
+                resetField(combinationSelectsWrapperCouple2);
+                resetField(differentMassagesSelectsWrapperCouple2);
                 resetField(durationAGuest1And2Couple2);
-                resetField(document.getElementById('Facial-Guest-1-Couple-2'));
-                resetField(document.getElementById('Facial-Guest-2-Couple-2'));
+                resetField(facialSelectsWrapperCouple2);
                 resetField(facialAddOnGuest1Couple2);
                 resetField(facialAddOnGuest2Couple2);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple-2'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple-2'));
+                resetField(bodyTreatmentsSelectsWrapperCouple2);
                 resetField(otherServicesInfoCouple2);
+                hideCoupleConditionals2();
                 break;
-
             case 'Service-Couple-3':
                 resetField(couplePackage3);
                 resetField(spaDelSolDreamInfoCouple3);
@@ -806,551 +750,175 @@ document.addEventListener('DOMContentLoaded', function() {
                 resetField(massageDurationACouple3);
                 resetField(massageDurationBCouple3);
                 resetField(prenatalMassageCouple3);
-                resetField(document.getElementById('Combination-Guest-1-Couple-3'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-3'));
+                resetField(combinationSelectsWrapperCouple3);
+                resetField(differentMassagesSelectsWrapperCouple3);
                 resetField(durationAGuest1And2Couple3);
-                resetField(document.getElementById('Facial-Guest-1-Couple-3'));
-                resetField(document.getElementById('Facial-Guest-2-Couple-3'));
+                resetField(facialSelectsWrapperCouple3);
                 resetField(facialAddOnGuest1Couple3);
                 resetField(facialAddOnGuest2Couple3);
-                resetField(document.getElementById('Body-Treatment-Guest-1-Couple-3'));
-                resetField(document.getElementById('Body-Treatment-Guest-2-Couple-3'));
+                resetField(bodyTreatmentsSelectsWrapperCouple3);
                 resetField(otherServicesInfoCouple3);
-                break;
-
-            case 'Package-Couple':
-                resetField(spaDelSolDreamInfoCouple);
-                resetField(otherPackagesInfoCouple);
-                break;
-
-            case 'Package-Couple-1':
-                resetField(spaDelSolDreamInfoCouple1);
-                resetField(otherPackagesInfoCouple1);
-                break;
-
-            case 'Package-Couple-2':
-                resetField(spaDelSolDreamInfoCouple2);
-                resetField(otherPackagesInfoCouple2);
-                break;
-
-            case 'Package-Couple-3':
-                resetField(spaDelSolDreamInfoCouple3);
-                resetField(otherPackagesInfoCouple3);
-                break;
-
-            case 'Massage-Couple':
-                resetField(massageDurationACouple);
-                resetField(massageDurationBCouple);
-                resetField(prenatalMassageCouple);
-                resetField(document.getElementById('Combination-Guest-1-Couple'));
-                resetField(document.getElementById('Combination-Guest-2-Couple'));
-                resetField(document.getElementById('Massage-Guest-1-Couple'));
-                resetField(document.getElementById('Massage-Guest-2-Couple'));
-                resetField(durationAGuest1And2Couple);
-                break;
-
-            case 'Massage-Couple-1':
-                resetField(massageDurationACouple1);
-                resetField(massageDurationBCouple1);
-                resetField(prenatalMassageCouple1);
-                resetField(document.getElementById('Combination-Guest-1-Couple-1'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-1'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-1'));
-                resetField(durationAGuest1And2Couple1);
-                break;
-
-            case 'Massage-Couple-2':
-                resetField(massageDurationACouple2);
-                resetField(massageDurationBCouple2);
-                resetField(prenatalMassageCouple2);
-                resetField(document.getElementById('Combination-Guest-1-Couple-2'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-2'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-2'));
-                resetField(durationAGuest1And2Couple2);
-                break;
-
-            case 'Massage-Couple-3':
-                resetField(massageDurationACouple3);
-                resetField(massageDurationBCouple3);
-                resetField(prenatalMassageCouple3);
-                resetField(document.getElementById('Combination-Guest-1-Couple-3'));
-                resetField(document.getElementById('Combination-Guest-2-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-1-Couple-3'));
-                resetField(document.getElementById('Massage-Guest-2-Couple-3'));
-                resetField(durationAGuest1And2Couple3);
-                break;
-
-            case 'Facial-Guest-1-Couple':
-                resetField(facialAddOnGuest1Couple);
-                break;
-
-            case 'Facial-Guest-1-Couple-1':
-                resetField(facialAddOnGuest1Couple1);
-                break;
-
-            case 'Facial-Guest-1-Couple-2':
-                resetField(facialAddOnGuest1Couple2);
-                break;
-
-            case 'Facial-Guest-1-Couple-3':
-                resetField(facialAddOnGuest1Couple3);
-                break;
-
-            case 'Facial-Guest-2-Couple':
-                resetField(facialAddOnGuest2Couple);
-                break;
-
-            case 'Facial-Guest-2-Couple-1':
-                resetField(facialAddOnGuest2Couple1);
-                break;
-
-            case 'Facial-Guest-2-Couple-2':
-                resetField(facialAddOnGuest2Couple2);
-                break;
-
-            case 'Facial-Guest-2-Couple-3':
-                resetField(facialAddOnGuest2Couple3);
+                hideCoupleConditionals3();
                 break;
         }
     }
 
-    // Show/hide and reset conditionals based on selected values
-    function handleConditionalsSingle() {
-        hideAllConditionals();
-
-        // Single Service Conditionals
-        const singleServiceValue = singleService.value;
-        if (singleServiceValue === 'Package') {
+    // Show/hide fields based on selection
+    singleService.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             singlePackage.style.display = 'block';
-        } else if (singleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfo.style.display = 'block';
+        } else if (this.value === 'Massages') {
             singleMassage.style.display = 'block';
-        } else if (singleServiceValue === 'Facial') {
+        } else if (this.value === 'Facials') {
             singleFacial.style.display = 'block';
-        } else if (singleServiceValue === 'Body treatment') {
+        } else if (this.value === 'Body Treatments') {
             bodyTreatment.style.display = 'block';
-        } else if (singleServiceValue === 'Wax') {
+        } else if (this.value === 'Waxing') {
             waxInfo.style.display = 'block';
-        } else if (singleServiceValue === 'Multiple services') {
+        } else if (this.value === 'Multiple Services') {
             multipleServicesInfo.style.display = 'block';
         }
+    });
 
-        const singlePackageValue = singlePackage.value;
-        if (singlePackageValue === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo.style.display = 'block';
-        }
-
-        const singleMassageValue = singleMassage.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue)) {
-            massageDurationA.style.display = 'block';
-        } else if (singleMassageValue === 'Reflexology') {
-            massageDurationB.style.display = 'block';
-        } else if (singleMassageValue === 'Relaxing Combination') {
-            combinationType.style.display = 'block';
-        }
-
-        const singleFacialValue = singleFacial.value;
-        if (singleFacialValue === 'Sol Janssen') {
-            facialAddOn.style.display = 'block';
-        }
-    }
-
-    function handleConditionalsSingle1() {
-        hideAllConditionals();
-
-        // Single Service Conditionals
-        const singleServiceValue = singleService1.value;
-        if (singleServiceValue === 'Package') {
+    singleService1.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             singlePackage1.style.display = 'block';
-        } else if (singleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfo1.style.display = 'block';
+        } else if (this.value === 'Massages') {
             singleMassage1.style.display = 'block';
-        } else if (singleServiceValue === 'Facial') {
+        } else if (this.value === 'Facials') {
             singleFacial1.style.display = 'block';
-        } else if (singleServiceValue === 'Body treatment') {
+        } else if (this.value === 'Body Treatments') {
             bodyTreatment1.style.display = 'block';
-        } else if (singleServiceValue === 'Wax') {
+        } else if (this.value === 'Waxing') {
             waxInfo1.style.display = 'block';
-        } else if (singleServiceValue === 'Multiple services') {
+        } else if (this.value === 'Multiple Services') {
             multipleServicesInfo1.style.display = 'block';
         }
+    });
 
-        const singlePackageValue = singlePackage1.value;
-        if (singlePackageValue === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo1.style.display = 'block';
-        }
-
-        const singleMassageValue = singleMassage1.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue)) {
-            massageDurationA1.style.display = 'block';
-        } else if (singleMassageValue === 'Reflexology') {
-            massageDurationB1.style.display = 'block';
-        } else if (singleMassageValue === 'Relaxing Combination') {
-            combinationType1.style.display = 'block';
-        }
-
-        const singleFacialValue = singleFacial1.value;
-        if (singleFacialValue === 'Sol Janssen') {
-            facialAddOn1.style.display = 'block';
-        }
-    }
-
-    function handleConditionalsSingle2() {
-        hideAllConditionals();
-
-        // Single Service Conditionals
-        const singleServiceValue = singleService2.value;
-        if (singleServiceValue === 'Package') {
+    singleService2.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             singlePackage2.style.display = 'block';
-        } else if (singleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfo2.style.display = 'block';
+        } else if (this.value === 'Massages') {
             singleMassage2.style.display = 'block';
-        } else if (singleServiceValue === 'Facial') {
+        } else if (this.value === 'Facials') {
             singleFacial2.style.display = 'block';
-        } else if (singleServiceValue === 'Body treatment') {
+        } else if (this.value === 'Body Treatments') {
             bodyTreatment2.style.display = 'block';
-        } else if (singleServiceValue === 'Wax') {
+        } else if (this.value === 'Waxing') {
             waxInfo2.style.display = 'block';
-        } else if (singleServiceValue === 'Multiple services') {
+        } else if (this.value === 'Multiple Services') {
             multipleServicesInfo2.style.display = 'block';
         }
+    });
 
-        const singlePackageValue = singlePackage2.value;
-        if (singlePackageValue === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo2.style.display = 'block';
-        }
-
-        const singleMassageValue = singleMassage2.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue)) {
-            massageDurationA2.style.display = 'block';
-        } else if (singleMassageValue === 'Reflexology') {
-            massageDurationB2.style.display = 'block';
-        } else if (singleMassageValue === 'Relaxing Combination') {
-            combinationType2.style.display = 'block';
-        }
-
-        const singleFacialValue = singleFacial2.value;
-        if (singleFacialValue === 'Sol Janssen') {
-            facialAddOn2.style.display = 'block';
-        }
-    }
-
-    function handleConditionalsSingle3() {
-        hideAllConditionals();
-
-        // Single Service Conditionals
-        const singleServiceValue = singleService3.value;
-        if (singleServiceValue === 'Package') {
+    singleService3.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             singlePackage3.style.display = 'block';
-        } else if (singleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfo3.style.display = 'block';
+        } else if (this.value === 'Massages') {
             singleMassage3.style.display = 'block';
-        } else if (singleServiceValue === 'Facial') {
+        } else if (this.value === 'Facials') {
             singleFacial3.style.display = 'block';
-        } else if (singleServiceValue === 'Body treatment') {
+        } else if (this.value === 'Body Treatments') {
             bodyTreatment3.style.display = 'block';
-        } else if (singleServiceValue === 'Wax') {
+        } else if (this.value === 'Waxing') {
             waxInfo3.style.display = 'block';
-        } else if (singleServiceValue === 'Multiple services') {
+        } else if (this.value === 'Multiple Services') {
             multipleServicesInfo3.style.display = 'block';
         }
+    });
 
-        const singlePackageValue = singlePackage3.value;
-        if (singlePackageValue === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo3.style.display = 'block';
-        }
-
-        const singleMassageValue = singleMassage3.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue)) {
-            massageDurationA3.style.display = 'block';
-        } else if (singleMassageValue === 'Reflexology') {
-            massageDurationB3.style.display = 'block';
-        } else if (singleMassageValue === 'Relaxing Combination') {
-            combinationType3.style.display = 'block';
-        }
-
-        const singleFacialValue = singleFacial3.value;
-        if (singleFacialValue === 'Sol Janssen') {
-            facialAddOn3.style.display = 'block';
-        }
-    }
-
-    function handleConditionalsCouple() {
-        hideAllConditionals();
-
-        // Couple Service Conditionals
-        const coupleServiceValue = coupleService.value;
-        if (coupleServiceValue === 'Package') {
+    coupleService.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             couplePackage.style.display = 'block';
-        } else if (coupleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfoCouple.style.display = 'block';
+        } else if (this.value === 'Massages') {
             coupleMassage.style.display = 'block';
-        } else if (coupleServiceValue === 'Facial') {
-            facialSelectsWrapperCouple.style.display = 'grid';
-        } else if (coupleServiceValue === 'Body treatment') {
-            bodyTreatmentsSelectsWrapperCouple.style.display = 'grid';
-        } else if (coupleServiceValue === 'Other') {
+        } else if (this.value === 'Facials') {
+            facialSelectsWrapperCouple.style.display = 'block';
+        } else if (this.value === 'Body Treatments') {
+            bodyTreatmentsSelectsWrapperCouple.style.display = 'block';
+        } else if (this.value === 'Other Services') {
             otherServicesInfoCouple.style.display = 'block';
         }
+    });
 
-        const couplePackageValue = couplePackage.value;
-        if (couplePackageValue === '2x Spa del Sol Dream') {
-            spaDelSolDreamInfoCouple.style.display = 'block';
-        } else if (couplePackageValue === 'Two different packages') {
-            otherPackagesInfoCouple.style.display = 'block';
-        }
-
-        const coupleMassageValue = coupleMassage.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue)) {
-            massageDurationACouple.style.display = 'block';
-        } else if (coupleMassageValue === 'Reflexology') {
-            massageDurationBCouple.style.display = 'block';
-        } else if (coupleMassageValue === 'Prenatal and other') {
-            prenatalMassageCouple.style.display = 'block';
-        } else if (coupleMassageValue === 'Relaxing Combination') {
-            combinationSelectsWrapperCouple.style.display = 'grid';
-        } else if (coupleMassageValue === 'Two different types') {
-            differentMassagesSelectsWrapperCouple.style.display = 'grid';
-        }
-
-        const massageGuest1Value = document.getElementById('Massage-Guest-1-Couple').value;
-        const massageGuest2Value = document.getElementById('Massage-Guest-2-Couple').value;
-        if (massageGuest1Value !== '' && massageGuest2Value !== '') {
-            durationAGuest1And2Couple.style.display = 'block';
-        }
-
-        const facialGuest1Value = document.getElementById('Facial-Guest-1-Couple').value;
-        if (facialGuest1Value === 'Sol Janssen') {
-            facialAddOnGuest1Couple.style.display = 'block';
-        }
-
-        const facialGuest2Value = document.getElementById('Facial-Guest-2-Couple').value;
-        if (facialGuest2Value === 'Sol Janssen') {
-            facialAddOnGuest2Couple.style.display = 'block';
-        }
-    }
-
-    function handleConditionalsCouple1() {
-        hideAllConditionals();
-
-        // Couple Service Conditionals
-        const coupleServiceValue = coupleService1.value;
-        if (coupleServiceValue === 'Package') {
+    coupleService1.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             couplePackage1.style.display = 'block';
-        } else if (coupleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfoCouple1.style.display = 'block';
+        } else if (this.value === 'Massages') {
             coupleMassage1.style.display = 'block';
-        } else if (coupleServiceValue === 'Facial') {
-            facialSelectsWrapperCouple1.style.display = 'grid';
-        } else if (coupleServiceValue === 'Body treatment') {
-            bodyTreatmentsSelectsWrapperCouple1.style.display = 'grid';
-        } else if (coupleServiceValue === 'Other') {
+        } else if (this.value === 'Facials') {
+            facialSelectsWrapperCouple1.style.display = 'block';
+        } else if (this.value === 'Body Treatments') {
+            bodyTreatmentsSelectsWrapperCouple1.style.display = 'block';
+        } else if (this.value === 'Other Services') {
             otherServicesInfoCouple1.style.display = 'block';
         }
+    });
 
-        const couplePackageValue = couplePackage1.value;
-        if (couplePackageValue === '2x Spa del Sol Dream') {
-            spaDelSolDreamInfoCouple1.style.display = 'block';
-        } else if (couplePackageValue === 'Two different packages') {
-            otherPackagesInfoCouple1.style.display = 'block';
-        }
-
-        const coupleMassageValue = coupleMassage1.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue)) {
-            massageDurationACouple1.style.display = 'block';
-        } else if (coupleMassageValue === 'Reflexology') {
-            massageDurationBCouple1.style.display = 'block';
-        } else if (coupleMassageValue === 'Prenatal and other') {
-            prenatalMassageCouple1.style.display = 'block';
-        } else if (coupleMassageValue === 'Relaxing Combination') {
-            combinationSelectsWrapperCouple1.style.display = 'grid';
-        } else if (coupleMassageValue === 'Two different types') {
-            differentMassagesSelectsWrapperCouple1.style.display = 'grid';
-        }
-
-        const massageGuest1Value = document.getElementById('Massage-Guest-1-Couple-1').value;
-        const massageGuest2Value = document.getElementById('Massage-Guest-2-Couple-1').value;
-        if (massageGuest1Value !== '' && massageGuest2Value !== '') {
-            durationAGuest1And2Couple1.style.display = 'block';
-        }
-
-        const facialGuest1Value = document.getElementById('Facial-Guest-1-Couple-1').value;
-        if (facialGuest1Value === 'Sol Janssen') {
-            facialAddOnGuest1Couple1.style.display = 'block';
-        }
-
-        const facialGuest2Value = document.getElementById('Facial-Guest-2-Couple-1').value;
-        if (facialGuest2Value === 'Sol Janssen') {
-            facialAddOnGuest2Couple1.style.display = 'block';
-        }
-    }
-
-    function handleConditionalsCouple2() {
-        hideAllConditionals();
-
-        // Couple Service Conditionals
-        const coupleServiceValue = coupleService2.value;
-        if (coupleServiceValue === 'Package') {
+    coupleService2.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             couplePackage2.style.display = 'block';
-        } else if (coupleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfoCouple2.style.display = 'block';
+        } else if (this.value === 'Massages') {
             coupleMassage2.style.display = 'block';
-        } else if (coupleServiceValue === 'Facial') {
-            facialSelectsWrapperCouple2.style.display = 'grid';
-        } else if (coupleServiceValue === 'Body treatment') {
-            bodyTreatmentsSelectsWrapperCouple2.style.display = 'grid';
-        } else if (coupleServiceValue === 'Other') {
+        } else if (this.value === 'Facials') {
+            facialSelectsWrapperCouple2.style.display = 'block';
+        } else if (this.value === 'Body Treatments') {
+            bodyTreatmentsSelectsWrapperCouple2.style.display = 'block';
+        } else if (this.value === 'Other Services') {
             otherServicesInfoCouple2.style.display = 'block';
         }
+    });
 
-        const couplePackageValue = couplePackage2.value;
-        if (couplePackageValue === '2x Spa del Sol Dream') {
-            spaDelSolDreamInfoCouple2.style.display = 'block';
-        } else if (couplePackageValue === 'Two different packages') {
-            otherPackagesInfoCouple2.style.display = 'block';
-        }
-
-        const coupleMassageValue = coupleMassage2.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue)) {
-            massageDurationACouple2.style.display = 'block';
-        } else if (coupleMassageValue === 'Reflexology') {
-            massageDurationBCouple2.style.display = 'block';
-        } else if (coupleMassageValue === 'Prenatal and other') {
-            prenatalMassageCouple2.style.display = 'block';
-        } else if (coupleMassageValue === 'Relaxing Combination') {
-            combinationSelectsWrapperCouple2.style.display = 'grid';
-        } else if (coupleMassageValue === 'Two different types') {
-            differentMassagesSelectsWrapperCouple2.style.display = 'grid';
-        }
-
-        const massageGuest1Value = document.getElementById('Massage-Guest-1-Couple-2').value;
-        const massageGuest2Value = document.getElementById('Massage-Guest-2-Couple-2').value;
-        if (massageGuest1Value !== '' && massageGuest2Value !== '') {
-            durationAGuest1And2Couple2.style.display = 'block';
-        }
-
-        const facialGuest1Value = document.getElementById('Facial-Guest-1-Couple-2').value;
-        if (facialGuest1Value === 'Sol Janssen') {
-            facialAddOnGuest1Couple2.style.display = 'block';
-        }
-
-        const facialGuest2Value = document.getElementById('Facial-Guest-2-Couple-2').value;
-        if (facialGuest2Value === 'Sol Janssen') {
-            facialAddOnGuest2Couple2.style.display = 'block';
-        }
-    }
-
-    function handleConditionalsCouple3() {
-        hideAllConditionals();
-
-        // Couple Service Conditionals
-        const coupleServiceValue = coupleService3.value;
-        if (coupleServiceValue === 'Package') {
+    coupleService3.addEventListener('change', function() {
+        resetAndHideChildren(this);
+        if (this.value === 'Packages') {
             couplePackage3.style.display = 'block';
-        } else if (coupleServiceValue === 'Massage') {
+        } else if (this.value === 'Spa del Sol Dream') {
+            spaDelSolDreamInfoCouple3.style.display = 'block';
+        } else if (this.value === 'Massages') {
             coupleMassage3.style.display = 'block';
-        } else if (coupleServiceValue === 'Facial') {
-            facialSelectsWrapperCouple3.style.display = 'grid';
-        } else if (coupleServiceValue === 'Body treatment') {
-            bodyTreatmentsSelectsWrapperCouple3.style.display = 'grid';
-        } else if (coupleServiceValue === 'Other') {
+        } else if (this.value === 'Facials') {
+            facialSelectsWrapperCouple3.style.display = 'block';
+        } else if (this.value === 'Body Treatments') {
+            bodyTreatmentsSelectsWrapperCouple3.style.display = 'block';
+        } else if (this.value === 'Other Services') {
             otherServicesInfoCouple3.style.display = 'block';
         }
+    });
 
-        const couplePackageValue = couplePackage3.value;
-        if (couplePackageValue === '2x Spa del Sol Dream') {
-            spaDelSolDreamInfoCouple3.style.display = 'block';
-        } else if (couplePackageValue === 'Two different packages') {
-            otherPackagesInfoCouple3.style.display = 'block';
-        }
+    // Initially hide all conditional fields
+    hideSingleConditionals();
+    hideSingleConditionals1();
+    hideSingleConditionals2();
+    hideSingleConditionals3();
+    hideCoupleConditionals();
+    hideCoupleConditionals1();
+    hideCoupleConditionals2();
+    hideCoupleConditionals3();
+});
+</script>
 
-        const coupleMassageValue = coupleMassage3.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue)) {
-            massageDurationACouple3.style.display = 'block';
-        } else if (coupleMassageValue === 'Reflexology') {
-            massageDurationBCouple3.style.display = 'block';
-        } else if (coupleMassageValue === 'Prenatal and other') {
-            prenatalMassageCouple3.style.display = 'block';
-        } else if (coupleMassageValue === 'Relaxing Combination') {
-            combinationSelectsWrapperCouple3.style.display = 'grid';
-        } else if (coupleMassageValue === 'Two different types') {
-            differentMassagesSelectsWrapperCouple3.style.display = 'grid';
-        }
-
-        const massageGuest1Value = document.getElementById('Massage-Guest-1-Couple-3').value;
-        const massageGuest2Value = document.getElementById('Massage-Guest-2-Couple-3').value;
-        if (massageGuest1Value !== '' && massageGuest2Value !== '') {
-            durationAGuest1And2Couple3.style.display = 'block';
-        }
-
-        const facialGuest1Value = document.getElementById('Facial-Guest-1-Couple-3').value;
-        if (facialGuest1Value === 'Sol Janssen') {
-            facialAddOnGuest1Couple3.style.display = 'block';
-        }
-
-        const facialGuest2Value = document.getElementById('Facial-Guest-2-Couple-3').value;
-        if (facialGuest2Value === 'Sol Janssen') {
-            facialAddOnGuest2Couple3.style.display = 'block';
-        }
-    }
-
-    // Add change event listeners to all select fields
-    function addChangeEventListener(id, handleChange) {
-        document.getElementById(id).addEventListener('change', function() {
-            resetAndHideChildren(this);
-            handleChange();
-        });
-    }
-
-    addChangeEventListener('Service-Single', handleConditionalsSingle);
-    addChangeEventListener('Package-Single', handleConditionalsSingle);
-    addChangeEventListener('Massage-Single', handleConditionalsSingle);
-    addChangeEventListener('Facial-Single', handleConditionalsSingle);
-
-    addChangeEventListener('Service-Single-1', handleConditionalsSingle1);
-    addChangeEventListener('Package-Single-1', handleConditionalsSingle1);
-    addChangeEventListener('Massage-Single-1', handleConditionalsSingle1);
-    addChangeEventListener('Facial-Single-1', handleConditionalsSingle1);
-
-    addChangeEventListener('Service-Single-2', handleConditionalsSingle2);
-    addChangeEventListener('Package-Single-2', handleConditionalsSingle2);
-    addChangeEventListener('Massage-Single-2', handleConditionalsSingle2);
-    addChangeEventListener('Facial-Single-2', handleConditionalsSingle2);
-
-    addChangeEventListener('Service-Single-3', handleConditionalsSingle3);
-    addChangeEventListener('Package-Single-3', handleConditionalsSingle3);
-    addChangeEventListener('Massage-Single-3', handleConditionalsSingle3);
-    addChangeEventListener('Facial-Single-3', handleConditionalsSingle3);
-
-    addChangeEventListener('Service-Couple', handleConditionalsCouple);
-    addChangeEventListener('Package-Couple', handleConditionalsCouple);
-    addChangeEventListener('Massage-Couple', handleConditionalsCouple);
-    addChangeEventListener('Massage-Guest-1-Couple', handleConditionalsCouple);
-    addChangeEventListener('Massage-Guest-2-Couple', handleConditionalsCouple);
-    addChangeEventListener('Facial-Guest-1-Couple', handleConditionalsCouple);
-    addChangeEventListener('Facial-Guest-2-Couple', handleConditionalsCouple);
-
-    addChangeEventListener('Service-Couple-1', handleConditionalsCouple1);
-    addChangeEventListener('Package-Couple-1', handleConditionalsCouple1);
-    addChangeEventListener('Massage-Couple-1', handleConditionalsCouple1);
-    addChangeEventListener('Massage-Guest-1-Couple-1', handleConditionalsCouple1);
-    addChangeEventListener('Massage-Guest-2-Couple-1', handleConditionalsCouple1);
-    addChangeEventListener('Facial-Guest-1-Couple-1', handleConditionalsCouple1);
-    addChangeEventListener('Facial-Guest-2-Couple-1', handleConditionalsCouple1);
-
-    addChangeEventListener('Service-Couple-2', handleConditionalsCouple2);
-    addChangeEventListener('Package-Couple-2', handleConditionalsCouple2);
-    addChangeEventListener('Massage-Couple-2', handleConditionalsCouple2);
-    addChangeEventListener('Massage-Guest-1-Couple-2', handleConditionalsCouple2);
-    addChangeEventListener('Massage-Guest-2-Couple-2', handleConditionalsCouple2);
-    addChangeEventListener('Facial-Guest-1-Couple-2', handleConditionalsCouple2);
-    addChangeEventListener('Facial-Guest-2-Couple-2', handleConditionalsCouple2);
-
-    addChangeEventListener('Service-Couple-3', handleConditionalsCouple3);
-    addChangeEventListener('Package-Couple-3', handleConditionalsCouple3);
-    addChangeEventListener('Massage-Couple-3', handleConditionalsCouple3);
-    addChangeEventListener('Massage-Guest-1-Couple-3', handleConditionalsCouple3);
-    addChangeEventListener('Massage-Guest-2-Couple-3', handleConditionalsCouple3);
-    addChangeEventListener('Facial-Guest-1-Couple-3', handleConditionalsCouple3);
-    addChangeEventListener('Facial-Guest-2-Couple-3', handleConditionalsCouple3);
-
-    // Initial setup
     hideAllConditionals();
 });
