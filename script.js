@@ -1,4 +1,3 @@
-<script>
 // STEPS SCRIPTS
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -918,7 +917,6 @@ document.addEventListener('DOMContentLoaded', function() {
     hideCoupleConditionals2();
     hideCoupleConditionals3();
 });
-</script>
 
     hideAllConditionals();
 });
