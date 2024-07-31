@@ -56,6 +56,23 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
+    function validateVisibleFieldsInStep8() {
+        const step8 = document.getElementById('step-8');
+        const inputs = step8.querySelectorAll('input, select, textarea');
+        for (let input of inputs) {
+            if (input.style.display !== 'none') {
+                if (input.type === 'select-one') {
+                    if (input.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (input.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     function resetServiceConditionals() {
         const singleServiceFields = [
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
@@ -139,11 +156,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     nextBtn.addEventListener('click', function() {
-        if (validateStep(currentStep)) {
+        if (currentStep === 'step-8' && !validateVisibleFieldsInStep8()) {
+            alert('Please fill out all required fields before proceeding.');
+        } else if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
         } else {
             alert('Please fill out all required fields before proceeding.');
+        }
+    });
+
+    submitBtn.addEventListener('click', function() {
+        if (currentStep === 'step-8' && !validateVisibleFieldsInStep8()) {
+            alert('Please fill out all required fields before submitting.');
+        } else if (validateStep(currentStep)) {
+            // Add form submission logic here
+        } else {
+            alert('Please fill out all required fields before submitting.');
         }
     });
 
