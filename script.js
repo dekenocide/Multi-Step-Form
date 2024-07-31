@@ -1,3 +1,4 @@
+// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     // Step navigation elements
     const steps = {
@@ -167,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to validate all visible fields in step-8 before submitting
     function validateVisibleFieldsInStep8() {
-        const visibleFields = steps['step-8'].querySelectorAll('input:visible, select:visible, textarea:visible');
+        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
         for (let field of visibleFields) {
             if (field.style.display !== 'none' && field.offsetParent !== null) {
                 if (field.type === 'select-one') {
