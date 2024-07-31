@@ -38,22 +38,31 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
+        validateStep(step); // Validate step when shown
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
+        let allValid = true;
         for (let input of inputs) {
             if (input.style.display !== 'none') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
-                        return false;
+                        allValid = false;
+                        input.style.border = '1px solid red'; // Highlight the empty fields
+                    } else {
+                        input.style.border = ''; // Reset the border if filled
                     }
                 } else if (input.value.trim() === "") {
-                    return false;
+                    allValid = false;
+                    input.style.border = '1px solid red'; // Highlight the empty fields
+                } else {
+                    input.style.border = ''; // Reset the border if filled
                 }
             }
         }
-        return true;
+        submitBtn.disabled = !allValid; // Enable/disable submit button
+        return allValid;
     }
 
     function resetServiceConditionals() {
@@ -184,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!allValid) {
             alert('Please fill out all required fields.');
             event.preventDefault(); // Prevent form submission
+            return;
         }
 
         // Remove empty fields
