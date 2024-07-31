@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showStep(currentStep);
 
     // Validate all visible fields in step-8 before submission
-    const form = document.querySelector('email-form'); // Make sure this selector matches your form
+    const form = document.querySelector('form'); // Make sure this selector matches your form
 
     form.addEventListener('submit', function(event) {
         const inputs = steps['step-8'].querySelectorAll('input, select, textarea');
