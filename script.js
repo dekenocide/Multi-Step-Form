@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none' && input.offsetParent !== null) {
+            if (input.style.display !== 'none') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -166,28 +166,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     showStep(currentStep);
 
-    // Function to validate all visible fields in step-8 before submitting
-    function validateVisibleFieldsInStep8() {
-        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
-        for (let field of visibleFields) {
-            if (field.style.display !== 'none' && field.offsetParent !== null) {
-                if (field.type === 'select-one') {
-                    if (field.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (field.value.trim() === "") {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+    // Validate all visible fields in step-8 before submission
+    const form = document.querySelector('email-form'); // Make sure this selector matches your form
 
-    submitBtn.addEventListener('click', function(event) {
-        if (!validateVisibleFieldsInStep8()) {
-            event.preventDefault();
-            alert('Please fill out all required fields before submitting.');
+    form.addEventListener('submit', function(event) {
+        const inputs = steps['step-8'].querySelectorAll('input, select, textarea');
+        let allValid = true;
+        inputs.forEach(input => {
+            if (input.style.display !== 'none' && input.value.trim() === '') {
+                allValid = false;
+                input.style.border = '1px solid red'; // Highlight the empty fields
+            } else {
+                input.style.border = ''; // Reset the border if filled
+            }
+        });
+
+        if (!allValid) {
+            alert('Please fill out all required fields.');
+            event.preventDefault(); // Prevent form submission
         }
+
+        // Remove empty fields
+        const allInputs = form.querySelectorAll('input, select, textarea');
+        allInputs.forEach(input => {
+            if (input.value.trim() === '') {
+                input.parentNode.removeChild(input);
+            }
+        });
     });
 });
 
