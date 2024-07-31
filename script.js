@@ -1,4 +1,3 @@
-// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     // Step navigation elements
     const steps = {
@@ -43,24 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none') {
-                if (input.type === 'select-one') {
-                    if (input.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (input.value.trim() === "") {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    function validateVisibleFieldsInStep8() {
-        const step8 = document.getElementById('step-8');
-        const inputs = step8.querySelectorAll('input, select, textarea');
-        for (let input of inputs) {
-            if (input.style.display !== 'none') {
+            if (input.style.display !== 'none' && input.offsetParent !== null) {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -156,23 +138,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     nextBtn.addEventListener('click', function() {
-        if (currentStep === 'step-8' && !validateVisibleFieldsInStep8()) {
-            alert('Please fill out all required fields before proceeding.');
-        } else if (validateStep(currentStep)) {
+        if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
         } else {
             alert('Please fill out all required fields before proceeding.');
-        }
-    });
-
-    submitBtn.addEventListener('click', function() {
-        if (currentStep === 'step-8' && !validateVisibleFieldsInStep8()) {
-            alert('Please fill out all required fields before submitting.');
-        } else if (validateStep(currentStep)) {
-            // Add form submission logic here
-        } else {
-            alert('Please fill out all required fields before submitting.');
         }
     });
 
@@ -194,6 +164,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial setup
     showStep(currentStep);
+
+    // Function to validate all visible fields in step-8 before submitting
+    function validateVisibleFieldsInStep8() {
+        const visibleFields = steps['step-8'].querySelectorAll('input:visible, select:visible, textarea:visible');
+        for (let field of visibleFields) {
+            if (field.style.display !== 'none' && field.offsetParent !== null) {
+                if (field.type === 'select-one') {
+                    if (field.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (field.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    submitBtn.addEventListener('click', function(event) {
+        if (!validateVisibleFieldsInStep8()) {
+            event.preventDefault();
+            alert('Please fill out all required fields before submitting.');
+        }
+    });
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
