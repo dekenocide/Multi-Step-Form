@@ -1,6 +1,5 @@
-// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
-    // Step navigation elements
+    // 1. Function for the multi steps
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -38,9 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
-        document.getElementById('recaptcha-container').style.display = (step === 'step-8') ? 'flex' : 'none'; // Show reCAPTCHA in step-8
+        document.getElementById('recaptcha-container').style.display = (step === 'step-8') ? 'flex' : 'none'; // 3. Display reCAPTCHA in step-8
     }
 
+    // 2. Function to validate all fields in steps 1-7 with the exception of #Date-Flexibility
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
+    // 4. Function to reset service conditionals when the previous button is clicked in step-8
     function resetServiceConditionals() {
         const singleServiceFields = [
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
@@ -140,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('Service-Couple-3').style.display = 'block';
     }
 
+    // 5. Event listeners for the next and previous buttons
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
@@ -165,10 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    // Initial setup
-    showStep(currentStep);
-
-    // Function to validate all visible fields in step-8 before submitting
+    // 6. Enable the submit button ONLY when all visible fields in step-8 have a value and the reCAPTCHA is valid
     function validateVisibleFieldsInStep8() {
         const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
         for (let field of visibleFields) {
@@ -185,22 +184,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    // Block submit button until all visible fields in step-8 are filled
     function toggleSubmitButton() {
-        submitBtn.disabled = !validateVisibleFieldsInStep8();
+        const recaptchaCompleted = grecaptcha.getResponse().length !== 0;
+        submitBtn.disabled = !(validateVisibleFieldsInStep8() && recaptchaCompleted);
     }
 
-    // Event listener to monitor changes in step-8
     const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
     step8Fields.forEach(field => {
         field.addEventListener('input', toggleSubmitButton);
         field.addEventListener('change', toggleSubmitButton);
     });
 
+    window.recaptchaCallback = function() {
+        toggleSubmitButton();
+    };
+
     // Disable submit button initially
     toggleSubmitButton();
 
-    // Remove empty fields before form submission
+    // 7. Delete all empty fields from form when the submit button is finally enabled and clicked
     const form = document.querySelector('form'); // Adjust selector as needed
 
     form.addEventListener('submit', function(event) {
@@ -217,6 +219,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Initial setup
+    showStep(currentStep);
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
