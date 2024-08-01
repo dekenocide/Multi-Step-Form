@@ -38,31 +38,26 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
-        validateStep(step); // Validate step when shown
+
+        if (step === 'step-8') {
+            checkFieldsInStep8();
+        }
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
-        let allValid = true;
         for (let input of inputs) {
-            if (input.style.display !== 'none') {
+            if (input.style.display !== 'none' && input.offsetParent !== null) {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
-                        allValid = false;
-                        input.style.border = '1px solid red'; // Highlight the empty fields
-                    } else {
-                        input.style.border = ''; // Reset the border if filled
+                        return false;
                     }
                 } else if (input.value.trim() === "") {
-                    allValid = false;
-                    input.style.border = '1px solid red'; // Highlight the empty fields
-                } else {
-                    input.style.border = ''; // Reset the border if filled
+                    return false;
                 }
             }
         }
-        submitBtn.disabled = !allValid; // Enable/disable submit button
-        return allValid;
+        return true;
     }
 
     function resetServiceConditionals() {
@@ -175,35 +170,77 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     showStep(currentStep);
 
-    // Validate all visible fields in step-8 before submission
-    const form = document.querySelector('form'); // Make sure this selector matches your form
-
-    form.addEventListener('submit', function(event) {
-        const inputs = steps['step-8'].querySelectorAll('input, select, textarea');
-        let allValid = true;
-        inputs.forEach(input => {
-            if (input.style.display !== 'none' && input.value.trim() === '') {
-                allValid = false;
-                input.style.border = '1px solid red'; // Highlight the empty fields
-            } else {
-                input.style.border = ''; // Reset the border if filled
+    // Function to validate all visible fields in step-8
+    function validateVisibleFieldsInStep8() {
+        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
+        for (let field of visibleFields) {
+            if (field.style.display !== 'none' && field.offsetParent !== null) {
+                if (field.type === 'select-one') {
+                    if (field.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (field.value.trim() === "") {
+                    return false;
+                }
             }
-        });
+        }
+        return true;
+    }
 
-        if (!allValid) {
-            alert('Please fill out all required fields.');
-            event.preventDefault(); // Prevent form submission
+    function checkFieldsInStep8() {
+        if (validateVisibleFieldsInStep8()) {
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.disabled = true;
+        }
+    }
+
+    // Add event listener to check fields on input change in step-8
+    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
+    step8Fields.forEach(field => {
+        field.addEventListener('input', checkFieldsInStep8);
+        field.addEventListener('change', checkFieldsInStep8);
+    });
+
+    // Function to handle form submission
+    function handleSubmit(event) {
+        if (!validateVisibleFieldsInStep8()) {
+            event.preventDefault();
+            alert('Please fill out all required fields before submitting.');
             return;
         }
 
-        // Remove empty fields
-        const allInputs = form.querySelectorAll('input, select, textarea');
-        allInputs.forEach(input => {
-            if (input.value.trim() === '') {
-                input.parentNode.removeChild(input);
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Remove empty fields from formData
+        for (let [name, value] of formData.entries()) {
+            if (!value.trim()) {
+                formData.delete(name);
             }
+        }
+
+        // Submit the form using fetch
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+        }).then(response => {
+            if (response.ok) {
+                alert('Form submitted successfully!');
+                form.reset();
+                showStep('step-1'); // Reset to the first step
+            } else {
+                alert('There was a problem with the submission.');
+            }
+        }).catch(error => {
+            alert('There was a problem with the submission.');
         });
-    });
+
+        event.preventDefault();
+    }
+
+    // Add event listener to the submit button
+    submitBtn.addEventListener('click', handleSubmit);
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
