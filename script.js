@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.getElementById('next-button');
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
-    const reCAPTCHAWrapper = document.getElementById('form-reCAPTCHA-wrapper');
     let currentStep = 'step-1';
 
     // Define the hierarchical order for the steps
@@ -39,17 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
-        reCAPTCHAWrapper.style.display = step === 'step-8' ? 'block' : 'none';
-
-        if (step === 'step-8') {
-            validateVisibleFieldsInStep8();  // Validate fields when entering step-8
-        }
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none' && input.offsetParent !== null) {
+            if (input.style.display !== 'none') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -169,33 +163,31 @@ document.addEventListener('DOMContentLoaded', function() {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    // Function to validate all visible fields in step-8
-    function validateVisibleFieldsInStep8() {
-        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
-        let allValid = true;
-        for (let field of visibleFields) {
-            if (field.style.display !== 'none' && field.offsetParent !== null) {
-                if (field.type === 'select-one') {
-                    if (field.selectedIndex === 0) {
-                        allValid = false;
-                    }
-                } else if (field.value.trim() === "") {
-                    allValid = false;
-                }
+    // Initial setup
+    showStep(currentStep);
+
+    // Function to check if all visible fields in step-8 are filled
+    function checkStep8Fields() {
+        const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
+        for (let field of step8Fields) {
+            if (field.style.display !== 'none' && field.value.trim() === '') {
+                return false;
             }
         }
-        submitBtn.disabled = !allValid;
+        return true;
     }
 
-    // Add change event listeners to all fields in step-8 to validate on change
-    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
-    for (let field of step8Fields) {
-        field.addEventListener('input', validateVisibleFieldsInStep8);
-        field.addEventListener('change', validateVisibleFieldsInStep8);
-    }
+    // Disable submit button initially
+    submitBtn.disabled = true;
 
+    // Check fields on input change
+    steps['step-8'].addEventListener('input', function() {
+        submitBtn.disabled = !checkStep8Fields();
+    });
+
+    // Prevent form submission if not all fields are filled
     submitBtn.addEventListener('click', function(event) {
-        if (!validateVisibleFieldsInStep8()) {
+        if (!checkStep8Fields()) {
             event.preventDefault();
             alert('Please fill out all required fields before submitting.');
         }
