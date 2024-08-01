@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (step === 'step-8') {
             checkFieldsInStep8();
-            recaptchaContainer.style.display = 'block'; // Show reCAPTCHA in step-8
+            recaptchaContainer.style.display = 'flex'; // Show reCAPTCHA in step-8
         } else {
             recaptchaContainer.style.display = 'none'; // Hide reCAPTCHA in other steps
         }
