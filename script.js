@@ -1,4 +1,3 @@
-
 // STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     // Step navigation elements
@@ -17,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.getElementById('next-button');
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
+    const recaptchaContainer = document.getElementById('recaptcha-container');
     let currentStep = 'step-1';
 
     // Define the hierarchical order for the steps
@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (step === 'step-8') {
             checkFieldsInStep8();
+            recaptchaContainer.style.display = 'block'; // Show reCAPTCHA in step-8
+        } else {
+            recaptchaContainer.style.display = 'none'; // Hide reCAPTCHA in other steps
         }
     }
 
