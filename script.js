@@ -38,15 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
+        document.getElementById('recaptcha-container').style.display = (step === 'step-8') ? 'flex' : 'none'; // Show reCAPTCHA in step-8
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
             if (input.style.display !== 'none' && input.offsetParent !== null) {
-                if (step === 'step-6' && input.id === 'Date-Flexibility') {
-                    continue; // Skip validation for Date-Flexibility field in step-6
-                }
+                if (step === 'step-6' && input.id === 'Date-Flexibility') continue; // Skip validation for #Date-Flexibility in step-6
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -186,45 +185,38 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    // Function to remove empty fields from the form before submission
-    function removeEmptyFields() {
-        const fields = steps['step-8'].querySelectorAll('input, select, textarea');
-        for (let field of fields) {
-            if (field.style.display !== 'none' && field.offsetParent !== null) {
-                if (field.value.trim() === "" || (field.type === 'select-one' && field.selectedIndex === 0)) {
-                    field.disabled = true;
-                }
-            }
-        }
-    }
-
-    // Function to disable submit button until all visible fields are filled
+    // Block submit button until all visible fields in step-8 are filled
     function toggleSubmitButton() {
-        if (validateVisibleFieldsInStep8()) {
-            submitBtn.disabled = false;
-        } else {
-            submitBtn.disabled = true;
-        }
+        submitBtn.disabled = !validateVisibleFieldsInStep8();
     }
 
-    submitBtn.addEventListener('click', function(event) {
-        if (!validateVisibleFieldsInStep8()) {
-            event.preventDefault();
-            alert('Please fill out all required fields before submitting.');
-        } else {
-            removeEmptyFields();
-        }
-    });
-
-    // Monitor changes in step-8 fields to enable/disable the submit button
+    // Event listener to monitor changes in step-8
     const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
     step8Fields.forEach(field => {
         field.addEventListener('input', toggleSubmitButton);
         field.addEventListener('change', toggleSubmitButton);
     });
 
-    // Initial setup
+    // Disable submit button initially
     toggleSubmitButton();
+
+    // Remove empty fields before form submission
+    const form = document.querySelector('email-form'); // Make sure this selector matches your form
+
+    form.addEventListener('submit', function(event) {
+        if (!validateVisibleFieldsInStep8()) {
+            event.preventDefault();
+            alert('Please fill out all required fields before submitting.');
+            return;
+        }
+
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                input.parentNode.removeChild(input);
+            }
+        });
+    });
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
