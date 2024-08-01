@@ -185,10 +185,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    // Block submit button until all visible fields in step-8 are filled and reCAPTCHA is completed
+    // Block submit button until all visible fields in step-8 are filled
     function toggleSubmitButton() {
-        const recaptchaCompleted = grecaptcha.getResponse().length !== 0;
-        submitBtn.disabled = !(validateVisibleFieldsInStep8() && recaptchaCompleted);
+        submitBtn.disabled = !validateVisibleFieldsInStep8();
     }
 
     // Event listener to monitor changes in step-8
@@ -198,16 +197,11 @@ document.addEventListener('DOMContentLoaded', function() {
         field.addEventListener('change', toggleSubmitButton);
     });
 
-    // reCAPTCHA callback
-    window.recaptchaCallback = function() {
-        toggleSubmitButton();
-    };
-
     // Disable submit button initially
     toggleSubmitButton();
 
     // Remove empty fields before form submission
-    const form = document.querySelector('email-form'); // Adjust selector as needed
+    const form = document.querySelector('form'); // Adjust selector as needed
 
     form.addEventListener('submit', function(event) {
         if (!validateVisibleFieldsInStep8()) {
