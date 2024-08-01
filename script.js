@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.getElementById('next-button');
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
-    const recaptchaContainer = document.getElementById('recaptcha-container');
     let currentStep = 'step-1';
 
     // Define the hierarchical order for the steps
@@ -39,21 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
-
-        if (step === 'step-8') {
-            checkFieldsInStep8();
-            recaptchaContainer.style.display = 'block';
-        } else {
-            recaptchaContainer.style.display = 'none';
-        }
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
             if (input.style.display !== 'none' && input.offsetParent !== null) {
-                if (input.id === 'Date-Flexibility') {
-                    continue; // Skip validation for Date-Flexibility field
+                if (step === 'step-6' && input.id === 'Date-Flexibility') {
+                    continue; // Skip validation for Date-Flexibility field in step-6
                 }
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
@@ -177,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     showStep(currentStep);
 
-    // Function to validate all visible fields in step-8
+    // Function to validate all visible fields in step-8 before submitting
     function validateVisibleFieldsInStep8() {
         const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
         for (let field of visibleFields) {
@@ -194,7 +186,20 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    function checkFieldsInStep8() {
+    // Function to remove empty fields from the form before submission
+    function removeEmptyFields() {
+        const fields = steps['step-8'].querySelectorAll('input, select, textarea');
+        for (let field of fields) {
+            if (field.style.display !== 'none' && field.offsetParent !== null) {
+                if (field.value.trim() === "" || (field.type === 'select-one' && field.selectedIndex === 0)) {
+                    field.disabled = true;
+                }
+            }
+        }
+    }
+
+    // Function to disable submit button until all visible fields are filled
+    function toggleSubmitButton() {
         if (validateVisibleFieldsInStep8()) {
             submitBtn.disabled = false;
         } else {
@@ -202,43 +207,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Add event listener to check fields on input change in step-8
-    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
-    step8Fields.forEach(field => {
-        field.addEventListener('input', checkFieldsInStep8);
-        field.addEventListener('change', checkFieldsInStep8);
-    });
-
-    // Function to handle form submission
-    function handleSubmit(event) {
+    submitBtn.addEventListener('click', function(event) {
         if (!validateVisibleFieldsInStep8()) {
             event.preventDefault();
             alert('Please fill out all required fields before submitting.');
-            return;
+        } else {
+            removeEmptyFields();
         }
+    });
 
-        // Submit the form using fetch
-        const form = event.target.closest('form');
-        fetch(form.action, {
-            method: form.method,
-            body: new FormData(form),
-        }).then(response => {
-            if (response.ok) {
-                alert('Form submitted successfully!');
-                form.reset();
-                showStep('step-1'); // Reset to the first step
-            } else {
-                alert('There was a problem with the submission.');
-            }
-        }).catch(error => {
-            alert('There was a problem with the submission.');
-        });
+    // Monitor changes in step-8 fields to enable/disable the submit button
+    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
+    step8Fields.forEach(field => {
+        field.addEventListener('input', toggleSubmitButton);
+        field.addEventListener('change', toggleSubmitButton);
+    });
 
-        event.preventDefault();
-    }
-
-    // Add event listener to the submit button
-    submitBtn.addEventListener('click', handleSubmit);
+    // Initial setup
+    toggleSubmitButton();
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
