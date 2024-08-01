@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleSubmitButton();
 
     // Remove empty fields before form submission
-    const form = document.querySelector('email-form'); // Make sure this selector matches your form
+    const form = document.querySelector('form.email-form'); // Make sure this selector matches your form
 
     form.addEventListener('submit', function(event) {
         if (!validateVisibleFieldsInStep8()) {
