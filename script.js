@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (step === 'step-8') {
             checkFieldsInStep8();
-            recaptchaContainer.style.display = 'flex'; // Show reCAPTCHA in step-8
+            recaptchaContainer.style.display = 'block';
         } else {
-            recaptchaContainer.style.display = 'none'; // Hide reCAPTCHA in other steps
+            recaptchaContainer.style.display = 'none';
         }
     }
 
@@ -52,9 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
             if (input.style.display !== 'none' && input.offsetParent !== null) {
-                if (input.id === 'Date-Flexibility') {
-                    continue; // Skip validation for Date-Flexibility field
-                }
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -217,13 +214,17 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const form = event.target;
+        const form = event.target.closest('form');
         const formData = new FormData(form);
 
         // Remove empty fields from formData
         for (let [name, value] of formData.entries()) {
             if (!value.trim()) {
                 formData.delete(name);
+                const inputElement = form.querySelector(`[name="${name}"]`);
+                if (inputElement) {
+                    inputElement.disabled = true;
+                }
             }
         }
 
