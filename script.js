@@ -214,24 +214,11 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const form = event.target.closest('form');
-        const formData = new FormData(form);
-
-        // Remove empty fields from formData
-        for (let [name, value] of formData.entries()) {
-            if (!value.trim()) {
-                formData.delete(name);
-                const inputElement = form.querySelector(`[name="${name}"]`);
-                if (inputElement) {
-                    inputElement.disabled = true;
-                }
-            }
-        }
-
         // Submit the form using fetch
+        const form = event.target.closest('form');
         fetch(form.action, {
             method: form.method,
-            body: formData,
+            body: new FormData(form),
         }).then(response => {
             if (response.ok) {
                 alert('Form submitted successfully!');
