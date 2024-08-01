@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
             if (input.style.display !== 'none' && input.offsetParent !== null) {
+                if (input.id === 'Date-Flexibility') {
+                    continue; // Skip validation for Date-Flexibility field
+                }
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
