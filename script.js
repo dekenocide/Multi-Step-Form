@@ -1,4 +1,3 @@
-<script>
 // 1. Multi-step form navigation
 document.addEventListener('DOMContentLoaded', function() {
     const steps = {
