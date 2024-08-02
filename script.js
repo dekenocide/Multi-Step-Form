@@ -1,5 +1,6 @@
-// 1. Multi-step form navigation
+// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
+    // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submit');
     let currentStep = 'step-1';
 
+    // Define the hierarchical order for the steps
     const hierarchicalSteps = {
         'step-1': { next: 'step-2' },
         'step-2': { next: 'step-3', prev: 'step-1' },
@@ -36,12 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
+        document.getElementById('recaptcha-container').style.display = (step === 'step-8') ? 'flex' : 'none'; // Show reCAPTCHA in step-8
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
+            if (input.style.display !== 'none' && input.offsetParent !== null) {
+                if (step === 'step-6' && input.id === 'Date-Flexibility') continue; // Skip validation for #Date-Flexibility in step-6
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -140,10 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
-            if (currentStep === 'step-8') {
-                showRecaptcha();
-                enableSubmitButtonWhenAllFieldsAreFilled();
-            }
         } else {
             alert('Please fill out all required fields before proceeding.');
         }
@@ -167,49 +167,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial setup
     showStep(currentStep);
-});
 
-// 3. Function to display the recaptcha container in step-8
-function showRecaptcha() {
-    const recaptchaContainer = document.getElementById('recaptcha-container');
-    if (recaptchaContainer) {
-        recaptchaContainer.style.display = 'flex';
-    }
-}
-
-// 6. Function to enable the submit button when all fields in step-8 are filled and recaptcha is valid
-function enableSubmitButtonWhenAllFieldsAreFilled() {
-    const submitBtn = document.getElementById('submit');
-    const recaptchaContainer = document.getElementById('recaptcha-container');
-
-    function checkFieldsAndRecaptcha() {
-        const step8Fields = document.querySelectorAll('#step-8 input, #step-8 select, #step-8 textarea');
-        let allFieldsFilled = true;
-        step8Fields.forEach(field => {
-            if (field.style.display !== 'none' && field.value.trim() === '') {
-                allFieldsFilled = false;
+    // Function to validate all visible fields in step-8 before submitting
+    function validateVisibleFieldsInStep8() {
+        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
+        for (let field of visibleFields) {
+            if (field.style.display !== 'none' && field.offsetParent !== null) {
+                if (field.type === 'select-one') {
+                    if (field.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (field.value.trim() === "") {
+                    return false;
+                }
             }
-        });
-
-        const recaptchaValid = grecaptcha && grecaptcha.getResponse().length > 0;
-
-        submitBtn.disabled = !(allFieldsFilled && recaptchaValid);
+        }
+        return true;
     }
 
-    const step8Fields = document.querySelectorAll('#step-8 input, #step-8 select, #step-8 textarea');
+    // Block submit button until all visible fields in step-8 are filled and reCAPTCHA is completed
+    function toggleSubmitButton() {
+        const recaptchaCompleted = grecaptcha.getResponse().length !== 0;
+        submitBtn.disabled = !(validateVisibleFieldsInStep8() && recaptchaCompleted);
+    }
+
+    // Event listener to monitor changes in step-8
+    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
     step8Fields.forEach(field => {
-        field.addEventListener('input', checkFieldsAndRecaptcha);
+        field.addEventListener('input', toggleSubmitButton);
+        field.addEventListener('change', toggleSubmitButton);
     });
 
-    recaptchaContainer.addEventListener('grecaptcha-success', checkFieldsAndRecaptcha);
-    checkFieldsAndRecaptcha();
-}
+    // reCAPTCHA callback
+    window.recaptchaCallback = function() {
+        toggleSubmitButton();
+    };
 
-// 7. Delete all empty fields from form when the submit button is clicked
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form'); // Make sure this selector matches your form
+    // Disable submit button initially
+    toggleSubmitButton();
+
+    // Remove empty fields before form submission
+    const form = document.querySelector('email-form'); // Adjust selector as needed
 
     form.addEventListener('submit', function(event) {
+        if (!validateVisibleFieldsInStep8()) {
+            event.preventDefault();
+            alert('Please fill out all required fields before submitting.');
+            return;
+        }
+
         const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
             if (input.value.trim() === '') {
