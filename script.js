@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to remove empty fields and labels
     function removeEmptyFieldsAndLabels() {
-        const form = document.querySelector('#email-form'); // Ensure this is the correct form selector
+        const form = document.querySelector('email-form'); // Ensure this is the correct form selector
         const inputs = form.querySelectorAll('input, select, textarea');
 
         inputs.forEach(input => {
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Remove empty fields before form submission
-    const form = document.querySelector('#email-form');
+    const form = document.querySelector('email-form');
 
     form.addEventListener('submit', function(event) {
         if (!validateVisibleFieldsInStep8()) {
