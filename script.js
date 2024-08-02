@@ -207,15 +207,9 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleSubmitButton();
 
     // Remove empty fields before form submission
-    const form = document.querySelector('email-form'); // Adjust selector as needed
+    const form = document.getElementById('email-form'); // Adjust selector as needed
 
     form.addEventListener('submit', function(event) {
-        if (!validateVisibleFieldsInStep8()) {
-            event.preventDefault();
-            alert('Please fill out all required fields before submitting.');
-            return;
-        }
-
         const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
             if (input.value.trim() === '') {
