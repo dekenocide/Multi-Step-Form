@@ -201,23 +201,32 @@ function enableSubmitButtonWhenAllFieldsAreFilled() {
         field.addEventListener('input', checkFieldsAndRecaptcha);
     });
 
-    recaptchaContainer.addEventListener('grecaptcha-success', checkFieldsAndRecaptcha);
+    window.onRecaptchaSuccess = function() {
+        checkFieldsAndRecaptcha();
+    };
+
     checkFieldsAndRecaptcha();
 }
 
 // 7. Delete all empty fields from form when the submit button is clicked
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('email-form'); // Updated to match the correct form ID
+    const form = document.querySelector('#email-form'); // Make sure this selector matches your form
 
     form.addEventListener('submit', function(event) {
         const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
-            if (input.value.trim() === '' || input.selectedIndex === 0) {
+            if (input.value.trim() === '') {
                 input.parentNode.removeChild(input);
             }
         });
     });
 });
+
+// reCAPTCHA callback
+function onRecaptchaSuccess() {
+    const event = new Event('grecaptcha-success');
+    document.getElementById('recaptcha-container').dispatchEvent(event);
+}
 
 // SHOW STEP-8 TEMPLATE SCRIPT
 
