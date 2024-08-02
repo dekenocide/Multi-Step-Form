@@ -1,5 +1,6 @@
-// 1. Multi-step form navigation
+// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
+    // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submit');
     let currentStep = 'step-1';
 
+    // Define the hierarchical order for the steps
     const hierarchicalSteps = {
         'step-1': { next: 'step-2' },
         'step-2': { next: 'step-3', prev: 'step-1' },
@@ -206,84 +208,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to remove empty fields and labels
     function removeEmptyFieldsAndLabels() {
-        const selectFieldIds = [
-            'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
-            'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
-            'Combination-Single', 'Facial-Single', 'Add-On-Single',
-            'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
-            'Service-Single-1', 'Package-Single-1', 'Spa-del-Sol-Dream-Info-Single-1',
-            'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1',
-            'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1',
-            'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
-            'Service-Single-2', 'Package-Single-2', 'Spa-del-Sol-Dream-Info-Single-2',
-            'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
-            'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2',
-            'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
-            'Service-Single-3', 'Package-Single-3', 'Spa-del-Sol-Dream-Info-Single-3',
-            'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3',
-            'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3',
-            'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3',
-            'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
-            'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple',
-            'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple',
-            'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple',
-            'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple',
-            'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple',
-            'Other-Services-Info-Couple', 'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1',
-            'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1',
-            'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1',
-            'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1',
-            'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1',
-            'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1',
-            'Other-Services-Info-Couple-1', 'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2',
-            'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2',
-            'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2',
-            'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2',
-            'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2',
-            'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatments-Selects-Wrapper-Couple-2',
-            'Other-Services-Info-Couple-2', 'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3',
-            'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3',
-            'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3',
-            'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3',
-            'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3',
-            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3',
-            'Other-Services-Info-Couple-3'
-        ];
+        const form = document.querySelector('#email-form'); // Ensure this is the correct form selector
+        const inputs = form.querySelectorAll('input, select, textarea');
 
-        // Array of all textarea field IDs
-        const textAreaIds = [
-            'Group-Booking-Info-TA', 
-            'S1-Spa-del-Sol-Dream-TA', 'S1-Wax-TA', 'S1-Multiple-Services-TA', 
-            'S2-Spa-del-Sol-Dream-TA', 'S2-Wax-TA', 'S2-Multiple-Services-TA', 
-            'S3-Spa-del-Sol-Dream-TA', 'S3-Wax-TA', 'S3-Multiple-Services-TA', 
-            'S4-Spa-del-Sol-Dream-TA', 'S4-Wax-TA', 'S4-Multiple-Services-TA', 
-            'S5-Spa-del-Sol-Dream-TA', 'S5-Wax-TA', 'S5-Multiple-Services-TA', 
-            'C1-Spa-Del-Sol-Dream-TA', 'C1-Other-Packages-TA', 'C1-Prenatal-And-Other-TA', 'C1-Other-Massage-TA', 'C1-Other-Services-TA', 
-            'C2-Spa-Del-Sol-Dream-TA', 'C2-Other-Packages-TA', 'C2-Prenatal-And-Other-TA', 'C2-Other-Massage-TA', 'C2-Other-Services-TA', 
-            'C3-Spa-Del-Sol-Dream-TA', 'C3-Other-Packages-TA', 'C3-Prenatal-And-Other-TA', 'C3-Other-Massage-TA', 'C3-Other-Services-TA',
-        ];
-
-        // Remove empty select fields
-        selectFieldIds.forEach(function (id) {
-            const selectField = document.getElementById(id);
-            if (selectField && !selectField.value) {
-                selectField.parentElement.removeChild(selectField);
-            }
-        });
-
-        // Remove empty textarea fields
-        textAreaIds.forEach(function (id) {
-            const textArea = document.getElementById(id);
-            if (textArea && !textArea.value.trim()) {
-                textArea.parentElement.removeChild(textArea);
-            }
-        });
-
-        // Remove all labels except #protected-label
-        const labels = document.querySelectorAll('label');
-        labels.forEach(function (label) {
-            if (label.id !== 'protected-label') {
-                label.parentElement.removeChild(label);
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                input.parentNode.removeChild(input);
             }
         });
     }
