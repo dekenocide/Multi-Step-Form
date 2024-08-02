@@ -206,30 +206,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Disable submit button initially
     toggleSubmitButton();
 
-    // Function to remove empty fields and labels
-    function removeEmptyFieldsAndLabels() {
-        const form = document.querySelector('email-form'); // Ensure this is the correct form selector
-        const inputs = form.querySelectorAll('input, select, textarea');
+    // Function to create and submit a temporary form with only filled fields
+    function createAndSubmitTempForm(event) {
+        event.preventDefault();
+        const form = document.getElementById('email-form');
+        const tempForm = document.createElement('form');
+        tempForm.style.display = 'none';
 
+        const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
-            if (input.value.trim() === '') {
-                input.parentNode.removeChild(input);
+            if (input.value.trim() !== '') {
+                const tempInput = input.cloneNode(true);
+                tempForm.appendChild(tempInput);
             }
         });
+
+        document.body.appendChild(tempForm);
+        tempForm.submit();
     }
 
-    // Remove empty fields before form submission
-    const form = document.querySelector('email-form');
-
-    form.addEventListener('submit', function(event) {
-        if (!validateVisibleFieldsInStep8()) {
-            event.preventDefault();
-            alert('Please fill out all required fields before submitting.');
-            return;
-        }
-
-        removeEmptyFieldsAndLabels();
-    });
+    // Add submit event listener to the form
+    const form = document.getElementById('email-form');
+    form.addEventListener('submit', createAndSubmitTempForm);
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
