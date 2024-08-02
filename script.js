@@ -212,8 +212,8 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(event) {
         const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
-            if (input.value.trim() === '') {
-                input.parentNode.removeChild(input);
+            if (input.style.display === 'none' || input.offsetParent === null || input.value.trim() === '') {
+                input.disabled = true; // Disable hidden and empty fields
             }
         });
     });
