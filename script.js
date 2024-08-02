@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(event) {
         const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
-            if (input.value.trim() === '') {
+            if (input.value.trim() === '' || input.selectedIndex === 0) {
                 input.parentNode.removeChild(input);
             }
         });
