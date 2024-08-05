@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to remove empty fields and labels
     function removeEmptyFieldsAndLabels() {
+        console.log('removeEmptyFieldsAndLabels called');
         const fieldIds = [
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
             'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
@@ -240,8 +241,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove empty select and input fields
         fieldIds.forEach(function (id) {
             var field = document.getElementById(id);
-            if (field && !field.value.trim()) {
-                field.parentElement.removeChild(field);
+            if (field) {
+                console.log(`Checking field: ${id}, value: ${field.value}`);
+                if (!field.value.trim()) {
+                    console.log(`Removing field: ${id}`);
+                    field.parentElement.removeChild(field);
+                }
             }
         });
 
@@ -249,6 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var labels = document.querySelectorAll('label');
         labels.forEach(function (label) {
             if (label.id !== 'protected-label') {
+                console.log(`Removing label: ${label.id}`);
                 label.parentElement.removeChild(label);
             }
         });
