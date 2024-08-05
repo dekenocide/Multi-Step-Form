@@ -206,28 +206,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Disable submit button initially
     toggleSubmitButton();
 
-    // Function to create and submit a temporary form with only filled fields
-    function createAndSubmitTempForm(event) {
-        event.preventDefault();
-        const form = document.getElementById('email-form');
-        const tempForm = document.createElement('form');
-        tempForm.style.display = 'none';
-
-        const inputs = form.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            if (input.value.trim() !== '') {
-                const tempInput = input.cloneNode(true);
-                tempForm.appendChild(tempInput);
+    // Function to remove fields without selected values before submission
+    function removeUnselectedFields() {
+        const allFields = document.querySelectorAll('input, select, textarea');
+        allFields.forEach(field => {
+            if ((field.tagName === 'SELECT' && field.selectedIndex === 0) || (field.tagName !== 'SELECT' && field.value.trim() === '')) {
+                field.parentNode.removeChild(field);
             }
         });
-
-        document.body.appendChild(tempForm);
-        tempForm.submit();
     }
 
-    // Add submit event listener to the form
-    const form = document.getElementById('email-form');
-    form.addEventListener('submit', createAndSubmitTempForm);
+    // Add event listener to submit button to remove unselected fields before submitting
+    submitBtn.addEventListener('click', function(event) {
+        removeUnselectedFields();
+    });
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
