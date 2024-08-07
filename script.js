@@ -141,10 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
 
-        const fieldSelectors = [
-            'input', 'select', 'textarea'
-        ];
-
+        const fieldSelectors = ['input', 'select', 'textarea'];
         fieldSelectors.forEach(selector => {
             const fields = document.querySelectorAll(selector);
             console.log(`Checking ${fields.length} fields for emptiness`);
@@ -169,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("Form element found");
         form.addEventListener('submit', function(event) {
             console.log("Form submit event triggered");
+            event.preventDefault(); // Prevent actual form submission for testing
             removeEmptyFields(); // Call the function to remove empty fields
         });
     } else {
