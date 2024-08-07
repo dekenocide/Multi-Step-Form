@@ -1,5 +1,6 @@
-// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded and parsed");
+
     // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
@@ -18,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submit');
     let currentStep = 'step-1';
 
+    console.log("Step navigation elements initialized");
+
     // Define the hierarchical order for the steps
     const hierarchicalSteps = {
         'step-1': { next: 'step-2' },
@@ -32,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function showStep(step) {
+        console.log(`Showing step: ${step}`);
         Object.keys(steps).forEach(key => {
             steps[key].style.display = key === step ? 'block' : 'none';
         });
@@ -42,15 +46,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validateStep(step) {
+        console.log(`Validating step: ${step}`);
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
             if (input.style.display !== 'none' && input.offsetParent !== null) {
                 if (step === 'step-6' && input.id === 'Date-Flexibility') continue; // Skip validation for #Date-Flexibility in step-6
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
+                        console.log(`Validation failed for step: ${step}, input: ${input.id}`);
                         return false;
                     }
                 } else if (input.value.trim() === "") {
+                    console.log(`Validation failed for step: ${step}, input: ${input.id}`);
                     return false;
                 }
             }
@@ -59,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function resetServiceConditionals() {
+        console.log("Resetting service conditionals");
         const singleServiceFields = [
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single',
             'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
@@ -141,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     nextBtn.addEventListener('click', function() {
+        console.log("Next button clicked");
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
@@ -150,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     prevBtn.addEventListener('click', function() {
+        console.log("Previous button clicked");
         if (currentStep === 'step-8') {
             resetServiceConditionals();
         }
@@ -170,14 +180,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to validate all visible fields in step-8 before submitting
     function validateVisibleFieldsInStep8() {
+        console.log("Validating visible fields in step-8");
         const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
         for (let field of visibleFields) {
             if (field.style.display !== 'none' && field.offsetParent !== null) {
                 if (field.type === 'select-one') {
                     if (field.selectedIndex === 0) {
+                        console.log(`Validation failed for field: ${field.id}`);
                         return false;
                     }
                 } else if (field.value.trim() === "") {
+                    console.log(`Validation failed for field: ${field.id}`);
                     return false;
                 }
             }
@@ -187,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Block submit button until all visible fields in step-8 are filled and reCAPTCHA is completed
     function toggleSubmitButton() {
+        console.log("Toggling submit button");
         const recaptchaCompleted = grecaptcha.getResponse().length !== 0;
         submitBtn.disabled = !(validateVisibleFieldsInStep8() && recaptchaCompleted);
     }
@@ -200,44 +214,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // reCAPTCHA callback
     window.recaptchaCallback = function() {
+        console.log("reCAPTCHA callback");
         toggleSubmitButton();
     };
 
     // Disable submit button initially
     toggleSubmitButton();
 
-    // Function to remove empty fields before submitting the form
+    // Function to remove empty fields
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
 
-        // Array of all select field IDs
         const selectFieldIds = [
-            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
-            'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Service-Single-1',
-            'Package-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1',
-            'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1'
+            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single',
+            'Service-Single-1', 'Package-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1',
+            'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2', 'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2',
+            'Service-Single-3', 'Package-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3'
         ];
 
-        // Remove empty select fields
+        console.log(`Total select fields to check: ${selectFieldIds.length}`);
+
         selectFieldIds.forEach(function(id) {
-            var selectField = document.getElementById(id);
-            if (selectField) {
-                if (!selectField.value) {
-                    console.log(`Removing empty field: ${id}`);
-                    selectField.parentElement.removeChild(selectField);
-                } else {
-                    console.log(`Field ${id} is not empty: ${selectField.value}`);
-                }
-            } else {
-                console.log(`Field ${id} not found`);
+            const field = document.getElementById(id);
+            if (field && !field.value) {
+                console.log(`Removing empty field: ${id}`);
+                field.parentElement.removeChild(field);
+            }
+        });
+
+        const textAreaIds = [
+            'Group-Booking-Info-TA', 
+            'Spa-del-Sol-Dream-Info-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single', 
+            'Spa-del-Sol-Dream-Info-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1', 
+            'Spa-del-Sol-Dream-Info-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 
+            'Spa-del-Sol-Dream-Info-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3'
+        ];
+
+        console.log(`Total textarea fields to check: ${textAreaIds.length}`);
+
+        textAreaIds.forEach(function(id) {
+            const field = document.getElementById(id);
+            if (field && !field.value.trim()) {
+                console.log(`Removing empty textarea: ${id}`);
+                field.parentElement.removeChild(field);
             }
         });
     }
 
-    // Call the function before form submission to ensure fields are removed
-    var form = document.querySelector('form');
+    // Add form submit listener
+    const form = document.querySelector('form');
     if (form) {
-        form.addEventListener('submit', function() {
+        form.addEventListener('submit', function(event) {
+            console.log("Form submit event triggered");
             removeEmptyFields(); // Call the function to remove empty fields
         });
     }
