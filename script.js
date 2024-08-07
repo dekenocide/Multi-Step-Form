@@ -1,6 +1,5 @@
-// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
-    // Step navigation elements
+    // Step navigation elements and other constants
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submit');
     let currentStep = 'step-1';
 
-    // Define the hierarchical order for the steps
     const hierarchicalSteps = {
         'step-1': { next: 'step-2' },
         'step-2': { next: 'step-3', prev: 'step-1' },
@@ -206,43 +204,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // Disable submit button initially
     toggleSubmitButton();
 
-    // Function to collect only filled fields
-    function getFilledFields(form) {
-        const formData = new FormData(form);
-        const filledFields = new FormData();
+    // Function to remove empty fields before submitting the form
+    function removeEmptyFields() {
+        // Array of all select field IDs
+        const selectFieldIds = [
+            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
+            'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single',
+            'Service-Single-1', 'Package-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1',
+            'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1',
+            'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
+            'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2',
+            'Service-Single-3', 'Package-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3',
+            'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3',
+            'Service-Couple', 'Package-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple',
+            'Combination-Couple', 'Facial-Couple', 'Add-On-Couple', 'Body-Treatment-Couple',
+            'Service-Couple-1', 'Package-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1',
+            'Combination-Couple-1', 'Facial-Couple-1', 'Add-On-Couple-1', 'Body-Treatment-Couple-1',
+            'Service-Couple-2', 'Package-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2',
+            'Combination-Couple-2', 'Facial-Couple-2', 'Add-On-Couple-2', 'Body-Treatment-Couple-2',
+            'Service-Couple-3', 'Package-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3',
+            'Combination-Couple-3', 'Facial-Couple-3', 'Add-On-Couple-3', 'Body-Treatment-Couple-3'
+        ];
 
-        for (const [key, value] of formData.entries()) {
-            if (value.trim() !== "") {
-                filledFields.append(key, value);
+        // Array of all textarea field IDs
+        const textAreaIds = [
+            'Spa-del-Sol-Dream-Info-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
+            'Spa-del-Sol-Dream-Info-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
+            'Spa-del-Sol-Dream-Info-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
+            'Spa-del-Sol-Dream-Info-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3',
+            'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple',
+            'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1',
+            'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2',
+            'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Other-Services-Info-Couple-3'
+        ];
+
+        // Remove empty select fields
+        selectFieldIds.forEach(function(id) {
+            var selectField = document.getElementById(id);
+            if (selectField && !selectField.value) {
+                selectField.parentElement.removeChild(selectField);
             }
-        }
+        });
 
-        return filledFields;
+        // Remove empty textarea fields
+        textAreaIds.forEach(function(id) {
+            var textArea = document.getElementById(id);
+            if (textArea && !textArea.value.trim()) {
+                textArea.parentElement.removeChild(textArea);
+            }
+        });
     }
 
-    // Form submission with only filled fields
+    // Call the function before form submission to ensure fields are removed
     const form = document.getElementById('email-form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const filledData = getFilledFields(form);
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', form.action, true);
-
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                alert('Form submitted successfully!');
-            } else {
-                alert('An error occurred while submitting the form. Status: ' + xhr.status + ', Status Text: ' + xhr.statusText);
-            }
-        };
-
-        xhr.onerror = function () {
-            alert('An error occurred while submitting the form. Please check your network connection.');
-        };
-
-        xhr.send(filledData);
-    });
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            removeEmptyFields(); // Remove empty fields before form submission
+        });
+    }
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
