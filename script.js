@@ -37,14 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
-        document.getElementById('recaptcha-container').style.display = (step === 'step-8') ? 'flex' : 'none'; // Show reCAPTCHA in step-8
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none' && input.offsetParent !== null) {
-                if (step === 'step-6' && input.id === 'Date-Flexibility') continue; // Skip validation for #Date-Flexibility in step-6
+            if (input.style.display !== 'none') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -164,94 +162,40 @@ document.addEventListener('DOMContentLoaded', function() {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    // Initial setup
-    showStep(currentStep);
+    function filterEmptyFields(form) {
+        const data = new FormData(form);
+        const filteredData = new FormData();
 
-    // Function to validate all visible fields in step-8 before submitting
-    function validateVisibleFieldsInStep8() {
-        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
-        for (let field of visibleFields) {
-            if (field.style.display !== 'none' && field.offsetParent !== null) {
-                if (field.type === 'select-one') {
-                    if (field.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (field.value.trim() === "") {
-                    return false;
-                }
+        for (const [key, value] of data.entries()) {
+            if (value.trim() !== '') {
+                filteredData.append(key, value);
             }
         }
-        return true;
+
+        return filteredData;
     }
 
-    // Block submit button until all visible fields in step-8 are filled and reCAPTCHA is completed
-    function toggleSubmitButton() {
-        const recaptchaCompleted = grecaptcha.getResponse().length !== 0;
-        submitBtn.disabled = !(validateVisibleFieldsInStep8() && recaptchaCompleted);
-    }
+    submitBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        const form = document.querySelector('form'); // Adjust the selector if needed
+        const filteredData = filterEmptyFields(form);
 
-    // Event listener to monitor changes in step-8
-    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
-    step8Fields.forEach(field => {
-        field.addEventListener('input', toggleSubmitButton);
-        field.addEventListener('change', toggleSubmitButton);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert('Form submitted successfully!');
+            } else {
+                alert('An error occurred while submitting the form.');
+            }
+        };
+
+        xhr.send(filteredData);
     });
 
-    // reCAPTCHA callback
-    window.recaptchaCallback = function() {
-        toggleSubmitButton();
-    };
-
-    // Disable submit button initially
-    toggleSubmitButton();
-
-    // Function to remove empty fields and labels
-    function removeEmptyFieldsAndLabels() {
-        var fieldIds = [
-            '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement',
-            'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
-            'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
-            'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Massage-Couple',
-            'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple',
-            'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple',
-            'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple',
-            'Other-Services-Info-Couple', 'Group-Booking-Info-TA',
-            'Service-Single-1', 'Package-Single-1', 'Spa-del-Sol-Dream-Info-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1',
-            'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
-            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1',
-            'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1',
-            'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1',
-            'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1',
-            'Other-Services-Info-Couple-1', 'Service-Single-2', 'Package-Single-2', 'Spa-del-Sol-Dream-Info-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
-            'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
-            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2',
-            'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2',
-            'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2',
-            'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatments-Selects-Wrapper-Couple-2',
-            'Other-Services-Info-Couple-2', 'Service-Single-3', 'Package-Single-3', 'Spa-del-Sol-Dream-Info-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3',
-            'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3',
-            'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3',
-            'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3',
-            'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3',
-            'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3',
-            'Other-Services-Info-Couple-3'
-        ];
-
-        // Remove empty fields
-        fieldIds.forEach(function (id) {
-            var field = document.getElementById(id);
-            if (field && !field.value) {
-                field.parentElement.removeChild(field);
-            }
-        });
-    }
-
-    var form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', function () {
-            removeEmptyFieldsAndLabels();
-        });
-    }
+    // Initial setup
+    showStep(currentStep);
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
