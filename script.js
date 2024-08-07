@@ -206,25 +206,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Disable submit button initially
     toggleSubmitButton();
 
-    // Function to filter out empty fields
-    function filterEmptyFields(form) {
-        const data = new FormData(form);
-        const filteredData = new FormData();
+    // Function to collect only filled fields
+    function getFilledFields(form) {
+        const formData = new FormData(form);
+        const filledFields = new FormData();
 
-        for (const [key, value] of data.entries()) {
-            if (value.trim() !== '') {
-                filteredData.append(key, value);
+        for (const [key, value] of formData.entries()) {
+            if (value.trim() !== "") {
+                filledFields.append(key, value);
             }
         }
 
-        return filteredData;
+        return filledFields;
     }
 
-    // Form submission with filtered data
+    // Form submission with only filled fields
     const form = document.getElementById('email-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        const filteredData = filterEmptyFields(form);
+        const filledData = getFilledFields(form);
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', form.action, true);
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('An error occurred while submitting the form. Please check your network connection.');
         };
 
-        xhr.send(filteredData);
+        xhr.send(filledData);
     });
 });
 
