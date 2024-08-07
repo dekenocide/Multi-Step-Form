@@ -141,32 +141,29 @@ document.addEventListener('DOMContentLoaded', function() {
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
 
-        const fieldSelectors = ['input', 'select', 'textarea'];
-        fieldSelectors.forEach(selector => {
-            const fields = document.querySelectorAll(selector);
-            console.log(`Checking ${fields.length} fields for emptiness`);
-            fields.forEach(field => {
-                if (field.tagName === 'SELECT' && field.selectedIndex === 0) {
-                    console.log(`Removing empty select field: ${field.id}`);
-                    field.parentElement.removeChild(field);
-                } else if (field.tagName === 'TEXTAREA' && field.value.trim() === "") {
-                    console.log(`Removing empty textarea: ${field.id}`);
-                    field.parentElement.removeChild(field);
-                } else if (field.tagName === 'INPUT' && field.type !== 'hidden' && field.value.trim() === "") {
-                    console.log(`Removing empty input: ${field.id}`);
-                    field.parentElement.removeChild(field);
-                }
-            });
+        const allFields = document.querySelectorAll('input, select, textarea');
+        console.log(`Found ${allFields.length} fields to check for emptiness`);
+        
+        allFields.forEach(field => {
+            if (field.tagName === 'SELECT' && field.selectedIndex === 0) {
+                console.log(`Removing empty select field: ${field.id}`);
+                field.parentElement.removeChild(field);
+            } else if (field.tagName === 'TEXTAREA' && field.value.trim() === "") {
+                console.log(`Removing empty textarea: ${field.id}`);
+                field.parentElement.removeChild(field);
+            } else if (field.tagName === 'INPUT' && field.type !== 'hidden' && field.value.trim() === "") {
+                console.log(`Removing empty input: ${field.id}`);
+                field.parentElement.removeChild(field);
+            }
         });
     }
 
     // Add form submit listener
-    const form = document.querySelector('form');
+    const form = document.getElementById('email-form'); // Assuming form id is 'email-form'
     if (form) {
         console.log("Form element found");
         form.addEventListener('submit', function(event) {
             console.log("Form submit event triggered");
-            event.preventDefault(); // Prevent actual form submission for testing
             removeEmptyFields(); // Call the function to remove empty fields
         });
     } else {
