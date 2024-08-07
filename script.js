@@ -225,62 +225,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
 
-        const selectFieldIds = [
-            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single',
-            'Service-Single-1', 'Package-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1',
-            'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2', 'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2',
-            'Service-Single-3', 'Package-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3',
-            'Service-Couple', 'Package-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Combination-Couple', 'Facial-Couple', 'Add-On-Couple', 'Body-Treatment-Couple',
-            'Service-Couple-1', 'Package-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Combination-Couple-1', 'Facial-Couple-1', 'Add-On-Couple-1', 'Body-Treatment-Couple-1',
-            'Service-Couple-2', 'Package-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Combination-Couple-2', 'Facial-Couple-2', 'Add-On-Couple-2', 'Body-Treatment-Couple-2',
-            'Service-Couple-3', 'Package-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Combination-Couple-3', 'Facial-Couple-3', 'Add-On-Couple-3', 'Body-Treatment-Couple-3'
+        const fieldSelectors = [
+            'input', 'select', 'textarea'
         ];
 
-        console.log(`Total select fields to check: ${selectFieldIds.length}`);
-
-        selectFieldIds.forEach(function(id) {
-            const field = document.getElementById(id);
-            if (field && !field.value) {
-                console.log(`Removing empty field: ${id}`);
-                field.parentElement.removeChild(field);
-            }
-        });
-
-        const textAreaIds = [
-            'Group-Booking-Info-TA', 
-            'Spa-del-Sol-Dream-Info-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single', 
-            'Spa-del-Sol-Dream-Info-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1', 
-            'Spa-del-Sol-Dream-Info-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 
-            'Spa-del-Sol-Dream-Info-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3',
-            'Spa-del-Sol-Dream-Info-Couple', 'Wax-Info-Couple', 'Multiple-Services-Info-Couple', 
-            'Spa-del-Sol-Dream-Info-Couple-1', 'Wax-Info-Couple-1', 'Multiple-Services-Info-Couple-1', 
-            'Spa-del-Sol-Dream-Info-Couple-2', 'Wax-Info-Couple-2', 'Multiple-Services-Info-Couple-2', 
-            'Spa-del-Sol-Dream-Info-Couple-3', 'Wax-Info-Couple-3', 'Multiple-Services-Info-Couple-3'
-        ];
-
-        console.log(`Total textarea fields to check: ${textAreaIds.length}`);
-
-        textAreaIds.forEach(function(id) {
-            const field = document.getElementById(id);
-            if (field && !field.value.trim()) {
-                console.log(`Removing empty textarea: ${id}`);
-                field.parentElement.removeChild(field);
-            }
-        });
-
-        const inputFieldIds = [
-            'Input-Single', 'Input-Single-1', 'Input-Single-2', 'Input-Single-3', 
-            'Input-Couple', 'Input-Couple-1', 'Input-Couple-2', 'Input-Couple-3'
-        ];
-
-        console.log(`Total input fields to check: ${inputFieldIds.length}`);
-
-        inputFieldIds.forEach(function(id) {
-            const field = document.getElementById(id);
-            if (field && !field.value.trim()) {
-                console.log(`Removing empty input: ${id}`);
-                field.parentElement.removeChild(field);
-            }
+        fieldSelectors.forEach(selector => {
+            const fields = document.querySelectorAll(selector);
+            console.log(`Checking ${fields.length} fields for emptiness`);
+            fields.forEach(field => {
+                if (field.tagName === 'SELECT' && field.selectedIndex === 0) {
+                    console.log(`Removing empty select field: ${field.id}`);
+                    field.parentElement.removeChild(field);
+                } else if (field.tagName === 'TEXTAREA' && field.value.trim() === "") {
+                    console.log(`Removing empty textarea: ${field.id}`);
+                    field.parentElement.removeChild(field);
+                } else if (field.tagName === 'INPUT' && field.type !== 'hidden' && field.value.trim() === "") {
+                    console.log(`Removing empty input: ${field.id}`);
+                    field.parentElement.removeChild(field);
+                }
+            });
         });
     }
 
