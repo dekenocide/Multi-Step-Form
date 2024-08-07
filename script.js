@@ -1,3 +1,4 @@
+// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     // Step navigation elements
     const steps = {
@@ -37,12 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
+        document.getElementById('recaptcha-container').style.display = (step === 'step-8') ? 'flex' : 'none'; // Show reCAPTCHA in step-8
     }
 
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none') {
+            if (input.style.display !== 'none' && input.offsetParent !== null) {
+                if (step === 'step-6' && input.id === 'Date-Flexibility') continue; // Skip validation for #Date-Flexibility in step-6
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -162,6 +165,48 @@ document.addEventListener('DOMContentLoaded', function() {
         return hierarchicalSteps[current]?.prev || current;
     }
 
+    // Initial setup
+    showStep(currentStep);
+
+    // Function to validate all visible fields in step-8 before submitting
+    function validateVisibleFieldsInStep8() {
+        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
+        for (let field of visibleFields) {
+            if (field.style.display !== 'none' && field.offsetParent !== null) {
+                if (field.type === 'select-one') {
+                    if (field.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (field.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Block submit button until all visible fields in step-8 are filled and reCAPTCHA is completed
+    function toggleSubmitButton() {
+        const recaptchaCompleted = grecaptcha.getResponse().length !== 0;
+        submitBtn.disabled = !(validateVisibleFieldsInStep8() && recaptchaCompleted);
+    }
+
+    // Event listener to monitor changes in step-8
+    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
+    step8Fields.forEach(field => {
+        field.addEventListener('input', toggleSubmitButton);
+        field.addEventListener('change', toggleSubmitButton);
+    });
+
+    // reCAPTCHA callback
+    window.recaptchaCallback = function() {
+        toggleSubmitButton();
+    };
+
+    // Disable submit button initially
+    toggleSubmitButton();
+
+    // Function to filter out empty fields
     function filterEmptyFields(form) {
         const data = new FormData(form);
         const filteredData = new FormData();
@@ -175,9 +220,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return filteredData;
     }
 
-    submitBtn.addEventListener('click', function(event) {
+    // Form submission with filtered data
+    const form = document.getElementById('email-form');
+    form.addEventListener('submit', function(event) {
         event.preventDefault();
-        const form = document.querySelector('email-form'); // Adjust the selector if needed
         const filteredData = filterEmptyFields(form);
 
         const xhr = new XMLHttpRequest();
@@ -187,15 +233,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (xhr.status === 200) {
                 alert('Form submitted successfully!');
             } else {
-                alert('An error occurred while submitting the form.');
+                alert('An error occurred while submitting the form. Status: ' + xhr.status + ', Status Text: ' + xhr.statusText);
             }
+        };
+
+        xhr.onerror = function () {
+            alert('An error occurred while submitting the form. Please check your network connection.');
         };
 
         xhr.send(filteredData);
     });
-
-    // Initial setup
-    showStep(currentStep);
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
