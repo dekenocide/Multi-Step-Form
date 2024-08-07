@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     submitBtn.addEventListener('click', function(event) {
         event.preventDefault();
-        const form = document.querySelector('form'); // Adjust the selector if needed
+        const form = document.querySelector('email-form'); // Adjust the selector if needed
         const filteredData = filterEmptyFields(form);
 
         const xhr = new XMLHttpRequest();
