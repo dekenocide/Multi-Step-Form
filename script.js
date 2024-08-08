@@ -90,7 +90,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // Form submission handler with filter empty fields
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Form submission handler initialized");
-    const form = document.querySelector('email-form');
+
+    const form = document.querySelector('form');
+    if (!form) {
+        console.error("Form element not found");
+        return;
+    }
+
     form.addEventListener('submit', function(event) {
         console.log("Form submission triggered");
         event.preventDefault(); // Prevent the form from submitting immediately
