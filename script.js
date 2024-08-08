@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Block submit button until all visible fields in step-8 are filled and reCAPTCHA is completed
     function toggleSubmitButton() {
-        const recaptchaCompleted = grecaptcha.getResponse().length !== 0;
+        const recaptchaCompleted = typeof grecaptcha !== 'undefined' && grecaptcha.getResponse().length !== 0;
         submitBtn.disabled = !(validateVisibleFieldsInStep8() && recaptchaCompleted);
     }
 
@@ -209,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to remove empty fields
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
-        // Array of all select and textarea field IDs
         var fieldIds = [
             '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement',
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
@@ -223,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
             'Group-Booking-Info-TA',
         ];
 
-        // Remove empty select and textarea fields
         fieldIds.forEach(function (id) {
             var field = document.getElementById(id);
             if (field && !field.value.trim()) {
