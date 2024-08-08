@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
             'Service-Single-2', 'Package-Single-2', 'Spa-del-Sol-Dream-Info-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
             'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2',
-            'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Service-Single-3', 'Package-Single-3', 'Spa-del-Sol-Dream-Info-Single-3'
+            'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Service-Single-3', 'Package-Single-3', 'Spa-del-Sol-Dream-Info-Single-3',
             'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3',
             'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3',
             'Multiple-Services-Info-Single-3', 'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
