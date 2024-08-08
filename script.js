@@ -1,4 +1,3 @@
-// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
 
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.id !== 'Date-Flexibility' && input.style.display !== 'none') {
+            if (input.style.display !== 'none') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -87,8 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to remove empty fields
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
-        // Array of all select and textarea field IDs
-        var fieldIds = [
+        // Array of all select field IDs
+        var selectFieldIds = [
             '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement',
             'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
             'Service-Single-1', 'Package-Single-1', 'Spa-del-Sol-Dream-Info-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
@@ -101,25 +100,39 @@ document.addEventListener('DOMContentLoaded', function() {
             'Group-Booking-Info-TA',
         ];
 
-        // Remove empty select and textarea fields
-        fieldIds.forEach(function (id) {
-            var field = document.getElementById(id);
-            if (field && !field.value.trim()) {
-                field.parentElement.removeChild(field);
-                console.log(`Empty field removed: ${id}`);
+        // Array of all textarea field IDs
+        var textAreaIds = [
+            // Add your textarea IDs here if any
+        ];
+
+        // Remove empty select fields
+        selectFieldIds.forEach(function (id) {
+            var selectField = document.getElementById(id);
+            if (selectField && !selectField.value) {
+                selectField.parentElement.removeChild(selectField);
+                console.log(Empty select field removed: ${id});
+            }
+        });
+
+        // Remove empty textarea fields
+        textAreaIds.forEach(function (id) {
+            var textArea = document.getElementById(id);
+            if (textArea && !textArea.value.trim()) {
+                textArea.parentElement.removeChild(textArea);
+                console.log(Empty textarea field removed: ${id});
             }
         });
     }
 
     // Call the function before form submission to ensure fields are removed
-    var form = document.getElementById('form');
+    var form = document.getElementById('wf-form-Multi-Step-Form');
     if (form) {
         console.log("Form element found");
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             console.log("Form submission handler initialized");
             removeEmptyFields(); // Remove empty fields
-            HTMLFormElement.prototype.submit.call(form); // Submit the form
+            form.submit(); // Submit the form
             console.log("Form submitted via Webflow's native handling");
         });
     } else {
