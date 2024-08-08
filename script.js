@@ -79,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
+        if (currentStep === 'step-9') {
+            resetGroupBookingInfoField();
+        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
@@ -242,6 +245,14 @@ document.addEventListener('DOMContentLoaded', function() {
         hideAllGuestArrangements();
 
         console.log('Guest arrangements reset');
+    }
+
+    function resetGroupBookingInfoField() {
+        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+        if (groupBookingInfoField) {
+            groupBookingInfoField.value = '';
+            console.log('Group-Booking-Info field reset');
+        }
     }
 });
 
