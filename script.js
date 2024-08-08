@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
         }
+        if (currentStep === 'step-7') {
+            resetNumberOfGuestsField();
+        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
@@ -189,6 +192,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('Service-Couple-2').style.display = 'block';
         document.getElementById('Service-Single-3').style.display = 'block';
         document.getElementById('Service-Couple-3').style.display = 'block';
+    }
+
+    function resetNumberOfGuestsField() {
+        const numberOfGuestsField = document.getElementById('Number-of-Guests');
+        if (numberOfGuestsField) {
+            numberOfGuestsField.value = '';
+            console.log('Number-of-Guests field reset');
+        }
     }
 });
 
