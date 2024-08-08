@@ -278,39 +278,39 @@ document.addEventListener('DOMContentLoaded', function() {
             singleTemplate.style.display = 'block';
         } else if (numberOfGuestsValue === '2') {
             const guestArrangementValue = guestArrangementSelect2.value;
-            if (guestArrangementValue === '1-Couple') {
+            if (guestArrangementValue === '1 couple') {
                 coupleTemplate.style.display = 'block';
-            } else if (guestArrangementValue === '2-Singles') {
+            } else if (guestArrangementValue === '2 singles') {
                 single1Template.style.display = 'block';
                 single2Template.style.display = 'block';
             }
         } else if (numberOfGuestsValue === '3') {
             const guestArrangementValue = guestArrangementSelect3.value;
-            if (guestArrangementValue === '1-Couple-1-Single') {
+            if (guestArrangementValue === '1 couple and 1 single') {
                 coupleTemplate.style.display = 'block';
                 singleTemplate.style.display = 'block';
-            } else if (guestArrangementValue === '3-Singles') {
+            } else if (guestArrangementValue === '3 singles') {
                 single1Template.style.display = 'block';
                 single2Template.style.display = 'block';
                 single3Template.style.display = 'block';
             }
         } else if (numberOfGuestsValue === '4') {
             const guestArrangementValue = guestArrangementSelect4.value;
-            if (guestArrangementValue === '2-Couples') {
+            if (guestArrangementValue === '2 couples') {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
-            } else if (guestArrangementValue === '1-Couple-2-Singles') {
+            } else if (guestArrangementValue === '1 couple and 2 singles') {
                 coupleTemplate.style.display = 'block';
                 single1Template.style.display = 'block';
                 single2Template.style.display = 'block';
             }
         } else if (numberOfGuestsValue === '5') {
             const guestArrangementValue = guestArrangementSelect5.value;
-            if (guestArrangementValue === '2-Couples-1-Single') {
+            if (guestArrangementValue === '2 couples and 1 single') {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
                 singleTemplate.style.display = 'block';
-            } else if (guestArrangementValue === '1-Couple-3-Singles') {
+            } else if (guestArrangementValue === '1 couple and 3 singles') {
                 coupleTemplate.style.display = 'block';
                 single1Template.style.display = 'block';
                 single2Template.style.display = 'block';
@@ -318,11 +318,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } else if (numberOfGuestsValue === '6') {
             const guestArrangementValue = guestArrangementSelect6.value;
-            if (guestArrangementValue === '3-Couples') {
+            if (guestArrangementValue === '3 couples') {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
                 couple3Template.style.display = 'block';
-            } else if (guestArrangementValue === '2-Couples-2-Singles') {
+            } else if (guestArrangementValue === '2 couples and 2 singles') {
                 couple1Template.style.display = 'block';
                 couple2Template.style.display = 'block';
                 single1Template.style.display = 'block';
