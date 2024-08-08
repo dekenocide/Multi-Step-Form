@@ -89,14 +89,15 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("removeEmptyFields function called");
         // Array of all select field IDs
         var selectFieldIds = [
-            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
+            '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement', 
+            'Service-Single', 'Package-Single', 'Spa-Del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
             'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single',
-            'Multiple-Services-Info-Single', 'Service-Single-1', 'Package-Single-1', 'Massage-Single-1',
+            'Multiple-Services-Info-Single', 'Service-Single-1', 'Package-Single-1', 'Spa-Del-Sol-Dream-Info-Single-1', 'Massage-Single-1',
             'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1',
             'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
-            'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
+            'Service-Single-2', 'Package-Single-2', 'Spa-Del-Sol-Dream-Info-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
             'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2',
-            'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Service-Single-3', 'Package-Single-3',
+            'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Service-Single-3', 'Package-Single-3', 'Spa-Del-Sol-Dream-Info-Single-3',
             'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3',
             'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3',
             'Multiple-Services-Info-Single-3', 'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
@@ -118,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3',
             'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3',
             'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3',
-            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3'
+            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3', 'Group-Booking-Info',
         ];
 
         // Array of all textarea field IDs
@@ -358,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Single Service Conditional fields
     const singleService = document.getElementById('Service-Single');
     const singlePackage = document.getElementById('Package-Single');
-    const spaDelSolDreamInfo = document.getElementById('Spa-del-Sol-Dream-Info-Single');
+    const spaDelSolDreamInfo = document.getElementById('Spa-Del-Sol-Dream-Info-Single');
     const singleMassage = document.getElementById('Massage-Single');
     const massageDurationA = document.getElementById('Duration-A-Single');
     const massageDurationB = document.getElementById('Duration-B-Single');
@@ -372,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Single Service Conditional fields (Set 1)
     const singleService1 = document.getElementById('Service-Single-1');
     const singlePackage1 = document.getElementById('Package-Single-1');
-    const spaDelSolDreamInfo1 = document.getElementById('Spa-del-Sol-Dream-Info-Single-1');
+    const spaDelSolDreamInfo1 = document.getElementById('Spa-Del-Sol-Dream-Info-Single-1');
     const singleMassage1 = document.getElementById('Massage-Single-1');
     const massageDurationA1 = document.getElementById('Duration-A-Single-1');
     const massageDurationB1 = document.getElementById('Duration-B-Single-1');
@@ -386,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Single Service Conditional fields (Set 2)
     const singleService2 = document.getElementById('Service-Single-2');
     const singlePackage2 = document.getElementById('Package-Single-2');
-    const spaDelSolDreamInfo2 = document.getElementById('Spa-del-Sol-Dream-Info-Single-2');
+    const spaDelSolDreamInfo2 = document.getElementById('Spa-Del-Sol-Dream-Info-Single-2');
     const singleMassage2 = document.getElementById('Massage-Single-2');
     const massageDurationA2 = document.getElementById('Duration-A-Single-2');
     const massageDurationB2 = document.getElementById('Duration-B-Single-2');
@@ -400,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Single Service Conditional fields (Set 3)
     const singleService3 = document.getElementById('Service-Single-3');
     const singlePackage3 = document.getElementById('Package-Single-3');
-    const spaDelSolDreamInfo3 = document.getElementById('Spa-del-Sol-Dream-Info-Single-3');
+    const spaDelSolDreamInfo3 = document.getElementById('Spa-Del-Sol-Dream-Info-Single-3');
     const singleMassage3 = document.getElementById('Massage-Single-3');
     const massageDurationA3 = document.getElementById('Duration-A-Single-3');
     const massageDurationB3 = document.getElementById('Duration-B-Single-3');
