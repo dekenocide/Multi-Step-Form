@@ -97,35 +97,19 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             console.log("Form submission handler initialized");
 
-            const formData = new FormData(form);
-            console.log("FormData object created");
-
-            for (let [key, value] of formData.entries()) {
-                if (!value.trim()) {
-                    formData.delete(key);
-                    console.log(`Empty field removed: ${key}`);
+            const elements = form.elements;
+            for (let i = elements.length - 1; i >= 0; i--) {
+                const element = elements[i];
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
+                    if (!element.value.trim()) {
+                        element.parentNode.removeChild(element);
+                        console.log(`Empty field removed: ${element.name}`);
+                    }
                 }
             }
 
-            fetch(form.action, {
-                method: form.method,
-                body: formData,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Form submission successful");
-                // Handle success (e.g., show a success message)
-            })
-            .catch(error => {
-                console.log("Form submission failed");
-                console.error('There was a problem with the form submission:', error);
-                // Handle error (e.g., show an error message)
-            });
+            form.submit();
+            console.log("Form submitted via Webflow's native handling");
         });
     } else {
         console.log("Form element not found");
