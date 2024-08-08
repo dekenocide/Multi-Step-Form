@@ -60,7 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
-            if (currentStep === 'step-7' && document.getElementById('Number-of-Guests').value === '6 plus') {
+            const numberOfGuestsField = document.getElementById('Number-of-Guests');
+            if (currentStep === 'step-7' && numberOfGuestsField.value === '6 plus') {
                 currentStep = 'step-9';
             } else {
                 currentStep = getNextStep(currentStep);
@@ -72,15 +73,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     prevBtn.addEventListener('click', function() {
-        if (currentStep === 'step-9') {
-            resetGroupBookingInfoField();
-        }
         if (currentStep === 'step-8') {
             resetServiceConditionals();
         }
         if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
             resetGuestArrangements();
+        }
+        if (currentStep === 'step-9') {
+            resetGroupBookingInfoField();
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Array of all textarea field IDs
         var textAreaIds = [
-            'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Group-Booking-Info'
+            'Group-Booking-Info', 'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Group-Booking-Info'
         ];
 
         // Remove empty select fields
@@ -146,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             console.log("Form submission handler initialized");
             removeEmptyFields(); // Remove empty fields
-            form.submit(); // Submit the form
             console.log("Form submitted via Webflow's native handling");
         });
     } else {
