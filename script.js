@@ -58,6 +58,24 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
+    // Function to reset the Number-of-Guests field
+    function resetNumberOfGuestsField() {
+        const numberOfGuestsField = document.getElementById('Number-of-Guests');
+        if (numberOfGuestsField) {
+            numberOfGuestsField.value = '';
+            console.log('Number-of-Guests field reset');
+        }
+    }
+
+    // Function to reset the Group-Booking-Info field
+    function resetGroupBookingInfoField() {
+        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+        if (groupBookingInfoField) {
+            groupBookingInfoField.value = '';
+            console.log('Group-Booking-Info field reset');
+        }
+    }
+
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
             const numberOfGuestsField = document.getElementById('Number-of-Guests');
@@ -202,14 +220,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('Service-Couple-3').style.display = 'block';
     }
 
-    function resetGroupBookingInfoField() {
-        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
-        if (groupBookingInfoField) {
-            groupBookingInfoField.value = '';
-            console.log('Group-Booking-Info field reset');
-        }
+    function resetGuestArrangements() {
+        // Add your reset logic for guest arrangements here if needed
     }
 });
+
 
 // SHOW STEP-8 TEMPLATE SCRIPT
 
