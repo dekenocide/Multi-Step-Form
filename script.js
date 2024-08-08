@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'step-5': { next: 'step-6', prev: 'step-4' },
         'step-6': { next: 'step-7', prev: 'step-5' },
         'step-7': { next: 'step-8', prev: 'step-6' },
-        'step-8': { prev: 'step-7', next: 'step-9' },
+        'step-8': { prev: 'step-7' },
         'step-9': { prev: 'step-7' }
     };
 
@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none') {
+            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
                     }
-                } else if (input.value.trim() === "" && input.id !== 'Date-Flexibility') {
+                } else if (input.value.trim() === "") {
                     return false;
                 }
             }
@@ -60,11 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
-            if (currentStep === 'step-7' && document.getElementById('Number-of-Guests').value === '6 plus') {
-                currentStep = 'step-9';
-            } else {
-                currentStep = getNextStep(currentStep);
-            }
+            currentStep = getNextStep(currentStep);
             showStep(currentStep);
         } else {
             alert('Please fill out all required fields before proceeding.');
@@ -74,10 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
     prevBtn.addEventListener('click', function() {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
+        }
+        if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
             resetGuestArrangements();
-        } else if (currentStep === 'step-9') {
-            resetGroupBookingInfo();
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
@@ -98,44 +94,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to remove empty fields
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
-        var fieldIds = [
-            '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement',
-            'Service-Single', 'Package-Single', 'Spa-Del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
-            'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
-            'Service-Single-1', 'Package-Single-1', 'Spa-Del-Sol-Dream-Info-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1',
-            'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
-            'Service-Single-2', 'Package-Single-2', 'Spa-Del-Sol-Dream-Info-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
-            'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
-            'Service-Single-3', 'Package-Single-3', 'Spa-Del-Sol-Dream-Info-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3',
-            'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3',
-            'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple',
-            'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple', 'Different-Massages-Selects-Wrapper-Couple',
-            'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple',
-            'Body-Treatments-Selects-Wrapper-Couple', 'Other-Services-Info-Couple', 'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1',
-            'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1',
-            'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1',
-            'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1', 'Other-Services-Info-Couple-1',
-            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2',
-            'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2',
-            'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2',
-            'Body-Treatments-Selects-Wrapper-Couple-2', 'Other-Services-Info-Couple-2', 'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3',
-            'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3',
-            'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3',
-            'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3',
-            'Group-Booking-Info'
+        // Array of all select field IDs
+        var selectFieldIds = [
+            '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement', 
+            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single', 
+            'Service-Single-1', 'Package-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1', 
+            'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2', 'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 
+            'Service-Single-3', 'Package-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3', 
+            'Service-Couple', 'Package-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple', 'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple', 'Other-Services-Info-Couple', 
+            'Service-Couple-1', 'Package-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1', 'Other-Services-Info-Couple-1', 
+            'Service-Couple-2', 'Package-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatments-Selects-Wrapper-Couple-2', 'Other-Services-Info-Couple-2', 
+            'Service-Couple-3', 'Package-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3'
         ];
 
+        // Array of all textarea field IDs
         var textAreaIds = [
-            'Spa-Del-Sol-Dream-Info-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1',
-            'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Wax-Info-Single-2',
-            'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3',
-            'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1',
-            'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2',
-            'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Other-Services-Info-Couple-3',
-            'Group-Booking-Info'
+            'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Group-Booking-Info'
         ];
 
-        selectFieldIds.forEach(function(id) {
+        // Remove empty select fields
+        selectFieldIds.forEach(function (id) {
             var selectField = document.getElementById(id);
             if (selectField && !selectField.value) {
                 selectField.parentElement.removeChild(selectField);
@@ -143,7 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        textAreaIds.forEach(function(id) {
+        // Remove empty textarea fields
+        textAreaIds.forEach(function (id) {
             var textArea = document.getElementById(id);
             if (textArea && !textArea.value.trim()) {
                 textArea.parentElement.removeChild(textArea);
@@ -152,55 +131,34 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Call the function before form submission to ensure fields are removed
     var form = document.getElementById('Appointment-Inquiry');
     if (form) {
         console.log("Form element found");
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
             console.log("Form submission handler initialized");
-            removeEmptyFields();
-            form.submit();
+            removeEmptyFields(); // Remove empty fields
+            form.submit(); // Submit the form
             console.log("Form submitted via Webflow's native handling");
         });
     } else {
         console.log("Form element not found");
     }
 
-    // Function to reset service conditionals
     function resetServiceConditionals() {
         const singleServiceFields = [
-            'Service-Single', 'Package-Single', 'Spa-Del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single',
-            'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single',
-            'Multiple-Services-Info-Single', 'Service-Single-1', 'Package-Single-1', 'Spa-Del-Sol-Dream-Info-Single-1', 'Massage-Single-1',
-            'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1',
-            'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Service-Single-2', 'Package-Single-2',
-            'Spa-Del-Sol-Dream-Info-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2', 'Combination-Single-2',
-            'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
-            'Service-Single-3', 'Package-Single-3', 'Spa-Del-Sol-Dream-Info-Single-3', 'Massage-Single-3', 'Duration-A-Single-3',
-            'Duration-B-Single-3', 'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3',
-            'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3'
+            'Service-Single', 'Package-Single', 'Spa-Del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
+            'Service-Single-1', 'Package-Single-1', 'Spa-Del-Sol-Dream-Info-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
+            'Service-Single-2', 'Package-Single-2', 'Spa-Del-Sol-Dream-Info-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2', 'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2',
+            'Service-Single-3', 'Package-Single-3', 'Spa-Del-Sol-Dream-Info-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3'
         ];
 
         const coupleServiceFields = [
-            'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Massage-Couple',
-            'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple',
-            'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple',
-            'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple',
-            'Other-Services-Info-Couple', 'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1',
-            'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1',
-            'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1',
-            'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1',
-            'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1', 'Other-Services-Info-Couple-1',
-            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2',
-            'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2',
-            'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2',
-            'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2',
-            'Body-Treatments-Selects-Wrapper-Couple-2', 'Other-Services-Info-Couple-2', 'Service-Couple-3', 'Package-Couple-3',
-            'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3',
-            'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3',
-            'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3',
-            'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3',
-            'Other-Services-Info-Couple-3'
+            'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple', 'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple', 'Other-Services-Info-Couple',
+            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1', 'Other-Services-Info-Couple-1',
+            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatments-Selects-Wrapper-Couple-2', 'Other-Services-Info-Couple-2',
+            'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3'
         ];
 
         singleServiceFields.forEach(id => {
@@ -226,122 +184,61 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
+
+        document.getElementById('Service-Single').style.display = 'block';
+        document.getElementById('Service-Couple').style.display = 'block';
+        document.getElementById('Service-Single-1').style.display = 'block';
+        document.getElementById('Service-Couple-1').style.display = 'block';
+        document.getElementById('Service-Single-2').style.display = 'block';
+        document.getElementById('Service-Couple-2').style.display = 'block';
+        document.getElementById('Service-Single-3').style.display = 'block';
+        document.getElementById('Service-Couple-3').style.display = 'block';
     }
 
-    // Function to reset the Number-of-Guests field
     function resetNumberOfGuestsField() {
-        const numberOfGuests = document.getElementById('Number-of-Guests');
-        if (numberOfGuests) {
-            numberOfGuests.selectedIndex = 0;
-            console.log("Number-of-Guests field reset");
+        const numberOfGuestsField = document.getElementById('Number-of-Guests');
+        if (numberOfGuestsField) {
+            numberOfGuestsField.value = '';
+            console.log('Number-of-Guests field reset');
         }
     }
 
-    // Function to reset guest arrangements
     function resetGuestArrangements() {
-        const guestArrangementFields = [
-            '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement'
-        ];
+        const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
+        const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
+        const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
+        const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
+        const guestArrangement5 = document.getElementById('5-Guest-Arrangement');
+        const guestArrangement6 = document.getElementById('6-Guest-Arrangement');
 
-        guestArrangementFields.forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.style.display = 'none';
-                if (element.tagName === 'SELECT') {
-                    element.selectedIndex = 0;
-                } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
-                    element.value = '';
+        function hideAllGuestArrangements() {
+            guestArrangementLabel.style.display = 'none';
+            guestArrangement2.style.display = 'none';
+            guestArrangement3.style.display = 'none';
+            guestArrangement4.style.display = 'none';
+            guestArrangement5.style.display = 'none';
+            guestArrangement6.style.display = 'none';
+        }
+
+        function resetField(field) {
+            if (field) {
+                if (field.tagName === 'SELECT') {
+                    field.selectedIndex = 0;
+                } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
+                    field.value = '';
                 }
             }
-        });
-
-        const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
-        if (guestArrangementLabel) {
-            guestArrangementLabel.style.display = 'none';
         }
 
-        console.log("Guest arrangements reset");
-    }
-
-    // Function to reset Group Booking Info
-    function resetGroupBookingInfo() {
-        const groupBookingInfo = document.getElementById('Group-Booking-Info');
-        if (groupBookingInfo) {
-            groupBookingInfo.value = '';
-            console.log("Group Booking Info reset");
-        }
-    }
-
-    // NUMBER OF GUESTS CONDITIONALS SCRIPT
-    const numberOfGuests = document.getElementById('Number-of-Guests');
-    const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
-    const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
-    const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
-    const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
-    const guestArrangement5 = document.getElementById('5-Guest-Arrangement');
-    const guestArrangement6 = document.getElementById('6-Guest-Arrangement');
-
-    function hideAllGuestArrangements() {
-        guestArrangementLabel.style.display = 'none';
-        guestArrangement2.style.display = 'none';
-        guestArrangement3.style.display = 'none';
-        guestArrangement4.style.display = 'none';
-        guestArrangement5.style.display = 'none';
-        guestArrangement6.style.display = 'none';
-    }
-
-    function resetField(field) {
-        if (field) {
-            if (field.tagName === 'SELECT') {
-                field.selectedIndex = 0;
-            } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
-                field.value = '';
-            }
-        }
-    }
-
-    function resetAndHideChildren(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Number-of-Guests':
-                resetField(guestArrangement2);
-                resetField(guestArrangement3);
-                resetField(guestArrangement4);
-                resetField(guestArrangement5);
-                resetField(guestArrangement6);
-                hideAllGuestArrangements();
-                break;
-        }
-    }
-
-    function handleGuestArrangements() {
+        resetField(guestArrangement2);
+        resetField(guestArrangement3);
+        resetField(guestArrangement4);
+        resetField(guestArrangement5);
+        resetField(guestArrangement6);
         hideAllGuestArrangements();
 
-        const numberOfGuestsValue = numberOfGuests.value;
-        if (numberOfGuestsValue === '2') {
-            guestArrangementLabel.style.display = 'block';
-            guestArrangement2.style.display = 'block';
-        } else if (numberOfGuestsValue === '3') {
-            guestArrangementLabel.style.display = 'block';
-            guestArrangement3.style.display = 'block';
-        } else if (numberOfGuestsValue === '4') {
-            guestArrangementLabel.style.display = 'block';
-            guestArrangement4.style.display = 'block';
-        } else if (numberOfGuestsValue === '5') {
-            guestArrangementLabel.style.display = 'block';
-            guestArrangement5.style.display = 'block';
-        } else if (numberOfGuestsValue === '6') {
-            guestArrangementLabel.style.display = 'block';
-            guestArrangement6.style.display = 'block';
-        }
+        console.log('Guest arrangements reset');
     }
-
-    numberOfGuests.addEventListener('change', function() {
-        resetAndHideChildren(this);
-        handleGuestArrangements();
-    });
-
-    // Initial setup
-    hideAllGuestArrangements();
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
