@@ -1,3 +1,4 @@
+<script>
 // STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
@@ -87,38 +88,48 @@ document.addEventListener('DOMContentLoaded', function() {
     showStep(currentStep);
 });
 
-// Form submission handler with remove empty fields function
+// Form submission handler with filter empty fields
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Form submission handler initialized");
     const form = document.querySelector('form');
     form.addEventListener('submit', function(event) {
         console.log("Form submission triggered");
         event.preventDefault(); // Prevent the form from submitting immediately
-        removeEmptyFields(form);
-        form.submit(); // Submit the form after empty fields are removed
+        filterAndSubmitForm(form);
     });
 });
 
-function removeEmptyFields(form) {
-    console.log("removeEmptyFields function called");
-    const elements = form.elements;
-    for (let i = elements.length - 1; i >= 0; i--) {
-        const element = elements[i];
-        if (element.type !== "hidden" && element.value.trim() === "") {
-            console.log(`Removing empty field: ${element.name}`);
-            element.parentNode.removeChild(element);
+function filterAndSubmitForm(form) {
+    console.log("filterAndSubmitForm function called");
+    const formData = new FormData(form);
+    const filteredData = new URLSearchParams();
+
+    formData.forEach((value, key) => {
+        if (value.trim() !== "") {
+            filteredData.append(key, value);
+        } else {
+            console.log(`Filtering out empty field: ${key}`);
         }
-    }
-    console.log("Form fields cleaned up");
+    });
+
+    console.log("Submitting filtered form data");
+    fetch(form.action, {
+        method: form.method,
+        body: filteredData,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(response => {
+        if (response.ok) {
+            console.log("Form submitted successfully");
+            // Optionally redirect or show success message
+        } else {
+            console.error("Form submission failed", response);
+        }
+    }).catch(error => {
+        console.error("Form submission error", error);
+    });
 }
-
-// Function to reset and hide all conditionals (additional necessary functions should be placed here)
-
-// Example service conditionals script for illustration
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("Service conditionals script loaded");
-    // Add your service conditionals logic here
-});
 
 // SHOW STEP-8 TEMPLATE SCRIPT
 
