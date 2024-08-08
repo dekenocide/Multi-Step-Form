@@ -60,7 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
-            currentStep = getNextStep(currentStep);
+            const numberOfGuestsField = document.getElementById('Number-of-Guests');
+            if (currentStep === 'step-7' && numberOfGuestsField.value === '6 plus') {
+                currentStep = 'step-9';
+            } else {
+                currentStep = getNextStep(currentStep);
+            }
             showStep(currentStep);
         } else {
             alert('Please fill out all required fields before proceeding.');
@@ -82,19 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showStep(currentStep);
     });
 
-    submitBtn.addEventListener('click', function(event) {
-        if (!isRecaptchaValidated()) {
-            event.preventDefault();
-            alert('Please complete the reCAPTCHA before submitting.');
-            return;
-        }
-    });
-
     function getNextStep(current) {
-        const numberOfGuestsField = document.getElementById('Number-of-Guests');
-        if (current === 'step-7' && numberOfGuestsField && numberOfGuestsField.value === '6 plus') {
-            return 'step-9';
-        }
         return hierarchicalSteps[current]?.next || current;
     }
 
@@ -124,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Array of all textarea field IDs
         var textAreaIds = [
-            'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Group-Booking-Info', 'Date-Flexibility'
+            'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Group-Booking-Info'
         ];
 
         // Remove empty select fields
@@ -151,11 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (form) {
         console.log("Form element found");
         form.addEventListener('submit', function (event) {
-            if (!isRecaptchaValidated()) {
-                event.preventDefault();
-                alert('Please complete the reCAPTCHA before submitting.');
-                return;
-            }
+            event.preventDefault();
             console.log("Form submission handler initialized");
             removeEmptyFields(); // Remove empty fields
             console.log("Form submitted via Webflow's native handling");
