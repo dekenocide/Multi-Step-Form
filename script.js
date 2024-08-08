@@ -111,6 +111,13 @@ function removeEmptyFields(form) {
     }
     console.log("Form fields cleaned up");
 }
+
+// Function to reset and hide all conditionals (additional necessary functions should be placed here)
+
+// Example service conditionals script for illustration
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("Service conditionals script loaded");
+    // Add your service conditionals logic here
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
