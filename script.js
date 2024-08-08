@@ -1,7 +1,7 @@
 // STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
-
+    
     // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function showStep(step) {
-        console.log(`Showing step: ${step}`);
         Object.keys(steps).forEach(key => {
             steps[key].style.display = key === step ? 'block' : 'none';
         });
@@ -46,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none' && input.required) {
+            if (input.style.display !== 'none') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -60,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     nextBtn.addEventListener('click', function() {
-        console.log(`Next button clicked on step: ${currentStep}`);
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
@@ -70,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     prevBtn.addEventListener('click', function() {
-        console.log(`Previous button clicked on step: ${currentStep}`);
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
@@ -85,56 +82,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial setup
     showStep(currentStep);
+    console.log("Step navigation elements initialized");
 });
 
-// Form submission handler with filter empty fields
+// Form submission script with empty field filtering
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Form submission handler initialized");
+    console.log("Form submission script loaded");
 
-    const form = document.querySelector('form');
-    if (!form) {
-        console.error("Form element not found");
-        return;
+    const form = document.getElementById('form');
+    if (form) {
+        console.log("Form element found");
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            console.log("Form submission handler initialized");
+
+            const formData = new FormData(form);
+            console.log("FormData object created");
+
+            for (let [key, value] of formData.entries()) {
+                if (!value.trim()) {
+                    formData.delete(key);
+                    console.log(`Empty field removed: ${key}`);
+                }
+            }
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Form submission successful");
+                // Handle success (e.g., show a success message)
+            })
+            .catch(error => {
+                console.log("Form submission failed");
+                console.error('There was a problem with the form submission:', error);
+                // Handle error (e.g., show an error message)
+            });
+        });
+    } else {
+        console.log("Form element not found");
     }
-
-    form.addEventListener('submit', function(event) {
-        console.log("Form submission triggered");
-        event.preventDefault(); // Prevent the form from submitting immediately
-        filterAndSubmitForm(form);
-    });
 });
-
-function filterAndSubmitForm(form) {
-    console.log("filterAndSubmitForm function called");
-    const formData = new FormData(form);
-    const filteredData = new URLSearchParams();
-
-    formData.forEach((value, key) => {
-        if (value.trim() !== "") {
-            filteredData.append(key, value);
-        } else {
-            console.log(`Filtering out empty field: ${key}`);
-        }
-    });
-
-    console.log("Submitting filtered form data");
-    fetch(form.action, {
-        method: form.method,
-        body: filteredData,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }).then(response => {
-        if (response.ok) {
-            console.log("Form submitted successfully");
-            // Optionally redirect or show success message
-        } else {
-            console.error("Form submission failed", response);
-        }
-    }).catch(error => {
-        console.error("Form submission error", error);
-    });
-}
 
 // SHOW STEP-8 TEMPLATE SCRIPT
 
