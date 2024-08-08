@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
+            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility' && !input.closest('[style*="display: none"]')) {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -75,19 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
-        if (currentStep === 'step-9') {
-            resetGroupBookingInfoField();
-        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
 
     function getNextStep(current) {
-        const nextStep = hierarchicalSteps[current]?.next || current;
-        if (current === 'step-7' && document.getElementById('Number-of-Guests').value === '6 plus') {
-            return 'step-9';
-        }
-        return nextStep;
+        return hierarchicalSteps[current]?.next || current;
     }
 
     function getPrevStep(current) {
@@ -138,12 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Function to check if reCAPTCHA is validated
-    function isRecaptchaValidated() {
-        // Modify this function according to your reCAPTCHA implementation
-        return grecaptcha && grecaptcha.getResponse().length !== 0;
-    }
-
     // Call the function before form submission to ensure fields are removed
     var form = document.getElementById('Appointment-Inquiry');
     if (form) {
@@ -154,12 +141,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Please complete the reCAPTCHA before submitting.');
                 return;
             }
-            event.preventDefault();
-            console.log("Form submission handler initialized");
-            if (!validateStep('step-8') || !validateStep('step-9')) {
+
+            if (!validateStep8And9()) {
+                event.preventDefault();
                 alert('Please fill out all required fields before submitting.');
                 return;
             }
+
+            console.log("Form submission handler initialized");
             removeEmptyFields(); // Remove empty fields
             form.submit(); // Submit the form
             console.log("Form submitted via Webflow's native handling");
@@ -262,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Guest arrangements reset');
     }
 
-    function resetGroupBookingInfoField() {
+    function resetGroupBookingInfo() {
         const groupBookingInfoField = document.getElementById('Group-Booking-Info');
         if (groupBookingInfoField) {
             groupBookingInfoField.value = '';
@@ -270,21 +259,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Validate visible fields in step-8 and the Group-Booking-Info field in step-9
     function validateStep8And9() {
-        return validateStep('step-8') && validateStep('step-9');
-    }
-
-    submitBtn.addEventListener('click', function(event) {
-        if (!isRecaptchaValidated()) {
-            event.preventDefault();
-            alert('Please complete the reCAPTCHA before submitting.');
-            return;
+        const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
+        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+        
+        for (let input of step8Fields) {
+            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility' && !input.closest('[style*="display: none"]')) {
+                if (input.type === 'select-one') {
+                    if (input.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (input.value.trim() === "") {
+                    return false;
+                }
+            }
         }
 
-        if (!validateStep8And9()) {
-            event.preventDefault();
-            alert('Please fill out all required fields before submitting.');
-            return;
+        if (steps['step-9'].style.display !== 'none' && groupBookingInfoField && groupBookingInfoField.value.trim() === "") {
+            return false;
+        }
+
+        return true;
+    }
+
+    function isRecaptchaValidated() {
+        const recaptcha = document.querySelector('.g-recaptcha');
+        if (recaptcha) {
+            const response = grecaptcha.getResponse();
+            return response && response.length > 0;
+        }
+        return true; // If reCAPTCHA is not present, assume validated (or handle differently if needed)
+    }
+
+    // Attach resetGroupBookingInfo to the previous button in step-9
+    prevBtn.addEventListener('click', function() {
+        if (currentStep === 'step-9') {
+            resetGroupBookingInfo();
         }
     });
 });
