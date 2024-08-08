@@ -1,7 +1,7 @@
 // STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
-    
+
     // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
@@ -83,32 +83,77 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     showStep(currentStep);
     console.log("Step navigation elements initialized");
-});
 
-// Form submission script with empty field filtering
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("Form submission script loaded");
+    // Function to remove empty fields
+    function removeEmptyFields() {
+        console.log("removeEmptyFields function called");
+        // Array of all select field IDs
+        var selectFieldIds = [
+            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
+            'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single',
+            'Multiple-Services-Info-Single', 'Service-Single-1', 'Package-Single-1', 'Massage-Single-1',
+            'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1',
+            'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
+            'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
+            'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2',
+            'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Service-Single-3', 'Package-Single-3',
+            'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3',
+            'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3',
+            'Multiple-Services-Info-Single-3', 'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
+            'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple',
+            'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple', 'Different-Massages-Selects-Wrapper-Couple',
+            'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple',
+            'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple', 'Other-Services-Info-Couple',
+            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1',
+            'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1',
+            'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1',
+            'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1',
+            'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1', 'Other-Services-Info-Couple-1',
+            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2',
+            'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2',
+            'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2',
+            'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2',
+            'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatments-Selects-Wrapper-Couple-2', 'Other-Services-Info-Couple-2',
+            'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3',
+            'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3',
+            'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3',
+            'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3',
+            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3'
+        ];
 
-    const form = document.getElementById('form');
+        // Array of all textarea field IDs
+        var textAreaIds = [
+            // Add your textarea IDs here if any
+        ];
+
+        // Remove empty select fields
+        selectFieldIds.forEach(function (id) {
+            var selectField = document.getElementById(id);
+            if (selectField && !selectField.value) {
+                selectField.parentElement.removeChild(selectField);
+                console.log(`Empty select field removed: ${id}`);
+            }
+        });
+
+        // Remove empty textarea fields
+        textAreaIds.forEach(function (id) {
+            var textArea = document.getElementById(id);
+            if (textArea && !textArea.value.trim()) {
+                textArea.parentElement.removeChild(textArea);
+                console.log(`Empty textarea field removed: ${id}`);
+            }
+        });
+    }
+
+    // Call the function before form submission to ensure fields are removed
+    var form = document.getElementById('form');
     if (form) {
         console.log("Form element found");
-
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
             console.log("Form submission handler initialized");
-
-            const elements = form.elements;
-            for (let i = elements.length - 1; i >= 0; i--) {
-                const element = elements[i];
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
-                    if (!element.value.trim()) {
-                        element.parentNode.removeChild(element);
-                        console.log(`Empty field removed: ${element.name}`);
-                    }
-                }
-            }
-
-            form.submit();
+            removeEmptyFields(); // Remove empty fields
+            form.submit(); // Submit the form
             console.log("Form submitted via Webflow's native handling");
         });
     } else {
