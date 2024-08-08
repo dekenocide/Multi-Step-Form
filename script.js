@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateStep(step) {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility' && !input.closest('[style*="display: none"]')) {
+            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -75,11 +75,26 @@ document.addEventListener('DOMContentLoaded', function() {
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
+        if (currentStep === 'step-9') {
+            resetGroupBookingInfoField();
+        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
 
+    submitBtn.addEventListener('click', function(event) {
+        if (!isRecaptchaValidated()) {
+            event.preventDefault();
+            alert('Please complete the reCAPTCHA before submitting.');
+            return;
+        }
+    });
+
     function getNextStep(current) {
+        const numberOfGuestsField = document.getElementById('Number-of-Guests');
+        if (current === 'step-7' && numberOfGuestsField && numberOfGuestsField.value === '6 plus') {
+            return 'step-9';
+        }
         return hierarchicalSteps[current]?.next || current;
     }
 
@@ -141,16 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Please complete the reCAPTCHA before submitting.');
                 return;
             }
-
-            if (!validateStep8And9()) {
-                event.preventDefault();
-                alert('Please fill out all required fields before submitting.');
-                return;
-            }
-
             console.log("Form submission handler initialized");
             removeEmptyFields(); // Remove empty fields
-            form.submit(); // Submit the form
             console.log("Form submitted via Webflow's native handling");
         });
     } else {
@@ -251,53 +258,13 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Guest arrangements reset');
     }
 
-    function resetGroupBookingInfo() {
+    function resetGroupBookingInfoField() {
         const groupBookingInfoField = document.getElementById('Group-Booking-Info');
         if (groupBookingInfoField) {
             groupBookingInfoField.value = '';
             console.log('Group-Booking-Info field reset');
         }
     }
-
-    // Validate visible fields in step-8 and the Group-Booking-Info field in step-9
-    function validateStep8And9() {
-        const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
-        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
-        
-        for (let input of step8Fields) {
-            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility' && !input.closest('[style*="display: none"]')) {
-                if (input.type === 'select-one') {
-                    if (input.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (input.value.trim() === "") {
-                    return false;
-                }
-            }
-        }
-
-        if (steps['step-9'].style.display !== 'none' && groupBookingInfoField && groupBookingInfoField.value.trim() === "") {
-            return false;
-        }
-
-        return true;
-    }
-
-    function isRecaptchaValidated() {
-        const recaptcha = document.querySelector('.g-recaptcha');
-        if (recaptcha) {
-            const response = grecaptcha.getResponse();
-            return response && response.length > 0;
-        }
-        return true; // If reCAPTCHA is not present, assume validated (or handle differently if needed)
-    }
-
-    // Attach resetGroupBookingInfo to the previous button in step-9
-    prevBtn.addEventListener('click', function() {
-        if (currentStep === 'step-9') {
-            resetGroupBookingInfo();
-        }
-    });
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
