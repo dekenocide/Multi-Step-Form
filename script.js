@@ -89,14 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("removeEmptyFields function called");
         // Array of all select field IDs
         var selectFieldIds = [
-            'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
+            'Service-Single', 'Package-Single', 'Spa-del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single',
             'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single',
-            'Multiple-Services-Info-Single', 'Service-Single-1', 'Package-Single-1', 'Massage-Single-1',
+            'Multiple-Services-Info-Single', 'Service-Single-1', 'Package-Single-1', 'Spa-del-Sol-Dream-Info-Single-1', 'Massage-Single-1',
             'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1',
             'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1',
-            'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
+            'Service-Single-2', 'Package-Single-2', 'Spa-del-Sol-Dream-Info-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2',
             'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2',
-            'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Service-Single-3', 'Package-Single-3',
+            'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Service-Single-3', 'Package-Single-3', 'Spa-del-Sol-Dream-Info-Single-3'
             'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3',
             'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3',
             'Multiple-Services-Info-Single-3', 'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple',
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3',
             'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3',
             'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3',
-            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3'
+            'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatments-Selects-Wrapper-Couple-3', 'Other-Services-Info-Couple-3', 'Group-Booking-Info-TA',
         ];
 
         // Array of all textarea field IDs
