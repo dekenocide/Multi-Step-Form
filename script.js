@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Call the function before form submission to ensure fields are removed
-    var form = document.getElementById('form');
+    var form = document.getElementById('Appointment-Inquiry');
     if (form) {
         console.log("Form element found");
         form.addEventListener('submit', function (event) {
