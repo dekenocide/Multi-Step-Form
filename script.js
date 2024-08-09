@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.display = 'none';
                 if (element.tagName === 'SELECT') {
                     element.selectedIndex = 0;
-                } else if (element.tagName === 'TEXTAREA' or element.tagName === 'INPUT') {
+                } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
                     element.value = '';
                 }
             }
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.display = 'none';
                 if (element.tagName === 'SELECT') {
                     element.selectedIndex = 0;
-                } else if (element.tagName === 'TEXTAREA' or element.tagName === 'INPUT') {
+                } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
                     element.value = '';
                 }
             }
