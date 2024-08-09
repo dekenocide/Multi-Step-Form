@@ -3,37 +3,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
 
-    // All necessary functions for step handling
-    function toggleSubmitButton() {
-        submitBtn.disabled = !validateVisibleFieldsInStep8();
-    }
-
-    function validateVisibleFieldsInStep8() {
-        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
-        for (let field of visibleFields) {
-            if (field.style.display !== 'none' && field.offsetParent !== null) {
-                if (field.type === 'select-one') {
-                    if (field.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (field.value.trim() === "") {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    function monitorStep8Fields() {
-        const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
-        step8Fields.forEach(field => {
-            field.addEventListener('input', toggleSubmitButton);
-            field.addEventListener('change', toggleSubmitButton);
-        });
-    }
-
-    // The rest of the Main Step Handling Script code...
-    // Including the step navigation, event listeners for next/prev buttons, and initial setup.
+    // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -50,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
     const recaptchaContainer = document.getElementById('recaptcha-container');
+
     let currentStep = 'step-1';
 
     // Define the hierarchical order for the steps
@@ -65,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         'step-9': { prev: 'step-7' }
     };
 
-    // Show Step Function
     function showStep(step) {
         Object.keys(steps).forEach(key => {
             steps[key].style.display = key === step ? 'block' : 'none';
@@ -79,11 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
             recaptchaContainer.style.display = 'block';
         } else {
             recaptchaContainer.style.display = 'none';
-        }
-
-        // Toggle submit button state based on visibility of fields in step-8
-        if (step === 'step-8') {
-            toggleSubmitButton();
         }
     }
 
@@ -118,14 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     prevBtn.addEventListener('click', function() {
         if (currentStep === 'step-8') {
-            resetServiceConditionals(); // Reset conditionals when moving back from step-8
+            resetServiceConditionals();
         }
         if (currentStep === 'step-7') {
-            resetNumberOfGuestsField(); // Reset number of guests when moving back from step-7
-            resetGuestArrangements(); // Reset guest arrangements when moving back from step-7
+            resetNumberOfGuestsField();
+            resetGuestArrangements();
         }
         if (currentStep === 'step-9') {
-            resetGroupBookingInfoField(); // Reset group booking info when moving back from step-9
+            resetGroupBookingInfoField();
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
@@ -142,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     showStep(currentStep);
     console.log("Step navigation elements initialized");
-    monitorStep8Fields(); // Start monitoring fields in Step 8 for changes
 });
 
 // RESET CONDITIONALS SCRIPT
@@ -253,25 +217,48 @@ function resetGroupBookingInfoField() {
 
 function removeEmptyFields() {
     console.log("removeEmptyFields function called");
-    // Array of all select field IDs
+
     var selectFieldIds = [
         '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement', 
-        'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single', 
-        'Service-Single-1', 'Package-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1', 
-        'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2', 'Combination-Single-2', 'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 
-        'Service-Single-3', 'Package-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3', 'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3', 
-        'Service-Couple', 'Package-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Guest-1-Couple', 'Combination-Guest-2-Couple', 'Massage-Guest-1-Couple', 'Massage-Guest-2-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Guest-1-Couple', 'Facial-Guest-2-Couple', 'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatment-Guest-1-Couple', 'Body-Treatment-Guest-2-Couple', 'Other-Services-Couple',
-        'Service-Couple-1', 'Package-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Guest-1-Couple-1', 'Combination-Guest-2-Couple-1', 'Massage-Guest-1-Couple-1', 'Massage-Guest-2-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Guest-1-Couple-1', 'Facial-Guest-2-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatment-Guest-1-Couple-1', 'Body-Treatment-Guest-2-Couple-1', 'Other-Services-Couple-1',
-        'Service-Couple-2', 'Package-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Guest-1-Couple-2', 'Combination-Guest-2-Couple-2', 'Massage-Guest-1-Couple-2', 'Massage-Guest-2-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Guest-1-Couple-2', 'Facial-Guest-2-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatment-Guest-1-Couple-2', 'Body-Treatment-Guest-2-Couple-2', 'Other-Services-Couple-2',
-        'Service-Couple-3', 'Package-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Guest-1-Couple-3', 'Combination-Guest-2-Couple-3', 'Massage-Guest-1-Couple-3', 'Massage-Guest-2-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Guest-1-Couple-3', 'Facial-Guest-2-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Couple-3'
+        'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 
+        'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single', 
+        'Service-Single-1', 'Package-Single-1', 'Massage-Single-1', 'Duration-A-Single-1', 'Duration-B-Single-1', 'Combination-Single-1', 
+        'Facial-Single-1', 'Add-On-Single-1', 'Body-Treatment-Single-1', 'Wax-Info-Single-1', 'Multiple-Services-Info-Single-1', 
+        'Service-Single-2', 'Package-Single-2', 'Massage-Single-2', 'Duration-A-Single-2', 'Duration-B-Single-2', 'Combination-Single-2', 
+        'Facial-Single-2', 'Add-On-Single-2', 'Body-Treatment-Single-2', 'Wax-Info-Single-2', 'Multiple-Services-Info-Single-2', 
+        'Service-Single-3', 'Package-Single-3', 'Massage-Single-3', 'Duration-A-Single-3', 'Duration-B-Single-3', 'Combination-Single-3', 
+        'Facial-Single-3', 'Add-On-Single-3', 'Body-Treatment-Single-3', 'Wax-Info-Single-3', 'Multiple-Services-Info-Single-3', 
+        'Service-Couple', 'Package-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 
+        'Combination-Guest-1-Couple', 'Combination-Guest-2-Couple', 'Massage-Guest-1-Couple', 'Massage-Guest-2-Couple', 
+        'Duration-A-Guest-1-And-2-Couple', 'Facial-Guest-1-Couple', 'Facial-Guest-2-Couple', 'Facial-Add-On-Guest-1-Couple', 
+        'Facial-Add-On-Guest-2-Couple', 'Body-Treatment-Guest-1-Couple', 'Body-Treatment-Guest-2-Couple', 'Other-Services-Couple',
+        'Service-Couple-1', 'Package-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 
+        'Prenatal-Massage-Couple-1', 'Combination-Guest-1-Couple-1', 'Combination-Guest-2-Couple-1', 'Massage-Guest-1-Couple-1', 
+        'Massage-Guest-2-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Guest-1-Couple-1', 'Facial-Guest-2-Couple-1', 
+        'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatment-Guest-1-Couple-1', 
+        'Body-Treatment-Guest-2-Couple-1', 'Other-Services-Couple-1',
+        'Service-Couple-2', 'Package-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 
+        'Prenatal-Massage-Couple-2', 'Combination-Guest-1-Couple-2', 'Combination-Guest-2-Couple-2', 'Massage-Guest-1-Couple-2', 
+        'Massage-Guest-2-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Guest-1-Couple-2', 'Facial-Guest-2-Couple-2', 
+        'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatment-Guest-1-Couple-2', 
+        'Body-Treatment-Guest-2-Couple-2', 'Other-Services-Couple-2',
+        'Service-Couple-3', 'Package-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 
+        'Prenatal-Massage-Couple-3', 'Combination-Guest-1-Couple-3', 'Combination-Guest-2-Couple-3', 'Massage-Guest-1-Couple-3', 
+        'Massage-Guest-2-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Guest-1-Couple-3', 'Facial-Guest-2-Couple-3', 
+        'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 
+        'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Couple-3'
     ];
 
-    // Array of all textarea field IDs
     var textAreaIds = [
-        'Date-Flexibility', 'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Other-Services-Info-Couple-3', 'Group-Booking-Info'
+        'Date-Flexibility', 'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 
+        'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 
+        'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 
+        'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 
+        'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 
+        'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 
+        'Other-Services-Info-Couple-3', 'Group-Booking-Info'
     ];
 
-    // Remove empty select fields
     selectFieldIds.forEach(function (id) {
         var selectField = document.getElementById(id);
         if (selectField && !selectField.value) {
@@ -280,7 +267,6 @@ function removeEmptyFields() {
         }
     });
 
-    // Remove empty textarea fields
     textAreaIds.forEach(function (id) {
         var textArea = document.getElementById(id);
         if (textArea && !textArea.value.trim()) {
@@ -290,7 +276,7 @@ function removeEmptyFields() {
     });
 }
 
-// FORM SUBMISSION HANDLER
+// Form submission handling
 var form = document.getElementById('Appointment-Inquiry');
 if (form) {
     console.log("Form element found");
@@ -298,13 +284,7 @@ if (form) {
         event.preventDefault();
         console.log("Form submission handler initialized");
 
-        // Ensure fields in Step 8 are validated again before submission
-        if (!validateVisibleFieldsInStep8()) {
-            alert("Please fill out all required fields.");
-            return;
-        }
-
-        removeEmptyFields(); // Remove empty fields
+        removeEmptyFields(); // Remove empty fields before submission
         form.submit(); // Submit the form
         console.log("Form submitted via Webflow's native handling");
     });
