@@ -46,13 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Show or hide recaptcha-container based on the step
         if (step === 'step-9') {
             recaptchaContainer.style.display = 'block';
+            populateReviewStep(steps); // Pass steps object to populateReviewStep
         } else {
             recaptchaContainer.style.display = 'none';
-        }
-
-        // Populate review fields if on step-9
-        if (step === 'step-9') {
-            populateReviewStep();
         }
     }
 
@@ -110,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // REVIEW STEP SCRIPT
 
-function populateReviewStep() {
+function populateReviewStep(steps) {
     const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-9
 
     // Clear existing content in the review container
