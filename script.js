@@ -75,8 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
         }
+        if (currentStep === 'step-7') {
+            resetNumberOfGuestsField();
+            resetGuestArrangements();
+        }
         if (currentStep === 'step-9') {
-            resetGroupBookingInfoField();
+            resetGroupBookingInfoField(); // This assumes you have this function implemented
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
@@ -196,6 +200,51 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('Service-Couple-2').style.display = 'block';
         document.getElementById('Service-Single-3').style.display = 'block';
         document.getElementById('Service-Couple-3').style.display = 'block';
+    }
+
+    function resetNumberOfGuestsField() {
+        const numberOfGuestsField = document.getElementById('Number-of-Guests');
+        if (numberOfGuestsField) {
+            numberOfGuestsField.value = '';
+            console.log('Number-of-Guests field reset');
+        }
+    }
+
+    function resetGuestArrangements() {
+        const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
+        const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
+        const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
+        const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
+        const guestArrangement5 = document.getElementById('5-Guest-Arrangement');
+        const guestArrangement6 = document.getElementById('6-Guest-Arrangement');
+
+        function hideAllGuestArrangements() {
+            guestArrangementLabel.style.display = 'none';
+            guestArrangement2.style.display = 'none';
+            guestArrangement3.style.display = 'none';
+            guestArrangement4.style.display = 'none';
+            guestArrangement5.style.display = 'none';
+            guestArrangement6.style.display = 'none';
+        }
+
+        function resetField(field) {
+            if (field) {
+                if (field.tagName === 'SELECT') {
+                    field.selectedIndex = 0;
+                } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
+                    field.value = '';
+                }
+            }
+        }
+
+        resetField(guestArrangement2);
+        resetField(guestArrangement3);
+        resetField(guestArrangement4);
+        resetField(guestArrangement5);
+        resetField(guestArrangement6);
+        hideAllGuestArrangements();
+
+        console.log('Guest arrangements reset');
     }
 
     function resetGroupBookingInfoField() {
