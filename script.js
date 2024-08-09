@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
             steps[key].style.display = key === step ? 'block' : 'none';
         });
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
-        nextBtn.style.display = (step === 'step-10' || step === 'step-9') ? 'none' : 'inline-block';
-        submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
+        nextBtn.style.display = step === 'step-9' ? 'none' : 'inline-block';
+        submitBtn.style.display = step === 'step-9' ? 'inline-block' : 'none';
 
         // Show or hide recaptcha-container based on the step
         if (step === 'step-9') {
@@ -56,6 +56,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function validateStep(step) {
+        const inputs = steps[step].querySelectorAll('input, select, textarea');
+        for (let input of inputs) {
+            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
+                if (input.type === 'select-one') {
+                    if (input.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (input.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     nextBtn.addEventListener('click', function () {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
@@ -64,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please fill out all required fields before proceeding.');
         }
     });
-
 
     prevBtn.addEventListener('click', function () {
         if (currentStep === 'step-8') {
@@ -91,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("Step navigation elements initialized");
 });
 
-// REVIEW
+// REVIEW STEP SCRIPT
 
 function populateReviewStep() {
     const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-9
@@ -115,7 +130,6 @@ function populateReviewStep() {
         }
     }
 }
-
 
 // RESET CONDITIONALS SCRIPT
 
