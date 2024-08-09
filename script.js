@@ -16,6 +16,127 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-9': document.getElementById('step-9'), // review step
     };
 
+    const fieldLabels = {
+        'Number-of-Guests': 'Number of Guests',
+        '2-Guest-Arrangement': 'Guest Arrangement for 2 Guests',
+        '3-Guest-Arrangement': 'Guest Arrangement for 3 Guests',
+        '4-Guest-Arrangement': 'Guest Arrangement for 4 Guests',
+        '5-Guest-Arrangement': 'Guest Arrangement for 5 Guests',
+        '6-Guest-Arrangement': 'Guest Arrangement for 6 Guests',
+        'Group-Booking-Info': 'Group Booking Information',
+        'Service-Single': 'Single Service',
+        'Package-Single': 'Single Package',
+        'Spa-Del-Sol-Dream-Info-Single': 'Spa Del Sol Dream Information (Single)',
+        'Massage-Single': 'Single Massage',
+        'Duration-A-Single': 'Massage Duration A (Single)',
+        'Duration-B-Single': 'Massage Duration B (Single)',
+        'Combination-Single': 'Combination Type (Single)',
+        'Facial-Single': 'Single Facial',
+        'Add-On-Single': 'Facial Add-On (Single)',
+        'Body-Treatment-Single': 'Body Treatment (Single)',
+        'Wax-Info-Single': 'Wax Information (Single)',
+        'Multiple-Services-Info-Single': 'Multiple Services Information (Single)',
+        'Service-Single-1': 'Single Service 1',
+        'Package-Single-1': 'Single Package 1',
+        'Spa-Del-Sol-Dream-Info-Single-1': 'Spa Del Sol Dream Information (Single 1)',
+        'Massage-Single-1': 'Single Massage 1',
+        'Duration-A-Single-1': 'Massage Duration A (Single 1)',
+        'Duration-B-Single-1': 'Massage Duration B (Single 1)',
+        'Combination-Single-1': 'Combination Type (Single 1)',
+        'Facial-Single-1': 'Single Facial 1',
+        'Add-On-Single-1': 'Facial Add-On (Single 1)',
+        'Body-Treatment-Single-1': 'Body Treatment (Single 1)',
+        'Wax-Info-Single-1': 'Wax Information (Single 1)',
+        'Multiple-Services-Info-Single-1': 'Multiple Services Information (Single 1)',
+        'Service-Single-2': 'Single Service 2',
+        'Package-Single-2': 'Single Package 2',
+        'Spa-Del-Sol-Dream-Info-Single-2': 'Spa Del Sol Dream Information (Single 2)',
+        'Massage-Single-2': 'Single Massage 2',
+        'Duration-A-Single-2': 'Massage Duration A (Single 2)',
+        'Duration-B-Single-2': 'Massage Duration B (Single 2)',
+        'Combination-Single-2': 'Combination Type (Single 2)',
+        'Facial-Single-2': 'Single Facial 2',
+        'Add-On-Single-2': 'Facial Add-On (Single 2)',
+        'Body-Treatment-Single-2': 'Body Treatment (Single 2)',
+        'Wax-Info-Single-2': 'Wax Information (Single 2)',
+        'Multiple-Services-Info-Single-2': 'Multiple Services Information (Single 2)',
+        'Service-Single-3': 'Single Service 3',
+        'Package-Single-3': 'Single Package 3',
+        'Spa-Del-Sol-Dream-Info-Single-3': 'Spa Del Sol Dream Information (Single 3)',
+        'Massage-Single-3': 'Single Massage 3',
+        'Duration-A-Single-3': 'Massage Duration A (Single 3)',
+        'Duration-B-Single-3': 'Massage Duration B (Single 3)',
+        'Combination-Single-3': 'Combination Type (Single 3)',
+        'Facial-Single-3': 'Single Facial 3',
+        'Add-On-Single-3': 'Facial Add-On (Single 3)',
+        'Body-Treatment-Single-3': 'Body Treatment (Single 3)',
+        'Wax-Info-Single-3': 'Wax Information (Single 3)',
+        'Multiple-Services-Info-Single-3': 'Multiple Services Information (Single 3)',
+        'Service-Couple': 'Couple Service',
+        'Package-Couple': 'Couple Package',
+        'Spa-Del-Sol-Dream-Info-Couple': 'Spa Del Sol Dream Information (Couple)',
+        'Other-Packages-Info-Couple': 'Other Packages Information (Couple)',
+        'Massage-Couple': 'Couple Massage',
+        'Duration-A-Couple': 'Massage Duration A (Couple)',
+        'Duration-B-Couple': 'Massage Duration B (Couple)',
+        'Prenatal-Massage-Couple': 'Prenatal Massage (Couple)',
+        'Facial-Guest-1-Couple': 'Facial (Guest 1) (Couple)',
+        'Facial-Guest-2-Couple': 'Facial (Guest 2) (Couple)',
+        'Add-On-Guest-1-Couple': 'Facial Add-On (Guest 1) (Couple)',
+        'Add-On-Guest-2-Couple': 'Facial Add-On (Guest 2) (Couple)',
+        'Body-Treatment-Guest-1-Couple': 'Body Treatment (Guest 1) (Couple)',
+        'Body-Treatment-Guest-2-Couple': 'Body Treatment (Guest 2) (Couple)',
+        'Other-Services-Info-Couple': 'Other Services Information (Couple)',
+        'Combination-Guest-1-Couple': 'Combination Type (Guest 1) (Couple)',
+        'Combination-Guest-2-Couple': 'Combination Type (Guest 2) (Couple)',
+        'Service-Couple-1': 'Couple Service 1',
+        'Package-Couple-1': 'Couple Package 1',
+        'Spa-Del-Sol-Dream-Info-Couple-1': 'Spa Del Sol Dream Information (Couple 1)',
+        'Other-Packages-Info-Couple-1': 'Other Packages Information (Couple 1)',
+        'Massage-Couple-1': 'Couple Massage 1',
+        'Duration-A-Couple-1': 'Massage Duration A (Couple 1)',
+        'Duration-B-Couple-1': 'Massage Duration B (Couple 1)',
+        'Prenatal-Massage-Couple-1': 'Prenatal Massage (Couple 1)',
+        'Facial-Guest-1-Couple-1': 'Facial (Guest 1) (Couple 1)',
+        'Facial-Guest-2-Couple-1': 'Facial (Guest 2) (Couple 1)',
+        'Add-On-Guest-1-Couple-1': 'Facial Add-On (Guest 1) (Couple 1)',
+        'Add-On-Guest-2-Couple-1': 'Facial Add-On (Guest 2) (Couple 1)',
+        'Body-Treatment-Guest-1-Couple-1': 'Body Treatment (Guest 1) (Couple 1)',
+        'Body-Treatment-Guest-2-Couple-1': 'Body Treatment (Guest 2) (Couple 1)',
+        'Other-Services-Info-Couple-1': 'Other Services Information (Couple 1)',
+        'Service-Couple-2': 'Couple Service 2',
+        'Package-Couple-2': 'Couple Package 2',
+        'Spa-Del-Sol-Dream-Info-Couple-2': 'Spa Del Sol Dream Information (Couple 2)',
+        'Other-Packages-Info-Couple-2': 'Other Packages Information (Couple 2)',
+        'Massage-Couple-2': 'Couple Massage 2',
+        'Duration-A-Couple-2': 'Massage Duration A (Couple 2)',
+        'Duration-B-Couple-2': 'Massage Duration B (Couple 2)',
+        'Prenatal-Massage-Couple-2': 'Prenatal Massage (Couple 2)',
+        'Facial-Guest-1-Couple-2': 'Facial (Guest 1) (Couple 2)',
+        'Facial-Guest-2-Couple-2': 'Facial (Guest 2) (Couple 2)',
+        'Add-On-Guest-1-Couple-2': 'Facial Add-On (Guest 1) (Couple 2)',
+        'Add-On-Guest-2-Couple-2': 'Facial Add-On (Guest 2) (Couple 2)',
+        'Body-Treatment-Guest-1-Couple-2': 'Body Treatment (Guest 1) (Couple 2)',
+        'Body-Treatment-Guest-2-Couple-2': 'Body Treatment (Guest 2) (Couple 2)',
+        'Other-Services-Info-Couple-2': 'Other Services Information (Couple 2)',
+        'Service-Couple-3': 'Couple Service 3',
+        'Package-Couple-3': 'Couple Package 3',
+        'Spa-Del-Sol-Dream-Info-Couple-3': 'Spa Del Sol Dream Information (Couple 3)',
+        'Other-Packages-Info-Couple-3': 'Other Packages Information (Couple 3)',
+        'Massage-Couple-3': 'Couple Massage 3',
+        'Duration-A-Couple-3': 'Massage Duration A (Couple 3)',
+        'Duration-B-Couple-3': 'Massage Duration B (Couple 3)',
+        'Prenatal-Massage-Couple-3': 'Prenatal Massage (Couple 3)',
+        'Facial-Guest-1-Couple-3': 'Facial (Guest 1) (Couple 3)',
+        'Facial-Guest-2-Couple-3': 'Facial (Guest 2) (Couple 3)',
+        'Add-On-Guest-1-Couple-3': 'Facial Add-On (Guest 1) (Couple 3)',
+        'Add-On-Guest-2-Couple-3': 'Facial Add-On (Guest 2) (Couple 3)',
+        'Body-Treatment-Guest-1-Couple-3': 'Body Treatment (Guest 1) (Couple 3)',
+        'Body-Treatment-Guest-2-Couple-3': 'Body Treatment (Guest 2) (Couple 3)',
+        'Other-Services-Info-Couple-3': 'Other Services Information (Couple 3)'
+    };
+
+
     const nextBtn = document.getElementById('next-button');
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
@@ -121,19 +242,6 @@ document.addEventListener('DOMContentLoaded', function () {
 function populateReviewStep() {
     const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-9
 
-    // Define the steps object here
-    const steps = {
-        'step-1': document.getElementById('step-1'),
-        'step-2': document.getElementById('step-2'),
-        'step-3': document.getElementById('step-3'),
-        'step-4': document.getElementById('step-4'),
-        'step-5': document.getElementById('step-5'),
-        'step-6': document.getElementById('step-6'),
-        'step-7': document.getElementById('step-7'),
-        'step-8': document.getElementById('step-8'),
-        'step-9': document.getElementById('step-9'), // review step
-    };
-
     // Clear existing content in the review container
     reviewContainer.innerHTML = '';
 
@@ -144,15 +252,18 @@ function populateReviewStep() {
             inputs.forEach(input => {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex > 0) {
-                        reviewContainer.innerHTML += `<p><strong>${input.name}:</strong> ${input.options[input.selectedIndex].text}</p>`;
+                        const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
+                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
                     }
                 } else if (input.value.trim() !== "") {
-                    reviewContainer.innerHTML += `<p><strong>${input.name}:</strong> ${input.value}</p>`;
+                    const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
+                    reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
                 }
             });
         }
     }
 }
+
 
 // RESET CONDITIONALS SCRIPT
 
