@@ -16,6 +16,125 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-9': document.getElementById('step-9'), // review step
     };
 
+    const nextBtn = document.getElementById('next-button');
+    const prevBtn = document.getElementById('previous-button');
+    const submitBtn = document.getElementById('submit');
+    const recaptchaContainer = document.getElementById('recaptcha-container');
+    let currentStep = 'step-1';
+
+    // Define the hierarchical order for the steps
+    const hierarchicalSteps = {
+        'step-1': { next: 'step-2' },
+        'step-2': { next: 'step-3', prev: 'step-1' },
+        'step-3': { next: 'step-4', prev: 'step-2' },
+        'step-4': { next: 'step-5', prev: 'step-3' },
+        'step-5': { next: 'step-6', prev: 'step-4' },
+        'step-6': { next: 'step-7', prev: 'step-5' },
+        'step-7': { next: 'step-8', prev: 'step-6' },
+        'step-8': { next: 'step-9', prev: 'step-7' }, 
+        'step-9': { prev: 'step-8' },
+    };
+
+    function showStep(step) {
+        Object.keys(steps).forEach(key => {
+            steps[key].style.display = key === step ? 'block' : 'none';
+        });
+        prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
+        nextBtn.style.display = step === 'step-9' ? 'none' : 'inline-block';
+        submitBtn.style.display = step === 'step-9' ? 'inline-block' : 'none';
+
+        // Show or hide recaptcha-container based on the step
+        if (step === 'step-9') {
+            recaptchaContainer.style.display = 'block';
+        } else {
+            recaptchaContainer.style.display = 'none';
+        }
+
+        // Populate review fields if on step-9
+        if (step === 'step-9') {
+            populateReviewStep();
+        }
+    }
+
+    function validateStep(step) {
+        const inputs = steps[step].querySelectorAll('input, select, textarea');
+        for (let input of inputs) {
+            // Check if the field is visible and its parent element is visible as well
+            if (input.style.display !== 'none' && input.offsetParent !== null && input.id !== 'Date-Flexibility') {
+                if (input.type === 'select-one') {
+                    if (input.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (input.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    nextBtn.addEventListener('click', function () {
+        if (validateStep(currentStep)) {
+            currentStep = getNextStep(currentStep);
+            showStep(currentStep);
+        } else {
+            alert('Please fill out all required fields before proceeding.');
+        }
+    });
+
+    prevBtn.addEventListener('click', function () {
+        if (currentStep === 'step-8') {
+            resetServiceConditionals();
+            clearGroupBookingInfo(); // Clear the textarea in step-8
+        }
+        if (currentStep === 'step-7') {
+            resetNumberOfGuestsField();
+            resetGuestArrangements();
+        }
+        currentStep = getPrevStep(currentStep);
+        showStep(currentStep);
+    });
+
+    function getNextStep(current) {
+        return hierarchicalSteps[current]?.next || current;
+    }
+
+    function getPrevStep(current) {
+        return hierarchicalSteps[current]?.prev || current;
+    }
+
+    function clearGroupBookingInfo() {
+        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+        if (groupBookingInfoField) {
+            groupBookingInfoField.value = '';
+            console.log('Group-Booking-Info field cleared');
+        }
+    }
+
+    // Initial setup
+    showStep(currentStep);
+    console.log("Step navigation elements initialized");
+});
+
+// REVIEW STEP SCRIPT
+
+// REVIEW STEP SCRIPT
+
+function populateReviewStep() {
+    // Define the steps object here
+    const steps = {
+        'step-1': document.getElementById('step-1'),
+        'step-2': document.getElementById('step-2'),
+        'step-3': document.getElementById('step-3'),
+        'step-4': document.getElementById('step-4'),
+        'step-5': document.getElementById('step-5'),
+        'step-6': document.getElementById('step-6'),
+        'step-7': document.getElementById('step-7'),
+        'step-8': document.getElementById('step-8'),
+        'step-9': document.getElementById('step-9'), // review step
+    };
+
+    // Mapping object for user-friendly field labels
     const fieldLabels = {
         'Number-of-Guests': 'Number of Guests',
         '2-Guest-Arrangement': 'Guest Arrangement for 2 Guests',
@@ -136,110 +255,6 @@ document.addEventListener('DOMContentLoaded', function () {
         'Other-Services-Info-Couple-3': 'Other Services Information (Couple 3)'
     };
 
-
-    const nextBtn = document.getElementById('next-button');
-    const prevBtn = document.getElementById('previous-button');
-    const submitBtn = document.getElementById('submit');
-    const recaptchaContainer = document.getElementById('recaptcha-container');
-    let currentStep = 'step-1';
-
-    // Define the hierarchical order for the steps
-    const hierarchicalSteps = {
-        'step-1': { next: 'step-2' },
-        'step-2': { next: 'step-3', prev: 'step-1' },
-        'step-3': { next: 'step-4', prev: 'step-2' },
-        'step-4': { next: 'step-5', prev: 'step-3' },
-        'step-5': { next: 'step-6', prev: 'step-4' },
-        'step-6': { next: 'step-7', prev: 'step-5' },
-        'step-7': { next: 'step-8', prev: 'step-6' },
-        'step-8': { next: 'step-9', prev: 'step-7' }, 
-        'step-9': { prev: 'step-8' },
-    };
-
-    function showStep(step) {
-        Object.keys(steps).forEach(key => {
-            steps[key].style.display = key === step ? 'block' : 'none';
-        });
-        prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
-        nextBtn.style.display = step === 'step-9' ? 'none' : 'inline-block';
-        submitBtn.style.display = step === 'step-9' ? 'inline-block' : 'none';
-
-        // Show or hide recaptcha-container based on the step
-        if (step === 'step-9') {
-            recaptchaContainer.style.display = 'block';
-        } else {
-            recaptchaContainer.style.display = 'none';
-        }
-
-        // Populate review fields if on step-9
-        if (step === 'step-9') {
-            populateReviewStep();
-        }
-    }
-
-    function validateStep(step) {
-        const inputs = steps[step].querySelectorAll('input, select, textarea');
-        for (let input of inputs) {
-            // Check if the field is visible and its parent element is visible as well
-            if (input.style.display !== 'none' && input.offsetParent !== null && input.id !== 'Date-Flexibility') {
-                if (input.type === 'select-one') {
-                    if (input.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (input.value.trim() === "") {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    nextBtn.addEventListener('click', function () {
-        if (validateStep(currentStep)) {
-            currentStep = getNextStep(currentStep);
-            showStep(currentStep);
-        } else {
-            alert('Please fill out all required fields before proceeding.');
-        }
-    });
-
-    prevBtn.addEventListener('click', function () {
-        if (currentStep === 'step-8') {
-            resetServiceConditionals();
-            clearGroupBookingInfo(); // Clear the textarea in step-8
-        }
-        if (currentStep === 'step-7') {
-            resetNumberOfGuestsField();
-            resetGuestArrangements();
-        }
-        currentStep = getPrevStep(currentStep);
-        showStep(currentStep);
-    });
-
-    function getNextStep(current) {
-        return hierarchicalSteps[current]?.next || current;
-    }
-
-    function getPrevStep(current) {
-        return hierarchicalSteps[current]?.prev || current;
-    }
-
-    function clearGroupBookingInfo() {
-        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
-        if (groupBookingInfoField) {
-            groupBookingInfoField.value = '';
-            console.log('Group-Booking-Info field cleared');
-        }
-    }
-
-    // Initial setup
-    showStep(currentStep);
-    console.log("Step navigation elements initialized");
-});
-
-// REVIEW STEP SCRIPT
-
-function populateReviewStep() {
     const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-9
 
     // Clear existing content in the review container
