@@ -66,22 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    function validateVisibleFields() {
-        const visibleFields = document.querySelectorAll('#step-8 input:visible, #step-8 select:visible, #step-8 textarea:visible');
-        let allValid = true;
-
-        visibleFields.forEach(field => {
-            if (field.value.trim() === "" || (field.tagName === 'SELECT' && field.selectedIndex === 0)) {
-                allValid = false;
-                field.classList.add('required-field-error'); // Optional: Add this class to highlight the field if needed
-            } else {
-                field.classList.remove('required-field-error');
-            }
-        });
-
-        return allValid;
-    }
-
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
             if (currentStep === 'step-7' && document.getElementById('Number-of-Guests').value === '6 plus') {
@@ -169,12 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             console.log("Form submission handler initialized");
-
-            if (!validateVisibleFields()) {
-                alert("Please fill out all required fields.");
-                return;
-            }
-
             removeEmptyFields(); // Remove empty fields
             form.submit(); // Submit the form
             console.log("Form submitted via Webflow's native handling");
