@@ -1,6 +1,8 @@
+// STEPS SCRIPTS
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
 
+    // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -19,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const recaptchaContainer = document.getElementById('recaptcha-container');
     let currentStep = 'step-1';
 
+    // Define the hierarchical order for the steps
     const hierarchicalSteps = {
         'step-1': { next: 'step-2' },
         'step-2': { next: 'step-3', prev: 'step-1' },
@@ -39,13 +42,33 @@ document.addEventListener('DOMContentLoaded', function() {
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
 
-        if (step === 'step-8') {
-            toggleSubmitButton();
-            monitorStep8Fields();
+        // Show or hide recaptcha-container based on the step
+        if (step === 'step-8' || step === 'step-9') {
+            recaptchaContainer.style.display = 'block';
+        } else {
+            recaptchaContainer.style.display = 'none';
         }
 
-        // Show or hide recaptcha-container based on the step
-        recaptchaContainer.style.display = (step === 'step-8' || step === 'step-9') ? 'block' : 'none';
+        // Toggle submit button state based on visibility of fields in step-8
+        if (step === 'step-8') {
+            toggleSubmitButton();
+        }
+    }
+
+    function validateStep(step) {
+        const inputs = steps[step].querySelectorAll('input, select, textarea');
+        for (let input of inputs) {
+            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
+                if (input.type === 'select-one') {
+                    if (input.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (input.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     function validateVisibleFieldsInStep8() {
@@ -54,11 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (field.style.display !== 'none' && field.offsetParent !== null) {
                 if (field.type === 'select-one') {
                     if (field.selectedIndex === 0) {
-                        console.log(`Field ${field.id} is not selected`);
                         return false;
                     }
                 } else if (field.value.trim() === "") {
-                    console.log(`Field ${field.id} is empty`);
                     return false;
                 }
             }
@@ -66,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
+    // Block submit button until all visible fields in step-8 are filled
     function toggleSubmitButton() {
-        const isValid = validateVisibleFieldsInStep8();
-        submitBtn.disabled = !isValid;
-        console.log(`Submit button is ${submitBtn.disabled ? 'disabled' : 'enabled'}`);
+        submitBtn.disabled = !validateVisibleFieldsInStep8();
     }
 
+    // Monitor changes in Step 8 to toggle the submit button
     function monitorStep8Fields() {
         const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
         step8Fields.forEach(field => {
@@ -94,25 +115,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     prevBtn.addEventListener('click', function() {
+        if (currentStep === 'step-8') {
+            resetServiceConditionals();
+        }
+        if (currentStep === 'step-7') {
+            resetNumberOfGuestsField();
+            resetGuestArrangements();
+        }
+        if (currentStep === 'step-9') {
+            resetGroupBookingInfoField();
+        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
-
-    function validateStep(step) {
-        const inputs = steps[step].querySelectorAll('input, select, textarea');
-        for (let input of inputs) {
-            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
-                if (input.type === 'select-one') {
-                    if (input.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (input.value.trim() === "") {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     function getNextStep(current) {
         return hierarchicalSteps[current]?.next || current;
@@ -125,10 +140,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     showStep(currentStep);
     console.log("Step navigation elements initialized");
+    monitorStep8Fields(); // Start monitoring fields in Step 8 for changes
 
     // Function to remove empty fields
     function removeEmptyFields() {
         console.log("removeEmptyFields function called");
+        // Array of all select field IDs
         var selectFieldIds = [
             '2-Guest-Arrangement', '3-Guest-Arrangement', '4-Guest-Arrangement', '5-Guest-Arrangement', '6-Guest-Arrangement', 
             'Service-Single', 'Package-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single', 
@@ -141,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'Service-Couple-3', 'Package-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Guest-1-Couple-3', 'Combination-Guest-2-Couple-3', 'Massage-Guest-1-Couple-3', 'Massage-Guest-2-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Guest-1-Couple-3', 'Facial-Guest-2-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Couple-3'
         ];
 
+        // Array of all textarea field IDs
         var textAreaIds = [
             'Date-Flexibility', 'Spa-Del-Sol-Dream-Info-Single', 'Multiple-Services-Info-Single', 'Spa-Del-Sol-Dream-Info-Single-1', 'Multiple-Services-Info-Single-1', 'Spa-Del-Sol-Dream-Info-Single-2', 'Multiple-Services-Info-Single-2', 'Spa-Del-Sol-Dream-Info-Single-3', 'Multiple-Services-Info-Single-3', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Other-Services-Info-Couple-3', 'Group-Booking-Info'
         ];
@@ -196,9 +214,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const coupleServiceFields = [
             'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple', 'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple', 'Other-Services-Info-Couple',
-            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1', 'Other-Services-Info-Couple-1',
+            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatment-Guest-1-Couple-1', 'Body-Treatment-Guest-2-Couple-1', 'Other-Services-Info-Couple-1',
             'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatment-Guest-1-Couple-2', 'Body-Treatment-Guest-2-Couple-2', 'Other-Services-Info-Couple-2',
-            'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Guest-1-Couple-3', 'Combination-Guest-2-Couple-3', 'Massage-Guest-1-Couple-3', 'Massage-Guest-2-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Guest-1-Couple-3', 'Facial-Guest-2-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Couple-3'
+            'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Couple-3'
         ];
 
         singleServiceFields.forEach(id => {
