@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             recaptchaContainer.style.display = 'none';
         }
 
-        // Validate step 8 fields on every step change
+        // Toggle submit button state based on visibility of fields in step-8
         if (step === 'step-8') {
             toggleSubmitButton();
         }
@@ -87,10 +87,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    // Block submit button until all visible fields in step-8
+    // Block submit button until all visible fields in step-8 are filled
     function toggleSubmitButton() {
-        const isValid = validateVisibleFieldsInStep8();
-        submitBtn.disabled = !isValid;
+        submitBtn.disabled = !validateVisibleFieldsInStep8();
+    }
+
+    // Monitor changes in Step 8 to toggle the submit button
+    function monitorStep8Fields() {
+        const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
+        step8Fields.forEach(field => {
+            field.addEventListener('input', toggleSubmitButton);
+            field.addEventListener('change', toggleSubmitButton);
+        });
     }
 
     nextBtn.addEventListener('click', function() {
@@ -132,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial setup
     showStep(currentStep);
     console.log("Step navigation elements initialized");
+    monitorStep8Fields(); // Start monitoring fields in Step 8 for changes
 
     // Function to remove empty fields
     function removeEmptyFields() {
@@ -181,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             console.log("Form submission handler initialized");
 
+            // Ensure fields in Step 8 are validated again before submission
             if (!validateVisibleFieldsInStep8()) {
                 alert("Please fill out all required fields.");
                 return;
@@ -204,9 +214,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const coupleServiceFields = [
             'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple', 'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple', 'Other-Services-Info-Couple',
-            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatments-Selects-Wrapper-Couple-1', 'Other-Services-Info-Couple-1',
-            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatment-Guest-1-Couple-2', 'Body-Treatment-Guest-2-Couple-2', 'Other-Services-Couple-2',
-            'Service-Couple-3', 'Package-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Guest-1-Couple-3', 'Combination-Guest-2-Couple-3', 'Massage-Guest-1-Couple-3', 'Massage-Guest-2-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Guest-1-Couple-3', 'Facial-Guest-2-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Couple-3'
+            'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatment-Guest-1-Couple-1', 'Body-Treatment-Guest-2-Couple-1', 'Other-Services-Info-Couple-1',
+            'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatment-Guest-1-Couple-2', 'Body-Treatment-Guest-2-Couple-2', 'Other-Services-Info-Couple-2',
+            'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Couple-3'
         ];
 
         singleServiceFields.forEach(id => {
@@ -295,13 +305,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Group-Booking-Info field reset');
         }
     }
-
-    // Event listeners for fields in Step 8 to enable/disable submit button
-    const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
-    step8Fields.forEach(field => {
-        field.addEventListener('input', toggleSubmitButton);
-        field.addEventListener('change', toggleSubmitButton);
-    });
 });
 
 // SHOW STEP-8 TEMPLATE SCRIPT
