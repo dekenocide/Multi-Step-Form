@@ -338,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
         couple2Template.style.display = 'none';
         couple3Template.style.display = 'none';
         sixPlusTemplate.style.display = 'none';
-        groupBookingInfo.style.display = 'none';
     }
 
     function handleTemplateVisibility() {
