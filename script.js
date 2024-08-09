@@ -146,7 +146,6 @@ function resetServiceConditionals() {
         'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatment-Guest-1-Couple-1', 'Body-Treatment-Guest-2-Couple-1', 'Other-Services-Info-Couple-1',
         'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatment-Guest-1-Couple-2', 'Body-Treatment-Guest-2-Couple-2', 'Other-Services-Info-Couple-2',
         'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Info-Couple-3',
-        'Group-Booking-Info'
     ];
 
     singleServiceFields.forEach(id => {
@@ -273,7 +272,8 @@ function removeEmptyFields() {
         'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Other-Services-Info-Couple', 
         'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 
         'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 
-        'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Other-Services-Info-Couple-3'
+        'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Other-Services-Info-Couple-3',
+        'Group-Booking-Info'
     ];
 
     selectFieldIds.forEach(function (id) {
@@ -327,7 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const couple2Template = document.getElementById('Couple-2');
     const couple3Template = document.getElementById('Couple-3');
     const sixPlusTemplate = document.getElementById('6-Plus');
-    const groupBookingInfo = document.getElementById('Group-Booking-Info');
 
     function hideAllTemplates() {
         singleTemplate.style.display = 'none';
@@ -402,7 +401,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } else if (numberOfGuestsValue === '6 plus') {
             sixPlusTemplate.style.display = 'flex';
-            groupBookingInfo.style.display = 'block';
         }
     }
 
