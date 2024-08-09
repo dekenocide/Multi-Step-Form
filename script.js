@@ -46,9 +46,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Show or hide recaptcha-container based on the step
         if (step === 'step-9') {
             recaptchaContainer.style.display = 'block';
-            populateReviewStep(steps); // Pass steps object to populateReviewStep
         } else {
             recaptchaContainer.style.display = 'none';
+        }
+
+        // Populate review fields if on step-9
+        if (step === 'step-9') {
+            populateReviewStep();
         }
     }
 
@@ -69,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return true;
     }
 
-
     nextBtn.addEventListener('click', function () {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
@@ -82,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     prevBtn.addEventListener('click', function () {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
+            clearGroupBookingInfo(); // Clear the textarea in step-8
         }
         if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
@@ -97,6 +101,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function getPrevStep(current) {
         return hierarchicalSteps[current]?.prev || current;
+    }
+
+    function clearGroupBookingInfo() {
+        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+        if (groupBookingInfoField) {
+            groupBookingInfoField.value = '';
+            console.log('Group-Booking-Info field cleared');
+        }
     }
 
     // Initial setup
