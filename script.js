@@ -136,7 +136,6 @@ function populateReviewStep() {
 
     // Mapping object for user-friendly field labels
     const fieldLabels = {
-        const fieldLabels = {
         // General Information
         'Full-Name': 'Full Name',
         'Aruba-Residence': 'Aruba Residence',
