@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.getElementById('next-button');
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
+    const recaptchaContainer = document.getElementById('recaptcha-container');
     let currentStep = 'step-1';
 
     // Define the hierarchical order for the steps
@@ -40,6 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
         nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
+
+        // Show or hide recaptcha-container based on the step
+        if (step === 'step-8' || step === 'step-9') {
+            recaptchaContainer.style.display = 'block';
+        } else {
+            recaptchaContainer.style.display = 'none';
+        }
     }
 
     function validateStep(step) {
@@ -80,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resetGuestArrangements();
         }
         if (currentStep === 'step-9') {
-            resetGroupBookingInfoField(); // This assumes you have this function implemented
+            resetGroupBookingInfoField();
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
