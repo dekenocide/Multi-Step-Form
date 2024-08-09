@@ -3,7 +3,37 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
 
-    // Step navigation elements
+    // All necessary functions for step handling
+    function toggleSubmitButton() {
+        submitBtn.disabled = !validateVisibleFieldsInStep8();
+    }
+
+    function validateVisibleFieldsInStep8() {
+        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
+        for (let field of visibleFields) {
+            if (field.style.display !== 'none' && field.offsetParent !== null) {
+                if (field.type === 'select-one') {
+                    if (field.selectedIndex === 0) {
+                        return false;
+                    }
+                } else if (field.value.trim() === "") {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function monitorStep8Fields() {
+        const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
+        step8Fields.forEach(field => {
+            field.addEventListener('input', toggleSubmitButton);
+            field.addEventListener('change', toggleSubmitButton);
+        });
+    }
+
+    // The rest of the Main Step Handling Script code...
+    // Including the step navigation, event listeners for next/prev buttons, and initial setup.
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -35,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'step-9': { prev: 'step-7' }
     };
 
+    // Show Step Function
     function showStep(step) {
         Object.keys(steps).forEach(key => {
             steps[key].style.display = key === step ? 'block' : 'none';
