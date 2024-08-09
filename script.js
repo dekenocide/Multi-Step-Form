@@ -173,14 +173,14 @@ function resetServiceConditionals() {
         }
     });
 
-    document.getElementById('Service-Single').style.display = 'block';
-    document.getElementById('Service-Couple').style.display = 'block';
-    document.getElementById('Service-Single-1').style.display = 'block';
-    document.getElementById('Service-Couple-1').style.display = 'block';
-    document.getElementById('Service-Single-2').style.display = 'block';
-    document.getElementById('Service-Couple-2').style.display = 'block';
-    document.getElementById('Service-Single-3').style.display = 'block';
-    document.getElementById('Service-Couple-3').style.display = 'block';
+    document.getElementById('Service-Single').style.display = 'flex';
+    document.getElementById('Service-Couple').style.display = 'flex';
+    document.getElementById('Service-Single-1').style.display = 'flex';
+    document.getElementById('Service-Couple-1').style.display = 'flex';
+    document.getElementById('Service-Single-2').style.display = 'flex';
+    document.getElementById('Service-Couple-2').style.display = 'flex';
+    document.getElementById('Service-Single-3').style.display = 'flex';
+    document.getElementById('Service-Couple-3').style.display = 'flex';
 }
 
 function resetNumberOfGuestsField() {
@@ -324,6 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const couple1Template = document.getElementById('Couple-1');
     const couple2Template = document.getElementById('Couple-2');
     const couple3Template = document.getElementById('Couple-3');
+    const sixPlusTemplate = document.getElementById('6-Plus');
 
     function hideAllTemplates() {
         singleTemplate.style.display = 'none';
@@ -334,6 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
         couple1Template.style.display = 'none';
         couple2Template.style.display = 'none';
         couple3Template.style.display = 'none';
+        sixPlusTemplate.style.display = 'none';
     }
 
     function handleTemplateVisibility() {
@@ -341,58 +343,63 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const numberOfGuestsValue = numberOfGuestsSelect.value;
         if (numberOfGuestsValue === '1') {
-            singleTemplate.style.display = 'block';
+            singleTemplate.style.display = 'flex';
         } else if (numberOfGuestsValue === '2') {
             const guestArrangementValue = guestArrangementSelect2.value;
             if (guestArrangementValue === '1 couple') {
-                coupleTemplate.style.display = 'block';
+                coupleTemplate.style.display = 'flex';
             } else if (guestArrangementValue === '2 singles') {
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
+                single1Template.style.display = 'flex';
+                single2Template.style.display = 'flex';
             }
         } else if (numberOfGuestsValue === '3') {
             const guestArrangementValue = guestArrangementSelect3.value;
             if (guestArrangementValue === '1 couple and 1 single') {
-                coupleTemplate.style.display = 'block';
-                singleTemplate.style.display = 'block';
+                coupleTemplate.style.display = 'flex';
+                singleTemplate.style.display = 'flex';
             } else if (guestArrangementValue === '3 singles') {
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
-                single3Template.style.display = 'block';
+                single1Template.style.display = 'flex';
+                single2Template.style.display = 'flex';
+                single3Template.style.display = 'flex';
             }
         } else if (numberOfGuestsValue === '4') {
             const guestArrangementValue = guestArrangementSelect4.value;
             if (guestArrangementValue === '2 couples') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
+                couple1Template.style.display = 'flex';
+                couple2Template.style.display = 'flex';
             } else if (guestArrangementValue === '1 couple and 2 singles') {
-                coupleTemplate.style.display = 'block';
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
+                coupleTemplate.style.display = 'flex';
+                single1Template.style.display = 'flex';
+                single2Template.style.display = 'flex';
             }
         } else if (numberOfGuestsValue === '5') {
             const guestArrangementValue = guestArrangementSelect5.value;
             if (guestArrangementValue === '2 couples and 1 single') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
-                singleTemplate.style.display = 'block';
+                couple1Template.style.display = 'flex';
+                couple2Template.style.display = 'flex';
+                singleTemplate.style.display = 'flex';
             } else if (guestArrangementValue === '1 couple and 3 singles') {
-                coupleTemplate.style.display = 'block';
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
-                single3Template.style.display = 'block';
+                coupleTemplate.style.display = 'flex';
+                single1Template.style.display = 'flex';
+                single2Template.style.display = 'flex';
+                single3Template.style.display = 'flex';
             }
         } else if (numberOfGuestsValue === '6') {
             const guestArrangementValue = guestArrangementSelect6.value;
             if (guestArrangementValue === '3 couples') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
-                couple3Template.style.display = 'block';
+                couple1Template.style.display = 'flex';
+                couple2Template.style.display = 'flex';
+                couple3Template.style.display = 'flex';
             } else if (guestArrangementValue === '2 couples and 2 singles') {
-                couple1Template.style.display = 'block';
-                couple2Template.style.display = 'block';
-                single1Template.style.display = 'block';
-                single2Template.style.display = 'block';
+                couple1Template.style.display = 'flex';
+                couple2Template.style.display = 'flex';
+                single1Template.style.display = 'flex';
+                single2Template.style.display = 'flex';
+            }
+        } else if (numberOfGuestsValue === '6 plus') {
+            const numberOfGuestsValue = numberOfGuestsSelect.value;
+            if (numberOfGuestsValue === '6 plus') {
+                sixPlusTemplate.style.display = 'flex';
             }
         }
     }
