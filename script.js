@@ -325,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const couple2Template = document.getElementById('Couple-2');
     const couple3Template = document.getElementById('Couple-3');
     const sixPlusTemplate = document.getElementById('6-Plus');
+    const groupBookingInfo = document.getElementById('Group-Booking-Info');
 
     function hideAllTemplates() {
         singleTemplate.style.display = 'none';
@@ -336,6 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
         couple2Template.style.display = 'none';
         couple3Template.style.display = 'none';
         sixPlusTemplate.style.display = 'none';
+        groupBookingInfo.style.display = 'none';
     }
 
     function handleTemplateVisibility() {
@@ -397,10 +399,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 single2Template.style.display = 'flex';
             }
         } else if (numberOfGuestsValue === '6 plus') {
-            const numberOfGuestsValue = numberOfGuestsSelect.value;
-            if (numberOfGuestsValue === '6 plus') {
-                sixPlusTemplate.style.display = 'flex';
-            }
+            sixPlusTemplate.style.display = 'flex';
+            groupBookingInfo.style.display = 'block';
         }
     }
 
