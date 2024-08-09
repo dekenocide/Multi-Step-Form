@@ -75,6 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
         }
+        if (currentStep === 'step-9') {
+            resetGroupBookingInfoField();
+        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
@@ -167,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.display = 'none';
                 if (element.tagName === 'SELECT') {
                     element.selectedIndex = 0;
-                } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
+                } else if (element.tagName === 'TEXTAREA' or element.tagName === 'INPUT') {
                     element.value = '';
                 }
             }
@@ -179,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.style.display = 'none';
                 if (element.tagName === 'SELECT') {
                     element.selectedIndex = 0;
-                } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
+                } else if (element.tagName === 'TEXTAREA' or element.tagName === 'INPUT') {
                     element.value = '';
                 }
             }
@@ -193,6 +196,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('Service-Couple-2').style.display = 'block';
         document.getElementById('Service-Single-3').style.display = 'block';
         document.getElementById('Service-Couple-3').style.display = 'block';
+    }
+
+    function resetGroupBookingInfoField() {
+        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+        if (groupBookingInfoField) {
+            groupBookingInfoField.value = '';
+            console.log('Group-Booking-Info field reset');
+        }
     }
 });
 
