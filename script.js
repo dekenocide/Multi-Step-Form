@@ -1,6 +1,6 @@
 // MAIN STEP HANDLING SCRIPT
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
 
     // Step navigation elements
@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
         'step-6': document.getElementById('step-6'),
         'step-7': document.getElementById('step-7'),
         'step-8': document.getElementById('step-8'),
-        'step-9': document.getElementById('step-9')
+        'step-9': document.getElementById('step-9'),
+        'step-10': document.getElementById('step-10') // Add this line
     };
 
     const nextBtn = document.getElementById('next-button');
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
     const recaptchaContainer = document.getElementById('recaptcha-container');
-
     let currentStep = 'step-1';
 
     // Define the hierarchical order for the steps
@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'step-5': { next: 'step-6', prev: 'step-4' },
         'step-6': { next: 'step-7', prev: 'step-5' },
         'step-7': { next: 'step-8', prev: 'step-6' },
-        'step-8': { prev: 'step-7' },
-        'step-9': { prev: 'step-7' }
+        'step-8': { next: 'step-10', prev: 'step-7' }, // Adjusted to point to step-10
+        'step-9': { prev: 'step-7' },
+        'step-10': { prev: 'step-8' } // Added step-10 navigation
     };
 
     function showStep(step) {
@@ -41,34 +42,23 @@ document.addEventListener('DOMContentLoaded', function() {
             steps[key].style.display = key === step ? 'block' : 'none';
         });
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
-        nextBtn.style.display = (step === 'step-8' || step === 'step-9') ? 'none' : 'inline-block';
+        nextBtn.style.display = (step === 'step-10' || step === 'step-9') ? 'none' : 'inline-block';
         submitBtn.style.display = nextBtn.style.display === 'none' ? 'inline-block' : 'none';
 
         // Show or hide recaptcha-container based on the step
-        if (step === 'step-8' || step === 'step-9') {
+        if (step === 'step-8' || step === 'step-9' || step === 'step-10') {
             recaptchaContainer.style.display = 'block';
         } else {
             recaptchaContainer.style.display = 'none';
         }
-    }
 
-    function validateStep(step) {
-        const inputs = steps[step].querySelectorAll('input, select, textarea');
-        for (let input of inputs) {
-            if (input.style.display !== 'none' && input.id !== 'Date-Flexibility') {
-                if (input.type === 'select-one') {
-                    if (input.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (input.value.trim() === "") {
-                    return false;
-                }
-            }
+        // Populate review fields if on step-10
+        if (step === 'step-10') {
+            populateReviewStep();
         }
-        return true;
     }
 
-    nextBtn.addEventListener('click', function() {
+    nextBtn.addEventListener('click', function () {
         if (validateStep(currentStep)) {
             if (currentStep === 'step-7' && document.getElementById('Number-of-Guests').value === '6 plus') {
                 currentStep = 'step-9';
@@ -81,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    prevBtn.addEventListener('click', function() {
+    prevBtn.addEventListener('click', function () {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
         }
@@ -108,6 +98,32 @@ document.addEventListener('DOMContentLoaded', function() {
     showStep(currentStep);
     console.log("Step navigation elements initialized");
 });
+
+// REVIEW
+
+function populateReviewStep() {
+    const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-10
+
+    // Clear existing content in the review container
+    reviewContainer.innerHTML = '';
+
+    // Iterate through each step and display the filled values
+    for (const stepKey in steps) {
+        if (stepKey !== 'step-10') { // Skip step-10 itself
+            const inputs = steps[stepKey].querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (input.type === 'select-one') {
+                    if (input.selectedIndex > 0) {
+                        reviewContainer.innerHTML += `<p><strong>${input.name}:</strong> ${input.options[input.selectedIndex].text}</p>`;
+                    }
+                } else if (input.value.trim() !== "") {
+                    reviewContainer.innerHTML += `<p><strong>${input.name}:</strong> ${input.value}</p>`;
+                }
+            });
+        }
+    }
+}
+
 
 // RESET CONDITIONALS SCRIPT
 
