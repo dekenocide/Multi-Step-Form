@@ -106,8 +106,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // REVIEW STEP SCRIPT
 
-function populateReviewStep(steps) {
+function populateReviewStep() {
     const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-9
+
+    // Define the steps object here
+    const steps = {
+        'step-1': document.getElementById('step-1'),
+        'step-2': document.getElementById('step-2'),
+        'step-3': document.getElementById('step-3'),
+        'step-4': document.getElementById('step-4'),
+        'step-5': document.getElementById('step-5'),
+        'step-6': document.getElementById('step-6'),
+        'step-7': document.getElementById('step-7'),
+        'step-8': document.getElementById('step-8'),
+        'step-9': document.getElementById('step-9'), // review step
+    };
 
     // Clear existing content in the review container
     reviewContainer.innerHTML = '';
