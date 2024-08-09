@@ -72,36 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return true;
     }
 
-    function validateVisibleFieldsInStep8() {
-        const visibleFields = steps['step-8'].querySelectorAll('input, select, textarea');
-        for (let field of visibleFields) {
-            if (field.style.display !== 'none' && field.offsetParent !== null) {
-                if (field.type === 'select-one') {
-                    if (field.selectedIndex === 0) {
-                        return false;
-                    }
-                } else if (field.value.trim() === "") {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    // Block submit button until all visible fields in step-8 are filled
-    function toggleSubmitButton() {
-        submitBtn.disabled = !validateVisibleFieldsInStep8();
-    }
-
-    // Monitor changes in Step 8 to toggle the submit button
-    function monitorStep8Fields() {
-        const step8Fields = steps['step-8'].querySelectorAll('input, select, textarea');
-        step8Fields.forEach(field => {
-            field.addEventListener('input', toggleSubmitButton);
-            field.addEventListener('change', toggleSubmitButton);
-        });
-    }
-
     nextBtn.addEventListener('click', function() {
         if (validateStep(currentStep)) {
             if (currentStep === 'step-7' && document.getElementById('Number-of-Guests').value === '6 plus') {
@@ -116,6 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     prevBtn.addEventListener('click', function() {
+        if (currentStep === 'step-8') {
+            resetServiceConditionals(); // Reset conditionals when moving back from step-8
+        }
+        if (currentStep === 'step-7') {
+            resetNumberOfGuestsField(); // Reset number of guests when moving back from step-7
+            resetGuestArrangements(); // Reset guest arrangements when moving back from step-7
+        }
+        if (currentStep === 'step-9') {
+            resetGroupBookingInfoField(); // Reset group booking info when moving back from step-9
+        }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
     });
