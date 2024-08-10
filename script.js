@@ -185,11 +185,8 @@ function populateReviewStep() {
     // Mapping object for user-friendly field labels
     const fieldLabels = {
         // General Information
-        'Booking-Name': 'Booking Name',
-        'Phone': 'Phone',
-        'Email': 'Email',
+        'Full-Name': 'Full Name',
         'Aruba-Residence': 'Aruba Residence',
-        'Date': 'Date',
         'Preferred-Time': 'Preferred Time',
         'Number-of-Guests': 'Number of Guests',
         'Group-Booking-Info': 'Group Booking Info',
@@ -201,15 +198,15 @@ function populateReviewStep() {
         '5-Guest-Arrangement': 'Guest Arrangement',
         '6-Guest-Arrangement': 'Guest Arrangement',
 
-        // Name Inputs (these should display only the value)
-        'Name-Single': '',
-        'Name-Single-1': '',
-        'Name-Single-2': '',
-        'Name-Single-3': '',
-        'Name-Couple': '',
-        'Name-Couple-1': '',
-        'Name-Couple-2': '',
-        'Name-Couple-3': '',
+        // Name Inputs
+        'Name-Single': 'Name (Single)',
+        'Name-Single-1': 'Name (Single 1)',
+        'Name-Single-2': 'Name (Single 2)',
+        'Name-Single-3': 'Name (Single 3)',
+        'Name-Couple': 'Name (Couple)',
+        'Name-Couple-1': 'Name (Couple 1)',
+        'Name-Couple-2': 'Name (Couple 2)',
+        'Name-Couple-3': 'Name (Couple 3)',
     
         // Single Service Details
         'Service-Single': 'Service',
@@ -362,26 +359,14 @@ function populateReviewStep() {
         if (stepKey !== 'step-9') { // Skip step-9 itself
             const inputs = steps[stepKey].querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
-                const label = fieldLabels[input.id]; // Use label from mapping or fallback to input name
-                const showLabel = label !== undefined && label !== ''; // Check if label should be shown
-
-                // Only apply the label hiding logic to Name-Single and Name-Couple fields
-                const isNameField = input.id.startsWith('Name-Single') || input.id.startsWith('Name-Couple');
-                
                 if (input.type === 'select-one') {
                     if (input.selectedIndex > 0) {
-                        if (showLabel && !isNameField) {
-                            reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
-                        } else {
-                            reviewContainer.innerHTML += `<p>${input.options[input.selectedIndex].text}</p>`;
-                        }
+                        const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
+                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
                     }
                 } else if (input.value.trim() !== "") {
-                    if (showLabel && !isNameField) {
-                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
-                    } else {
-                        reviewContainer.innerHTML += `<p>${input.value}</p>`;
-                    }
+                    const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
+                    reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
                 }
             });
         }
