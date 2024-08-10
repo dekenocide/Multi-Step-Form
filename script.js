@@ -278,17 +278,17 @@ function resetGuestArrangements() {
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
-    
+
     populateReviewStep(); // Ensure this runs after the DOM is ready
 });
 
 function populateReviewStep() {
     console.log("populateReviewStep function called");
 
-    const reviewFields = document.querySelectorAll('.review-row');
+    const reviewFields = document.querySelectorAll('.review-value');
     
-    reviewFields.forEach(field => {
-        const dataValueId = field.getAttribute('data-value-id');
+    reviewFields.forEach(valueDiv => {
+        const dataValueId = valueDiv.getAttribute('data-value-id');
         const inputElement = document.getElementById(dataValueId);
 
         if (inputElement) {
@@ -302,14 +302,14 @@ function populateReviewStep() {
 
             if (value) {
                 console.log(`Setting value for ${dataValueId}: ${value}`);
-                field.querySelector('.review-value').innerText = value;
+                valueDiv.innerText = value;
             } else {
                 console.log(`No value found for ${dataValueId}, hiding field`);
-                field.style.display = 'none'; // Hide the field if no value is present
+                valueDiv.closest('.review-row').style.display = 'none'; // Hide the entire row if no value is present
             }
         } else {
             console.log(`Input element not found for ${dataValueId}, hiding field`);
-            field.style.display = 'none'; // Hide the field if input element is not found
+            valueDiv.closest('.review-row').style.display = 'none'; // Hide the entire row if input element is not found
         }
     });
 }
