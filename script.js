@@ -133,6 +133,33 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Dynamic placeholder for service select fields
+    const inputsToSelects = {
+        'Name-Single': 'Service-Single',
+        'Name-Single-1': 'Service-Single-1',
+        'Name-Single-2': 'Service-Single-2',
+        'Name-Single-3': 'Service-Single-3',
+        'Name-Couple': 'Service-Couple',
+        'Name-Couple-1': 'Service-Couple-1',
+        'Name-Couple-2': 'Service-Couple-2',
+        'Name-Couple-3': 'Service-Couple-3'
+    };
+
+    Object.keys(inputsToSelects).forEach(nameId => {
+        const nameInput = document.getElementById(nameId);
+        const serviceSelect = document.getElementById(inputsToSelects[nameId]);
+
+        if (nameInput && serviceSelect) {
+            nameInput.addEventListener('input', function () {
+                const name = nameInput.value.trim();
+                if (name) {
+                    serviceSelect.options[0].text = `Select service for ${name}`;
+                } else {
+                    serviceSelect.options[0].text = 'Select service'; // Default placeholder if name is empty
+                }
+            });
+        }
+    });
 
     // Initial setup
     showStep(currentStep);
