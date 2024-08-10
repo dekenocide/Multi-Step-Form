@@ -16,6 +16,18 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-9': document.getElementById('step-9'), // review step
     };
 
+    // Declare inputsToSelects at a higher scope so it's accessible by all functions
+    const inputsToSelects = {
+        'Name-Single': 'Service-Single',
+        'Name-Single-1': 'Service-Single-1',
+        'Name-Single-2': 'Service-Single-2',
+        'Name-Single-3': 'Service-Single-3',
+        'Name-Couple': 'Service-Couple',
+        'Name-Couple-1': 'Service-Couple-1',
+        'Name-Couple-2': 'Service-Couple-2',
+        'Name-Couple-3': 'Service-Couple-3'
+    };
+
     const nextBtn = document.getElementById('next-button');
     const prevBtn = document.getElementById('previous-button');
     const submitBtn = document.getElementById('submit');
@@ -87,7 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
             resetServiceConditionals();
             clearGroupBookingInfo(); // Clear the textarea in step-8
             clearNameInputs(); // Clear the specific name input fields
-        } else if (currentStep === 'step-7') {
+        }
+        if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
@@ -104,17 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Dynamic placeholder for service select fields
-    const inputsToSelects = {
-        'Name-Single': 'Service-Single',
-        'Name-Single-1': 'Service-Single-1',
-        'Name-Single-2': 'Service-Single-2',
-        'Name-Single-3': 'Service-Single-3',
-        'Name-Couple': 'Service-Couple',
-        'Name-Couple-1': 'Service-Couple-1',
-        'Name-Couple-2': 'Service-Couple-2',
-        'Name-Couple-3': 'Service-Couple-3'
-    };
-
     Object.keys(inputsToSelects).forEach(nameId => {
         const nameInput = document.getElementById(nameId);
         const serviceSelect = document.getElementById(inputsToSelects[nameId]);
@@ -377,7 +379,6 @@ function resetServiceConditionals() {
             element.style.display = 'none';
             if (element.tagName === 'SELECT') {
                 element.selectedIndex = 0;
-                element.options[0].text = 'Select service'; // Reset placeholder text
             } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
                 element.value = '';
             }
@@ -390,7 +391,6 @@ function resetServiceConditionals() {
             element.style.display = 'none';
             if (element.tagName === 'SELECT') {
                 element.selectedIndex = 0;
-                element.options[0].text = 'Select service'; // Reset placeholder text
             } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
                 element.value = '';
             }
@@ -467,6 +467,7 @@ function clearNameInputs() {
     nameFields.forEach(id => {
         const inputField = document.getElementById(id);
         const correspondingSelect = document.getElementById(inputsToSelects[id]);
+
         if (inputField) {
             inputField.value = ''; // Clear the value of the input field
             if (correspondingSelect) {
