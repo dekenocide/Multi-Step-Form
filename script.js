@@ -354,11 +354,26 @@ function populateReviewStep() {
     // Clear existing content in the review container
     reviewContainer.innerHTML = '';
 
+    // List of field IDs to skip entirely from the review
+    const skipFields = [
+        'Name-Single', 
+        'Name-Single-1', 
+        'Name-Single-2', 
+        'Name-Single-3', 
+        'Name-Couple', 
+        'Name-Couple-1', 
+        'Name-Couple-2', 
+        'Name-Couple-3'
+    ];
+
     // Iterate through each step and display the filled values
     for (const stepKey in steps) {
         if (stepKey !== 'step-9') { // Skip step-9 itself
             const inputs = steps[stepKey].querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
+                // Skip fields that should not appear in the review
+                if (skipFields.includes(input.id)) return;
+
                 const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
                 if (input.type === 'select-one') {
                     if (input.selectedIndex > 0) {
