@@ -293,11 +293,8 @@ function populateReviewStep() {
     // Mapping object for user-friendly field labels
     const fieldLabels = {
         // General Information
-        'Booking-Name': 'Booking Name',
-        'Phone': 'Phone',
-        'Email': 'Email',
+        'Full-Name': 'Full Name',
         'Aruba-Residence': 'Aruba Residence',
-        'Date': 'Date',
         'Preferred-Time': 'Preferred Time',
         'Number-of-Guests': 'Number of Guests',
         'Group-Booking-Info': 'Group Booking Info',
@@ -309,7 +306,7 @@ function populateReviewStep() {
         '5-Guest-Arrangement': 'Guest Arrangement',
         '6-Guest-Arrangement': 'Guest Arrangement',
 
-        // Name Inputs (will not display labels)
+        // Name Inputs
         'Name-Single': '',
         'Name-Single-1': '',
         'Name-Single-2': '',
@@ -333,46 +330,6 @@ function populateReviewStep() {
         'Wax-Info-Single': 'Wax Info',
         'Multiple-Services-Info-Single': 'Multiple Services Info',
     
-        // Additional Single Service Details
-        'Service-Single-1': 'Service',
-        'Package-Single-1': 'Package',
-        'Spa-Del-Sol-Dream-Info-Single-1': 'Spa del Sol Dream Package',
-        'Massage-Single-1': 'Massage',
-        'Duration-A-Single-1': 'Duration',
-        'Duration-B-Single-1': 'Duration',
-        'Combination-Single-1': 'Combination',
-        'Facial-Single-1': 'Facial',
-        'Add-On-Single-1': 'Add-On',
-        'Body-Treatment-Single-1': 'Body Treatment',
-        'Wax-Info-Single-1': 'Wax Info',
-        'Multiple-Services-Info-Single-1': 'Multiple Services Info',
-    
-        'Service-Single-2': 'Service',
-        'Package-Single-2': 'Package',
-        'Spa-Del-Sol-Dream-Info-Single-2': 'Spa del Sol Dream Package',
-        'Massage-Single-2': 'Massage',
-        'Duration-A-Single-2': 'Duration',
-        'Duration-B-Single-2': 'Duration',
-        'Combination-Single-2': 'Combination',
-        'Facial-Single-2': 'Facial',
-        'Add-On-Single-2': 'Add-On',
-        'Body-Treatment-Single-2': 'Body Treatment',
-        'Wax-Info-Single-2': 'Wax Info',
-        'Multiple-Services-Info-Single-2': 'Multiple Services Info',
-    
-        'Service-Single-3': 'Service',
-        'Package-Single-3': 'Package',
-        'Spa-Del-Sol-Dream-Info-Single-3': 'Spa del Sol Dream Package',
-        'Massage-Single-3': 'Massage',
-        'Duration-A-Single-3': 'Duration',
-        'Duration-B-Single-3': 'Duration',
-        'Combination-Single-3': 'Combination',
-        'Facial-Single-3': 'Facial',
-        'Add-On-Single-3': 'Add-On',
-        'Body-Treatment-Single-3': 'Body Treatment',
-        'Wax-Info-Single-3': 'Wax Info',
-        'Multiple-Services-Info-Single-3': 'Multiple Services Info',
-    
         // Couple Service Details
         'Service-Couple': 'Service',
         'Package-Couple': 'Package',
@@ -394,76 +351,15 @@ function populateReviewStep() {
         'Massage-Guest-1-Couple': 'Massage (Guest 1)',
         'Massage-Guest-2-Couple': 'Massage (Guest 2)',
         'Duration-A-Guest-1-And-2-Couple': 'Duration (Guests 1 & 2)',
-    
-        // Additional Couple Service Details
-        'Service-Couple-1': 'Service',
-        'Package-Couple-1': 'Package',
-        'Spa-Del-Sol-Dream-Info-Couple-1': 'Spa del Sol Dream Package',
-        'Other-Packages-Info-Couple-1': 'Other Packages Info',
-        'Massage-Couple-1': 'Massage',
-        'Duration-A-Couple-1': 'Duration',
-        'Duration-B-Couple-1': 'Duration',
-        'Prenatal-Massage-Couple-1': "Partner's Massage",
-        'Facial-Guest-1-Couple-1': 'Facial (Guest 1)',
-        'Facial-Guest-2-Couple-1': 'Facial (Guest 2)',
-        'Add-On-Guest-1-Couple-1': 'Add-On (Guest 1)',
-        'Add-On-Guest-2-Couple-1': 'Add-On (Guest 2)',
-        'Body-Treatment-Guest-1-Couple-1': 'Body Treatment (Guest 1)',
-        'Body-Treatment-Guest-2-Couple-1': 'Body Treatment (Guest 2)',
-        'Other-Services-Info-Couple-1': 'Other Services Info',
-        'Combination-Guest-1-Couple-1': 'Combination (Guest 1)',
-        'Combination-Guest-2-Couple-1': 'Combination (Guest 2)',
-        'Massage-Guest-1-Couple-1': 'Massage (Guest 1)',
-        'Massage-Guest-2-Couple-1': 'Massage (Guest 2)',
-        'Duration-A-Guest-1-And-2-Couple-1': 'Duration (Guests 1 & 2)',
-    
-        'Service-Couple-2': 'Service',
-        'Package-Couple-2': 'Package',
-        'Spa-Del-Sol-Dream-Info-Couple-2': 'Spa del Sol Dream Package',
-        'Other-Packages-Info-Couple-2': 'Other Packages Info',
-        'Massage-Couple-2': 'Massage',
-        'Duration-A-Couple-2': 'Duration',
-        'Duration-B-Couple-2': 'Duration',
-        'Prenatal-Massage-Couple-2': "Partner's Massage",
-        'Facial-Guest-1-Couple-2': 'Facial (Guest 1)',
-        'Facial-Guest-2-Couple-2': 'Facial (Guest 2)',
-        'Add-On-Guest-1-Couple-2': 'Add-On (Guest 1)',
-        'Add-On-Guest-2-Couple-2': 'Add-On (Guest 2)',
-        'Body-Treatment-Guest-1-Couple-2': 'Body Treatment (Guest 1)',
-        'Body-Treatment-Guest-2-Couple-2': 'Body Treatment (Guest 2)',
-        'Other-Services-Info-Couple-2': 'Other Services Info',
-        'Combination-Guest-1-Couple-2': 'Combination (Guest 1)',
-        'Combination-Guest-2-Couple-2': 'Combination (Guest 2)',
-        'Massage-Guest-1-Couple-2': 'Massage (Guest 1)',
-        'Massage-Guest-2-Couple-2': 'Massage (Guest 2)',
-        'Duration-A-Guest-1-And-2-Couple-2': 'Duration (Guests 1 & 2)',
-    
-        'Service-Couple-3': 'Service',
-        'Package-Couple-3': 'Package',
-        'Spa-Del-Sol-Dream-Info-Couple-3': 'Spa del Sol Dream Package',
-        'Other-Packages-Info-Couple-3': 'Other Packages Info',
-        'Massage-Couple-3': 'Massage',
-        'Duration-A-Couple-3': 'Duration',
-        'Duration-B-Couple-3': 'Duration',
-        'Prenatal-Massage-Couple-3': "Partner's Massage",
-        'Facial-Guest-1-Couple-3': 'Facial (Guest 1)',
-        'Facial-Guest-2-Couple-3': 'Facial (Guest 2)',
-        'Add-On-Guest-1-Couple-3': 'Add-On (Guest 1)',
-        'Add-On-Guest-2-Couple-3': 'Add-On (Guest 2)',
-        'Body-Treatment-Guest-1-Couple-3': 'Body Treatment (Guest 1)',
-        'Body-Treatment-Guest-2-Couple-3': 'Body Treatment (Guest 2)',
-        'Other-Services-Info-Couple-3': 'Other Services Info',
-        'Combination-Guest-1-Couple-3': 'Combination (Guest 1)',
-        'Combination-Guest-2-Couple-3': 'Combination (Guest 2)',
-        'Massage-Guest-1-Couple-3': 'Massage (Guest 1)',
-        'Massage-Guest-2-Couple-3': 'Massage (Guest 2)',
-        'Duration-A-Guest-1-And-2-Couple-3': 'Duration (Guests 1 & 2)',
     };
 
     const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-9
 
     // Clear existing content in the review container
     reviewContainer.innerHTML = '';
+
+    // Start table
+    let tableHTML = '<table class="review-table"><tbody>';
 
     // Iterate through each step and display the filled values
     for (const stepKey in steps) {
@@ -474,22 +370,28 @@ function populateReviewStep() {
                     if (input.selectedIndex > 0) {
                         const label = fieldLabels[input.id] !== '' ? fieldLabels[input.id] : ''; // Use label from mapping or no label for name fields
                         if (label) {
-                            reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
+                            tableHTML += `<tr class="review-row"><td class="review-label">${label}:</td><td class="review-value">${input.options[input.selectedIndex].text}</td></tr>`;
                         } else {
-                            reviewContainer.innerHTML += `<p>${input.options[input.selectedIndex].text}</p>`;
+                            tableHTML += `<tr class="review-row"><td colspan="2" class="review-value">${input.options[input.selectedIndex].text}</td></tr>`;
                         }
                     }
                 } else if (input.value.trim() !== "") {
                     const label = fieldLabels[input.id] !== '' ? fieldLabels[input.id] : ''; // Use label from mapping or no label for name fields
                     if (label) {
-                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
+                        tableHTML += `<tr class="review-row"><td class="review-label">${label}:</td><td class="review-value">${input.value}</td></tr>`;
                     } else {
-                        reviewContainer.innerHTML += `<p>${input.value}</p>`;
+                        tableHTML += `<tr class="review-row"><td colspan="2" class="review-value">${input.value}</td></tr>`;
                     }
                 }
             });
         }
     }
+
+    // End table
+    tableHTML += '</tbody></table>';
+
+    // Insert table into the review container
+    reviewContainer.innerHTML = tableHTML;
 }
 
 // REMOVE EMPTY FIELDS SCRIPT
