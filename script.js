@@ -185,7 +185,7 @@ function populateReviewStep() {
     // Mapping object for user-friendly field labels
     const fieldLabels = {
         // General Information
-        'Booking-Name': 'Booking Name',
+        'Full-Name': 'Full Name',
         'Aruba-Residence': 'Aruba Residence',
         'Preferred-Time': 'Preferred Time',
         'Number-of-Guests': 'Number of Guests',
@@ -198,7 +198,7 @@ function populateReviewStep() {
         '5-Guest-Arrangement': 'Guest Arrangement',
         '6-Guest-Arrangement': 'Guest Arrangement',
 
-        // Name Inputs (empty labels)
+        // Name Inputs (special handling with blank labels)
         'Name-Single': '',
         'Name-Single-1': '',
         'Name-Single-2': '',
@@ -360,16 +360,17 @@ function populateReviewStep() {
             const inputs = steps[stepKey].querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
                 const label = fieldLabels[input.id]; // Use label from mapping or fallback to input name
+                const showLabel = label !== undefined && label !== ''; // Check if label should be shown
                 if (input.type === 'select-one') {
                     if (input.selectedIndex > 0) {
-                        if (label) {
+                        if (showLabel) {
                             reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
                         } else {
                             reviewContainer.innerHTML += `<p>${input.options[input.selectedIndex].text}</p>`;
                         }
                     }
                 } else if (input.value.trim() !== "") {
-                    if (label) {
+                    if (showLabel) {
                         reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
                     } else {
                         reviewContainer.innerHTML += `<p>${input.value}</p>`;
