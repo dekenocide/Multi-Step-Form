@@ -303,6 +303,7 @@ function populateReviewStep() {
             if (value) {
                 console.log(`Setting value for ${dataValueId}: ${value}`);
                 valueDiv.innerText = value;
+                valueDiv.closest('.review-row').style.display = 'flex'; // Ensure row is displayed as flex
             } else {
                 console.log(`No value found for ${dataValueId}, hiding field`);
                 valueDiv.closest('.review-row').style.display = 'none'; // Hide the entire row if no value is present
