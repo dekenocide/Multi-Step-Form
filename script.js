@@ -186,7 +186,10 @@ function populateReviewStep() {
     const fieldLabels = {
         // General Information
         'Booking-Name': 'Booking Name',
+        'Phone': 'Phone',
+        'Email': 'Email',
         'Aruba-Residence': 'Aruba Residence',
+        'Date': 'Date',
         'Preferred-Time': 'Preferred Time',
         'Number-of-Guests': 'Number of Guests',
         'Group-Booking-Info': 'Group Booking Info',
