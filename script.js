@@ -460,45 +460,31 @@ function populateReviewStep() {
         'Duration-A-Guest-1-And-2-Couple-3': 'Duration (Guests 1 & 2)',
     };
 
-    const reviewContainer = document.getElementById('review-container'); // Ensure you have a container in step-9
-
     // Clear existing content in the review container
-    reviewContainer.innerHTML = '';
+    const reviewFields = document.querySelectorAll('.review-row');
 
-    // Start table
-    let tableHTML = '<table class="review-table"><tbody>';
+    reviewFields.forEach(field => {
+        const dataValueId = field.getAttribute('data-value-id');
+        const inputElement = document.getElementById(dataValueId);
 
-    // Iterate through each step and display the filled values
-    for (const stepKey in steps) {
-        if (stepKey !== 'step-9') { // Skip step-9 itself
-            const inputs = steps[stepKey].querySelectorAll('input, select, textarea');
-            inputs.forEach(input => {
-                if (input.type === 'select-one') {
-                    if (input.selectedIndex > 0) {
-                        const label = fieldLabels[input.id] !== '' ? fieldLabels[input.id] : ''; // Use label from mapping or no label for name fields
-                        if (label) {
-                            tableHTML += `<tr class="review-row"><td class="review-label">${label}:</td><td class="review-value">${input.options[input.selectedIndex].text}</td></tr>`;
-                        } else {
-                            tableHTML += `<tr class="review-row"><td colspan="2" class="review-value">${input.options[input.selectedIndex].text}</td></tr>`;
-                        }
-                    }
-                } else if (input.value.trim() !== "") {
-                    const label = fieldLabels[input.id] !== '' ? fieldLabels[input.id] : ''; // Use label from mapping or no label for name fields
-                    if (label) {
-                        tableHTML += `<tr class="review-row"><td class="review-label">${label}:</td><td class="review-value">${input.value}</td></tr>`;
-                    } else {
-                        tableHTML += `<tr class="review-row"><td colspan="2" class="review-value">${input.value}</td></tr>`;
-                    }
-                }
-            });
+        if (inputElement) {
+            let value = '';
+
+            if (inputElement.tagName === 'SELECT' && inputElement.selectedIndex > 0) {
+                value = inputElement.options[inputElement.selectedIndex].text;
+            } else if (inputElement.tagName === 'INPUT' || inputElement.tagName === 'TEXTAREA') {
+                value = inputElement.value.trim();
+            }
+
+            if (value) {
+                field.querySelector('.review-value').innerText = value;
+            } else {
+                field.style.display = 'none'; // Hide the field if no value is present
+            }
+        } else {
+            field.style.display = 'none'; // Hide the field if input element is not found
         }
-    }
-
-    // End table
-    tableHTML += '</tbody></table>';
-
-    // Insert table into the review container
-    reviewContainer.innerHTML = tableHTML;
+    });
 }
 
 // REMOVE EMPTY FIELDS SCRIPT
