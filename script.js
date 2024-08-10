@@ -359,20 +359,26 @@ function populateReviewStep() {
         if (stepKey !== 'step-9') { // Skip step-9 itself
             const inputs = steps[stepKey].querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
+                const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
                 if (input.type === 'select-one') {
                     if (input.selectedIndex > 0) {
-                        const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
-                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
+                        if (label !== '') {
+                            reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
+                        } else {
+                            reviewContainer.innerHTML += `<p>${input.options[input.selectedIndex].text}</p>`;
+                        }
                     }
                 } else if (input.value.trim() !== "") {
-                    const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
-                    reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
+                    if (label !== '') {
+                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
+                    } else {
+                        reviewContainer.innerHTML += `<p>${input.value}</p>`;
+                    }
                 }
             });
         }
     }
 }
-
 
 // RESET CONDITIONALS SCRIPT
 
