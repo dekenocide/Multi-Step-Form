@@ -186,7 +186,10 @@ function populateReviewStep() {
     const fieldLabels = {
         // General Information
         'Full-Name': 'Full Name',
+        'Phone': 'Phone',
+        'Email': 'Email',
         'Aruba-Residence': 'Aruba Residence',
+        'Date': 'Date',
         'Preferred-Time': 'Preferred Time',
         'Number-of-Guests': 'Number of Guests',
         'Group-Booking-Info': 'Group Booking Info',
@@ -198,15 +201,15 @@ function populateReviewStep() {
         '5-Guest-Arrangement': 'Guest Arrangement',
         '6-Guest-Arrangement': 'Guest Arrangement',
 
-        // Name Inputs
-        'Name-Single': 'Name (Single)',
-        'Name-Single-1': 'Name (Single 1)',
-        'Name-Single-2': 'Name (Single 2)',
-        'Name-Single-3': 'Name (Single 3)',
-        'Name-Couple': 'Name (Couple)',
-        'Name-Couple-1': 'Name (Couple 1)',
-        'Name-Couple-2': 'Name (Couple 2)',
-        'Name-Couple-3': 'Name (Couple 3)',
+        // Name Inputs (will not display labels)
+        'Name-Single': '',
+        'Name-Single-1': '',
+        'Name-Single-2': '',
+        'Name-Single-3': '',
+        'Name-Couple': '',
+        'Name-Couple-1': '',
+        'Name-Couple-2': '',
+        'Name-Couple-3': '',
     
         // Single Service Details
         'Service-Single': 'Service',
@@ -361,12 +364,20 @@ function populateReviewStep() {
             inputs.forEach(input => {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex > 0) {
-                        const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
-                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
+                        const label = fieldLabels[input.id] !== '' ? fieldLabels[input.id] : ''; // Use label from mapping or no label for name fields
+                        if (label) {
+                            reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
+                        } else {
+                            reviewContainer.innerHTML += `<p>${input.options[input.selectedIndex].text}</p>`;
+                        }
                     }
                 } else if (input.value.trim() !== "") {
-                    const label = fieldLabels[input.id] || input.name; // Use label from mapping or fallback to input name
-                    reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
+                    const label = fieldLabels[input.id] !== '' ? fieldLabels[input.id] : ''; // Use label from mapping or no label for name fields
+                    if (label) {
+                        reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
+                    } else {
+                        reviewContainer.innerHTML += `<p>${input.value}</p>`;
+                    }
                 }
             });
         }
