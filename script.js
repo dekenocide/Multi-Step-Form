@@ -198,7 +198,7 @@ function populateReviewStep() {
         '5-Guest-Arrangement': 'Guest Arrangement',
         '6-Guest-Arrangement': 'Guest Arrangement',
 
-        // Name Inputs (special handling with blank labels)
+        // Name Inputs (these should display only the value)
         'Name-Single': '',
         'Name-Single-1': '',
         'Name-Single-2': '',
@@ -361,16 +361,20 @@ function populateReviewStep() {
             inputs.forEach(input => {
                 const label = fieldLabels[input.id]; // Use label from mapping or fallback to input name
                 const showLabel = label !== undefined && label !== ''; // Check if label should be shown
+
+                // Only apply the label hiding logic to Name-Single and Name-Couple fields
+                const isNameField = input.id.startsWith('Name-Single') || input.id.startsWith('Name-Couple');
+                
                 if (input.type === 'select-one') {
                     if (input.selectedIndex > 0) {
-                        if (showLabel) {
+                        if (showLabel && !isNameField) {
                             reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.options[input.selectedIndex].text}</p>`;
                         } else {
                             reviewContainer.innerHTML += `<p>${input.options[input.selectedIndex].text}</p>`;
                         }
                     }
                 } else if (input.value.trim() !== "") {
-                    if (showLabel) {
+                    if (showLabel && !isNameField) {
                         reviewContainer.innerHTML += `<p><strong>${label}:</strong> ${input.value}</p>`;
                     } else {
                         reviewContainer.innerHTML += `<p>${input.value}</p>`;
