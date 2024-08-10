@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
             clearGroupBookingInfo(); // Clear the textarea in step-8
+            clearNameInputs(); // Clear the specific name input fields
         }
         if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
@@ -111,12 +112,32 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function clearNameInputs() {
+        const nameFields = [
+            'Name-Single', 
+            'Name-Single-1', 
+            'Name-Single-2', 
+            'Name-Single-3', 
+            'Name-Couple', 
+            'Name-Couple-1', 
+            'Name-Couple-2', 
+            'Name-Couple-3'
+        ];
+    
+        nameFields.forEach(function(id) {
+            const inputField = document.getElementById(id);
+            if (inputField) {
+                inputField.value = ''; // Clear the value of the input field
+                console.log(`Cleared input field: ${id}`);
+            }
+        });
+    }
+
+
     // Initial setup
     showStep(currentStep);
     console.log("Step navigation elements initialized");
 });
-
-// REVIEW STEP SCRIPT
 
 // REVIEW STEP SCRIPT
 
