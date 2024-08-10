@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
             clearGroupBookingInfo(); // Clear the textarea in step-8
-            clearNameInputs(); // Clear the specific name input fields
+            clearNameInputs(); // Clear the specific name input fields and placeholders
         }
         if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
@@ -102,14 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function getPrevStep(current) {
         return hierarchicalSteps[current]?.prev || current;
-    }
-
-    function clearGroupBookingInfo() {
-        const groupBookingInfoField = document.getElementById('Group-Booking-Info');
-        if (groupBookingInfoField) {
-            groupBookingInfoField.value = '';
-            console.log('Group-Booking-Info field cleared');
-        }
     }
 
     // Dynamic placeholder for service select fields
@@ -132,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
             nameInput.addEventListener('input', function () {
                 const name = nameInput.value.trim();
                 if (name) {
-                    serviceSelect.options[0].text = Select service for ${name};
+                    serviceSelect.options[0].text = `Select service for ${name}`;
                 } else {
                     serviceSelect.options[0].text = 'Select service'; // Default placeholder if name is empty
                 }
@@ -363,7 +355,7 @@ function populateReviewStep() {
     }
 }
 
-// RESET CONDITIONALS SCRIPT
+// RESETS AND CLEARS SCRIPT
 
 function resetServiceConditionals() {
     const singleServiceFields = [
@@ -386,6 +378,7 @@ function resetServiceConditionals() {
             element.style.display = 'none';
             if (element.tagName === 'SELECT') {
                 element.selectedIndex = 0;
+                element.options[0].text = 'Select service'; // Reset placeholder text
             } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
                 element.value = '';
             }
@@ -398,6 +391,7 @@ function resetServiceConditionals() {
             element.style.display = 'none';
             if (element.tagName === 'SELECT') {
                 element.selectedIndex = 0;
+                element.options[0].text = 'Select service'; // Reset placeholder text
             } else if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
                 element.value = '';
             }
@@ -473,11 +467,23 @@ function clearNameInputs() {
 
     nameFields.forEach(id => {
         const inputField = document.getElementById(id);
+        const correspondingSelect = document.getElementById(inputsToSelects[id]);
         if (inputField) {
             inputField.value = ''; // Clear the value of the input field
+            if (correspondingSelect) {
+                correspondingSelect.options[0].text = 'Select service'; // Reset placeholder text in select field
+            }
             console.log(`Cleared input field: ${id}`);
         }
     });
+}
+
+function clearGroupBookingInfo() {
+    const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+    if (groupBookingInfoField) {
+        groupBookingInfoField.value = '';
+        console.log('Group-Booking-Info field cleared');
+    }
 }
 
 // REMOVE EMPTY FIELDS SCRIPT
