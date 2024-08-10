@@ -3,18 +3,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
 
-    // Global scope declaration for inputsToSelects
-    const inputsToSelects = {
-        'Name-Single': 'Service-Single',
-        'Name-Single-1': 'Service-Single-1',
-        'Name-Single-2': 'Service-Single-2',
-        'Name-Single-3': 'Service-Single-3',
-        'Name-Couple': 'Service-Couple',
-        'Name-Couple-1': 'Service-Couple-1',
-        'Name-Couple-2': 'Service-Couple-2',
-        'Name-Couple-3': 'Service-Couple-3'
-    };
-
     // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
@@ -98,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
             clearGroupBookingInfo(); // Clear the textarea in step-8
-            clearNameInputs(); // Clear the specific name input fields
+            clearNameInputsAndResetPlaceholders(); // Clear the specific name input fields and reset placeholders
         }
         if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
@@ -116,22 +104,38 @@ document.addEventListener('DOMContentLoaded', function () {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    // Dynamic placeholder for service select fields
-    Object.keys(inputsToSelects).forEach(nameId => {
-        const nameInput = document.getElementById(nameId);
-        const serviceSelect = document.getElementById(inputsToSelects[nameId]);
+    // Function to update the placeholder text for service selects based on name inputs
+    function updateServiceSelectPlaceholders() {
+        const inputsToSelects = {
+            'Name-Single': 'Service-Single',
+            'Name-Single-1': 'Service-Single-1',
+            'Name-Single-2': 'Service-Single-2',
+            'Name-Single-3': 'Service-Single-3',
+            'Name-Couple': 'Service-Couple',
+            'Name-Couple-1': 'Service-Couple-1',
+            'Name-Couple-2': 'Service-Couple-2',
+            'Name-Couple-3': 'Service-Couple-3'
+        };
 
-        if (nameInput && serviceSelect) {
-            nameInput.addEventListener('input', function () {
-                const name = nameInput.value.trim();
-                if (name) {
-                    serviceSelect.options[0].text = `Select service for ${name}`;
-                } else {
-                    serviceSelect.options[0].text = 'Select service'; // Default placeholder if name is empty
-                }
-            });
-        }
-    });
+        Object.keys(inputsToSelects).forEach(nameId => {
+            const nameInput = document.getElementById(nameId);
+            const serviceSelect = document.getElementById(inputsToSelects[nameId]);
+
+            if (nameInput && serviceSelect) {
+                nameInput.addEventListener('input', function () {
+                    const name = nameInput.value.trim();
+                    if (name) {
+                        serviceSelect.options[0].text = `Select service for ${name}`;
+                    } else {
+                        serviceSelect.options[0].text = 'Select service'; // Default placeholder if name is empty
+                    }
+                });
+            }
+        });
+    }
+
+    // Call the function to update service select placeholders
+    updateServiceSelectPlaceholders();
 
     // Initial setup
     showStep(currentStep);
@@ -139,6 +143,42 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // RESETS AND CLEARS SCRIPT
+
+function clearNameInputsAndResetPlaceholders() {
+    const inputsToSelects = {
+        'Name-Single': 'Service-Single',
+        'Name-Single-1': 'Service-Single-1',
+        'Name-Single-2': 'Service-Single-2',
+        'Name-Single-3': 'Service-Single-3',
+        'Name-Couple': 'Service-Couple',
+        'Name-Couple-1': 'Service-Couple-1',
+        'Name-Couple-2': 'Service-Couple-2',
+        'Name-Couple-3': 'Service-Couple-3'
+    };
+
+    const nameFields = Object.keys(inputsToSelects);
+
+    nameFields.forEach(id => {
+        const inputField = document.getElementById(id);
+        const serviceSelect = document.getElementById(inputsToSelects[id]);
+
+        if (inputField) {
+            inputField.value = ''; // Clear the value of the input field
+            if (serviceSelect) {
+                serviceSelect.options[0].text = 'Select service'; // Reset the placeholder
+            }
+            console.log(`Cleared input field and reset placeholder: ${id}`);
+        }
+    });
+}
+
+function clearGroupBookingInfo() {
+    const groupBookingInfoField = document.getElementById('Group-Booking-Info');
+    if (groupBookingInfoField) {
+        groupBookingInfoField.value = '';
+        console.log('Group-Booking-Info field cleared');
+    }
+}
 
 function resetServiceConditionals() {
     const singleServiceFields = [
@@ -152,7 +192,7 @@ function resetServiceConditionals() {
         'Service-Couple', 'Package-Couple', 'Spa-Del-Sol-Dream-Info-Couple', 'Other-Packages-Info-Couple', 'Massage-Couple', 'Duration-A-Couple', 'Duration-B-Couple', 'Prenatal-Massage-Couple', 'Combination-Selects-Wrapper-Couple', 'Different-Massages-Selects-Wrapper-Couple', 'Duration-A-Guest-1-And-2-Couple', 'Facial-Selects-Wrapper-Couple', 'Facial-Add-On-Guest-1-Couple', 'Facial-Add-On-Guest-2-Couple', 'Body-Treatments-Selects-Wrapper-Couple', 'Other-Services-Info-Couple',
         'Service-Couple-1', 'Package-Couple-1', 'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Massage-Couple-1', 'Duration-A-Couple-1', 'Duration-B-Couple-1', 'Prenatal-Massage-Couple-1', 'Combination-Selects-Wrapper-Couple-1', 'Different-Massages-Selects-Wrapper-Couple-1', 'Duration-A-Guest-1-And-2-Couple-1', 'Facial-Selects-Wrapper-Couple-1', 'Facial-Add-On-Guest-1-Couple-1', 'Facial-Add-On-Guest-2-Couple-1', 'Body-Treatment-Guest-1-Couple-1', 'Body-Treatment-Guest-2-Couple-1', 'Other-Services-Info-Couple-1',
         'Service-Couple-2', 'Package-Couple-2', 'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Massage-Couple-2', 'Duration-A-Couple-2', 'Duration-B-Couple-2', 'Prenatal-Massage-Couple-2', 'Combination-Selects-Wrapper-Couple-2', 'Different-Massages-Selects-Wrapper-Couple-2', 'Duration-A-Guest-1-And-2-Couple-2', 'Facial-Selects-Wrapper-Couple-2', 'Facial-Add-On-Guest-1-Couple-2', 'Facial-Add-On-Guest-2-Couple-2', 'Body-Treatment-Guest-1-Couple-2', 'Body-Treatment-Guest-2-Couple-2', 'Other-Services-Info-Couple-2',
-        'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Info-Couple-3',
+        'Service-Couple-3', 'Package-Couple-3', 'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Massage-Couple-3', 'Duration-A-Couple-3', 'Duration-B-Couple-3', 'Prenatal-Massage-Couple-3', 'Combination-Selects-Wrapper-Couple-3', 'Different-Massages-Selects-Wrapper-Couple-3', 'Duration-A-Guest-1-And-2-Couple-3', 'Facial-Selects-Wrapper-Couple-3', 'Facial-Add-On-Guest-1-Couple-3', 'Facial-Add-On-Guest-2-Couple-3', 'Body-Treatment-Guest-1-Couple-3', 'Body-Treatment-Guest-2-Couple-3', 'Other-Services-Info-Couple-3'
     ];
 
     singleServiceFields.forEach(id => {
@@ -232,40 +272,6 @@ function resetGuestArrangements() {
     hideAllGuestArrangements();
 
     console.log('Guest arrangements reset');
-}
-
-function clearNameInputs() {
-    const nameFields = [
-        'Name-Single', 
-        'Name-Single-1', 
-        'Name-Single-2', 
-        'Name-Single-3', 
-        'Name-Couple', 
-        'Name-Couple-1', 
-        'Name-Couple-2', 
-        'Name-Couple-3'
-    ];
-
-    nameFields.forEach(id => {
-        const inputField = document.getElementById(id);
-        const serviceSelect = document.getElementById(inputsToSelects[id]); // Access global inputsToSelects
-
-        if (inputField) {
-            inputField.value = ''; // Clear the value of the input field
-            if (serviceSelect) {
-                serviceSelect.options[0].text = 'Select service'; // Reset the placeholder
-            }
-            console.log(`Cleared input field: ${id}`);
-        }
-    });
-}
-
-function clearGroupBookingInfo() {
-    const groupBookingInfoField = document.getElementById('Group-Booking-Info');
-    if (groupBookingInfoField) {
-        groupBookingInfoField.value = '';
-        console.log('Group-Booking-Info field cleared');
-    }
 }
 
 // REVIEW STEP SCRIPT
