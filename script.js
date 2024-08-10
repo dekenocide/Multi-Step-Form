@@ -197,6 +197,16 @@ function populateReviewStep() {
         '4-Guest-Arrangement': 'Guest Arrangement',
         '5-Guest-Arrangement': 'Guest Arrangement',
         '6-Guest-Arrangement': 'Guest Arrangement',
+
+        // Name Inputs
+        'Name-Single': '',
+        'Name-Single-1': '',
+        'Name-Single-2': '',
+        'Name-Single-3': '',
+        'Name-Couple': '',
+        'Name-Couple-1': '',
+        'Name-Couple-2': '',
+        'Name-Couple-3': '',
     
         // Single Service Details
         'Service-Single': 'Service',
