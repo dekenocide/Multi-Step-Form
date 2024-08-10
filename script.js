@@ -86,9 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentStep === 'step-8') {
             resetServiceConditionals();
             clearGroupBookingInfo(); // Clear the textarea in step-8
-            clearNameInputs(); // Clear the specific name input fields and placeholders
-        }
-        if (currentStep === 'step-7') {
+            clearNameInputs(); // Clear the specific name input fields
+        } else if (currentStep === 'step-7') {
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
