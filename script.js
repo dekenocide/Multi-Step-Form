@@ -288,38 +288,45 @@ function populateReviewStep() {
     const reviewRows = document.querySelectorAll('.review-row');
     
     reviewRows.forEach(row => {
-        const dataValueId = row.querySelector('.review-value').getAttribute('data-value-id');
-        const ids = dataValueId.split(',');
+        const valueDiv = row.querySelector('.review-value');
+        const dataValueId = valueDiv ? valueDiv.getAttribute('data-value-id') : null;
 
-        let combinedValue = '';
-        
-        ids.forEach(id => {
-            const inputElement = document.getElementById(id.trim());
+        if (dataValueId) {
+            const ids = dataValueId.split(',');
 
-            if (inputElement) {
-                let value = '';
+            let combinedValue = '';
+            
+            ids.forEach(id => {
+                const inputElement = document.getElementById(id.trim());
 
-                if (inputElement.tagName === 'SELECT' && inputElement.selectedIndex > 0) {
-                    value = inputElement.options[inputElement.selectedIndex].text;
-                } else if (inputElement.tagName === 'INPUT' || inputElement.tagName === 'TEXTAREA') {
-                    value = inputElement.value.trim();
+                if (inputElement) {
+                    let value = '';
+
+                    if (inputElement.tagName === 'SELECT' && inputElement.selectedIndex > 0) {
+                        value = inputElement.options[inputElement.selectedIndex].text;
+                    } else if (inputElement.tagName === 'INPUT' || inputElement.tagName === 'TEXTAREA') {
+                        value = inputElement.value.trim();
+                    }
+
+                    if (value) {
+                        combinedValue += value + ' '; // Combine values, separate with a space or comma as needed
+                    }
+                } else {
+                    console.log(`Input element not found for ${id}`);
                 }
+            });
 
-                if (value) {
-                    combinedValue += value + ' '; // Combine values, separate with a space or comma as needed
-                }
+            if (combinedValue.trim()) {
+                console.log(`Setting combined value for ${dataValueId}: ${combinedValue.trim()}`);
+                valueDiv.innerText = combinedValue.trim();
+                row.style.display = 'flex'; // Ensure the row is displayed
             } else {
-                console.log(`Input element not found for ${id}`);
+                console.log(`No value found for any of the IDs in ${dataValueId}, hiding field`);
+                row.style.display = 'none'; // Hide the row if no values are found
             }
-        });
-
-        if (combinedValue.trim()) {
-            console.log(`Setting combined value for ${dataValueId}: ${combinedValue.trim()}`);
-            row.querySelector('.review-value').innerText = combinedValue.trim();
-            row.style.display = 'flex'; // Ensure the row is displayed
         } else {
-            console.log(`No value found for any of the IDs in ${dataValueId}, hiding field`);
-            row.style.display = 'none'; // Hide the row if no values are found
+            console.log("No data-value-id attribute found, hiding field");
+            row.style.display = 'none'; // Hide the row if the data-value-id attribute is not found
         }
     });
 }
