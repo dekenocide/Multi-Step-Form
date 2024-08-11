@@ -8,12 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
         'step-3': document.getElementById('step-3'),
-        'step-4': document.getElementById('step-4'),
-        'step-5': document.getElementById('step-5'),
-        'step-6': document.getElementById('step-6'),
-        'step-7': document.getElementById('step-7'),
-        'step-8': document.getElementById('step-8'),
-        'step-9': document.getElementById('step-9'), // review step
+        'step-4': document.getElementById('step-4'), // review step
     };
 
     const nextBtn = document.getElementById('next-button');
@@ -27,12 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-1': { next: 'step-2' },
         'step-2': { next: 'step-3', prev: 'step-1' },
         'step-3': { next: 'step-4', prev: 'step-2' },
-        'step-4': { next: 'step-5', prev: 'step-3' },
-        'step-5': { next: 'step-6', prev: 'step-4' },
-        'step-6': { next: 'step-7', prev: 'step-5' },
-        'step-7': { next: 'step-8', prev: 'step-6' },
-        'step-8': { next: 'step-9', prev: 'step-7' }, 
-        'step-9': { prev: 'step-8' },
+        'step-4': { prev: 'step-3' },
     };
 
     function showStep(step) {
@@ -40,18 +30,18 @@ document.addEventListener('DOMContentLoaded', function () {
             steps[key].style.display = key === step ? 'block' : 'none';
         });
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
-        nextBtn.style.display = step === 'step-9' ? 'none' : 'inline-block';
-        submitBtn.style.display = step === 'step-9' ? 'inline-block' : 'none';
+        nextBtn.style.display = step === 'step-4' ? 'none' : 'inline-block';
+        submitBtn.style.display = step === 'step-4' ? 'inline-block' : 'none';
 
         // Show or hide recaptcha-container based on the step
-        if (step === 'step-9') {
+        if (step === 'step-4') {
             recaptchaContainer.style.display = 'flex';
         } else {
             recaptchaContainer.style.display = 'none';
         }
 
         // Populate review fields if on step-9
-        if (step === 'step-9') {
+        if (step === 'step-4') {
             populateReviewStep();
         }
     }
@@ -83,12 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     prevBtn.addEventListener('click', function () {
-        if (currentStep === 'step-8') {
+        if (currentStep === 'step-3') {
             resetServiceConditionals();
-            clearGroupBookingInfo(); // Clear the textarea in step-8
+            clearGroupBookingInfo(); // Clear the textarea in step-3
             clearNameInputsAndResetPlaceholders(); // Clear the specific name input fields and reset placeholders
         }
-        if (currentStep === 'step-7') {
+        if (currentStep === 'step-2') {
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
@@ -335,52 +325,7 @@ const steps = {
     'step-1': document.getElementById('step-1'),
     'step-2': document.getElementById('step-2'),
     'step-3': document.getElementById('step-3'),
-    'step-4': document.getElementById('step-4'),
-    'step-5': document.getElementById('step-5'),
-    'step-6': document.getElementById('step-6'),
-    'step-7': document.getElementById('step-7'),
-    'step-8': document.getElementById('step-8'),
-    'step-9': document.getElementById('step-9'), // review step
-};
-
-// Mapping object for user-friendly field labels
-const fieldLabels = {
-
-    // Single Service Details
-    'Service-Single': 'Service',
-    'Package-Single': 'Package',
-    'Spa-Del-Sol-Dream-Info-Single': 'Spa del Sol Dream Package',
-    'Massage-Single': 'Massage',
-    'Duration-A-Single': 'Duration',
-    'Duration-B-Single': 'Duration',
-    'Combination-Single': 'Combination',
-    'Facial-Single': 'Facial',
-    'Add-On-Single': 'Add-On',
-    'Body-Treatment-Single': 'Body Treatment',
-    'Wax-Info-Single': 'Wax Info',
-    'Multiple-Services-Info-Single': 'Multiple Services Info',
-
-    // Couple Service Details
-    'Service-Couple': 'Service',
-    'Package-Couple': 'Package',
-    'Spa-Del-Sol-Dream-Info-Couple': 'Spa del Sol Dream Package',
-    'Other-Packages-Info-Couple': 'Other Packages Info',
-    'Massage-Couple': 'Massage',
-    'Duration-A-Couple': 'Duration',
-    'Duration-B-Couple': 'Duration',
-    'Prenatal-Massage-Couple': "Partner's Massage",
-    'Facial-Guest-1-Couple': 'Facial (Guest 1)',
-    'Facial-Guest-2-Couple': 'Facial (Guest 2)',
-    'Add-On-Guest-1-Couple': 'Add-On (Guest 1)',
-    'Add-On-Guest-2-Couple': 'Add-On (Guest 2)',
-    'Body-Treatment-Guest-1-Couple': 'Body Treatment (Guest 1)',
-    'Body-Treatment-Guest-2-Couple': 'Body Treatment (Guest 2)',
-    'Other-Services-Info-Couple': 'Other Services Info',
-    'Combination-Guest-1-Couple': 'Combination (Guest 1)',
-    'Combination-Guest-2-Couple': 'Combination (Guest 2)',
-    'Massage-Guest-1-Couple': 'Massage (Guest 1)',
-    'Massage-Guest-2-Couple': 'Massage (Guest 2)',
-    'Duration-A-Guest-1-And-2-Couple': 'Duration (Guests 1 & 2)',
+    'step-4': document.getElementById('step-4'), // review step
 };
 
 // REMOVE EMPTY FIELDS SCRIPT
