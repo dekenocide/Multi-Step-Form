@@ -96,70 +96,70 @@ document.addEventListener('DOMContentLoaded', function () {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    // Function to update the placeholder text for service selects based on name inputs
-    function updateServiceSelectPlaceholders() {
-        const inputsToSelects = {
-            'Name-Single': 'Service-Single',
-            'Name-Single-1': 'Service-Single-1',
-            'Name-Single-2': 'Service-Single-2',
-            'Name-Single-3': 'Service-Single-3',
-            'Name-Couple': 'Service-Couple',
-            'Name-Couple-1': 'Service-Couple-1',
-            'Name-Couple-2': 'Service-Couple-2',
-            'Name-Couple-3': 'Service-Couple-3'
-        };
+    // Function to update the label text for services based on name inputs
+function updateServiceLabels() {
+    const inputsToLabels = {
+        'Name-Single': 'Label-SS-Single',
+        'Name-Single-1': 'Label-SS-Single-1',
+        'Name-Single-2': 'Label-SS-Single-2',
+        'Name-Single-3': 'Label-SS-Single-3',
+        'Name-Couple': 'Label-SS-Couple',
+        'Name-Couple-1': 'Label-SS-Couple-1',
+        'Name-Couple-2': 'Label-SS-Couple-2',
+        'Name-Couple-3': 'Label-SS-Couple-3'
+    };
 
-        Object.keys(inputsToSelects).forEach(nameId => {
-            const nameInput = document.getElementById(nameId);
-            const serviceSelect = document.getElementById(inputsToSelects[nameId]);
+    Object.keys(inputsToLabels).forEach(nameId => {
+        const nameInput = document.getElementById(nameId);
+        const serviceLabel = document.getElementById(inputsToLabels[nameId]);
 
-            if (nameInput && serviceSelect) {
-                nameInput.addEventListener('input', function () {
-                    const name = nameInput.value.trim();
-                    if (name) {
-                        serviceSelect.options[0].text = `Select service for ${name}`;
-                    } else {
-                        serviceSelect.options[0].text = 'Select service'; // Default placeholder if name is empty
-                    }
-                });
-            }
-        });
-    }
+        if (nameInput && serviceLabel) {
+            nameInput.addEventListener('input', function () {
+                const name = nameInput.value.trim();
+                if (name) {
+                    serviceLabel.innerText = `Select service for ${name}`;
+                } else {
+                    serviceLabel.innerText = 'Select service'; // Default label if name is empty
+                }
+            });
+        }
+    });
+}
 
-    // Call the function to update service select placeholders
-    updateServiceSelectPlaceholders();
+// Call the function to update service labels
+updateServiceLabels();
 
-    // Initial setup
-    showStep(currentStep);
-    console.log("Step navigation elements initialized");
+// Initial setup
+showStep(currentStep);
+console.log("Step navigation elements initialized");
 });
 
 // RESETS AND CLEARS SCRIPT
 
-function clearNameInputsAndResetPlaceholders() {
-    const inputsToSelects = {
-        'Name-Single': 'Service-Single',
-        'Name-Single-1': 'Service-Single-1',
-        'Name-Single-2': 'Service-Single-2',
-        'Name-Single-3': 'Service-Single-3',
-        'Name-Couple': 'Service-Couple',
-        'Name-Couple-1': 'Service-Couple-1',
-        'Name-Couple-2': 'Service-Couple-2',
-        'Name-Couple-3': 'Service-Couple-3'
+function clearNameInputsAndResetLabels() {
+    const inputsToLabels = {
+        'Name-Single': 'Label-SS-Single',
+        'Name-Single-1': 'Label-SS-Single-1',
+        'Name-Single-2': 'Label-SS-Single-2',
+        'Name-Single-3': 'Label-SS-Single-3',
+        'Name-Couple': 'Label-SS-Couple',
+        'Name-Couple-1': 'Label-SS-Couple-1',
+        'Name-Couple-2': 'Label-SS-Couple-2',
+        'Name-Couple-3': 'Label-SS-Couple-3'
     };
 
-    const nameFields = Object.keys(inputsToSelects);
+    const nameFields = Object.keys(inputsToLabels);
 
     nameFields.forEach(id => {
         const inputField = document.getElementById(id);
-        const serviceSelect = document.getElementById(inputsToSelects[id]);
+        const serviceLabel = document.getElementById(inputsToLabels[id]);
 
         if (inputField) {
             inputField.value = ''; // Clear the value of the input field
-            if (serviceSelect) {
-                serviceSelect.options[0].text = 'Select service'; // Reset the placeholder
+            if (serviceLabel) {
+                serviceLabel.innerText = 'Select service'; // Reset the label text
             }
-            console.log(`Cleared input field and reset placeholder: ${id}`);
+            console.log(`Cleared input field and reset label: ${id}`);
         }
     });
 }
