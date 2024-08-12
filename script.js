@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
         'step-3': document.getElementById('step-3'),
-        'step-4': document.getElementById('step-4'), // review step
+        'step-4': document.getElementById('step-4'),
+        'step-5': document.getElementById('step-5'), // review step
     };
 
     const nextBtn = document.getElementById('next-button');
@@ -22,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-1': { next: 'step-2' },
         'step-2': { next: 'step-3', prev: 'step-1' },
         'step-3': { next: 'step-4', prev: 'step-2' },
-        'step-4': { prev: 'step-3' },
+        'step-4': { next: 'step-5', prev: 'step-3' },
+        'step-5': { prev: 'step-4' },
     };
 
     function showStep(step) {
@@ -30,18 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
             steps[key].style.display = key === step ? 'block' : 'none';
         });
         prevBtn.style.display = step === 'step-1' ? 'none' : 'inline-block';
-        nextBtn.style.display = step === 'step-4' ? 'none' : 'inline-block';
-        submitBtn.style.display = step === 'step-4' ? 'inline-block' : 'none';
+        nextBtn.style.display = step === 'step-5' ? 'none' : 'inline-block';
+        submitBtn.style.display = step === 'step-5' ? 'inline-block' : 'none';
 
         // Show or hide recaptcha-container based on the step
-        if (step === 'step-4') {
+        if (step === 'step-5') {
             recaptchaContainer.style.display = 'flex';
         } else {
             recaptchaContainer.style.display = 'none';
         }
 
-        // Populate review fields if on step-9
-        if (step === 'step-4') {
+        // Populate review fields if on step-5
+        if (step === 'step-5') {
             populateReviewStep();
         }
     }
@@ -73,12 +75,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     prevBtn.addEventListener('click', function () {
-        if (currentStep === 'step-3') {
+        if (currentStep === 'step-4') {
             resetServiceConditionals();
-            clearGroupBookingInfo(); // Clear the textarea in step-3
+            clearGroupBookingInfo(); // Clear the textarea in step-4
             clearNameInputsAndResetPlaceholders(); // Clear the specific name input fields and reset placeholders
         }
-        if (currentStep === 'step-2') {
+        if (currentStep === 'step-3') {
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
@@ -325,7 +327,8 @@ const steps = {
     'step-1': document.getElementById('step-1'),
     'step-2': document.getElementById('step-2'),
     'step-3': document.getElementById('step-3'),
-    'step-4': document.getElementById('step-4'), // review step
+    'step-4': document.getElementById('step-4'),
+    'step-5': document.getElementById('step-5'), // review step
 };
 
 // REMOVE EMPTY FIELDS SCRIPT
