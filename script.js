@@ -117,7 +117,7 @@ function updateServiceLabels() {
             nameInput.addEventListener('input', function () {
                 const name = nameInput.value.trim();
                 if (name) {
-                    serviceLabel.innerText = `Select service for ${name}`;
+                    serviceLabel.innerText = `Service for ${name}`;
                 } else {
                     serviceLabel.innerText = 'Select service'; // Default label if name is empty
                 }
