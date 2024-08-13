@@ -530,6 +530,11 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const numberOfGuests = document.getElementById('Number-of-Guests');
     const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
+    const guestArrangementLabel2 = document.getElementById('2-Guest-Arrangement-Label');
+    const guestArrangementLabel3 = document.getElementById('3-Guest-Arrangement-Label');
+    const guestArrangementLabel4 = document.getElementById('4-Guest-Arrangement-Label');
+    const guestArrangementLabel5 = document.getElementById('5-Guest-Arrangement-Label');
+    const guestArrangementLabel6 = document.getElementById('6-Guest-Arrangement-Label');
     const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
@@ -538,6 +543,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function hideAllGuestArrangements() {
         guestArrangementLabel.style.display = 'none';
+        guestArrangementLabel2.style.display = 'none';
+        guestArrangementLabel3.style.display = 'none';
+        guestArrangementLabel4.style.display = 'none';
+        guestArrangementLabel5.style.display = 'none';
+        guestArrangementLabel6.style.display = 'none';
         guestArrangement2.style.display = 'none';
         guestArrangement3.style.display = 'none';
         guestArrangement4.style.display = 'none';
@@ -574,18 +584,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const numberOfGuestsValue = numberOfGuests.value;
         if (numberOfGuestsValue === '2') {
             guestArrangementLabel.style.display = 'block';
+            guestArrangementLabel2.style.display = 'block';
             guestArrangement2.style.display = 'block';
         } else if (numberOfGuestsValue === '3') {
             guestArrangementLabel.style.display = 'block';
+            guestArrangementLabel3.style.display = 'block';
             guestArrangement3.style.display = 'block';
         } else if (numberOfGuestsValue === '4') {
             guestArrangementLabel.style.display = 'block';
+            guestArrangementLabel4.style.display = 'block';
             guestArrangement4.style.display = 'block';
         } else if (numberOfGuestsValue === '5') {
             guestArrangementLabel.style.display = 'block';
+            guestArrangementLabel5.style.display = 'block';
             guestArrangement5.style.display = 'block';
         } else if (numberOfGuestsValue === '6') {
             guestArrangementLabel.style.display = 'block';
+            guestArrangementLabel6.style.display = 'block';
             guestArrangement6.style.display = 'block';
         }
     }
