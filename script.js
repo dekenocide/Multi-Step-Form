@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nameCoupleInput.addEventListener('input', function() {
         if (nameCoupleInput.value.trim() !== "") {
-            coupleLabel.innerText = 'Couple Service';
+            coupleLabel.innerText = 'Couple Names';
         } else {
             coupleLabel.innerText = originalLabelText;
         }
