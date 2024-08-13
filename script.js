@@ -159,7 +159,6 @@ function clearNameInputsAndResetLabels() {
             if (serviceLabel) {
                 serviceLabel.innerText = 'Select service'; // Reset the label text
             }
-            console.log(`Cleared input field and reset label: ${id}`);
         }
     });
 }
