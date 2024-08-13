@@ -119,7 +119,7 @@ function updateServiceLabels() {
                 if (name) {
                     serviceLabel.innerText = `Service for ${name}`;
                 } else {
-                    serviceLabel.innerText = 'Select service'; // Default label if name is empty
+                    serviceLabel.innerText = 'Service'; // Default label if name is empty
                 }
             });
         }
