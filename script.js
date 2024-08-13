@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
             resetServiceConditionals();
             clearGroupBookingInfo(); // Clear the textarea in step-4
             clearNameInputsAndResetLabels(); // Clear the specific name input fields and reset placeholders
+            revertLabelToOriginal();
         }
         if (currentStep === 'step-3') {
             resetNumberOfGuestsField();
@@ -168,6 +169,16 @@ function clearGroupBookingInfo() {
     if (groupBookingInfoField) {
         groupBookingInfoField.value = '';
         console.log('Group-Booking-Info field cleared');
+    }
+}
+
+function revertLabelToOriginal() {
+    const nameCoupleInput = document.getElementById('Name-Couple');
+    const coupleLabel = document.getElementById('Label-Couple');
+    const originalLabelText = coupleLabel.getAttribute('data-original-text');
+
+    if (nameCoupleInput && coupleLabel) {
+        coupleLabel.innerText = originalLabelText || ''; // Revert to original or default text
     }
 }
 
