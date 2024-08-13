@@ -178,7 +178,7 @@ function revertLabelToOriginal() {
     const originalLabelText = coupleLabel.getAttribute('data-original-text');
 
     if (nameCoupleInput && coupleLabel) {
-        coupleLabel.innerText = originalLabelText || 'Select service'; // Revert to original or default text
+        coupleLabel.innerText = originalLabelText;
     }
 }
 
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nameCoupleInput.addEventListener('input', function() {
         if (nameCoupleInput.value.trim() !== "") {
-            coupleLabel.innerText = 'Couple Service';
+            coupleLabel.innerText = 'Couple Names';
         } else {
             coupleLabel.innerText = originalLabelText;
         }
