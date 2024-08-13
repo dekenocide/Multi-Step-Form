@@ -173,11 +173,10 @@ function clearGroupBookingInfo() {
 }
 
 function revertLabelToOriginal() {
-    const nameCoupleInput = document.getElementById('Name-Couple');
     const coupleLabel = document.getElementById('Label-Couple');
 
-    if (nameCoupleInput && coupleLabel) {
-        coupleLabel.innerText = originalLabelText;
+    if (coupleLabel) {
+        coupleLabel.innerText = originalLabelText; // Revert to the original label text when prevBtn is clicked
     }
 }
 
