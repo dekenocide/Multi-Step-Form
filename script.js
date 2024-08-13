@@ -175,7 +175,6 @@ function clearGroupBookingInfo() {
 function revertLabelToOriginal() {
     const nameCoupleInput = document.getElementById('Name-Couple');
     const coupleLabel = document.getElementById('Label-Couple');
-    const originalLabelText = coupleLabel.getAttribute('data-original-text');
 
     if (nameCoupleInput && coupleLabel) {
         coupleLabel.innerText = originalLabelText;
