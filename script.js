@@ -230,11 +230,11 @@ function resetNumberOfGuestsField() {
 
 function resetGuestArrangements() {
     const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
-    const guestArrangementLabel2 = document.getElementById('Guest-Arrangement-Label-2');
-    const guestArrangementLabel3 = document.getElementById('Guest-Arrangement-Label-3');
-    const guestArrangementLabel4 = document.getElementById('Guest-Arrangement-Label-4');
-    const guestArrangementLabel5 = document.getElementById('Guest-Arrangement-Label-5');
-    const guestArrangementLabel6 = document.getElementById('Guest-Arrangement-Label-6');
+    const guestArrangementLabel2 = document.getElementById('2-Guest-Arrangement-Label');
+    const guestArrangementLabel3 = document.getElementById('3-Guest-Arrangement-Label');
+    const guestArrangementLabel4 = document.getElementById('4-Guest-Arrangement-Label');
+    const guestArrangementLabel5 = document.getElementById('5-Guest-Arrangement-Label');
+    const guestArrangementLabel6 = document.getElementById('6-Guest-Arrangement-Label');
     const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
