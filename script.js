@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const originalLabelText = coupleLabel.innerText; // Store the original text
 
     nameCoupleInput.addEventListener('input', function() {
+        console.log('Input event triggered, current value:', nameCoupleInput.value);
         if (nameCoupleInput.value.trim() !== "") {
             coupleLabel.innerText = 'Couple Names';
         } else {
@@ -290,6 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
 // REVIEW STEP SCRIPT
 
