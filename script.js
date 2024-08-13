@@ -291,12 +291,13 @@ function resetGuestArrangements() {
 document.addEventListener('DOMContentLoaded', function() {
     const nameCoupleInput = document.getElementById('Name-Couple');
     const coupleLabel = document.getElementById('Label-Couple');
+    const originalLabelText = coupleLabel.innerText; // Store the original text
 
     nameCoupleInput.addEventListener('input', function() {
         if (nameCoupleInput.value.trim() !== "") {
-            coupleLabel.innerText = 'Couple Names'; // Change label text when there's input
+            coupleLabel.innerText = 'Couple Service';
         } else {
-            coupleLabel.innerText = coupleLabel.defaultText || coupleLabel.getAttribute('data-original-text'); // Revert to the original label text
+            coupleLabel.innerText = originalLabelText;
         }
     });
 });
