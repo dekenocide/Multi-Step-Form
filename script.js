@@ -230,6 +230,11 @@ function resetNumberOfGuestsField() {
 
 function resetGuestArrangements() {
     const guestArrangementLabel = document.getElementById('Guest-Arrangement-Label');
+    const guestArrangementLabel2 = document.getElementById('Guest-Arrangement-Label-2');
+    const guestArrangementLabel3 = document.getElementById('Guest-Arrangement-Label-3');
+    const guestArrangementLabel4 = document.getElementById('Guest-Arrangement-Label-4');
+    const guestArrangementLabel5 = document.getElementById('Guest-Arrangement-Label-5');
+    const guestArrangementLabel6 = document.getElementById('Guest-Arrangement-Label-6');
     const guestArrangement2 = document.getElementById('2-Guest-Arrangement');
     const guestArrangement3 = document.getElementById('3-Guest-Arrangement');
     const guestArrangement4 = document.getElementById('4-Guest-Arrangement');
@@ -238,6 +243,11 @@ function resetGuestArrangements() {
 
     function hideAllGuestArrangements() {
         guestArrangementLabel.style.display = 'none';
+        guestArrangementLabel2.style.display = 'none';
+        guestArrangementLabel3.style.display = 'none';
+        guestArrangementLabel4.style.display = 'none';
+        guestArrangementLabel5.style.display = 'none';
+        guestArrangementLabel6.style.display = 'none';
         guestArrangement2.style.display = 'none';
         guestArrangement3.style.display = 'none';
         guestArrangement4.style.display = 'none';
