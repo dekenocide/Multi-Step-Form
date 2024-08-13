@@ -172,14 +172,6 @@ function clearGroupBookingInfo() {
     }
 }
 
-function revertLabelToOriginal() {
-    const coupleLabel = document.getElementById('Label-Couple');
-
-    if (coupleLabel) {
-        coupleLabel.innerText = originalLabelText; // Revert to the original label text when prevBtn is clicked
-    }
-}
-
 function resetServiceConditionals() {
     const singleServiceFields = [
         'Service-Single', 'Package-Single', 'Spa-Del-Sol-Dream-Info-Single', 'Massage-Single', 'Duration-A-Single', 'Duration-B-Single', 'Combination-Single', 'Facial-Single', 'Add-On-Single', 'Body-Treatment-Single', 'Wax-Info-Single', 'Multiple-Services-Info-Single',
@@ -286,19 +278,31 @@ function resetGuestArrangements() {
 
 // NAME INPUT LABEL CHANGE
 
+let originalLabelText; // Declare in a higher scope
+
 document.addEventListener('DOMContentLoaded', function() {
     const nameCoupleInput = document.getElementById('Name-Couple');
     const coupleLabel = document.getElementById('Label-Couple');
-    const originalLabelText = coupleLabel.innerText; // Store the original text
+
+    // Store the original label text in the higher scope variable
+    originalLabelText = coupleLabel.innerText;
 
     nameCoupleInput.addEventListener('input', function() {
         if (nameCoupleInput.value.trim() !== "") {
-            coupleLabel.innerText = 'Couple Names';
+            coupleLabel.innerText = 'Couple Service';
         } else {
-            coupleLabel.innerText = originalLabelText;
+            coupleLabel.innerText = originalLabelText; // Revert to the original text if input is cleared
         }
     });
 });
+
+function revertLabelToOriginal() {
+    const coupleLabel = document.getElementById('Label-Couple');
+
+    if (coupleLabel) {
+        coupleLabel.innerText = originalLabelText; // Revert to the original label text when prevBtn is clicked
+    }
+}
 
 // REVIEW STEP SCRIPT
 
