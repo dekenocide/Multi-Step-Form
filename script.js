@@ -275,6 +275,22 @@ function resetGuestArrangements() {
     console.log('Guest arrangements reset');
 }
 
+// NAME INPUT LABEL CHANGE
+
+document.addEventListener('DOMContentLoaded', function() {
+    const nameCoupleInput = document.getElementById('Name-Couple');
+    const coupleLabel = document.getElementById('Label-Couple');
+    const originalLabelText = coupleLabel.innerText; // Store the original text
+
+    nameCoupleInput.addEventListener('input', function() {
+        if (nameCoupleInput.value.trim() !== "") {
+            coupleLabel.innerText = 'Couple Service';
+        } else {
+            coupleLabel.innerText = originalLabelText;
+        }
+    });
+});
+
 // REVIEW STEP SCRIPT
 
 document.addEventListener('DOMContentLoaded', function () {
