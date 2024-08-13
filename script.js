@@ -308,15 +308,12 @@ function populateReviewStep() {
             });
 
             if (combinedValue.trim()) {
-                console.log(`Setting combined value for ${dataValueId}: ${combinedValue.trim()}`);
                 valueDiv.innerText = combinedValue.trim();
                 row.style.display = 'flex'; // Ensure the row is displayed
             } else {
-                console.log(`No value found for any of the IDs in ${dataValueId}, hiding field`);
                 row.style.display = 'none'; // Hide the row if no values are found
             }
         } else {
-            console.log("No data-value-id attribute found, hiding field");
             row.style.display = 'none'; // Hide the row if the data-value-id attribute is not found
         }
     });
