@@ -172,15 +172,18 @@ function clearGroupBookingInfo() {
     }
 }
 
-function revertLabelToOriginal() {
+document.addEventListener('DOMContentLoaded', function() {
     const nameCoupleInput = document.getElementById('Name-Couple');
     const coupleLabel = document.getElementById('Label-Couple');
-    const originalLabelText = coupleLabel.getAttribute('data-original-text');
 
-    if (nameCoupleInput && coupleLabel) {
-        coupleLabel.innerText = originalLabelText || ''; // Revert to original or default text
-    }
-}
+    nameCoupleInput.addEventListener('input', function() {
+        if (nameCoupleInput.value.trim() !== "") {
+            coupleLabel.innerText = 'Couple Names'; // Change label text when there's input
+        } else {
+            coupleLabel.innerText = coupleLabel.defaultText || coupleLabel.getAttribute('data-original-text'); // Revert to the original label text
+        }
+    });
+});
 
 function resetServiceConditionals() {
     const singleServiceFields = [
