@@ -217,7 +217,6 @@ function resetServiceConditionals() {
             }
         }
     });
-}
 
     document.getElementById('Service-Single').style.display = 'flex';
     document.getElementById('Service-Couple').style.display = 'flex';
