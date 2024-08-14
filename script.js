@@ -728,7 +728,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const durationAGuest1And2CoupleLabel = document.getElementById('Duration-A-Guest-1-And-2-Couple-Label');
     const facialSelectsWrapperCouple = document.getElementById('Facial-Selects-Wrapper-Couple');
     const facialGuest1CoupleLabel = document.getElementById ('Facial-Guest-1-Couple-Label');
-    const facialGuest2CoupleLabel = document.getElementById ('Facial-Guest-1-Couple-Label');
+    const facialGuest2CoupleLabel = document.getElementById ('Facial-Guest-2-Couple-Label');
     const facialAddOnGuest1Couple = document.getElementById('Facial-Add-On-Guest-1-Couple');
     const facialAddOnGuest1CoupleLabel = document.getElementById('Facial-Add-On-Guest-1-Couple-Label');
     const facialAddOnGuest2Couple = document.getElementById('Facial-Add-On-Guest-2-Couple');
@@ -1324,8 +1324,6 @@ document.addEventListener('DOMContentLoaded', function() {
             facialSelectsWrapperCouple2.style.display = 'grid';
             facialGuest1CoupleLabel2.style.display = 'block';
             facialGuest2CoupleLabel2.style.display = 'block';
-            facialAddOnGuest1CoupleLabel2.style.display = 'block';
-            facialAddOnGuest2CoupleLabel2.style.display = 'block';
         } else if (coupleServiceValue2 === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple2.style.display = 'grid';
             bodyTreatmentGuest1CoupleLabel2.style.display = 'block';
@@ -1556,8 +1554,6 @@ document.addEventListener('DOMContentLoaded', function() {
             facialSelectsWrapperCouple3.style.display = 'grid';
             facialGuest1CoupleLabel3.style.display = 'block';
             facialGuest2CoupleLabel3.style.display = 'block';
-            facialAddOnGuest1CoupleLabel3.style.display = 'block';
-            facialAddOnGuest2CoupleLabel3.style.display = 'block';
         } else if (coupleServiceValue3 === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple3.style.display = 'grid';
             bodyTreatmentGuest1CoupleLabel3.style.display = 'block';
