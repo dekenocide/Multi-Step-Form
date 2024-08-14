@@ -862,8 +862,6 @@ document.addEventListener('DOMContentLoaded', function() {
             facialSelectsWrapperCouple.style.display = 'grid';
             facialGuest1CoupleLabel.style.display = 'block';
             facialGuest2CoupleLabel.style.display = 'block';
-            facialAddOnGuest1CoupleLabel.style.display = 'block';
-            facialAddOnGuest2CoupleLabel.style.display = 'block';
         } else if (coupleServiceValue === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple.style.display = 'grid';
             bodyTreatmentGuest1CoupleLabel.style.display = 'block';
