@@ -1598,20 +1598,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const coupleServiceValue = coupleService.value;
         if (coupleServiceValue === 'Package') {
             couplePackage.style.display = 'block';
-            couplePackageLabel.style.display = 'block';
+            couplePackageLabel.style.display = 'block'; // Show the label
         } else if (coupleServiceValue === 'Massage') {
             coupleMassage.style.display = 'block';
-            coupleMassageLabel.style.display = 'block';
+            coupleMassageLabel.style.display = 'block'; // Show the label
         } else if (coupleServiceValue === 'Facial') {
             facialSelectsWrapperCouple.style.display = 'grid';
-            facialGuest1CoupleLabel.style.display = 'block';
-            facialGuest2CoupleLabel.style.display = 'block';
-            facialAddOnGuest1CoupleLabel.style.display = 'block';
-            facialAddOnGuest2CoupleLabel.style.display = 'block';
+            facialGuest1CoupleLabel.style.display = 'block'; // Show the label
+            facialGuest2CoupleLabel.style.display = 'block'; // Show the label
+            facialAddOnGuest1CoupleLabel.style.display = 'block'; // Show the label
+            facialAddOnGuest2CoupleLabel.style.display = 'block'; // Show the label
         } else if (coupleServiceValue === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple.style.display = 'grid';
-            bodyTreatmentGuest1CoupleLabel.style.display = 'block';
-            bodyTreatmentGuest2CoupleLabel.style.display = 'block';
+            bodyTreatmentGuest1CoupleLabel.style.display = 'block'; // Show the label
+            bodyTreatmentGuest2CoupleLabel.style.display = 'block'; // Show the label
         } else if (coupleServiceValue === 'Other') {
             otherServicesInfoCouple.style.display = 'block';
         }
@@ -1626,60 +1626,60 @@ document.addEventListener('DOMContentLoaded', function() {
         const coupleMassageValue = coupleMassage.value;
         if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue)) {
             massageDurationACouple.style.display = 'block';
-            massageDurationACoupleLabel.style.display = 'block';
+            massageDurationACoupleLabel.style.display = 'block'; // Show the label
         } else if (coupleMassageValue === 'Reflexology') {
             massageDurationBCouple.style.display = 'block';
-            massageDurationBCoupleLabel.style.display = 'block';
+            massageDurationBCoupleLabel.style.display = 'block'; // Show the label
         } else if (coupleMassageValue === 'Prenatal and other') {
             prenatalMassageCouple.style.display = 'block';
-            prenatalMassageCoupleLabel.style.display = 'block';
+            prenatalMassageCoupleLabel.style.display = 'block'; // Show the label
         } else if (coupleMassageValue === 'Relaxing Combination') {
             combinationSelectsWrapperCouple.style.display = 'grid';
-            combinationGuest1CoupleLabel.style.display = 'block';
-            combinationGuest2CoupleLabel.style.display = 'block';
+            combinationGuest1CoupleLabel.style.display = 'block'; // Show the label
+            combinationGuest2CoupleLabel.style.display = 'block'; // Show the label
         } else if (coupleMassageValue === 'Two different types') {
             differentMassagesSelectsWrapperCouple.style.display = 'grid';
-            massageGuest1CoupleLabel.style.display = 'block';
-            massageGuest2CoupleLabel.style.display = 'block';
+            massageGuest1CoupleLabel.style.display = 'block'; // Show the label
+            massageGuest2CoupleLabel.style.display = 'block'; // Show the label
         }
 
         const massageGuest1Value = document.getElementById('Massage-Guest-1-Couple').value;
         const massageGuest2Value = document.getElementById('Massage-Guest-2-Couple').value;
         if (massageGuest1Value !== '' && massageGuest2Value !== '') {
             durationAGuest1And2Couple.style.display = 'block';
-            durationAGuest1And2CoupleLabel.style.display = 'block';
+            durationAGuest1And2CoupleLabel.style.display = 'block'; // Show the label
         }
 
         const facialGuest1Value = document.getElementById('Facial-Guest-1-Couple').value;
         if (facialGuest1Value === 'Sol Janssen') {
             facialAddOnGuest1Couple.style.display = 'block';
-            facialAddOnGuest1CoupleLabel.style.display = 'block';
+            facialAddOnGuest1CoupleLabel.style.display = 'block'; // Show the label
         }
 
         const facialGuest2Value = document.getElementById('Facial-Guest-2-Couple').value;
         if (facialGuest2Value === 'Sol Janssen') {
             facialAddOnGuest2Couple.style.display = 'block';
-            facialAddOnGuest2CoupleLabel.style.display = 'block';
+            facialAddOnGuest2CoupleLabel.style.display = 'block'; // Show the label
         }
 
         // Couple Service Conditionals (Set 1)
         const coupleServiceValue1 = coupleService1.value;
         if (coupleServiceValue1 === 'Package') {
             couplePackage1.style.display = 'block';
-            couplePackageLabel1.style.display = 'block';
+            couplePackageLabel1.style.display = 'block'; // Show the label
         } else if (coupleServiceValue1 === 'Massage') {
             coupleMassage1.style.display = 'block';
-            coupleMassageLabel1.style.display = 'block';
+            coupleMassageLabel1.style.display = 'block'; // Show the label
         } else if (coupleServiceValue1 === 'Facial') {
             facialSelectsWrapperCouple1.style.display = 'grid';
-            facialGuest1CoupleLabel1.style.display = 'block';
-            facialGuest2CoupleLabel1.style.display = 'block';
-            facialAddOnGuest1CoupleLabel1.style.display = 'block';
-            facialAddOnGuest2CoupleLabel1.style.display = 'block';
+            facialGuest1CoupleLabel1.style.display = 'block'; // Show the label
+            facialGuest2CoupleLabel1.style.display = 'block'; // Show the label
+            facialAddOnGuest1CoupleLabel1.style.display = 'block'; // Show the label
+            facialAddOnGuest2CoupleLabel1.style.display = 'block'; // Show the label
         } else if (coupleServiceValue1 === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple1.style.display = 'grid';
-            bodyTreatmentGuest1CoupleLabel1.style.display = 'block';
-            bodyTreatmentGuest2CoupleLabel1.style.display = 'block';
+            bodyTreatmentGuest1CoupleLabel1.style.display = 'block'; // Show the label
+            bodyTreatmentGuest2CoupleLabel1.style.display = 'block'; // Show the label
         } else if (coupleServiceValue1 === 'Other') {
             otherServicesInfoCouple1.style.display = 'block';
         }
@@ -1694,60 +1694,60 @@ document.addEventListener('DOMContentLoaded', function() {
         const coupleMassageValue1 = coupleMassage1.value;
         if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue1)) {
             massageDurationACouple1.style.display = 'block';
-            massageDurationACoupleLabel1.style.display = 'block';
+            massageDurationACoupleLabel1.style.display = 'block'; // Show the label
         } else if (coupleMassageValue1 === 'Reflexology') {
             massageDurationBCouple1.style.display = 'block';
-            massageDurationBCoupleLabel1.style.display = 'block';
+            massageDurationBCoupleLabel1.style.display = 'block'; // Show the label
         } else if (coupleMassageValue1 === 'Prenatal and other') {
             prenatalMassageCouple1.style.display = 'block';
-            prenatalMassageCoupleLabel1.style.display = 'block';
+            prenatalMassageCoupleLabel1.style.display = 'block'; // Show the label
         } else if (coupleMassageValue1 === 'Relaxing Combination') {
             combinationSelectsWrapperCouple1.style.display = 'grid';
-            combinationGuest1CoupleLabel1.style.display = 'block';
-            combinationGuest2CoupleLabel1.style.display = 'block';
+            combinationGuest1CoupleLabel1.style.display = 'block'; // Show the label
+            combinationGuest2CoupleLabel1.style.display = 'block'; // Show the label
         } else if (coupleMassageValue1 === 'Two different types') {
             differentMassagesSelectsWrapperCouple1.style.display = 'grid';
-            massageGuest1CoupleLabel1.style.display = 'block';
-            massageGuest2CoupleLabel1.style.display = 'block';
+            massageGuest1CoupleLabel1.style.display = 'block'; // Show the label
+            massageGuest2CoupleLabel1.style.display = 'block'; // Show the label
         }
 
         const massageGuest1Value1 = document.getElementById('Massage-Guest-1-Couple-1').value;
         const massageGuest2Value1 = document.getElementById('Massage-Guest-2-Couple-1').value;
         if (massageGuest1Value1 !== '' && massageGuest2Value1 !== '') {
             durationAGuest1And2Couple1.style.display = 'block';
-            durationAGuest1And2CoupleLabel1.style.display = 'block';
+            durationAGuest1And2CoupleLabel1.style.display = 'block'; // Show the label
         }
 
         const facialGuest1Value1 = document.getElementById('Facial-Guest-1-Couple-1').value;
         if (facialGuest1Value1 === 'Sol Janssen') {
             facialAddOnGuest1Couple1.style.display = 'block';
-            facialAddOnGuest1CoupleLabel1.style.display = 'block';
+            facialAddOnGuest1CoupleLabel1.style.display = 'block'; // Show the label
         }
 
         const facialGuest2Value1 = document.getElementById('Facial-Guest-2-Couple-1').value;
         if (facialGuest2Value1 === 'Sol Janssen') {
             facialAddOnGuest2Couple1.style.display = 'block';
-            facialAddOnGuest2CoupleLabel1.style.display = 'block';
+            facialAddOnGuest2CoupleLabel1.style.display = 'block'; // Show the label
         }
 
         // Couple Service Conditionals (Set 2)
         const coupleServiceValue2 = coupleService2.value;
         if (coupleServiceValue2 === 'Package') {
             couplePackage2.style.display = 'block';
-            couplePackageLabel2.style.display = 'block';
+            couplePackageLabel2.style.display = 'block'; // Show the label
         } else if (coupleServiceValue2 === 'Massage') {
             coupleMassage2.style.display = 'block';
-            coupleMassageLabel2.style.display = 'block';
+            coupleMassageLabel2.style.display = 'block'; // Show the label
         } else if (coupleServiceValue2 === 'Facial') {
             facialSelectsWrapperCouple2.style.display = 'grid';
-            facialGuest1CoupleLabel2.style.display = 'block';
-            facialGuest2CoupleLabel2.style.display = 'block';
-            facialAddOnGuest1CoupleLabel2.style.display = 'block';
-            facialAddOnGuest2CoupleLabel2.style.display = 'block';
+            facialGuest1CoupleLabel2.style.display = 'block'; // Show the label
+            facialGuest2CoupleLabel2.style.display = 'block'; // Show the label
+            facialAddOnGuest1CoupleLabel2.style.display = 'block'; // Show the label
+            facialAddOnGuest2CoupleLabel2.style.display = 'block'; // Show the label
         } else if (coupleServiceValue2 === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple2.style.display = 'grid';
-            bodyTreatmentGuest1CoupleLabel2.style.display = 'block';
-            bodyTreatmentGuest2CoupleLabel2.style.display = 'block';
+            bodyTreatmentGuest1CoupleLabel2.style.display = 'block'; // Show the label
+            bodyTreatmentGuest2CoupleLabel2.style.display = 'block'; // Show the label
         } else if (coupleServiceValue2 === 'Other') {
             otherServicesInfoCouple2.style.display = 'block';
         }
@@ -1762,60 +1762,60 @@ document.addEventListener('DOMContentLoaded', function() {
         const coupleMassageValue2 = coupleMassage2.value;
         if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue2)) {
             massageDurationACouple2.style.display = 'block';
-            massageDurationACoupleLabel2.style.display = 'block';
+            massageDurationACoupleLabel2.style.display = 'block'; // Show the label
         } else if (coupleMassageValue2 === 'Reflexology') {
             massageDurationBCouple2.style.display = 'block';
-            massageDurationBCoupleLabel2.style.display = 'block';
+            massageDurationBCoupleLabel2.style.display = 'block'; // Show the label
         } else if (coupleMassageValue2 === 'Prenatal and other') {
             prenatalMassageCouple2.style.display = 'block';
-            prenatalMassageCoupleLabel2.style.display = 'block';
+            prenatalMassageCoupleLabel2.style.display = 'block'; // Show the label
         } else if (coupleMassageValue2 === 'Relaxing Combination') {
             combinationSelectsWrapperCouple2.style.display = 'grid';
-            combinationGuest1CoupleLabel2.style.display = 'block';
-            combinationGuest2CoupleLabel2.style.display = 'block';
+            combinationGuest1CoupleLabel2.style.display = 'block'; // Show the label
+            combinationGuest2CoupleLabel2.style.display = 'block'; // Show the label
         } else if (coupleMassageValue2 === 'Two different types') {
             differentMassagesSelectsWrapperCouple2.style.display = 'grid';
-            massageGuest1CoupleLabel2.style.display = 'block';
-            massageGuest2CoupleLabel2.style.display = 'block';
+            massageGuest1CoupleLabel2.style.display = 'block'; // Show the label
+            massageGuest2CoupleLabel2.style.display = 'block'; // Show the label
         }
 
         const massageGuest1Value2 = document.getElementById('Massage-Guest-1-Couple-2').value;
         const massageGuest2Value2 = document.getElementById('Massage-Guest-2-Couple-2').value;
         if (massageGuest1Value2 !== '' && massageGuest2Value2 !== '') {
             durationAGuest1And2Couple2.style.display = 'block';
-            durationAGuest1And2CoupleLabel2.style.display = 'block';
+            durationAGuest1And2CoupleLabel2.style.display = 'block'; // Show the label
         }
 
         const facialGuest1Value2 = document.getElementById('Facial-Guest-1-Couple-2').value;
         if (facialGuest1Value2 === 'Sol Janssen') {
             facialAddOnGuest1Couple2.style.display = 'block';
-            facialAddOnGuest1CoupleLabel2.style.display = 'block';
+            facialAddOnGuest1CoupleLabel2.style.display = 'block'; // Show the label
         }
 
         const facialGuest2Value2 = document.getElementById('Facial-Guest-2-Couple-2').value;
         if (facialGuest2Value2 === 'Sol Janssen') {
             facialAddOnGuest2Couple2.style.display = 'block';
-            facialAddOnGuest2CoupleLabel2.style.display = 'block';
+            facialAddOnGuest2CoupleLabel2.style.display = 'block'; // Show the label
         }
 
         // Couple Service Conditionals (Set 3)
         const coupleServiceValue3 = coupleService3.value;
         if (coupleServiceValue3 === 'Package') {
             couplePackage3.style.display = 'block';
-            couplePackageLabel3.style.display = 'block';
+            couplePackageLabel3.style.display = 'block'; // Show the label
         } else if (coupleServiceValue3 === 'Massage') {
             coupleMassage3.style.display = 'block';
-            coupleMassageLabel3.style.display = 'block';
+            coupleMassageLabel3.style.display = 'block'; // Show the label
         } else if (coupleServiceValue3 === 'Facial') {
             facialSelectsWrapperCouple3.style.display = 'grid';
-            facialGuest1CoupleLabel3.style.display = 'block';
-            facialGuest2CoupleLabel3.style.display = 'block';
-            facialAddOnGuest1CoupleLabel3.style.display = 'block';
-            facialAddOnGuest2CoupleLabel3.style.display = 'block';
+            facialGuest1CoupleLabel3.style.display = 'block'; // Show the label
+            facialGuest2CoupleLabel3.style.display = 'block'; // Show the label
+            facialAddOnGuest1CoupleLabel3.style.display = 'block'; // Show the label
+            facialAddOnGuest2CoupleLabel3.style.display = 'block'; // Show the label
         } else if (coupleServiceValue3 === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple3.style.display = 'grid';
-            bodyTreatmentGuest1CoupleLabel3.style.display = 'block';
-            bodyTreatmentGuest2CoupleLabel3.style.display = 'block';
+            bodyTreatmentGuest1CoupleLabel3.style.display = 'block'; // Show the label
+            bodyTreatmentGuest2CoupleLabel3.style.display = 'block'; // Show the label
         } else if (coupleServiceValue3 === 'Other') {
             otherServicesInfoCouple3.style.display = 'block';
         }
@@ -1830,103 +1830,96 @@ document.addEventListener('DOMContentLoaded', function() {
         const coupleMassageValue3 = coupleMassage3.value;
         if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue3)) {
             massageDurationACouple3.style.display = 'block';
-            massageDurationACoupleLabel3.style.display = 'block';
+            massageDurationACoupleLabel3.style.display = 'block'; // Show the label
         } else if (coupleMassageValue3 === 'Reflexology') {
             massageDurationBCouple3.style.display = 'block';
-            massageDurationBCoupleLabel3.style.display = 'block';
+            massageDurationBCoupleLabel3.style.display = 'block'; // Show the label
         } else if (coupleMassageValue3 === 'Prenatal and other') {
             prenatalMassageCouple3.style.display = 'block';
-            prenatalMassageCoupleLabel3.style.display = 'block';
+            prenatalMassageCoupleLabel3.style.display = 'block'; // Show the label
         } else if (coupleMassageValue3 === 'Relaxing Combination') {
             combinationSelectsWrapperCouple3.style.display = 'grid';
-            combinationGuest1CoupleLabel3.style.display = 'block';
-            combinationGuest2CoupleLabel3.style.display = 'block';
+            combinationGuest1CoupleLabel3.style.display = 'block'; // Show the label
+            combinationGuest2CoupleLabel3.style.display = 'block'; // Show the label
         } else if (coupleMassageValue3 === 'Two different types') {
             differentMassagesSelectsWrapperCouple3.style.display = 'grid';
-            massageGuest1CoupleLabel3.style.display = 'block';
-            massageGuest2CoupleLabel3.style.display = 'block';
+            massageGuest1CoupleLabel3.style.display = 'block'; // Show the label
+            massageGuest2CoupleLabel3.style.display = 'block'; // Show the label
         }
 
         const massageGuest1Value3 = document.getElementById('Massage-Guest-1-Couple-3').value;
         const massageGuest2Value3 = document.getElementById('Massage-Guest-2-Couple-3').value;
         if (massageGuest1Value3 !== '' && massageGuest2Value3 !== '') {
             durationAGuest1And2Couple3.style.display = 'block';
-            durationAGuest1And2CoupleLabel3.style.display = 'block';
+            durationAGuest1And2CoupleLabel3.style.display = 'block'; // Show the label
         }
 
         const facialGuest1Value3 = document.getElementById('Facial-Guest-1-Couple-3').value;
         if (facialGuest1Value3 === 'Sol Janssen') {
             facialAddOnGuest1Couple3.style.display = 'block';
-            facialAddOnGuest1CoupleLabel3.style.display = 'block';
+            facialAddOnGuest1CoupleLabel3.style.display = 'block'; // Show the label
         }
 
         const facialGuest2Value3 = document.getElementById('Facial-Guest-2-Couple-3').value;
         if (facialGuest2Value3 === 'Sol Janssen') {
             facialAddOnGuest2Couple3.style.display = 'block';
-            facialAddOnGuest2CoupleLabel3.style.display = 'block';
+            facialAddOnGuest2CoupleLabel3.style.display = 'block'; // Show the label
         }
     }
 
-    // Add change event listeners to all select fields
-    function addChangeEventListener(id, handleChange) {
-        document.getElementById(id).addEventListener('change', function() {
-            resetAndHideChildren(this);
-            handleChange();
-        });
-    }
+    // Add event listeners to the single and couple select fields
+    singleService.addEventListener('change', handleConditionals);
+    singlePackage.addEventListener('change', handleConditionals);
+    singleMassage.addEventListener('change', handleConditionals);
+    singleFacial.addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Single', handleConditionals);
-    addChangeEventListener('Package-Single', handleConditionals);
-    addChangeEventListener('Massage-Single', handleConditionals);
-    addChangeEventListener('Facial-Single', handleConditionals);
+    singleService1.addEventListener('change', handleConditionals);
+    singlePackage1.addEventListener('change', handleConditionals);
+    singleMassage1.addEventListener('change', handleConditionals);
+    singleFacial1.addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Single-1', handleConditionals);
-    addChangeEventListener('Package-Single-1', handleConditionals);
-    addChangeEventListener('Massage-Single-1', handleConditionals);
-    addChangeEventListener('Facial-Single-1', handleConditionals);
+    singleService2.addEventListener('change', handleConditionals);
+    singlePackage2.addEventListener('change', handleConditionals);
+    singleMassage2.addEventListener('change', handleConditionals);
+    singleFacial2.addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Single-2', handleConditionals);
-    addChangeEventListener('Package-Single-2', handleConditionals);
-    addChangeEventListener('Massage-Single-2', handleConditionals);
-    addChangeEventListener('Facial-Single-2', handleConditionals);
+    singleService3.addEventListener('change', handleConditionals);
+    singlePackage3.addEventListener('change', handleConditionals);
+    singleMassage3.addEventListener('change', handleConditionals);
+    singleFacial3.addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Single-3', handleConditionals);
-    addChangeEventListener('Package-Single-3', handleConditionals);
-    addChangeEventListener('Massage-Single-3', handleConditionals);
-    addChangeEventListener('Facial-Single-3', handleConditionals);
+    coupleService.addEventListener('change', handleConditionals);
+    couplePackage.addEventListener('change', handleConditionals);
+    coupleMassage.addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-1-Couple').addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-2-Couple').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-1-Couple').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-2-Couple').addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Couple', handleConditionals);
-    addChangeEventListener('Package-Couple', handleConditionals);
-    addChangeEventListener('Massage-Couple', handleConditionals);
-    addChangeEventListener('Massage-Guest-1-Couple', handleConditionals);
-    addChangeEventListener('Massage-Guest-2-Couple', handleConditionals);
-    addChangeEventListener('Facial-Guest-1-Couple', handleConditionals);
-    addChangeEventListener('Facial-Guest-2-Couple', handleConditionals);
+    coupleService1.addEventListener('change', handleConditionals);
+    couplePackage1.addEventListener('change', handleConditionals);
+    coupleMassage1.addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-1-Couple-1').addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-2-Couple-1').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-1-Couple-1').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-2-Couple-1').addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Couple-1', handleConditionals);
-    addChangeEventListener('Package-Couple-1', handleConditionals);
-    addChangeEventListener('Massage-Couple-1', handleConditionals);
-    addChangeEventListener('Massage-Guest-1-Couple-1', handleConditionals);
-    addChangeEventListener('Massage-Guest-2-Couple-1', handleConditionals);
-    addChangeEventListener('Facial-Guest-1-Couple-1', handleConditionals);
-    addChangeEventListener('Facial-Guest-2-Couple-1', handleConditionals);
+    coupleService2.addEventListener('change', handleConditionals);
+    couplePackage2.addEventListener('change', handleConditionals);
+    coupleMassage2.addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-1-Couple-2').addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-2-Couple-2').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-1-Couple-2').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-2-Couple-2').addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Couple-2', handleConditionals);
-    addChangeEventListener('Package-Couple-2', handleConditionals);
-    addChangeEventListener('Massage-Couple-2', handleConditionals);
-    addChangeEventListener('Massage-Guest-1-Couple-2', handleConditionals);
-    addChangeEventListener('Massage-Guest-2-Couple-2', handleConditionals);
-    addChangeEventListener('Facial-Guest-1-Couple-2', handleConditionals);
-    addChangeEventListener('Facial-Guest-2-Couple-2', handleConditionals);
+    coupleService3.addEventListener('change', handleConditionals);
+    couplePackage3.addEventListener('change', handleConditionals);
+    coupleMassage3.addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-1-Couple-3').addEventListener('change', handleConditionals);
+    document.getElementById('Massage-Guest-2-Couple-3').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-1-Couple-3').addEventListener('change', handleConditionals);
+    document.getElementById('Facial-Guest-2-Couple-3').addEventListener('change', handleConditionals);
 
-    addChangeEventListener('Service-Couple-3', handleConditionals);
-    addChangeEventListener('Package-Couple-3', handleConditionals);
-    addChangeEventListener('Massage-Couple-3', handleConditionals);
-    addChangeEventListener('Massage-Guest-1-Couple-3', handleConditionals);
-    addChangeEventListener('Massage-Guest-2-Couple-3', handleConditionals);
-    addChangeEventListener('Facial-Guest-1-Couple-3', handleConditionals);
-    addChangeEventListener('Facial-Guest-2-Couple-3', handleConditionals);
-
-    // Initial setup
+    // Initial hide of all conditionals
     hideAllConditionals();
 });
