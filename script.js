@@ -139,14 +139,14 @@ console.log("Step navigation elements initialized");
 
 function clearNameInputsAndResetLabels() {
     const inputsToLabels = {
-        'Name-Single': 'Label-SS-Single',
-        'Name-Single-1': 'Label-SS-Single-1',
-        'Name-Single-2': 'Label-SS-Single-2',
-        'Name-Single-3': 'Label-SS-Single-3',
-        'Name-Couple': 'Label-SS-Couple',
-        'Name-Couple-1': 'Label-SS-Couple-1',
-        'Name-Couple-2': 'Label-SS-Couple-2',
-        'Name-Couple-3': 'Label-SS-Couple-3'
+        'Name-Single': 'Service-Single-Label',
+        'Name-Single-1': 'Service-Single-1-Label',
+        'Name-Single-2': 'Service-Single-2-Label',
+        'Name-Single-3': 'Service-Single-3-Label',
+        'Name-Couple': 'Service-Couple-Label',
+        'Name-Couple-1': 'Service-Couple-1-Label',
+        'Name-Couple-2': 'Service-Couple-2-Label',
+        'Name-Couple-3': 'Service-Couple-3-Label'
     };
 
     const nameFields = Object.keys(inputsToLabels);
