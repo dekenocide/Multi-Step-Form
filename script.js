@@ -683,6 +683,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // SERVICES CONDITIONALS SCRIPT
 
+// Define resetField function
+function resetField(field) {
+    if (field) {
+        if (field.tagName === 'SELECT') {
+            field.selectedIndex = 0;
+        } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
+            field.value = '';
+        }
+    }
+}
+
+// Define hideField function
+function hideField(field) {
+    if (field) {
+        field.style.display = 'none';
+    }
+}
+
 // COUPLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
 
 document.addEventListener('DOMContentLoaded', function() {
