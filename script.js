@@ -686,6 +686,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // SERVICES CONDITIONALS SCRIPT
 
+function resetField(field) {
+    if (field) {
+        field.value = ''; // Reset the value of the field
+        field.style.display = 'none'; // Optionally hide the field after resetting (this line can be removed if not needed)
+    }
+}
+
 // COUPLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
 
 document.addEventListener('DOMContentLoaded', function() {
