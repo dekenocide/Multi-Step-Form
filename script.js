@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentStep === 'step-4') {
             resetServiceConditionals();
             clearGroupBookingInfo(); 
-            clearNameInputs(); 
+            clearNameInputs();
+            revertServiceLabels()
         }
         if (currentStep === 'step-3') {
             resetNumberOfGuestsField();
@@ -148,6 +149,27 @@ function clearNameInputs() {
         const inputField = document.getElementById(id);
         if (inputField) {
             inputField.value = ''; // Clear the value of the input field
+        }
+    });
+}
+
+function revertServiceLabels() {
+    const labelIds = [
+        'Service-Single-Label',
+        'Service-Single-1-Label',
+        'Service-Single-2-Label',
+        'Service-Single-3-Label',
+        'Service-Couple-Label',
+        'Service-Couple-1-Label',
+        'Service-Couple-2-Label',
+        'Service-Couple-3-Label'
+    ];
+
+    labelIds.forEach(labelId => {
+        const labelElement = document.getElementById(labelId);
+        if (labelElement) {
+            // This assumes the labels will revert to their original text as set in Webflow automatically
+            labelElement.innerText = labelElement.defaultValue || labelElement.textContent || ''; 
         }
     });
 }
