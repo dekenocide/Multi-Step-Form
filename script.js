@@ -130,6 +130,47 @@ showStep(currentStep);
 console.log("Step navigation elements initialized");
 });
 
+let originalLabelTexts = {}; // Declare in a higher scope to store original label texts
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputsToLabels = {
+        'Name-Single': 'Service-Single-Label',
+        'Name-Single-1': 'Service-Single-1-Label',
+        'Name-Single-2': 'Service-Single-2-Label',
+        'Name-Single-3': 'Service-Single-3-Label',
+        'Name-Couple': 'Service-Couple-Label',
+        'Name-Couple-1': 'Service-Couple-1-Label',
+        'Name-Couple-2': 'Service-Couple-2-Label',
+        'Name-Couple-3': 'Service-Couple-3-Label'
+    };
+
+    // Store the original label text for each label
+    Object.keys(inputsToLabels).forEach(nameId => {
+        const labelId = inputsToLabels[nameId];
+        const labelElement = document.getElementById(labelId);
+        if (labelElement) {
+            originalLabelTexts[labelId] = labelElement.innerText;
+        }
+    });
+
+    // Function to update labels based on input value
+    Object.keys(inputsToLabels).forEach(nameId => {
+        const inputField = document.getElementById(nameId);
+        const labelId = inputsToLabels[nameId];
+        const labelElement = document.getElementById(labelId);
+
+        if (inputField && labelElement) {
+            inputField.addEventListener('input', function() {
+                if (inputField.value.trim() !== "") {
+                    labelElement.innerText = `Service for ${inputField.value.trim()}`;
+                } else {
+                    labelElement.innerText = originalLabelTexts[labelId]; // Revert to the original text if input is cleared
+                }
+            });
+        }
+    });
+});
+
 // RESETS AND CLEARS SCRIPT
 
 function clearNameInputsAndRevertLabels() {
@@ -144,19 +185,18 @@ function clearNameInputsAndRevertLabels() {
         'Name-Couple-3': 'Service-Couple-3-Label'
     };
 
-    // Clear name inputs
+    // Clear the input fields and revert labels to original text
     Object.keys(inputsToLabels).forEach(nameId => {
         const inputField = document.getElementById(nameId);
+        const labelId = inputsToLabels[nameId];
+        const labelElement = document.getElementById(labelId);
+
         if (inputField) {
             inputField.value = ''; // Clear the value of the input field
         }
-    });
 
-    // Revert labels to their original text in Webflow
-    Object.values(inputsToLabels).forEach(labelId => {
-        const labelElement = document.getElementById(labelId);
-        if (labelElement) {
-            labelElement.innerHTML = labelElement.innerHTML; // This line triggers a reversion to the original text
+        if (labelElement && originalLabelTexts[labelId]) {
+            labelElement.innerText = originalLabelTexts[labelId]; // Revert to the original text
         }
     });
 }
