@@ -75,8 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentStep === 'step-4') {
             resetServiceConditionals();
             clearGroupBookingInfo(); 
-            clearNameInputs();
-            revertServiceLabels()
+            clearNameInputsAndRevertLabels();
         }
         if (currentStep === 'step-3') {
             resetNumberOfGuestsField();
@@ -133,43 +132,31 @@ console.log("Step navigation elements initialized");
 
 // RESETS AND CLEARS SCRIPT
 
-function clearNameInputs() {
-    const nameFields = [
-        'Name-Single',
-        'Name-Single-1',
-        'Name-Single-2',
-        'Name-Single-3',
-        'Name-Couple',
-        'Name-Couple-1',
-        'Name-Couple-2',
-        'Name-Couple-3'
-    ];
+function clearNameInputsAndRevertLabels() {
+    const inputsToLabels = {
+        'Name-Single': 'Service-Single-Label',
+        'Name-Single-1': 'Service-Single-1-Label',
+        'Name-Single-2': 'Service-Single-2-Label',
+        'Name-Single-3': 'Service-Single-3-Label',
+        'Name-Couple': 'Service-Couple-Label',
+        'Name-Couple-1': 'Service-Couple-1-Label',
+        'Name-Couple-2': 'Service-Couple-2-Label',
+        'Name-Couple-3': 'Service-Couple-3-Label'
+    };
 
-    nameFields.forEach(id => {
-        const inputField = document.getElementById(id);
+    // Clear name inputs
+    Object.keys(inputsToLabels).forEach(nameId => {
+        const inputField = document.getElementById(nameId);
         if (inputField) {
             inputField.value = ''; // Clear the value of the input field
         }
     });
-}
 
-function revertServiceLabels() {
-    const labelIds = [
-        'Service-Single-Label',
-        'Service-Single-1-Label',
-        'Service-Single-2-Label',
-        'Service-Single-3-Label',
-        'Service-Couple-Label',
-        'Service-Couple-1-Label',
-        'Service-Couple-2-Label',
-        'Service-Couple-3-Label'
-    ];
-
-    labelIds.forEach(labelId => {
+    // Revert labels to their original text in Webflow
+    Object.values(inputsToLabels).forEach(labelId => {
         const labelElement = document.getElementById(labelId);
         if (labelElement) {
-            // This assumes the labels will revert to their original text as set in Webflow automatically
-            labelElement.innerText = labelElement.defaultValue || labelElement.textContent || ''; 
+            labelElement.innerHTML = labelElement.innerHTML; // This line triggers a reversion to the original text
         }
     });
 }
