@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
-            scrollToFormSection(); // Scroll to the top of the form after showing the next step
+            scrollToFormTop(); // Scroll to the top of the form after showing the next step
         } else {
             alert('Please fill out all required fields before proceeding.');
         }
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
-        scrollToFormSection(); // Scroll to the top of the form after showing the previous step
+        scrollToFormTop(); // Scroll to the top of the form after showing the previous step
     });
 
     function getNextStep(current) {
@@ -100,10 +100,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    function scrollToFormSection() {
-        const section = document.getElementById('form-section');
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function scrollToFormTop() {
+        const landingDiv = document.getElementById('landing-div');
+        if (landingDiv) {
+            landingDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
             console.warn("Form section not found.");
         }
