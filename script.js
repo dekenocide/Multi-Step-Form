@@ -341,7 +341,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // MOVE LABELS
 
-    const prevBtn = document.getElementById('previous-button');
     const selects = document.querySelectorAll('select.floating-input');
 
       // Function to reset labels for select elements with default values
