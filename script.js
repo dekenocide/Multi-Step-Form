@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             resetServiceConditionals();
             clearGroupBookingInfo(); 
             clearNameInputsAndRevertLabels();
+            resetLabelsForDefaultSelects();
         }
         if (currentStep === 'step-3') {
             resetNumberOfGuestsField();
@@ -171,6 +172,70 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
+
+    // MOVE LABELS BACK
+
+    const prevBtn = document.getElementById('previous-button');
+    const selects = document.querySelectorAll('select.floating-input');
+
+    // Function to reset labels for select elements with default values
+    function resetLabelsForDefaultSelects() {
+        selects.forEach(select => {
+            const label = select.nextElementSibling;
+
+            if (label) {
+                if (!select.value || select.value === "") {
+                    label.classList.remove('active');
+                    console.log(`Label reset for select with id: ${select.id}`);
+                } else {
+                    label.classList.add('active');
+                }
+            }
+        });
+    }
+
+    // Event listener for select elements to manage label states dynamically
+    selects.forEach(select => {
+        const label = select.nextElementSibling;
+
+        if (label) {
+            // Initial state check based on the select's current value
+            if (!select.value || select.value === "") {
+                label.classList.remove('active');
+            } else {
+                label.classList.add('active');
+            }
+
+            // Listen for changes in the select element
+            select.addEventListener('change', function() {
+                if (!this.value || this.value === "") {
+                    label.classList.remove('active');
+                    this.blur(); // Blur to trigger the label movement
+                } else {
+                    label.classList.add('active');
+                }
+            });
+
+            // Optional blur event to ensure label behavior
+            select.addEventListener('blur', function() {
+                if (!this.value || this.value === "") {
+                    label.classList.remove('active');
+                }
+            });
+        } else {
+            console.warn(`No label found for select element with id: ${select.id}`);
+        }
+    });
+
+    // Event listener for the previous button to trigger the label reset
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            console.log("Previous button clicked");
+            resetLabelsForDefaultSelects();
+        });
+    } else {
+        console.warn("Previous button not found");
+    }
 
     // RESETS AND CLEARS SCRIPT
 
