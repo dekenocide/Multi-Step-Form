@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-2': document.getElementById('step-2'),
         'step-3': document.getElementById('step-3'),
         'step-4': document.getElementById('step-4'),
-        'step-5': document.getElementById('step-5'), // review step
+        'step-5': document.getElementById('step-5'),
     };
 
     const nextBtn = document.getElementById('next-button');
@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const recaptchaContainer = document.getElementById('recaptcha-container');
     let currentStep = 'step-1';
 
-    // Define the hierarchical order for the steps
     const hierarchicalSteps = {
         'step-1': { next: 'step-2' },
         'step-2': { next: 'step-3', prev: 'step-1' },
@@ -35,14 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
         nextBtn.style.display = step === 'step-5' ? 'none' : 'inline-block';
         submitBtn.style.display = step === 'step-5' ? 'inline-block' : 'none';
 
-        // Show or hide recaptcha-container based on the step
         if (step === 'step-5') {
             recaptchaContainer.style.display = 'flex';
         } else {
             recaptchaContainer.style.display = 'none';
         }
 
-        // Populate review fields if on step-5
         if (step === 'step-5') {
             populateReviewStep();
         }
@@ -64,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return true;
     }
-    
 
     nextBtn.addEventListener('click', function () {
         if (validateStep(currentStep)) {
@@ -78,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
     prevBtn.addEventListener('click', function () {
         if (currentStep === 'step-4') {
             resetServiceConditionals();
-            clearGroupBookingInfo(); // Clear the textarea in step-4
-            clearNameInputsAndResetLabels(); // Clear the specific name input fields and reset placeholders
+            clearGroupBookingInfo(); 
+            clearNameInputs(); 
         }
         if (currentStep === 'step-3') {
             resetNumberOfGuestsField();
@@ -97,18 +93,17 @@ document.addEventListener('DOMContentLoaded', function () {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    // Function to update the label text for services based on name inputs
-function updateServiceLabels() {
-    const inputsToLabels = {
-        'Name-Single': 'Service-Single-Label',
-        'Name-Single-1': 'Service-Single-1-Label',
-        'Name-Single-2': 'Service-Single-2-Label',
-        'Name-Single-3': 'Service-Single-3-Label',
-        'Name-Couple': 'Service-Couple-Label',
-        'Name-Couple-1': 'Service-Couple-1-Label',
-        'Name-Couple-2': 'Service-Couple-2-Label',
-        'Name-Couple-3': 'Service-Couple-3-Label'
-    };
+    function updateServiceLabels() {
+        const inputsToLabels = {
+            'Name-Single': 'Service-Single-Label',
+            'Name-Single-1': 'Service-Single-1-Label',
+            'Name-Single-2': 'Service-Single-2-Label',
+            'Name-Single-3': 'Service-Single-3-Label',
+            'Name-Couple': 'Service-Couple-Label',
+            'Name-Couple-1': 'Service-Couple-1-Label',
+            'Name-Couple-2': 'Service-Couple-2-Label',
+            'Name-Couple-3': 'Service-Couple-3-Label'
+        };
 
     Object.keys(inputsToLabels).forEach(nameId => {
         const nameInput = document.getElementById(nameId);
@@ -122,10 +117,10 @@ function updateServiceLabels() {
                 } else {
                     serviceLabel.innerText = 'Service'; // Default label if name is empty
                 }
-            });
-        }
-    });
-}
+                });
+            }
+        });
+    }
 
 // Call the function to update service labels
 updateServiceLabels();
@@ -137,29 +132,22 @@ console.log("Step navigation elements initialized");
 
 // RESETS AND CLEARS SCRIPT
 
-function clearNameInputsAndResetLabels() {
-    const inputsToLabels = {
-        'Name-Single': 'Service-Single-Label',
-        'Name-Single-1': 'Service-Single-1-Label',
-        'Name-Single-2': 'Service-Single-2-Label',
-        'Name-Single-3': 'Service-Single-3-Label',
-        'Name-Couple': 'Service-Couple-Label',
-        'Name-Couple-1': 'Service-Couple-1-Label',
-        'Name-Couple-2': 'Service-Couple-2-Label',
-        'Name-Couple-3': 'Service-Couple-3-Label'
-    };
-
-    const nameFields = Object.keys(inputsToLabels);
+function clearNameInputs() {
+    const nameFields = [
+        'Name-Single',
+        'Name-Single-1',
+        'Name-Single-2',
+        'Name-Single-3',
+        'Name-Couple',
+        'Name-Couple-1',
+        'Name-Couple-2',
+        'Name-Couple-3'
+    ];
 
     nameFields.forEach(id => {
         const inputField = document.getElementById(id);
-        const serviceLabel = document.getElementById(inputsToLabels[id]);
-
         if (inputField) {
             inputField.value = ''; // Clear the value of the input field
-            if (serviceLabel) {
-                serviceLabel.innerText = 'Select service'; // Reset the label text
-            }
         }
     });
 }
