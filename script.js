@@ -305,34 +305,6 @@ function resetGuestArrangements() {
     console.log('Guest arrangements reset');
 }
 
-// NAME INPUT LABEL CHANGE
-
-let originalLabelText; // Declare in a higher scope
-
-document.addEventListener('DOMContentLoaded', function() {
-    const nameCoupleInput = document.getElementById('Name-Couple');
-    const coupleLabel = document.getElementById('Label-Couple');
-
-    // Store the original label text in the higher scope variable
-    originalLabelText = coupleLabel.innerText;
-
-    nameCoupleInput.addEventListener('input', function() {
-        if (nameCoupleInput.value.trim() !== "") {
-            coupleLabel.innerText = 'Couple Service';
-        } else {
-            coupleLabel.innerText = originalLabelText; // Revert to the original text if input is cleared
-        }
-    });
-});
-
-function revertLabelToOriginal() {
-    const coupleLabel = document.getElementById('Label-Couple');
-
-    if (coupleLabel) {
-        coupleLabel.innerText = originalLabelText; // Revert to the original label text when prevBtn is clicked
-    }
-}
-
 // REVIEW STEP SCRIPT
 
 document.addEventListener('DOMContentLoaded', function () {
