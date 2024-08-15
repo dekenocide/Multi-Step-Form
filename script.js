@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
             resetServiceConditionals();
             clearGroupBookingInfo(); // Clear the textarea in step-4
             clearNameInputsAndResetLabels(); // Clear the specific name input fields and reset placeholders
-            revertLabelToOriginal();
         }
         if (currentStep === 'step-3') {
             resetNumberOfGuestsField();
