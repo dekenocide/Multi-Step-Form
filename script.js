@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
-            scrollToFormTop(); // Scroll to the top of the form after showing the next step
+            scrollToFormSection(); // Scroll to the top of the form after showing the next step
         } else {
             alert('Please fill out all required fields before proceeding.');
         }
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
-        scrollToFormTop(); // Scroll to the top of the form after showing the previous step
+        scrollToFormSection(); // Scroll to the top of the form after showing the previous step
     });
 
     function getNextStep(current) {
@@ -100,12 +100,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return hierarchicalSteps[current]?.prev || current;
     }
 
-    function scrollToFormTop() {
+    function scrollToFormSection() {
         const section = document.getElementById('form-section');
         if (section) {
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } else {
-            console.warn("Appointment-Inquiry form not found.");
+            console.warn("Form section not found.");
         }
     }
 
