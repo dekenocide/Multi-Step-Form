@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
             // Check if the field is visible and its parent element is visible as well
-            if (input.style.display !== 'none' && input.offsetParent !== null && input.id !== 'Date-Flexibility') {
+            if (input.style.display !== 'none' && input.offsetParent !== null) {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
                         return false;
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return true;
     }
+    
 
     nextBtn.addEventListener('click', function () {
         if (validateStep(currentStep)) {
