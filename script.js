@@ -686,13 +686,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // SERVICES CONDITIONALS SCRIPT
 
-function resetField(field) {
-    if (field) {
-        field.value = ''; // Reset the value of the field
-        field.style.display = 'none'; // Optionally hide the field after resetting (this line can be removed if not needed)
-    }
-}
-
 // COUPLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -918,6 +911,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (facialGuest2Value === 'Sol Janssen') {
                 showFields([elements.facialAddOnGuest2Couple, elements.facialAddOnGuest2CoupleLabel]);
             }
+
+            // Handle visibility of all "Wrapper" elements as grid
+            Object.values(elements).forEach(element => {
+                if (element && element.id.toLowerCase().includes('wrapper')) {
+                    element.style.display = 'grid';
+                }
+            });
         }
 
         elements.coupleService?.addEventListener('change', function() {
@@ -934,6 +934,13 @@ document.addEventListener('DOMContentLoaded', function() {
         hideConditionals(); // Initial hide
     });
 
+    function resetField(field) {
+        if (field) {
+            field.value = ''; // Reset the value of the field
+            field.style.display = 'none'; // Optionally hide the field after resetting
+        }
+    }
+
     function resetFields(fields) {
         fields.forEach(field => {
             if (field) resetField(field);
@@ -948,7 +955,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showFields(fields) {
         fields.forEach(field => {
-            if (field) field.style.display = 'block';
+            if (field) {
+                if (field.id && field.id.toLowerCase().includes('wrapper')) {
+                    field.style.display = 'grid'; // Set display to grid for elements with 'wrapper' in the ID
+                } else {
+                    field.style.display = 'block'; // Default display to block for other elements
+                }
+            }
         });
     }
 });
