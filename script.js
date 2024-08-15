@@ -697,207 +697,244 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     coupleSets.forEach(({ suffix, idSuffix }) => {
-        const coupleService = document.getElementById(`Service-Couple${idSuffix}`);
-        const couplePackage = document.getElementById(`Package-Couple${idSuffix}`);
-        const coupleMassage = document.getElementById(`Massage-Couple${idSuffix}`);
+        const elements = {
+            coupleService: document.getElementById(`Service-Couple${idSuffix}`),
+            couplePackage: document.getElementById(`Package-Couple${idSuffix}`),
+            couplePackageLabel: document.getElementById(`Package-Couple${suffix}-Label`),
+            spaDelSolDreamInfoCouple: document.getElementById(`Spa-Del-Sol-Dream-Info-Couple${idSuffix}`),
+            otherPackagesInfoCouple: document.getElementById(`Other-Packages-Info-Couple${idSuffix}`),
+            coupleMassage: document.getElementById(`Massage-Couple${idSuffix}`),
+            coupleMassageLabel: document.getElementById(`Massage-Couple${suffix}-Label`),
+            massageDurationACouple: document.getElementById(`Duration-A-Couple${idSuffix}`),
+            massageDurationACoupleLabel: document.getElementById(`Duration-A-Couple${suffix}-Label`),
+            massageDurationBCouple: document.getElementById(`Duration-B-Couple${idSuffix}`),
+            massageDurationBCoupleLabel: document.getElementById(`Duration-B-Couple${suffix}-Label`),
+            prenatalMassageCouple: document.getElementById(`Prenatal-Massage-Couple${idSuffix}`),
+            prenatalMassageCoupleLabel: document.getElementById(`Prenatal-Massage-Couple${suffix}-Label`),
+            combinationSelectsWrapperCouple: document.getElementById(`Combination-Selects-Wrapper-Couple${idSuffix}`),
+            combinationGuest1CoupleLabel: document.getElementById(`Combination-Guest-1-Couple${suffix}-Label`),
+            combinationGuest2CoupleLabel: document.getElementById(`Combination-Guest-2-Couple${suffix}-Label`),
+            differentMassagesSelectsWrapperCouple: document.getElementById(`Different-Massages-Selects-Wrapper-Couple${idSuffix}`),
+            massageGuest1CoupleLabel: document.getElementById(`Massage-Guest-1-Couple${suffix}-Label`),
+            massageGuest2CoupleLabel: document.getElementById(`Massage-Guest-2-Couple${suffix}-Label`),
+            durationAGuest1And2Couple: document.getElementById(`Duration-A-Guest-1-And-2-Couple${idSuffix}`),
+            durationAGuest1And2CoupleLabel: document.getElementById(`Duration-A-Guest-1-And-2-Couple${suffix}-Label`),
+            facialSelectsWrapperCouple: document.getElementById(`Facial-Selects-Wrapper-Couple${idSuffix}`),
+            facialGuest1CoupleLabel: document.getElementById(`Facial-Guest-1-Couple${suffix}-Label`),
+            facialGuest2CoupleLabel: document.getElementById(`Facial-Guest-2-Couple${suffix}-Label`),
+            facialAddOnGuest1Couple: document.getElementById(`Facial-Add-On-Guest-1-Couple${idSuffix}`),
+            facialAddOnGuest1CoupleLabel: document.getElementById(`Facial-Add-On-Guest-1-Couple${suffix}-Label`),
+            facialAddOnGuest2Couple: document.getElementById(`Facial-Add-On-Guest-2-Couple${idSuffix}`),
+            facialAddOnGuest2CoupleLabel: document.getElementById(`Facial-Add-On-Guest-2-Couple${suffix}-Label`),
+            bodyTreatmentsSelectsWrapperCouple: document.getElementById(`Body-Treatments-Selects-Wrapper-Couple${idSuffix}`),
+            bodyTreatmentGuest1CoupleLabel: document.getElementById(`Body-Treatment-Guest-1-Couple${suffix}-Label`),
+            bodyTreatmentGuest2CoupleLabel: document.getElementById(`Body-Treatment-Guest-2-Couple${suffix}-Label`),
+            otherServicesInfoCouple: document.getElementById(`Other-Services-Info-Couple${idSuffix}`)
+        };
 
         function resetAndHideChildren(parentSelect) {
+            if (!parentSelect) return;
             switch (parentSelect.id) {
                 case `Service-Couple${idSuffix}`:
                     resetFields([
-                        `Package-Couple${idSuffix}`,
-                        `Spa-Del-Sol-Dream-Info-Couple${idSuffix}`,
-                        `Other-Packages-Info-Couple${idSuffix}`,
-                        `Massage-Couple${idSuffix}`,
-                        `Duration-A-Couple${idSuffix}`,
-                        `Duration-B-Couple${idSuffix}`,
-                        `Prenatal-Massage-Couple${idSuffix}`,
-                        `Combination-Guest-1-Couple${idSuffix}`,
-                        `Combination-Guest-2-Couple${idSuffix}`,
-                        `Massage-Guest-1-Couple${idSuffix}`,
-                        `Massage-Guest-2-Couple${idSuffix}`,
-                        `Duration-A-Guest-1-And-2-Couple${idSuffix}`,
-                        `Facial-Guest-1-Couple${idSuffix}`,
-                        `Facial-Guest-2-Couple${idSuffix}`,
-                        `Facial-Add-On-Guest-1-Couple${idSuffix}`,
-                        `Facial-Add-On-Guest-2-Couple${idSuffix}`,
-                        `Body-Treatment-Guest-1-Couple${idSuffix}`,
-                        `Body-Treatment-Guest-2-Couple${idSuffix}`,
-                        `Other-Services-Info-Couple${idSuffix}`
+                        elements.couplePackage,
+                        elements.spaDelSolDreamInfoCouple,
+                        elements.otherPackagesInfoCouple,
+                        elements.coupleMassage,
+                        elements.massageDurationACouple,
+                        elements.massageDurationBCouple,
+                        elements.prenatalMassageCouple,
+                        document.getElementById(`Combination-Guest-1-Couple${idSuffix}`),
+                        document.getElementById(`Combination-Guest-2-Couple${idSuffix}`),
+                        document.getElementById(`Massage-Guest-1-Couple${idSuffix}`),
+                        document.getElementById(`Massage-Guest-2-Couple${idSuffix}`),
+                        elements.durationAGuest1And2Couple,
+                        document.getElementById(`Facial-Guest-1-Couple${idSuffix}`),
+                        document.getElementById(`Facial-Guest-2-Couple${idSuffix}`),
+                        elements.facialAddOnGuest1Couple,
+                        elements.facialAddOnGuest2Couple,
+                        document.getElementById(`Body-Treatment-Guest-1-Couple${idSuffix}`),
+                        document.getElementById(`Body-Treatment-Guest-2-Couple${idSuffix}`),
+                        elements.otherServicesInfoCouple
                     ]);
                     hideFields([
-                        `Service-Couple${suffix}-Label`,
-                        `Package-Couple${suffix}-Label`,
-                        `Massage-Couple${suffix}-Label`,
-                        `Duration-A-Couple${suffix}-Label`,
-                        `Duration-B-Couple${suffix}-Label`,
-                        `Prenatal-Massage-Couple${suffix}-Label`,
-                        `Combination-Guest-1-Couple${suffix}-Label`,
-                        `Combination-Guest-2-Couple${suffix}-Label`,
-                        `Massage-Guest-1-Couple${suffix}-Label`,
-                        `Massage-Guest-2-Couple${suffix}-Label`,
-                        `Duration-A-Guest-1-And-2-Couple${suffix}-Label`,
-                        `Facial-Guest-1-Couple${suffix}-Label`,
-                        `Facial-Guest-2-Couple${suffix}-Label`,
-                        `Facial-Add-On-Guest-1-Couple${suffix}-Label`,
-                        `Facial-Add-On-Guest-2-Couple${suffix}-Label`,
-                        `Body-Treatment-Guest-1-Couple${suffix}-Label`,
-                        `Body-Treatment-Guest-2-Couple${suffix}-Label`
+                        elements.couplePackageLabel,
+                        elements.coupleMassageLabel,
+                        elements.massageDurationACoupleLabel,
+                        elements.massageDurationBCoupleLabel,
+                        elements.prenatalMassageCoupleLabel,
+                        elements.combinationGuest1CoupleLabel,
+                        elements.combinationGuest2CoupleLabel,
+                        elements.massageGuest1CoupleLabel,
+                        elements.massageGuest2CoupleLabel,
+                        elements.durationAGuest1And2CoupleLabel,
+                        elements.facialGuest1CoupleLabel,
+                        elements.facialGuest2CoupleLabel,
+                        elements.facialAddOnGuest1CoupleLabel,
+                        elements.facialAddOnGuest2CoupleLabel,
+                        elements.bodyTreatmentGuest1CoupleLabel,
+                        elements.bodyTreatmentGuest2CoupleLabel
                     ]);
                     break;
 
                 case `Package-Couple${idSuffix}`:
-                    resetFields([`Spa-Del-Sol-Dream-Info-Couple${idSuffix}`, `Other-Packages-Info-Couple${idSuffix}`]);
+                    resetFields([elements.spaDelSolDreamInfoCouple, elements.otherPackagesInfoCouple]);
                     break;
 
                 case `Massage-Couple${idSuffix}`:
                     resetFields([
-                        `Duration-A-Couple${idSuffix}`,
-                        `Duration-B-Couple${idSuffix}`,
-                        `Prenatal-Massage-Couple${idSuffix}`,
-                        `Combination-Guest-1-Couple${idSuffix}`,
-                        `Combination-Guest-2-Couple${idSuffix}`,
-                        `Massage-Guest-1-Couple${idSuffix}`,
-                        `Massage-Guest-2-Couple${idSuffix}`,
-                        `Duration-A-Guest-1-And-2-Couple${idSuffix}`
+                        elements.massageDurationACouple,
+                        elements.massageDurationBCouple,
+                        elements.prenatalMassageCouple,
+                        document.getElementById(`Combination-Guest-1-Couple${idSuffix}`),
+                        document.getElementById(`Combination-Guest-2-Couple${idSuffix}`),
+                        document.getElementById(`Massage-Guest-1-Couple${idSuffix}`),
+                        document.getElementById(`Massage-Guest-2-Couple${idSuffix}`),
+                        elements.durationAGuest1And2Couple
                     ]);
                     hideFields([
-                        `Duration-A-Couple${suffix}-Label`,
-                        `Duration-B-Couple${suffix}-Label`,
-                        `Prenatal-Massage-Couple${suffix}-Label`,
-                        `Combination-Guest-1-Couple${suffix}-Label`,
-                        `Combination-Guest-2-Couple${suffix}-Label`,
-                        `Massage-Guest-1-Couple${suffix}-Label`,
-                        `Massage-Guest-2-Couple${suffix}-Label`,
-                        `Duration-A-Guest-1-And-2-Couple${suffix}-Label`
+                        elements.massageDurationACoupleLabel,
+                        elements.massageDurationBCoupleLabel,
+                        elements.prenatalMassageCoupleLabel,
+                        elements.combinationGuest1CoupleLabel,
+                        elements.combinationGuest2CoupleLabel,
+                        elements.massageGuest1CoupleLabel,
+                        elements.massageGuest2CoupleLabel,
+                        elements.durationAGuest1And2CoupleLabel
                     ]);
                     break;
 
                 case `Facial-Guest-1-Couple${idSuffix}`:
-                    resetFields([`Facial-Add-On-Guest-1-Couple${idSuffix}`]);
-                    hideFields([`Facial-Add-On-Guest-1-Couple${suffix}-Label`]);
+                    resetFields([elements.facialAddOnGuest1Couple]);
+                    hideFields([elements.facialAddOnGuest1CoupleLabel]);
                     break;
 
                 case `Facial-Guest-2-Couple${idSuffix}`:
-                    resetFields([`Facial-Add-On-Guest-2-Couple${idSuffix}`]);
-                    hideFields([`Facial-Add-On-Guest-2-Couple${suffix}-Label`]);
+                    resetFields([elements.facialAddOnGuest2Couple]);
+                    hideFields([elements.facialAddOnGuest2CoupleLabel]);
                     break;
             }
         }
 
         function hideConditionals() {
             hideFields([
-                `Package-Couple${suffix}`,
-                `Package-Couple${suffix}-Label`,
-                `Spa-Del-Sol-Dream-Info-Couple${suffix}`,
-                `Other-Packages-Info-Couple${suffix}`,
-                `Massage-Couple${suffix}`,
-                `Massage-Couple${suffix}-Label`,
-                `Duration-A-Couple${suffix}`,
-                `Duration-A-Couple${suffix}-Label`,
-                `Duration-B-Couple${suffix}`,
-                `Duration-B-Couple${suffix}-Label`,
-                `Prenatal-Massage-Couple${suffix}`,
-                `Prenatal-Massage-Couple${suffix}-Label`,
-                `Combination-Selects-Wrapper-Couple${suffix}`,
-                `Combination-Guest-1-Couple${suffix}-Label`,
-                `Combination-Guest-2-Couple${suffix}-Label`,
-                `Different-Massages-Selects-Wrapper-Couple${suffix}`,
-                `Massage-Guest-1-Couple${suffix}-Label`,
-                `Massage-Guest-2-Couple${suffix}-Label`,
-                `Duration-A-Guest-1-And-2-Couple${suffix}`,
-                `Duration-A-Guest-1-And-2-Couple${suffix}-Label`,
-                `Facial-Selects-Wrapper-Couple${suffix}`,
-                `Facial-Guest-1-Couple${suffix}-Label`,
-                `Facial-Guest-2-Couple${suffix}-Label`,
-                `Facial-Add-On-Guest-1-Couple${suffix}`,
-                `Facial-Add-On-Guest-1-Couple${suffix}-Label`,
-                `Facial-Add-On-Guest-2-Couple${suffix}`,
-                `Facial-Add-On-Guest-2-Couple${suffix}-Label`,
-                `Body-Treatments-Selects-Wrapper-Couple${suffix}`,
-                `Body-Treatment-Guest-1-Couple${suffix}-Label`,
-                `Body-Treatment-Guest-2-Couple${suffix}-Label`,
-                `Other-Services-Info-Couple${suffix}`
+                elements.couplePackage,
+                elements.couplePackageLabel,
+                elements.spaDelSolDreamInfoCouple,
+                elements.otherPackagesInfoCouple,
+                elements.coupleMassage,
+                elements.coupleMassageLabel,
+                elements.massageDurationACouple,
+                elements.massageDurationACoupleLabel,
+                elements.massageDurationBCouple,
+                elements.massageDurationBCoupleLabel,
+                elements.prenatalMassageCouple,
+                elements.prenatalMassageCoupleLabel,
+                elements.combinationSelectsWrapperCouple,
+                elements.combinationGuest1CoupleLabel,
+                elements.combinationGuest2CoupleLabel,
+                elements.differentMassagesSelectsWrapperCouple,
+                elements.massageGuest1CoupleLabel,
+                elements.massageGuest2CoupleLabel,
+                elements.durationAGuest1And2Couple,
+                elements.durationAGuest1And2CoupleLabel,
+                elements.facialSelectsWrapperCouple,
+                elements.facialGuest1CoupleLabel,
+                elements.facialGuest2CoupleLabel,
+                elements.facialAddOnGuest1Couple,
+                elements.facialAddOnGuest1CoupleLabel,
+                elements.facialAddOnGuest2Couple,
+                elements.facialAddOnGuest2CoupleLabel,
+                elements.bodyTreatmentsSelectsWrapperCouple,
+                elements.bodyTreatmentGuest1CoupleLabel,
+                elements.bodyTreatmentGuest2CoupleLabel,
+                elements.otherServicesInfoCouple
             ]);
         }
 
         function handleConditionals() {
             hideConditionals();
 
-            const coupleServiceValue = coupleService.value;
+            const coupleServiceValue = elements.coupleService?.value;
             if (coupleServiceValue === 'Package') {
-                showFields([`Package-Couple${suffix}`, `Package-Couple${suffix}-Label`]);
+                showFields([elements.couplePackage, elements.couplePackageLabel]);
             } else if (coupleServiceValue === 'Massage') {
-                showFields([`Massage-Couple${suffix}`, `Massage-Couple${suffix}-Label`]);
+                showFields([elements.coupleMassage, elements.coupleMassageLabel]);
             } else if (coupleServiceValue === 'Facial') {
-                showFields([`Facial-Selects-Wrapper-Couple${suffix}`, `Facial-Guest-1-Couple${suffix}-Label`, `Facial-Guest-2-Couple${suffix}-Label`]);
+                showFields([elements.facialSelectsWrapperCouple, elements.facialGuest1CoupleLabel, elements.facialGuest2CoupleLabel]);
             } else if (coupleServiceValue === 'Body treatment') {
-                showFields([`Body-Treatments-Selects-Wrapper-Couple${suffix}`, `Body-Treatment-Guest-1-Couple${suffix}-Label`, `Body-Treatment-Guest-2-Couple${suffix}-Label`]);
+                showFields([elements.bodyTreatmentsSelectsWrapperCouple, elements.bodyTreatmentGuest1CoupleLabel, elements.bodyTreatmentGuest2CoupleLabel]);
             } else if (coupleServiceValue === 'Other') {
-                showFields([`Other-Services-Info-Couple${suffix}`]);
+                showFields([elements.otherServicesInfoCouple]);
             }
 
-            const couplePackageValue = couplePackage.value;
+            const couplePackageValue = elements.couplePackage?.value;
             if (couplePackageValue === '2x Spa del Sol Dream') {
-                showFields([`Spa-Del-Sol-Dream-Info-Couple${suffix}`]);
+                showFields([elements.spaDelSolDreamInfoCouple]);
             } else if (couplePackageValue === 'Two different packages') {
-                showFields([`Other-Packages-Info-Couple${suffix}`]);
+                showFields([elements.otherPackagesInfoCouple]);
             }
 
-            const coupleMassageValue = coupleMassage.value;
+            const coupleMassageValue = elements.coupleMassage?.value;
             if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(coupleMassageValue)) {
-                showFields([`Duration-A-Couple${suffix}`, `Duration-A-Couple${suffix}-Label`]);
+                showFields([elements.massageDurationACouple, elements.massageDurationACoupleLabel]);
             } else if (coupleMassageValue === 'Reflexology') {
-                showFields([`Duration-B-Couple${suffix}`, `Duration-B-Couple${suffix}-Label`]);
+                showFields([elements.massageDurationBCouple, elements.massageDurationBCoupleLabel]);
             } else if (coupleMassageValue === 'Prenatal and other') {
-                showFields([`Prenatal-Massage-Couple${suffix}`, `Prenatal-Massage-Couple${suffix}-Label`]);
+                showFields([elements.prenatalMassageCouple, elements.prenatalMassageCoupleLabel]);
             } else if (coupleMassageValue === 'Relaxing Combination') {
-                showFields([`Combination-Selects-Wrapper-Couple${suffix}`, `Combination-Guest-1-Couple${suffix}-Label`, `Combination-Guest-2-Couple${suffix}-Label`]);
+                showFields([elements.combinationSelectsWrapperCouple, elements.combinationGuest1CoupleLabel, elements.combinationGuest2CoupleLabel]);
             } else if (coupleMassageValue === 'Two different types') {
-                showFields([`Different-Massages-Selects-Wrapper-Couple${suffix}`, `Massage-Guest-1-Couple${suffix}-Label`, `Massage-Guest-2-Couple${suffix}-Label`]);
+                showFields([elements.differentMassagesSelectsWrapperCouple, elements.massageGuest1CoupleLabel, elements.massageGuest2CoupleLabel]);
             }
 
-            const massageGuest1Value = document.getElementById(`Massage-Guest-1-Couple${idSuffix}`).value;
-            const massageGuest2Value = document.getElementById(`Massage-Guest-2-Couple${idSuffix}`).value;
+            const massageGuest1Value = document.getElementById(`Massage-Guest-1-Couple${idSuffix}`)?.value;
+            const massageGuest2Value = document.getElementById(`Massage-Guest-2-Couple${idSuffix}`)?.value;
             if (massageGuest1Value !== '' && massageGuest2Value !== '') {
-                showFields([`Duration-A-Guest-1-And-2-Couple${suffix}`, `Duration-A-Guest-1-And-2-Couple${suffix}-Label`]);
+                showFields([elements.durationAGuest1And2Couple, elements.durationAGuest1And2CoupleLabel]);
             }
 
-            const facialGuest1Value = document.getElementById(`Facial-Guest-1-Couple${idSuffix}`).value;
+            const facialGuest1Value = document.getElementById(`Facial-Guest-1-Couple${idSuffix}`)?.value;
             if (facialGuest1Value === 'Sol Janssen') {
-                showFields([`Facial-Add-On-Guest-1-Couple${suffix}`, `Facial-Add-On-Guest-1-Couple${suffix}-Label`]);
+                showFields([elements.facialAddOnGuest1Couple, elements.facialAddOnGuest1CoupleLabel]);
             }
 
-            const facialGuest2Value = document.getElementById(`Facial-Guest-2-Couple${idSuffix}`).value;
+            const facialGuest2Value = document.getElementById(`Facial-Guest-2-Couple${idSuffix}`)?.value;
             if (facialGuest2Value === 'Sol Janssen') {
-                showFields([`Facial-Add-On-Guest-2-Couple${suffix}`, `Facial-Add-On-Guest-2-Couple${suffix}-Label`]);
+                showFields([elements.facialAddOnGuest2Couple, elements.facialAddOnGuest2CoupleLabel]);
             }
         }
 
-        coupleService.addEventListener('change', function() {
+        elements.coupleService?.addEventListener('change', function() {
             resetAndHideChildren(this);
             handleConditionals();
         });
-        couplePackage.addEventListener('change', handleConditionals);
-        coupleMassage.addEventListener('change', handleConditionals);
-        document.getElementById(`Massage-Guest-1-Couple${idSuffix}`).addEventListener('change', handleConditionals);
-        document.getElementById(`Massage-Guest-2-Couple${idSuffix}`).addEventListener('change', handleConditionals);
-        document.getElementById(`Facial-Guest-1-Couple${idSuffix}`).addEventListener('change', handleConditionals);
-        document.getElementById(`Facial-Guest-2-Couple${idSuffix}`).addEventListener('change', handleConditionals);
+        elements.couplePackage?.addEventListener('change', handleConditionals);
+        elements.coupleMassage?.addEventListener('change', handleConditionals);
+        document.getElementById(`Massage-Guest-1-Couple${idSuffix}`)?.addEventListener('change', handleConditionals);
+        document.getElementById(`Massage-Guest-2-Couple${idSuffix}`)?.addEventListener('change', handleConditionals);
+        document.getElementById(`Facial-Guest-1-Couple${idSuffix}`)?.addEventListener('change', handleConditionals);
+        document.getElementById(`Facial-Guest-2-Couple${idSuffix}`)?.addEventListener('change', handleConditionals);
 
         hideConditionals(); // Initial hide
     });
 
     function resetFields(fields) {
-        fields.forEach(fieldId => resetField(document.getElementById(fieldId)));
+        fields.forEach(field => {
+            if (field) resetField(field);
+        });
     }
 
     function hideFields(fields) {
-        fields.forEach(fieldId => document.getElementById(fieldId).style.display = 'none');
+        fields.forEach(field => {
+            if (field) field.style.display = 'none';
+        });
     }
 
     function showFields(fields) {
-        fields.forEach(fieldId => document.getElementById(fieldId).style.display = 'block');
+        fields.forEach(field => {
+            if (field) field.style.display = 'block';
+        });
     }
 });
 
@@ -910,137 +947,162 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     singleSets.forEach(({ suffix, idSuffix }) => {
-        const singleService = document.getElementById(`Service-Single${idSuffix}`);
-        const singlePackage = document.getElementById(`Package-Single${idSuffix}`);
-        const singleMassage = document.getElementById(`Massage-Single${idSuffix}`);
-        const singleFacial = document.getElementById(`Facial-Single${idSuffix}`);
+        const elements = {
+            singleService: document.getElementById(`Service-Single${idSuffix}`),
+            singlePackage: document.getElementById(`Package-Single${idSuffix}`),
+            singlePackageLabel: document.getElementById(`Package-Single${suffix}-Label`),
+            spaDelSolDreamInfo: document.getElementById(`Spa-Del-Sol-Dream-Info-Single${idSuffix}`),
+            singleMassage: document.getElementById(`Massage-Single${idSuffix}`),
+            singleMassageLabel: document.getElementById(`Massage-Single${suffix}-Label`),
+            massageDurationA: document.getElementById(`Duration-A-Single${idSuffix}`),
+            massageDurationALabel: document.getElementById(`Duration-A-Single${suffix}-Label`),
+            massageDurationB: document.getElementById(`Duration-B-Single${idSuffix}`),
+            massageDurationBLabel: document.getElementById(`Duration-B-Single${suffix}-Label`),
+            combinationType: document.getElementById(`Combination-Single${idSuffix}`),
+            combinationTypeLabel: document.getElementById(`Combination-Single${suffix}-Label`),
+            singleFacial: document.getElementById(`Facial-Single${idSuffix}`),
+            singleFacialLabel: document.getElementById(`Facial-Single${suffix}-Label`),
+            facialAddOn: document.getElementById(`Add-On-Single${idSuffix}`),
+            facialAddOnLabel: document.getElementById(`Add-On-Single${suffix}-Label`),
+            bodyTreatment: document.getElementById(`Body-Treatment-Single${idSuffix}`),
+            bodyTreatmentLabel: document.getElementById(`Body-Treatment-Single${suffix}-Label`),
+            waxInfo: document.getElementById(`Wax-Info-Single${idSuffix}`),
+            multipleServicesInfo: document.getElementById(`Multiple-Services-Info-Single${idSuffix}`)
+        };
 
         function resetAndHideChildren(parentSelect) {
+            if (!parentSelect) return;
             switch (parentSelect.id) {
                 case `Service-Single${idSuffix}`:
                     resetFields([
-                        `Package-Single${idSuffix}`,
-                        `Spa-Del-Sol-Dream-Info-Single${idSuffix}`,
-                        `Massage-Single${idSuffix}`,
-                        `Duration-A-Single${idSuffix}`,
-                        `Duration-B-Single${idSuffix}`,
-                        `Combination-Single${idSuffix}`,
-                        `Facial-Single${idSuffix}`,
-                        `Add-On-Single${idSuffix}`,
-                        `Body-Treatment-Single${idSuffix}`,
-                        `Wax-Info-Single${idSuffix}`,
-                        `Multiple-Services-Info-Single${idSuffix}`
+                        elements.singlePackage,
+                        elements.spaDelSolDreamInfo,
+                        elements.singleMassage,
+                        elements.massageDurationA,
+                        elements.massageDurationB,
+                        elements.combinationType,
+                        elements.singleFacial,
+                        elements.facialAddOn,
+                        elements.bodyTreatment,
+                        elements.waxInfo,
+                        elements.multipleServicesInfo
                     ]);
                     hideFields([
-                        `Package-Single${suffix}-Label`,
-                        `Massage-Single${suffix}-Label`,
-                        `Duration-A-Single${suffix}-Label`,
-                        `Duration-B-Single${suffix}-Label`,
-                        `Combination-Single${suffix}-Label`,
-                        `Facial-Single${suffix}-Label`,
-                        `Add-On-Single${suffix}-Label`,
-                        `Body-Treatment-Single${suffix}-Label`
+                        elements.singlePackageLabel,
+                        elements.singleMassageLabel,
+                        elements.massageDurationALabel,
+                        elements.massageDurationBLabel,
+                        elements.combinationTypeLabel,
+                        elements.singleFacialLabel,
+                        elements.facialAddOnLabel,
+                        elements.bodyTreatmentLabel
                     ]);
                     break;
 
                 case `Package-Single${idSuffix}`:
-                    resetFields([`Spa-Del-Sol-Dream-Info-Single${idSuffix}`]);
+                    resetFields([elements.spaDelSolDreamInfo]);
                     break;
 
                 case `Massage-Single${idSuffix}`:
-                    resetFields([`Duration-A-Single${idSuffix}`, `Duration-B-Single${idSuffix}`, `Combination-Single${idSuffix}`]);
-                    hideFields([`Duration-A-Single${suffix}-Label`, `Duration-B-Single${suffix}-Label`, `Combination-Single${suffix}-Label`]);
+                    resetFields([elements.massageDurationA, elements.massageDurationB, elements.combinationType]);
+                    hideFields([elements.massageDurationALabel, elements.massageDurationBLabel, elements.combinationTypeLabel]);
                     break;
 
                 case `Facial-Single${idSuffix}`:
-                    resetFields([`Add-On-Single${idSuffix}`]);
-                    hideFields([`Add-On-Single${suffix}-Label`]);
+                    resetFields([elements.facialAddOn]);
+                    hideFields([elements.facialAddOnLabel]);
                     break;
             }
         }
 
         function hideConditionals() {
             hideFields([
-                `Package-Single${suffix}`,
-                `Package-Single${suffix}-Label`,
-                `Spa-Del-Sol-Dream-Info-Single${suffix}`,
-                `Massage-Single${suffix}`,
-                `Massage-Single${suffix}-Label`,
-                `Duration-A-Single${suffix}`,
-                `Duration-A-Single${suffix}-Label`,
-                `Duration-B-Single${suffix}`,
-                `Duration-B-Single${suffix}-Label`,
-                `Combination-Single${suffix}`,
-                `Combination-Single${suffix}-Label`,
-                `Facial-Single${suffix}`,
-                `Facial-Single${suffix}-Label`,
-                `Add-On-Single${suffix}`,
-                `Add-On-Single${suffix}-Label`,
-                `Body-Treatment-Single${suffix}`,
-                `Body-Treatment-Single${suffix}-Label`,
-                `Wax-Info-Single${suffix}`,
-                `Multiple-Services-Info-Single${suffix}`
+                elements.singlePackage,
+                elements.singlePackageLabel,
+                elements.spaDelSolDreamInfo,
+                elements.singleMassage,
+                elements.singleMassageLabel,
+                elements.massageDurationA,
+                elements.massageDurationALabel,
+                elements.massageDurationB,
+                elements.massageDurationBLabel,
+                elements.combinationType,
+                elements.combinationTypeLabel,
+                elements.singleFacial,
+                elements.singleFacialLabel,
+                elements.facialAddOn,
+                elements.facialAddOnLabel,
+                elements.bodyTreatment,
+                elements.bodyTreatmentLabel,
+                elements.waxInfo,
+                elements.multipleServicesInfo
             ]);
         }
 
         function handleConditionals() {
             hideConditionals();
 
-            const singleServiceValue = singleService.value;
+            const singleServiceValue = elements.singleService?.value;
             if (singleServiceValue === 'Package') {
-                showFields([`Package-Single${suffix}`, `Package-Single${suffix}-Label`]);
+                showFields([elements.singlePackage, elements.singlePackageLabel]);
             } else if (singleServiceValue === 'Massage') {
-                showFields([`Massage-Single${suffix}`, `Massage-Single${suffix}-Label`]);
+                showFields([elements.singleMassage, elements.singleMassageLabel]);
             } else if (singleServiceValue === 'Facial') {
-                showFields([`Facial-Single${suffix}`, `Facial-Single${suffix}-Label`]);
+                showFields([elements.singleFacial, elements.singleFacialLabel]);
             } else if (singleServiceValue === 'Body treatment') {
-                showFields([`Body-Treatment-Single${suffix}`, `Body-Treatment-Single${suffix}-Label`]);
+                showFields([elements.bodyTreatment, elements.bodyTreatmentLabel]);
             } else if (singleServiceValue === 'Wax') {
-                showFields([`Wax-Info-Single${suffix}`]);
+                showFields([elements.waxInfo]);
             } else if (singleServiceValue === 'Multiple services') {
-                showFields([`Multiple-Services-Info-Single${suffix}`]);
+                showFields([elements.multipleServicesInfo]);
             }
 
-            const singlePackageValue = singlePackage.value;
+            const singlePackageValue = elements.singlePackage?.value;
             if (singlePackageValue === 'Spa del Sol Dream') {
-                showFields([`Spa-Del-Sol-Dream-Info-Single${suffix}`]);
+                showFields([elements.spaDelSolDreamInfo]);
             }
 
-            const singleMassageValue = singleMassage.value;
+            const singleMassageValue = elements.singleMassage?.value;
             if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue)) {
-                showFields([`Duration-A-Single${suffix}`, `Duration-A-Single${suffix}-Label`]);
+                showFields([elements.massageDurationA, elements.massageDurationALabel]);
             } else if (singleMassageValue === 'Reflexology') {
-                showFields([`Duration-B-Single${suffix}`, `Duration-B-Single${suffix}-Label`]);
+                showFields([elements.massageDurationB, elements.massageDurationBLabel]);
             } else if (singleMassageValue === 'Relaxing Combination') {
-                showFields([`Combination-Single${suffix}`, `Combination-Single${suffix}-Label`]);
+                showFields([elements.combinationType, elements.combinationTypeLabel]);
             }
 
-            const singleFacialValue = singleFacial.value;
+            const singleFacialValue = elements.singleFacial?.value;
             if (singleFacialValue === 'Sol Janssen') {
-                showFields([`Add-On-Single${suffix}`, `Add-On-Single${suffix}-Label`]);
+                showFields([elements.facialAddOn, elements.facialAddOnLabel]);
             }
         }
 
-        singleService.addEventListener('change', function() {
+        elements.singleService?.addEventListener('change', function() {
             resetAndHideChildren(this);
             handleConditionals();
         });
-        singlePackage.addEventListener('change', handleConditionals);
-        singleMassage.addEventListener('change', handleConditionals);
-        singleFacial.addEventListener('change', handleConditionals);
+        elements.singlePackage?.addEventListener('change', handleConditionals);
+        elements.singleMassage?.addEventListener('change', handleConditionals);
+        elements.singleFacial?.addEventListener('change', handleConditionals);
 
         hideConditionals(); // Initial hide
     });
 
     function resetFields(fields) {
-        fields.forEach(fieldId => resetField(document.getElementById(fieldId)));
+        fields.forEach(field => {
+            if (field) resetField(field);
+        });
     }
 
     function hideFields(fields) {
-        fields.forEach(fieldId => document.getElementById(fieldId).style.display = 'none');
+        fields.forEach(field => {
+            if (field) field.style.display = 'none';
+        });
     }
 
     function showFields(fields) {
-        fields.forEach(fieldId => document.getElementById(fieldId).style.display = 'block');
+        fields.forEach(field => {
+            if (field) field.style.display = 'block';
+        });
     }
 });
