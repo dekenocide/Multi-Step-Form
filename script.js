@@ -1844,6 +1844,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // SINGLE SERVICE SET 1 CONDITIONALS SCRIPT
 
+    document.addEventListener('DOMContentLoaded', function() {
     const singleService1 = document.getElementById('Service-Single-1');
     const singleServiceLabel1 = document.getElementById('Service-Single-1-Label');
     const singlePackage1 = document.getElementById('Package-Single-1');
@@ -1864,7 +1865,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const bodyTreatment1 = document.getElementById('Body-Treatment-Single-1');
     const bodyTreatmentLabel1 = document.getElementById('Body-Treatment-Single-1-Label');
     const waxInfo1 = document.getElementById('Wax-Info-Single-1');
-    const multipleServicesInfo1 = document.getElementById('Multiple-Services-Info-Single-1');
+    const multipleServicesInfo1 = document.getElementById('Multiple-Services-Info-Single-1');  
 
     function resetAndHideChildrenSingleSet1(parentSelect) {
         switch (parentSelect.id) {
@@ -1933,7 +1934,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleSingleSet1Conditionals() {
-        hideSingleSet1Conditionals();
+        hideSingleSet1Conditionals(); // Hide all fields first
 
         const singleServiceValue1 = singleService1.value;
         if (singleServiceValue1 === 'Package') {
@@ -1983,10 +1984,14 @@ document.addEventListener('DOMContentLoaded', function () {
         handleSingleSet1Conditionals();
     });
     singlePackage1.addEventListener('change', handleSingleSet1Conditionals);
-    singleMassage1.addEventListener('change', handleSingleSet1Conditionals);
+    singleMassage1.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet1(this); // Reset and hide fields first
+        handleSingleSet1Conditionals(); // Reapply conditionals based on new value
+    });
     singleFacial1.addEventListener('change', handleSingleSet1Conditionals);
 
     hideSingleSet1Conditionals(); // Initial hide
+});
 
     // SINGLE SERVICE SET 2 CONDITIONALS SCRIPT
 
