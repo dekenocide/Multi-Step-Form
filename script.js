@@ -1062,622 +1062,171 @@ document.addEventListener('DOMContentLoaded', function () {
         hideCoupleSetConditionals(setId); // Initial hide of all elements
     });
 
-    // SINGLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
+    // SINGLE SERVICE SETS CONDITIONALS SCRIPT
 
-    const singleService = document.getElementById('Service-Single');
-    const singleServiceLabel = document.getElementById('Service-Single-Label');
-    const singlePackage = document.getElementById('Package-Single');
-    const singlePackageLabel = document.getElementById('Package-Single-Label');
-    const spaDelSolDreamInfo = document.getElementById('Spa-Del-Sol-Dream-Info-Single');
-    const singleMassage = document.getElementById('Massage-Single');
-    const singleMassageLabel = document.getElementById('Massage-Single-Label');
-    const massageDurationA = document.getElementById('Duration-A-Single');
-    const massageDurationALabel = document.getElementById('Duration-A-Single-Label');
-    const massageDurationB = document.getElementById('Duration-B-Single');
-    const massageDurationBLabel = document.getElementById('Duration-B-Single-Label');
-    const combinationType = document.getElementById('Combination-Single');
-    const combinationTypeLabel = document.getElementById('Combination-Single-Label');
-    const singleFacial = document.getElementById('Facial-Single');
-    const singleFacialLabel = document.getElementById('Facial-Single-Label');
-    const facialAddOn = document.getElementById('Add-On-Single');
-    const facialAddOnLabel = document.getElementById('Add-On-Single-Label');
-    const bodyTreatment = document.getElementById('Body-Treatment-Single');
-    const bodyTreatmentLabel = document.getElementById('Body-Treatment-Single-Label');
-    const waxInfo = document.getElementById('Wax-Info-Single');
-    const multipleServicesInfo = document.getElementById('Multiple-Services-Info-Single');
-
-    function resetAndHideChildrenSingleOriginal(parentSelect) {
+    const elementsSingle = {};
+    const labelsSingle = {};
+    
+    ['Single', 'Single-1', 'Single-2', 'Single-3'].forEach(setId => {
+        elementsSingle[setId] = {
+            singlePackage: document.getElementById(`Package-${setId}`),
+            spaDelSolDreamInfo: document.getElementById(`Spa-Del-Sol-Dream-Info-${setId}`),
+            singleMassage: document.getElementById(`Massage-${setId}`),
+            massageDurationA: document.getElementById(`Duration-A-${setId}`),
+            massageDurationB: document.getElementById(`Duration-B-${setId}`),
+            combinationType: document.getElementById(`Combination-${setId}`),
+            singleFacial: document.getElementById(`Facial-${setId}`),
+            facialAddOn: document.getElementById(`Add-On-${setId}`),
+            bodyTreatment: document.getElementById(`Body-Treatment-${setId}`),
+            waxInfo: document.getElementById(`Wax-Info-${setId}`),
+            multipleServicesInfo: document.getElementById(`Multiple-Services-Info-${setId}`)
+        };
+    
+        labelsSingle[setId] = {
+            singlePackageLabel: document.getElementById(`Package-${setId}-Label`),
+            singleMassageLabel: document.getElementById(`Massage-${setId}-Label`),
+            massageDurationALabel: document.getElementById(`Duration-A-${setId}-Label`),
+            massageDurationBLabel: document.getElementById(`Duration-B-${setId}-Label`),
+            combinationTypeLabel: document.getElementById(`Combination-${setId}-Label`),
+            singleFacialLabel: document.getElementById(`Facial-${setId}-Label`),
+            facialAddOnLabel: document.getElementById(`Add-On-${setId}-Label`),
+            bodyTreatmentLabel: document.getElementById(`Body-Treatment-${setId}-Label`)
+        };
+    });
+    
+    // Function to reset fields and hide elements based on the selected parent field for each set
+    function resetAndHideChildrenSingleSet(parentSelect, setId) {
         switch (parentSelect.id) {
-            case 'Service-Single':
-                resetField(singlePackage);
-                resetField(spaDelSolDreamInfo);
-                resetField(singleMassage);
-                resetField(massageDurationA);
-                resetField(massageDurationB);
-                resetField(combinationType);
-                resetField(singleFacial);
-                resetField(facialAddOn);
-                resetField(bodyTreatment);
-                resetField(waxInfo);
-                resetField(multipleServicesInfo);
-                hideField(singlePackageLabel);
-                hideField(singleMassageLabel);
-                hideField(massageDurationALabel);
-                hideField(massageDurationBLabel);
-                hideField(combinationTypeLabel);
-                hideField(singleFacialLabel);
-                hideField(facialAddOnLabel);
-                hideField(bodyTreatmentLabel);
+            case `Service-${setId}`:
+                resetField(elementsSingle[setId].singlePackage);
+                resetField(elementsSingle[setId].spaDelSolDreamInfo);
+                resetField(elementsSingle[setId].singleMassage);
+                resetField(elementsSingle[setId].massageDurationA);
+                resetField(elementsSingle[setId].massageDurationB);
+                resetField(elementsSingle[setId].combinationType);
+                resetField(elementsSingle[setId].singleFacial);
+                resetField(elementsSingle[setId].facialAddOn);
+                resetField(elementsSingle[setId].bodyTreatment);
+                resetField(elementsSingle[setId].waxInfo);
+                resetField(elementsSingle[setId].multipleServicesInfo);
+                hideField(labelsSingle[setId].singlePackageLabel);
+                hideField(labelsSingle[setId].singleMassageLabel);
+                hideField(labelsSingle[setId].massageDurationALabel);
+                hideField(labelsSingle[setId].massageDurationBLabel);
+                hideField(labelsSingle[setId].combinationTypeLabel);
+                hideField(labelsSingle[setId].singleFacialLabel);
+                hideField(labelsSingle[setId].facialAddOnLabel);
+                hideField(labelsSingle[setId].bodyTreatmentLabel);
                 break;
-
-            case 'Package-Single':
-                resetField(spaDelSolDreamInfo);
+    
+            case `Package-${setId}`:
+                resetField(elementsSingle[setId].spaDelSolDreamInfo);
                 break;
-
-            case 'Massage-Single':
-                resetField(massageDurationA);
-                resetField(massageDurationB);
-                resetField(combinationType);
-                hideField(massageDurationALabel);
-                hideField(massageDurationBLabel);
-                hideField(combinationTypeLabel);
+    
+            case `Massage-${setId}`:
+                resetField(elementsSingle[setId].massageDurationA);
+                resetField(elementsSingle[setId].massageDurationB);
+                resetField(elementsSingle[setId].combinationType);
+                hideField(labelsSingle[setId].massageDurationALabel);
+                hideField(labelsSingle[setId].massageDurationBLabel);
+                hideField(labelsSingle[setId].combinationTypeLabel);
                 break;
-
-            case 'Facial-Single':
-                resetField(facialAddOn);
-                hideField(facialAddOnLabel);
+    
+            case `Facial-${setId}`:
+                resetField(elementsSingle[setId].facialAddOn);
+                hideField(labelsSingle[setId].facialAddOnLabel);
                 break;
         }
     }
-
-    function hideSingleOriginalSetConditionals() {
-        singlePackage.style.display = 'none';
-        singlePackageLabel.style.display = 'none';
-        spaDelSolDreamInfo.style.display = 'none';
-        singleMassage.style.display = 'none';
-        singleMassageLabel.style.display = 'none';
-        massageDurationA.style.display = 'none';
-        massageDurationALabel.style.display = 'none';
-        massageDurationB.style.display = 'none';
-        massageDurationBLabel.style.display = 'none';
-        combinationType.style.display = 'none';
-        combinationTypeLabel.style.display = 'none';
-        singleFacial.style.display = 'none';
-        singleFacialLabel.style.display = 'none';
-        facialAddOn.style.display = 'none';
-        facialAddOnLabel.style.display = 'none';
-        bodyTreatment.style.display = 'none';
-        bodyTreatmentLabel.style.display = 'none';
-        waxInfo.style.display = 'none';
-        multipleServicesInfo.style.display = 'none';
+    
+    // Function to hide all fields for a specific set
+    function hideSingleSetConditionals(setId) {
+        elementsSingle[setId].singlePackage.style.display = 'none';
+        labelsSingle[setId].singlePackageLabel.style.display = 'none';
+        elementsSingle[setId].spaDelSolDreamInfo.style.display = 'none';
+        elementsSingle[setId].singleMassage.style.display = 'none';
+        labelsSingle[setId].singleMassageLabel.style.display = 'none';
+        elementsSingle[setId].massageDurationA.style.display = 'none';
+        labelsSingle[setId].massageDurationALabel.style.display = 'none';
+        elementsSingle[setId].massageDurationB.style.display = 'none';
+        labelsSingle[setId].massageDurationBLabel.style.display = 'none';
+        elementsSingle[setId].combinationType.style.display = 'none';
+        labelsSingle[setId].combinationTypeLabel.style.display = 'none';
+        elementsSingle[setId].singleFacial.style.display = 'none';
+        labelsSingle[setId].singleFacialLabel.style.display = 'none';
+        elementsSingle[setId].facialAddOn.style.display = 'none';
+        labelsSingle[setId].facialAddOnLabel.style.display = 'none';
+        elementsSingle[setId].bodyTreatment.style.display = 'none';
+        labelsSingle[setId].bodyTreatmentLabel.style.display = 'none';
+        elementsSingle[setId].waxInfo.style.display = 'none';
+        elementsSingle[setId].multipleServicesInfo.style.display = 'none';
     }
-
-    function handleSingleOriginalSetConditionals() {
-        hideSingleOriginalSetConditionals(); // Hide all fields first
-
-        const singleServiceValue = singleService.value;
-        if (singleServiceValue === 'Package') {
-            singlePackage.style.display = 'block';
-            singlePackageLabel.style.display = 'block';
-        } else if (singleServiceValue === 'Massage') {
-            singleMassage.style.display = 'block';
-            singleMassageLabel.style.display = 'block';
-        } else if (singleServiceValue === 'Facial') {
-            singleFacial.style.display = 'block';
-            singleFacialLabel.style.display = 'block';
-        } else if (singleServiceValue === 'Body treatment') {
-            bodyTreatment.style.display = 'block';
-            bodyTreatmentLabel.style.display = 'block';
-        } else if (singleServiceValue === 'Wax') {
-            waxInfo.style.display = 'block';
-        } else if (singleServiceValue === 'Multiple services') {
-            multipleServicesInfo.style.display = 'block';
+    
+    // Function to handle conditional display of elements for a specific set
+    function handleSingleSetConditionals(setId) {
+        hideSingleSetConditionals(setId);
+    
+        const serviceValue = document.getElementById(`Service-${setId}`).value;
+        if (serviceValue === 'Package') {
+            elementsSingle[setId].singlePackage.style.display = 'block';
+            labelsSingle[setId].singlePackageLabel.style.display = 'block';
+        } else if (serviceValue === 'Massage') {
+            elementsSingle[setId].singleMassage.style.display = 'block';
+            labelsSingle[setId].singleMassageLabel.style.display = 'block';
+        } else if (serviceValue === 'Facial') {
+            elementsSingle[setId].singleFacial.style.display = 'block';
+            labelsSingle[setId].singleFacialLabel.style.display = 'block';
+        } else if (serviceValue === 'Body treatment') {
+            elementsSingle[setId].bodyTreatment.style.display = 'block';
+            labelsSingle[setId].bodyTreatmentLabel.style.display = 'block';
+        } else if (serviceValue === 'Wax') {
+            elementsSingle[setId].waxInfo.style.display = 'block';
+        } else if (serviceValue === 'Multiple services') {
+            elementsSingle[setId].multipleServicesInfo.style.display = 'block';
         }
-
-        const singlePackageValue = singlePackage.value;
+    
+        const singlePackageValue = elementsSingle[setId].singlePackage.value;
         if (singlePackageValue === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo.style.display = 'block';
+            elementsSingle[setId].spaDelSolDreamInfo.style.display = 'block';
         }
-
-        const singleMassageValue = singleMassage.value;
+    
+        const singleMassageValue = elementsSingle[setId].singleMassage.value;
         if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue)) {
-            massageDurationA.style.display = 'block';
-            massageDurationALabel.style.display = 'block';
+            elementsSingle[setId].massageDurationA.style.display = 'block';
+            labelsSingle[setId].massageDurationALabel.style.display = 'block';
         } else if (singleMassageValue === 'Reflexology') {
-            massageDurationB.style.display = 'block';
-            massageDurationBLabel.style.display = 'block';
+            elementsSingle[setId].massageDurationB.style.display = 'block';
+            labelsSingle[setId].massageDurationBLabel.style.display = 'block';
         } else if (singleMassageValue === 'Relaxing Combination') {
-            combinationType.style.display = 'block';
-            combinationTypeLabel.style.display = 'block';
+            elementsSingle[setId].combinationType.style.display = 'block';
+            labelsSingle[setId].combinationTypeLabel.style.display = 'block';
         }
-
-        const singleFacialValue = singleFacial.value;
+    
+        const singleFacialValue = elementsSingle[setId].singleFacial.value;
         if (singleFacialValue === 'Sol Janssen') {
-            facialAddOn.style.display = 'block';
-            facialAddOnLabel.style.display = 'block';
+            elementsSingle[setId].facialAddOn.style.display = 'block';
+            labelsSingle[setId].facialAddOnLabel.style.display = 'block';
         }
     }
-
-    singleService.addEventListener('change', function() {
-        resetAndHideChildrenSingleOriginal(this);
-        handleSingleOriginalSetConditionals();
-    });
-    singlePackage.addEventListener('change', function() {
-        resetAndHideChildrenSingleOriginal(this);
-        handleSingleOriginalSetConditionals();
-    });
-    singleMassage.addEventListener('change', function() {
-        resetAndHideChildrenSingleOriginal(this);
-        handleSingleOriginalSetConditionals();
-    });
-    singleFacial.addEventListener('change', function() {
-        resetAndHideChildrenSingleOriginal(this);
-        handleSingleOriginalSetConditionals();
-    });
     
-    hideSingleOriginalSetConditionals(); // Initial hide
-
-    // SINGLE SERVICE SET 1 CONDITIONALS SCRIPT
-
-    const singleService1 = document.getElementById('Service-Single-1');
-    const singleServiceLabel1 = document.getElementById('Service-Single-1-Label');
-    const singlePackage1 = document.getElementById('Package-Single-1');
-    const singlePackageLabel1 = document.getElementById('Package-Single-1-Label');
-    const spaDelSolDreamInfo1 = document.getElementById('Spa-Del-Sol-Dream-Info-Single-1');
-    const singleMassage1 = document.getElementById('Massage-Single-1');
-    const singleMassageLabel1 = document.getElementById('Massage-Single-1-Label');
-    const massageDurationA1 = document.getElementById('Duration-A-Single-1');
-    const massageDurationALabel1 = document.getElementById('Duration-A-Single-1-Label');
-    const massageDurationB1 = document.getElementById('Duration-B-Single-1');
-    const massageDurationBLabel1 = document.getElementById('Duration-B-Single-1-Label');
-    const combinationType1 = document.getElementById('Combination-Single-1');
-    const combinationTypeLabel1 = document.getElementById('Combination-Single-1-Label');
-    const singleFacial1 = document.getElementById('Facial-Single-1');
-    const singleFacialLabel1 = document.getElementById('Facial-Single-1-Label');
-    const facialAddOn1 = document.getElementById('Add-On-Single-1');
-    const facialAddOnLabel1 = document.getElementById('Add-On-Single-1-Label');
-    const bodyTreatment1 = document.getElementById('Body-Treatment-Single-1');
-    const bodyTreatmentLabel1 = document.getElementById('Body-Treatment-Single-1-Label');
-    const waxInfo1 = document.getElementById('Wax-Info-Single-1');
-    const multipleServicesInfo1 = document.getElementById('Multiple-Services-Info-Single-1');  
-
-    function resetAndHideChildrenSingleSet1(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Single-1':
-                resetField(singlePackage1);
-                resetField(spaDelSolDreamInfo1);
-                resetField(singleMassage1);
-                resetField(massageDurationA1);
-                resetField(massageDurationB1);
-                resetField(combinationType1);
-                resetField(singleFacial1);
-                resetField(facialAddOn1);
-                resetField(bodyTreatment1);
-                resetField(waxInfo1);
-                resetField(multipleServicesInfo1);
-                hideField(singlePackageLabel1);
-                hideField(singleMassageLabel1);
-                hideField(massageDurationALabel1);
-                hideField(massageDurationBLabel1);
-                hideField(combinationTypeLabel1);
-                hideField(singleFacialLabel1);
-                hideField(facialAddOnLabel1);
-                hideField(bodyTreatmentLabel1);
-                break;
-
-            case 'Package-Single-1':
-                resetField(spaDelSolDreamInfo1);
-                break;
-
-            case 'Massage-Single-1':
-                resetField(massageDurationA1);
-                resetField(massageDurationB1);
-                resetField(combinationType1);
-                hideField(massageDurationALabel1);
-                hideField(massageDurationBLabel1);
-                hideField(combinationTypeLabel1);
-                break;
-
-            case 'Facial-Single-1':
-                resetField(facialAddOn1);
-                hideField(facialAddOnLabel1);
-                break;
-        }
-    }
-
-    function hideSingleSet1Conditionals() {
-        singlePackage1.style.display = 'none';
-        singlePackageLabel1.style.display = 'none';
-        spaDelSolDreamInfo1.style.display = 'none';
-        singleMassage1.style.display = 'none';
-        singleMassageLabel1.style.display = 'none';
-        massageDurationA1.style.display = 'none';
-        massageDurationALabel1.style.display = 'none';
-        massageDurationB1.style.display = 'none';
-        massageDurationBLabel1.style.display = 'none';
-        combinationType1.style.display = 'none';
-        combinationTypeLabel1.style.display = 'none';
-        singleFacial1.style.display = 'none';
-        singleFacialLabel1.style.display = 'none';
-        facialAddOn1.style.display = 'none';
-        facialAddOnLabel1.style.display = 'none';
-        bodyTreatment1.style.display = 'none';
-        bodyTreatmentLabel1.style.display = 'none';
-        waxInfo1.style.display = 'none';
-        multipleServicesInfo1.style.display = 'none';
-    }
-
-    function handleSingleSet1Conditionals() {
-        hideSingleSet1Conditionals(); // Hide all fields first
-
-        const singleServiceValue1 = singleService1.value;
-        if (singleServiceValue1 === 'Package') {
-            singlePackage1.style.display = 'block';
-            singlePackageLabel1.style.display = 'block';
-        } else if (singleServiceValue1 === 'Massage') {
-            singleMassage1.style.display = 'block';
-            singleMassageLabel1.style.display = 'block';
-        } else if (singleServiceValue1 === 'Facial') {
-            singleFacial1.style.display = 'block';
-            singleFacialLabel1.style.display = 'block';
-        } else if (singleServiceValue1 === 'Body treatment') {
-            bodyTreatment1.style.display = 'block';
-            bodyTreatmentLabel1.style.display = 'block';
-        } else if (singleServiceValue1 === 'Wax') {
-            waxInfo1.style.display = 'block';
-        } else if (singleServiceValue1 === 'Multiple services') {
-            multipleServicesInfo1.style.display = 'block';
-        }
-
-        const singlePackageValue1 = singlePackage1.value;
-        if (singlePackageValue1 === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo1.style.display = 'block';
-        }
-
-        const singleMassageValue1 = singleMassage1.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue1)) {
-            massageDurationA1.style.display = 'block';
-            massageDurationALabel1.style.display = 'block';
-        } else if (singleMassageValue1 === 'Reflexology') {
-            massageDurationB1.style.display = 'block';
-            massageDurationBLabel1.style.display = 'block';
-        } else if (singleMassageValue1 === 'Relaxing Combination') {
-            combinationType1.style.display = 'block';
-            combinationTypeLabel1.style.display = 'block';
-        }
-
-        const singleFacialValue1 = singleFacial1.value;
-        if (singleFacialValue1 === 'Sol Janssen') {
-            facialAddOn1.style.display = 'block';
-            facialAddOnLabel1.style.display = 'block';
-        }
-    }
-
-    singleService1.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet1(this);
-        handleSingleSet1Conditionals();
-    });
-    singlePackage1.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet1(this);
-        handleSingleSet1Conditionals();
-    });
-    singleMassage1.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet1(this);
-        handleSingleSet1Conditionals();
-    });
-    singleFacial1.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet1(this);
-        handleSingleSet1Conditionals();
-    });
+    // Add event listeners and handle initial conditions for all sets
+    ['Single', 'Single-1', 'Single-2', 'Single-3'].forEach(setId => {
+        document.getElementById(`Service-${setId}`).addEventListener('change', function() {
+            resetAndHideChildrenSingleSet(this, setId);
+            handleSingleSetConditionals(setId);
+        });
+        document.getElementById(`Package-${setId}`).addEventListener('change', function() {
+            resetAndHideChildrenSingleSet(this, setId);
+            handleSingleSetConditionals(setId);
+        });
+        document.getElementById(`Massage-${setId}`).addEventListener('change', function() {
+            resetAndHideChildrenSingleSet(this, setId);
+            handleSingleSetConditionals(setId);
+        });
+        document.getElementById(`Facial-${setId}`).addEventListener('change', function() {
+            resetAndHideChildrenSingleSet(this, setId);
+            handleSingleSetConditionals(setId);
+        });
     
-    hideSingleSet1Conditionals(); // Initial hide
-
-    // SINGLE SERVICE SET 2 CONDITIONALS SCRIPT
-
-    const singleService2 = document.getElementById('Service-Single-2');
-    const singleServiceLabel2 = document.getElementById('Service-Single-2-Label');
-    const singlePackage2 = document.getElementById('Package-Single-2');
-    const singlePackageLabel2 = document.getElementById('Package-Single-2-Label');
-    const spaDelSolDreamInfo2 = document.getElementById('Spa-Del-Sol-Dream-Info-Single-2');
-    const singleMassage2 = document.getElementById('Massage-Single-2');
-    const singleMassageLabel2 = document.getElementById('Massage-Single-2-Label');
-    const massageDurationA2 = document.getElementById('Duration-A-Single-2');
-    const massageDurationALabel2 = document.getElementById('Duration-A-Single-2-Label');
-    const massageDurationB2 = document.getElementById('Duration-B-Single-2');
-    const massageDurationBLabel2 = document.getElementById('Duration-B-Single-2-Label');
-    const combinationType2 = document.getElementById('Combination-Single-2');
-    const combinationTypeLabel2 = document.getElementById('Combination-Single-2-Label');
-    const singleFacial2 = document.getElementById('Facial-Single-2');
-    const singleFacialLabel2 = document.getElementById('Facial-Single-2-Label');
-    const facialAddOn2 = document.getElementById('Add-On-Single-2');
-    const facialAddOnLabel2 = document.getElementById('Add-On-Single-2-Label');
-    const bodyTreatment2 = document.getElementById('Body-Treatment-Single-2');
-    const bodyTreatmentLabel2 = document.getElementById('Body-Treatment-Single-2-Label');
-    const waxInfo2 = document.getElementById('Wax-Info-Single-2');
-    const multipleServicesInfo2 = document.getElementById('Multiple-Services-Info-Single-2');
-
-    function resetAndHideChildrenSingleSet2(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Single-2':
-                resetField(singlePackage2);
-                resetField(spaDelSolDreamInfo2);
-                resetField(singleMassage2);
-                resetField(massageDurationA2);
-                resetField(massageDurationB2);
-                resetField(combinationType2);
-                resetField(singleFacial2);
-                resetField(facialAddOn2);
-                resetField(bodyTreatment2);
-                resetField(waxInfo2);
-                resetField(multipleServicesInfo2);
-                hideField(singlePackageLabel2);
-                hideField(singleMassageLabel2);
-                hideField(massageDurationALabel2);
-                hideField(massageDurationBLabel2);
-                hideField(combinationTypeLabel2);
-                hideField(singleFacialLabel2);
-                hideField(facialAddOnLabel2);
-                hideField(bodyTreatmentLabel2);
-                break;
-
-            case 'Package-Single-2':
-                resetField(spaDelSolDreamInfo2);
-                break;
-
-            case 'Massage-Single-2':
-                resetField(massageDurationA2);
-                resetField(massageDurationB2);
-                resetField(combinationType2);
-                hideField(massageDurationALabel2);
-                hideField(massageDurationBLabel2);
-                hideField(combinationTypeLabel2);
-                break;
-
-            case 'Facial-Single-2':
-                resetField(facialAddOn2);
-                hideField(facialAddOnLabel2);
-                break;
-        }
-    }
-
-    function hideSingleSet2Conditionals() {
-        singlePackage2.style.display = 'none';
-        singlePackageLabel2.style.display = 'none';
-        spaDelSolDreamInfo2.style.display = 'none';
-        singleMassage2.style.display = 'none';
-        singleMassageLabel2.style.display = 'none';
-        massageDurationA2.style.display = 'none';
-        massageDurationALabel2.style.display = 'none';
-        massageDurationB2.style.display = 'none';
-        massageDurationBLabel2.style.display = 'none';
-        combinationType2.style.display = 'none';
-        combinationTypeLabel2.style.display = 'none';
-        singleFacial2.style.display = 'none';
-        singleFacialLabel2.style.display = 'none';
-        facialAddOn2.style.display = 'none';
-        facialAddOnLabel2.style.display = 'none';
-        bodyTreatment2.style.display = 'none';
-        bodyTreatmentLabel2.style.display = 'none';
-        waxInfo2.style.display = 'none';
-        multipleServicesInfo2.style.display = 'none';
-    }
-
-    function handleSingleSet2Conditionals() {
-        hideSingleSet2Conditionals();
-
-        const singleServiceValue2 = singleService2.value;
-        if (singleServiceValue2 === 'Package') {
-            singlePackage2.style.display = 'block';
-            singlePackageLabel2.style.display = 'block';
-        } else if (singleServiceValue2 === 'Massage') {
-            singleMassage2.style.display = 'block';
-            singleMassageLabel2.style.display = 'block';
-        } else if (singleServiceValue2 === 'Facial') {
-            singleFacial2.style.display = 'block';
-            singleFacialLabel2.style.display = 'block';
-        } else if (singleServiceValue2 === 'Body treatment') {
-            bodyTreatment2.style.display = 'block';
-            bodyTreatmentLabel2.style.display = 'block';
-        } else if (singleServiceValue2 === 'Wax') {
-            waxInfo2.style.display = 'block';
-        } else if (singleServiceValue2 === 'Multiple services') {
-            multipleServicesInfo2.style.display = 'block';
-        }
-
-        const singlePackageValue2 = singlePackage2.value;
-        if (singlePackageValue2 === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo2.style.display = 'block';
-        }
-
-        const singleMassageValue2 = singleMassage2.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue2)) {
-            massageDurationA2.style.display = 'block';
-            massageDurationALabel2.style.display = 'block';
-        } else if (singleMassageValue2 === 'Reflexology') {
-            massageDurationB2.style.display = 'block';
-            massageDurationBLabel2.style.display = 'block';
-        } else if (singleMassageValue2 === 'Relaxing Combination') {
-            combinationType2.style.display = 'block';
-            combinationTypeLabel2.style.display = 'block';
-        }
-
-        const singleFacialValue2 = singleFacial2.value;
-        if (singleFacialValue2 === 'Sol Janssen') {
-            facialAddOn2.style.display = 'block';
-            facialAddOnLabel2.style.display = 'block';
-        }
-    }
-
-    singleService2.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet2(this);
-        handleSingleSet2Conditionals();
+        hideSingleSetConditionals(setId); // Initial hide of all elements
     });
-    singlePackage2.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet2(this);
-        handleSingleSet2Conditionals();
-    });
-    singleMassage2.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet2(this);
-        handleSingleSet2Conditionals();
-    });
-    singleFacial2.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet2(this);
-        handleSingleSet2Conditionals();
-    });
-    
-    hideSingleSet2Conditionals(); // Initial hide
-
-    // SINGLE SERVICE SET 3 CONDITIONALS SCRIPT
-
-    const singleService3 = document.getElementById('Service-Single-3');
-    const singleServiceLabel3 = document.getElementById('Service-Single-3-Label');
-    const singlePackage3 = document.getElementById('Package-Single-3');
-    const singlePackageLabel3 = document.getElementById('Package-Single-3-Label');
-    const spaDelSolDreamInfo3 = document.getElementById('Spa-Del-Sol-Dream-Info-Single-3');
-    const singleMassage3 = document.getElementById('Massage-Single-3');
-    const singleMassageLabel3 = document.getElementById('Massage-Single-3-Label');
-    const massageDurationA3 = document.getElementById('Duration-A-Single-3');
-    const massageDurationALabel3 = document.getElementById('Duration-A-Single-3-Label');
-    const massageDurationB3 = document.getElementById('Duration-B-Single-3');
-    const massageDurationBLabel3 = document.getElementById('Duration-B-Single-3-Label');
-    const combinationType3 = document.getElementById('Combination-Single-3');
-    const combinationTypeLabel3 = document.getElementById('Combination-Single-3-Label');
-    const singleFacial3 = document.getElementById('Facial-Single-3');
-    const singleFacialLabel3 = document.getElementById('Facial-Single-3-Label');
-    const facialAddOn3 = document.getElementById('Add-On-Single-3');
-    const facialAddOnLabel3 = document.getElementById('Add-On-Single-3-Label');
-    const bodyTreatment3 = document.getElementById('Body-Treatment-Single-3');
-    const bodyTreatmentLabel3 = document.getElementById('Body-Treatment-Single-3-Label');
-    const waxInfo3 = document.getElementById('Wax-Info-Single-3');
-    const multipleServicesInfo3 = document.getElementById('Multiple-Services-Info-Single-3');
-
-    function resetAndHideChildrenSingleSet3(parentSelect) {
-        switch (parentSelect.id) {
-            case 'Service-Single-3':
-                resetField(singlePackage3);
-                resetField(spaDelSolDreamInfo3);
-                resetField(singleMassage3);
-                resetField(massageDurationA3);
-                resetField(massageDurationB3);
-                resetField(combinationType3);
-                resetField(singleFacial3);
-                resetField(facialAddOn3);
-                resetField(bodyTreatment3);
-                resetField(waxInfo3);
-                resetField(multipleServicesInfo3);
-                hideField(singlePackageLabel3);
-                hideField(singleMassageLabel3);
-                hideField(massageDurationALabel3);
-                hideField(massageDurationBLabel3);
-                hideField(combinationTypeLabel3);
-                hideField(singleFacialLabel3);
-                hideField(facialAddOnLabel3);
-                hideField(bodyTreatmentLabel3);
-                break;
-
-            case 'Package-Single-3':
-                resetField(spaDelSolDreamInfo3);
-                break;
-
-            case 'Massage-Single-3':
-                resetField(massageDurationA3);
-                resetField(massageDurationB3);
-                resetField(combinationType3);
-                hideField(massageDurationALabel3);
-                hideField(massageDurationBLabel3);
-                hideField(combinationTypeLabel3);
-                break;
-
-            case 'Facial-Single-3':
-                resetField(facialAddOn3);
-                hideField(facialAddOnLabel3);
-                break;
-        }
-    }
-
-    function hideSingleSet3Conditionals() {
-        singlePackage3.style.display = 'none';
-        singlePackageLabel3.style.display = 'none';
-        spaDelSolDreamInfo3.style.display = 'none';
-        singleMassage3.style.display = 'none';
-        singleMassageLabel3.style.display = 'none';
-        massageDurationA3.style.display = 'none';
-        massageDurationALabel3.style.display = 'none';
-        massageDurationB3.style.display = 'none';
-        massageDurationBLabel3.style.display = 'none';
-        combinationType3.style.display = 'none';
-        combinationTypeLabel3.style.display = 'none';
-        singleFacial3.style.display = 'none';
-        singleFacialLabel3.style.display = 'none';
-        facialAddOn3.style.display = 'none';
-        facialAddOnLabel3.style.display = 'none';
-        bodyTreatment3.style.display = 'none';
-        bodyTreatmentLabel3.style.display = 'none';
-        waxInfo3.style.display = 'none';
-        multipleServicesInfo3.style.display = 'none';
-    }
-
-    function handleSingleSet3Conditionals() {
-        hideSingleSet3Conditionals();
-
-        const singleServiceValue3 = singleService3.value;
-        if (singleServiceValue3 === 'Package') {
-            singlePackage3.style.display = 'block';
-            singlePackageLabel3.style.display = 'block';
-        } else if (singleServiceValue3 === 'Massage') {
-            singleMassage3.style.display = 'block';
-            singleMassageLabel3.style.display = 'block';
-        } else if (singleServiceValue3 === 'Facial') {
-            singleFacial3.style.display = 'block';
-            singleFacialLabel3.style.display = 'block';
-        } else if (singleServiceValue3 === 'Body treatment') {
-            bodyTreatment3.style.display = 'block';
-            bodyTreatmentLabel3.style.display = 'block';
-        } else if (singleServiceValue3 === 'Wax') {
-            waxInfo3.style.display = 'block';
-        } else if (singleServiceValue3 === 'Multiple services') {
-            multipleServicesInfo3.style.display = 'block';
-        }
-
-        const singlePackageValue3 = singlePackage3.value;
-        if (singlePackageValue3 === 'Spa del Sol Dream') {
-            spaDelSolDreamInfo3.style.display = 'block';
-        }
-
-        const singleMassageValue3 = singleMassage3.value;
-        if (['Relaxing', 'Aromatherapy', 'Deep Tissue', 'Hot Stones', 'Bamboo', 'Therapeutic', 'Lomi Lomi', 'Shiatsu'].includes(singleMassageValue3)) {
-            massageDurationA3.style.display = 'block';
-            massageDurationALabel3.style.display = 'block';
-        } else if (singleMassageValue3 === 'Reflexology') {
-            massageDurationB3.style.display = 'block';
-            massageDurationBLabel3.style.display = 'block';
-        } else if (singleMassageValue3 === 'Relaxing Combination') {
-            combinationType3.style.display = 'block';
-            combinationTypeLabel3.style.display = 'block';
-        }
-
-        const singleFacialValue3 = singleFacial3.value;
-        if (singleFacialValue3 === 'Sol Janssen') {
-            facialAddOn3.style.display = 'block';
-            facialAddOnLabel3.style.display = 'block';
-        }
-    }
-
-    singleService3.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet3(this);
-        handleSingleSet3Conditionals();
-    });
-    singlePackage3.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet3(this);
-        handleSingleSet3Conditionals();
-    });
-    singleMassage3.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet3(this);
-        handleSingleSet3Conditionals();
-    });
-    singleFacial3.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet3(this);
-        handleSingleSet3Conditionals();
-    });
-    
-    hideSingleSet3Conditionals(); // Initial hide
