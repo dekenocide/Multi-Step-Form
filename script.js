@@ -793,8 +793,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const coupleMassage = document.getElementById('Massage-Couple');
     const coupleMassageLabel = document.getElementById('Massage-Couple-Label');
     const massageDurationACouple = document.getElementById('Duration-A-Couple');
-    const massageDurationACoupleLabel = document.getElementById('Duration-A-Couple-Label');
     const massageDurationBCouple = document.getElementById('Duration-B-Couple');
+    const massageDurationACoupleLabel = document.getElementById('Duration-A-Couple-Label');
     const massageDurationBCoupleLabel = document.getElementById('Duration-B-Couple-Label');
     const prenatalMassageCouple = document.getElementById('Prenatal-Massage-Couple');
     const prenatalMassageCoupleLabel = document.getElementById('Prenatal-Massage-Couple-Label');
@@ -807,11 +807,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const durationAGuest1And2Couple = document.getElementById('Duration-A-Guest-1-And-2-Couple');
     const durationAGuest1And2CoupleLabel = document.getElementById('Duration-A-Guest-1-And-2-Couple-Label');
     const facialSelectsWrapperCouple = document.getElementById('Facial-Selects-Wrapper-Couple');
+    const facialGuest1Couple = document.getElementById ('Facial-Guest-1-Couple');
+    const facialGuest2Couple = document.getElementById ('Facial-Guest-2-Couple');
     const facialGuest1CoupleLabel = document.getElementById ('Facial-Guest-1-Couple-Label');
     const facialGuest2CoupleLabel = document.getElementById ('Facial-Guest-2-Couple-Label');
     const facialAddOnGuest1Couple = document.getElementById('Facial-Add-On-Guest-1-Couple');
-    const facialAddOnGuest1CoupleLabel = document.getElementById('Facial-Add-On-Guest-1-Couple-Label');
     const facialAddOnGuest2Couple = document.getElementById('Facial-Add-On-Guest-2-Couple');
+    const facialAddOnGuest1CoupleLabel = document.getElementById('Facial-Add-On-Guest-1-Couple-Label');
     const facialAddOnGuest2CoupleLabel = document.getElementById('Facial-Add-On-Guest-2-Couple-Label');
     const bodyTreatmentsSelectsWrapperCouple = document.getElementById('Body-Treatments-Selects-Wrapper-Couple');
     const bodyTreatmentGuest1CoupleLabel = document.getElementById('Body-Treatment-Guest-1-Couple-Label');
