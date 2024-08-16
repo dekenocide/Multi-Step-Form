@@ -963,10 +963,14 @@ document.addEventListener('DOMContentLoaded', function () {
             labels[setId].coupleMassageLabel.style.display = 'block';
         } else if (serviceValue === 'Facial') {
             elements[setId].facialSelectsWrapper.style.display = 'grid';
+            elements[setId].facialGuest1.style.display = 'block';
+            elements[setId].facialGuest2.style.display = 'block';
             labels[setId].facialGuest1Label.style.display = 'block';
             labels[setId].facialGuest2Label.style.display = 'block';
         } else if (serviceValue === 'Body treatment') {
             elements[setId].bodyTreatmentsSelectsWrapper.style.display = 'grid';
+            elements[setId].bodyTreatmentGuest1.style.display = 'block';
+            elements[setId].bodyTreatmentGuest2.style.display = 'block';
             labels[setId].bodyTreatmentGuest1Label.style.display = 'block';
             labels[setId].bodyTreatmentGuest2Label.style.display = 'block';
         } else if (serviceValue === 'Other') {
@@ -992,6 +996,8 @@ document.addEventListener('DOMContentLoaded', function () {
             labels[setId].prenatalMassageLabel.style.display = 'block';
         } else if (massageValue === 'Relaxing Combination') {
             elements[setId].combinationSelectsWrapper.style.display = 'grid';
+            elements[setId].combinationGuest1.style.display = 'block';
+            elements[setId].combinationGuest2.style.display = 'block';
             labels[setId].combinationGuest1Label.style.display = 'block';
             labels[setId].combinationGuest2Label.style.display = 'block';
         } else if (massageValue === 'Two different types') {
