@@ -1839,7 +1839,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     singlePackage.addEventListener('change', function() {
         resetAndHideChildrenSingleOriginal(this);
-        handleSingleOriginalConditionals();
+        handleSingleOriginalSetConditionals();
     });
     singleMassage.addEventListener('change', function() {
         resetAndHideChildrenSingleOriginal(this);
