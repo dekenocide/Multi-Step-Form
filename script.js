@@ -1839,14 +1839,16 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     singlePackage.addEventListener('change', handleSingleOriginalSetConditionals);
     singleMassage.addEventListener('change', function() {
-        resetAndHideChildrenSingleOriginal(this); // Reset and hide fields first
-        handleSingleOriginalSetConditionals(); // Reapply conditionals based on new value
+        resetAndHideChildrenSingleOriginal(this);
+        handleSingleOriginalSetConditionals();
     });
-    singleFacial.addEventListener('change', handleSingleOriginalSetConditionals);
-
+    singleFacial.addEventListener('change', function() {
+        resetAndHideChildrenSingleOriginal(this);
+        handleSingleOriginalSetConditionals();
+    });
+    
     hideSingleOriginalSetConditionals(); // Initial hide
 });
-
 
     // SINGLE SERVICE SET 1 CONDITIONALS SCRIPT
 
@@ -1991,11 +1993,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     singlePackage1.addEventListener('change', handleSingleSet1Conditionals);
     singleMassage1.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet1(this); // Reset and hide fields first
-        handleSingleSet1Conditionals(); // Reapply conditionals based on new value
+        resetAndHideChildrenSingleSet1(this);
+        handleSingleSet1Conditionals();
     });
-    singleFacial1.addEventListener('change', handleSingleSet1Conditionals);
-
+    singleFacial1.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet1(this);
+        handleSingleSet1Conditionals();
+    });
+    
     hideSingleSet1Conditionals(); // Initial hide
 });
 
@@ -2142,11 +2147,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     singlePackage2.addEventListener('change', handleSingleSet2Conditionals);
     singleMassage2.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet2(this); // Reset and hide fields first
-        handleSingleSet2Conditionals(); // Reapply conditionals based on new value
+        resetAndHideChildrenSingleSet2(this);
+        handleSingleSet2Conditionals();
     });
-    singleFacial2.addEventListener('change', handleSingleSet2Conditionals);
-
+    singleFacial2.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet2(this);
+        handleSingleSet2Conditionals();
+    });
+    
     hideSingleSet2Conditionals(); // Initial hide
 });
 
@@ -2293,10 +2301,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     singlePackage3.addEventListener('change', handleSingleSet3Conditionals);
     singleMassage3.addEventListener('change', function() {
-        resetAndHideChildrenSingleSet3(this); // Reset and hide fields first
-        handleSingleSet3Conditionals(); // Reapply conditionals based on new value
+        resetAndHideChildrenSingleSet3(this);
+        handleSingleSet3Conditionals();
     });
-    singleFacial3.addEventListener('change', handleSingleSet3Conditionals);
-
+    singleFacial3.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet3(this);
+        handleSingleSet3Conditionals();
+    });
+    
     hideSingleSet3Conditionals(); // Initial hide
 });
