@@ -784,6 +784,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // COUPLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
 
+    // Array to store all sets of elements and their respective conditionals
     const coupleSets = [
         {
             service: document.getElementById('Service-Couple'),
@@ -1102,8 +1103,9 @@ document.addEventListener('DOMContentLoaded', function () {
             handleConditionals(set);
         });
     
-        hideAll(set); // Initial hide
+        handleConditionals(set); // Initial condition handling after hiding all elements
     });
+
 
     // SINGLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
 
