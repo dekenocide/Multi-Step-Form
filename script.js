@@ -1837,7 +1837,10 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenSingleOriginal(this);
         handleSingleOriginalSetConditionals();
     });
-    singlePackage.addEventListener('change', handleSingleOriginalSetConditionals);
+    singlePackage.addEventListener('change', function() {
+        resetAndHideChildrenSingleOriginal(this);
+        handleSingleOriginalConditionals();
+    });
     singleMassage.addEventListener('change', function() {
         resetAndHideChildrenSingleOriginal(this);
         handleSingleOriginalSetConditionals();
@@ -1991,7 +1994,10 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenSingleSet1(this);
         handleSingleSet1Conditionals();
     });
-    singlePackage1.addEventListener('change', handleSingleSet1Conditionals);
+    singlePackage1.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet1(this);
+        handleSingleSet1Conditionals();
+    });
     singleMassage1.addEventListener('change', function() {
         resetAndHideChildrenSingleSet1(this);
         handleSingleSet1Conditionals();
@@ -2145,7 +2151,10 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenSingleSet2(this);
         handleSingleSet2Conditionals();
     });
-    singlePackage2.addEventListener('change', handleSingleSet2Conditionals);
+    singlePackage2.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet2(this);
+        handleSingleSet2Conditionals();
+    });
     singleMassage2.addEventListener('change', function() {
         resetAndHideChildrenSingleSet2(this);
         handleSingleSet2Conditionals();
@@ -2299,7 +2308,10 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenSingleSet3(this);
         handleSingleSet3Conditionals();
     });
-    singlePackage3.addEventListener('change', handleSingleSet3Conditionals);
+    singlePackage3.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet3(this);
+        handleSingleSet3Conditionals();
+    });
     singleMassage3.addEventListener('change', function() {
         resetAndHideChildrenSingleSet3(this);
         handleSingleSet3Conditionals();
