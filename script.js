@@ -917,10 +917,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById(`Duration-B-${setId}-Label`).style.display = 'none';
         document.getElementById(`Prenatal-Massage-${setId}`).style.display = 'none';
         document.getElementById(`Prenatal-Massage-${setId}-Label`).style.display = 'none';
+        document.getElementById(`Combination-Selects-Wrapper-${setId}`).style.display = 'none';
         document.getElementById(`Combination-Guest-1-${setId}`).style.display = 'none';
         document.getElementById(`Combination-Guest-1-${setId}-Label`).style.display = 'none';
         document.getElementById(`Combination-Guest-2-${setId}`).style.display = 'none';
         document.getElementById(`Combination-Guest-2-${setId}-Label`).style.display = 'none';
+        document.getElementById(`Different-Massages-Selects-Wrapper-${setId}`).style.display = 'none';
         document.getElementById(`Massage-Guest-1-${setId}`).style.display = 'none';
         document.getElementById(`Massage-Guest-1-${setId}-Label`).style.display = 'none';
         document.getElementById(`Massage-Guest-2-${setId}`).style.display = 'none';
@@ -981,13 +983,11 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById(`Prenatal-Massage-${setId}`).style.display = 'block';
             document.getElementById(`Prenatal-Massage-${setId}-Label`).style.display = 'block';
         } else if (massageValue === 'Relaxing Combination') {
-            document.getElementById(`Combination-Guest-1-${setId}`).style.display = 'grid';
-            document.getElementById(`Combination-Guest-2-${setId}`).style.display = 'grid';
+            document.getElementById(`Combination-Selects-Wrapper-${setId}`).style.display = 'grid';
             document.getElementById(`Combination-Guest-1-${setId}-Label`).style.display = 'block';
             document.getElementById(`Combination-Guest-2-${setId}-Label`).style.display = 'block';
         } else if (massageValue === 'Two different types') {
-            document.getElementById(`Massage-Guest-1-${setId}`).style.display = 'grid';
-            document.getElementById(`Massage-Guest-2-${setId}`).style.display = 'grid';
+            document.getElementById(`Different-Massages-Selects-Wrapper-${setId}`).style.display = 'grid';
             document.getElementById(`Massage-Guest-1-${setId}-Label`).style.display = 'block';
             document.getElementById(`Massage-Guest-2-${setId}-Label`).style.display = 'block';
         }
