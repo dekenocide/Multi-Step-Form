@@ -1698,6 +1698,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // SINGLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
 
+    document.addEventListener('DOMContentLoaded', function() {
     const singleService = document.getElementById('Service-Single');
     const singleServiceLabel = document.getElementById('Service-Single-Label');
     const singlePackage = document.getElementById('Package-Single');
@@ -1787,7 +1788,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function handleSingleOriginalSetConditionals() {
-        hideSingleOriginalSetConditionals();
+        hideSingleOriginalSetConditionals(); // Hide all fields first
 
         const singleServiceValue = singleService.value;
         if (singleServiceValue === 'Package') {
@@ -1837,10 +1838,15 @@ document.addEventListener('DOMContentLoaded', function () {
         handleSingleOriginalSetConditionals();
     });
     singlePackage.addEventListener('change', handleSingleOriginalSetConditionals);
-    singleMassage.addEventListener('change', handleSingleOriginalSetConditionals);
+    singleMassage.addEventListener('change', function() {
+        resetAndHideChildrenSingleOriginal(this); // Reset and hide fields first
+        handleSingleOriginalSetConditionals(); // Reapply conditionals based on new value
+    });
     singleFacial.addEventListener('change', handleSingleOriginalSetConditionals);
 
     hideSingleOriginalSetConditionals(); // Initial hide
+});
+
 
     // SINGLE SERVICE SET 1 CONDITIONALS SCRIPT
 
@@ -1995,6 +2001,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // SINGLE SERVICE SET 2 CONDITIONALS SCRIPT
 
+    document.addEventListener('DOMContentLoaded', function() {
     const singleService2 = document.getElementById('Service-Single-2');
     const singleServiceLabel2 = document.getElementById('Service-Single-2-Label');
     const singlePackage2 = document.getElementById('Package-Single-2');
@@ -2134,13 +2141,18 @@ document.addEventListener('DOMContentLoaded', function () {
         handleSingleSet2Conditionals();
     });
     singlePackage2.addEventListener('change', handleSingleSet2Conditionals);
-    singleMassage2.addEventListener('change', handleSingleSet2Conditionals);
+    singleMassage2.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet2(this); // Reset and hide fields first
+        handleSingleSet2Conditionals(); // Reapply conditionals based on new value
+    });
     singleFacial2.addEventListener('change', handleSingleSet2Conditionals);
 
     hideSingleSet2Conditionals(); // Initial hide
+});
 
     // SINGLE SERVICE SET 3 CONDITIONALS SCRIPT
 
+    document.addEventListener('DOMContentLoaded', function() {
     const singleService3 = document.getElementById('Service-Single-3');
     const singleServiceLabel3 = document.getElementById('Service-Single-3-Label');
     const singlePackage3 = document.getElementById('Package-Single-3');
@@ -2280,7 +2292,11 @@ document.addEventListener('DOMContentLoaded', function () {
         handleSingleSet3Conditionals();
     });
     singlePackage3.addEventListener('change', handleSingleSet3Conditionals);
-    singleMassage3.addEventListener('change', handleSingleSet3Conditionals);
+    singleMassage3.addEventListener('change', function() {
+        resetAndHideChildrenSingleSet3(this); // Reset and hide fields first
+        handleSingleSet3Conditionals(); // Reapply conditionals based on new value
+    });
     singleFacial3.addEventListener('change', handleSingleSet3Conditionals);
 
     hideSingleSet3Conditionals(); // Initial hide
+});
