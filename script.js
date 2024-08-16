@@ -1027,7 +1027,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     hideCoupleOriginalSetConditionals(); // Initial hide
-});
 
     // COUPLE SERVICE SET 1 CONDITIONALS SCRIPT
 
@@ -1274,7 +1273,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     hideCoupleSet1Conditionals(); // Initial hide
-});
 
     // COUPLE SERVICE SET 2 CONDITIONALS SCRIPT
 
@@ -1521,7 +1519,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     hideCoupleSet2Conditionals(); // Initial hide
-});
 
     // COUPLE SERVICE SET 3 CONDITIONALS SCRIPT
 
@@ -1768,11 +1765,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     hideCoupleSet3Conditionals(); // Initial hide
-});
 
     // SINGLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
 
-    document.addEventListener('DOMContentLoaded', function() {
     const singleService = document.getElementById('Service-Single');
     const singleServiceLabel = document.getElementById('Service-Single-Label');
     const singlePackage = document.getElementById('Package-Single');
@@ -1925,11 +1920,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     hideSingleOriginalSetConditionals(); // Initial hide
-});
 
     // SINGLE SERVICE SET 1 CONDITIONALS SCRIPT
 
-    document.addEventListener('DOMContentLoaded', function() {
     const singleService1 = document.getElementById('Service-Single-1');
     const singleServiceLabel1 = document.getElementById('Service-Single-1-Label');
     const singlePackage1 = document.getElementById('Package-Single-1');
@@ -2082,11 +2075,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     hideSingleSet1Conditionals(); // Initial hide
-});
 
     // SINGLE SERVICE SET 2 CONDITIONALS SCRIPT
 
-    document.addEventListener('DOMContentLoaded', function() {
     const singleService2 = document.getElementById('Service-Single-2');
     const singleServiceLabel2 = document.getElementById('Service-Single-2-Label');
     const singlePackage2 = document.getElementById('Package-Single-2');
@@ -2239,11 +2230,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     hideSingleSet2Conditionals(); // Initial hide
-});
 
     // SINGLE SERVICE SET 3 CONDITIONALS SCRIPT
 
-    document.addEventListener('DOMContentLoaded', function() {
     const singleService3 = document.getElementById('Service-Single-3');
     const singleServiceLabel3 = document.getElementById('Service-Single-3-Label');
     const singlePackage3 = document.getElementById('Package-Single-3');
@@ -2396,4 +2385,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     hideSingleSet3Conditionals(); // Initial hide
-});
