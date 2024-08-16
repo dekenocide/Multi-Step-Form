@@ -1001,8 +1001,14 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenCoupleOriginal(this);
         handleCoupleOriginalSetConditionals();
     });
-    couplePackage.addEventListener('change', handleCoupleOriginalSetConditionals);
-    coupleMassage.addEventListener('change', handleCoupleOriginalSetConditionals);
+    couplePackage.addEventListener('change', function() {
+        resetAndHideChildrenCoupleOriginal(this);
+        handleCoupleOriginalSetConditionals();
+    });
+    coupleMassage.addEventListener('change', function() {
+        resetAndHideChildrenCoupleOriginal(this);
+        handleCoupleOriginalSetConditionals();
+    });
     document.getElementById('Massage-Guest-1-Couple').addEventListener('change', handleCoupleOriginalSetConditionals);
     document.getElementById('Massage-Guest-2-Couple').addEventListener('change', handleCoupleOriginalSetConditionals);
     document.getElementById('Facial-Guest-1-Couple').addEventListener('change', handleCoupleOriginalSetConditionals);
@@ -1170,8 +1176,6 @@ document.addEventListener('DOMContentLoaded', function () {
             facialSelectsWrapperCouple1.style.display = 'grid';
             facialGuest1CoupleLabel1.style.display = 'block';
             facialGuest2CoupleLabel1.style.display = 'block';
-            facialAddOnGuest1CoupleLabel1.style.display = 'block';
-            facialAddOnGuest2CoupleLabel1.style.display = 'block';
         } else if (coupleServiceValue1 === 'Body treatment') {
             bodyTreatmentsSelectsWrapperCouple1.style.display = 'grid';
             bodyTreatmentGuest1CoupleLabel1.style.display = 'block';
@@ -1231,8 +1235,14 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenCoupleSet1(this);
         handleCoupleSet1Conditionals();
     });
-    couplePackage1.addEventListener('change', handleCoupleSet1Conditionals);
-    coupleMassage1.addEventListener('change', handleCoupleSet1Conditionals);
+    couplePackage1.addEventListener('change', function() {
+        resetAndHideChildrenCoupleSet1(this);
+        handleCoupleSet1Conditionals();
+    });
+    coupleMassage1.addEventListener('change', function() {
+        resetAndHideChildrenCoupleSet1(this);
+        handleCoupleSet1Conditionals();
+    });
     document.getElementById('Massage-Guest-1-Couple-1').addEventListener('change', handleCoupleSet1Conditionals);
     document.getElementById('Massage-Guest-2-Couple-1').addEventListener('change', handleCoupleSet1Conditionals);
     document.getElementById('Facial-Guest-1-Couple-1').addEventListener('change', handleCoupleSet1Conditionals);
@@ -1459,8 +1469,14 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenCoupleSet2(this);
         handleCoupleSet2Conditionals();
     });
-    couplePackage2.addEventListener('change', handleCoupleSet2Conditionals);
-    coupleMassage2.addEventListener('change', handleCoupleSet2Conditionals);
+    couplePackage2.addEventListener('change', function() {
+        resetAndHideChildrenCoupleSet2(this);
+        handleCoupleSet2Conditionals();
+    });
+    coupleMassage2.addEventListener('change', function() {
+        resetAndHideChildrenCoupleSet2(this);
+        handleCoupleSet2Conditionals();
+    });
     document.getElementById('Massage-Guest-1-Couple-2').addEventListener('change', handleCoupleSet2Conditionals);
     document.getElementById('Massage-Guest-2-Couple-2').addEventListener('change', handleCoupleSet2Conditionals);
     document.getElementById('Facial-Guest-1-Couple-2').addEventListener('change', handleCoupleSet2Conditionals);
@@ -1687,8 +1703,14 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAndHideChildrenCoupleSet3(this);
         handleCoupleSet3Conditionals();
     });
-    couplePackage3.addEventListener('change', handleCoupleSet3Conditionals);
-    coupleMassage3.addEventListener('change', handleCoupleSet3Conditionals);
+    couplePackage3.addEventListener('change', function() {
+        resetAndHideChildrenCoupleSet3(this);
+        handleCoupleSet3Conditionals();
+    });
+    coupleMassage3.addEventListener('change', function() {
+        resetAndHideChildrenCoupleSet3(this);
+        handleCoupleSet3Conditionals();
+    });
     document.getElementById('Massage-Guest-1-Couple-3').addEventListener('change', handleCoupleSet3Conditionals);
     document.getElementById('Massage-Guest-2-Couple-3').addEventListener('change', handleCoupleSet3Conditionals);
     document.getElementById('Facial-Guest-1-Couple-3').addEventListener('change', handleCoupleSet3Conditionals);
