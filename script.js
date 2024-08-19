@@ -102,13 +102,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function scrollToFormTop() {
         const landingDiv = document.getElementById('landing-div');
-        const formSection = document.getElementById('form-section');
+        const apptInqHeading = document.getElementById('appt-inq-heading');
         const isMobile = window.innerWidth <= 767; // Common breakpoint for mobile devices
     
         if (isMobile) {
             // Mobile behavior: Scroll to the top of #form-section
-            if (formSection) {
-                formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (apptInqHeading) {
+                apptInqHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 console.warn("Form section not found.");
             }
