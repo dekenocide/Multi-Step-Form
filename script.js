@@ -7,6 +7,8 @@ console.log("Script started");
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
 
+    disableEnterKeySubmission('Appointment-Inquiry');
+
     // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
@@ -289,6 +291,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 labelElement.innerText = originalLabelTexts[labelId]; // Revert to the original text
             }
         });
+    }
+
+    function disableEnterKeySubmission(formId) {
+        const form = document.getElementById(formId);
+    
+        if (form) {
+            form.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevents form submission when Enter is pressed
+                }
+            });
+        }
     }
     
     function clearGroupBookingInfo() {
