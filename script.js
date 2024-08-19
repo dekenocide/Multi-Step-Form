@@ -453,8 +453,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (value) {
                             combinedValue += value + ' '; // Combine values, separate with a space or comma as needed
                         }
-                    } else {
-                        console.log(Input element not found for ${id});
                     }
                 });
     
