@@ -425,50 +425,62 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     function populateReviewStep() {
-        console.log("populateReviewStep function called");
+    console.log("populateReviewStep function called");
+
+    const reviewRows = document.querySelectorAll('.review-row');
+    console.log(`Number of review rows found: ${reviewRows.length}`);
     
-        const reviewRows = document.querySelectorAll('.review-row');
-        
-        reviewRows.forEach(row => {
-            const valueDiv = row.querySelector('.review-value');
-            const dataValueId = valueDiv ? valueDiv.getAttribute('data-value-id') : null;
-    
-            if (dataValueId) {
-                const ids = dataValueId.split(',');
-    
-                let combinedValue = '';
-                
-                ids.forEach(id => {
-                    const inputElement = document.getElementById(id.trim());
-    
-                    if (inputElement) {
-                        let value = '';
-    
-                        if (inputElement.tagName === 'SELECT' && inputElement.selectedIndex > 0) {
-                            value = inputElement.options[inputElement.selectedIndex].text;
-                        } else if (inputElement.tagName === 'INPUT' || inputElement.tagName === 'TEXTAREA') {
-                            value = inputElement.value.trim();
-                        }
-    
-                        if (value) {
-                            combinedValue += value + ' '; // Combine values, separate with a space or comma as needed
-                        }
-                    } else {
-                        console.log(`Input element not found for ${id}`);
+    reviewRows.forEach(row => {
+        const valueDiv = row.querySelector('.review-value');
+        const dataValueId = valueDiv ? valueDiv.getAttribute('data-value-id') : null;
+
+        console.log(`Processing row with data-value-id: ${dataValueId}`);
+
+        if (dataValueId) {
+            const ids = dataValueId.split(',');
+            console.log(`IDs extracted from data-value-id: ${ids}`);
+
+            let combinedValue = '';
+            
+            ids.forEach(id => {
+                const inputElement = document.getElementById(id.trim());
+                console.log(`Looking for input element with ID: ${id.trim()}`);
+
+                if (inputElement) {
+                    let value = '';
+                    console.log(`Found input element: ${inputElement.tagName}`);
+
+                    if (inputElement.tagName === 'SELECT' && inputElement.selectedIndex > 0) {
+                        value = inputElement.options[inputElement.selectedIndex].text;
+                        console.log(`SELECT element value: ${value}`);
+                    } else if (inputElement.tagName === 'INPUT' || inputElement.tagName === 'TEXTAREA') {
+                        value = inputElement.value.trim();
+                        console.log(`INPUT/TEXTAREA element value: ${value}`);
                     }
-                });
-    
-                if (combinedValue.trim()) {
-                    valueDiv.innerText = combinedValue.trim();
-                    row.style.display = 'flex'; // Ensure the row is displayed
+
+                    if (value) {
+                        combinedValue += value + ' '; // Combine values, separate with a space or comma as needed
+                    }
                 } else {
-                    row.style.display = 'none'; // Hide the row if no values are found
+                    console.log(`Input element not found for ID: ${id.trim()}`);
                 }
+            });
+
+            if (combinedValue.trim()) {
+                console.log(`Setting combined value: ${combinedValue.trim()}`);
+                valueDiv.innerText = combinedValue.trim();
+                row.style.display = 'flex'; // Ensure the row is displayed
             } else {
-                row.style.display = 'none'; // Hide the row if the data-value-id attribute is not found
+                console.log("No value found, hiding row.");
+                row.style.display = 'none'; // Hide the row if no values are found
             }
-        });
-    }
+        } else {
+            console.log("data-value-id not found, hiding row.");
+            row.style.display = 'none'; // Hide the row if the data-value-id attribute is not found
+        }
+    });
+}
+
     
     const steps = {
         'step-1': document.getElementById('step-1'),
