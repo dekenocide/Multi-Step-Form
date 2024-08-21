@@ -743,7 +743,7 @@
             'Spa-Del-Sol-Dream-Info-Couple-1', 'Other-Packages-Info-Couple-1', 'Other-Services-Info-Couple-1', 
             'Spa-Del-Sol-Dream-Info-Couple-2', 'Other-Packages-Info-Couple-2', 'Other-Services-Info-Couple-2', 
             'Spa-Del-Sol-Dream-Info-Couple-3', 'Other-Packages-Info-Couple-3', 'Other-Services-Info-Couple-3',
-            'Group-Booking-Info'
+            'Group-Booking-Info', 'Additional-Information'
         ];
     
         nameInputIds.forEach(function (id) {
