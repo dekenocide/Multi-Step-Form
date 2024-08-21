@@ -7,7 +7,6 @@
 
     disableEnterKeySubmission('Appointment-Inquiry');
 
-    // Step navigation elements
     const steps = {
         'step-1': document.getElementById('step-1'),
         'step-2': document.getElementById('step-2'),
@@ -52,12 +51,11 @@
     function validateStep(step) {
     const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
-            // Skip validation for #Additional-Information
+
             if (input.id === 'Additional-Information') {
                 continue;
             }
             
-            // Check if the field is visible and its parent element is visible as well
             if (input.style.display !== 'none' && input.offsetParent !== null) {
                 if (input.type === 'select-one') {
                     if (input.selectedIndex === 0) {
@@ -76,7 +74,7 @@
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
             showStep(currentStep);
-            scrollToFormTop(); // Scroll to the top of the form after showing the next step
+            scrollToFormTop();
         } else {
             alert('Please fill out all required fields before proceeding.');
         }
@@ -93,10 +91,19 @@
             resetNumberOfGuestsField();
             resetGuestArrangements();
         }
+    
+        if (currentStep === 'step-5') {
+            const additionalInfoField = document.getElementById('Additional-Information');
+            if (additionalInfoField) {
+                additionalInfoField.value = '';
+            }
+        }
+    
         currentStep = getPrevStep(currentStep);
         showStep(currentStep);
-        scrollToFormTop(); // Scroll to the top of the form after showing the previous step
+        scrollToFormTop(); 
     });
+
 
     function getNextStep(current) {
         return hierarchicalSteps[current]?.next || current;
@@ -112,14 +119,14 @@
         const isMobile = window.innerWidth <= 767; // Common breakpoint for mobile devices
     
         if (isMobile) {
-            // Mobile behavior: Scroll to the top of #form-section
+
             if (apptInqHeading) {
                 apptInqHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 console.warn("Form section not found.");
             }
         } else {
-            // Desktop behavior: Scroll to the top of #landing-div
+
             if (landingDiv) {
                 landingDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
@@ -158,14 +165,13 @@
         });
     }
 
-    // Call the function to update service labels
     updateServiceLabels();
 
     // Initial setup
     showStep(currentStep);
     console.log("Step navigation elements initialized");
 
-    let originalLabelTexts = {}; // Declare in a higher scope to store original label texts
+    let originalLabelTexts = {};
 
     const inputsToLabels = {
         'Name-Single': 'Service-Single-Label',
@@ -178,7 +184,6 @@
         'Name-Couple-3': 'Service-Couple-3-Label'
     };
 
-    // Store the original label text for each label
     Object.keys(inputsToLabels).forEach(nameId => {
         const labelId = inputsToLabels[nameId];
         const labelElement = document.getElementById(labelId);
@@ -187,7 +192,6 @@
         }
     });
 
-    // Function to update labels based on input value
     Object.keys(inputsToLabels).forEach(nameId => {
         const inputField = document.getElementById(nameId);
         const labelId = inputsToLabels[nameId];
@@ -208,7 +212,6 @@
 
     const selects = document.querySelectorAll('select.floating-input');
 
-    // Function to reset labels for select elements with default values
     function resetLabelsForDefaultSelects() {
         selects.forEach(select => {
             const label = select.nextElementSibling;
@@ -224,29 +227,26 @@
         });
     }
 
-    // Event listener for select elements to manage label states dynamically
     selects.forEach(select => {
         const label = select.nextElementSibling;
 
         if (label) {
-            // Initial state check based on the select's current value
+
             if (!select.value || select.value === "") {
                 label.classList.remove('active');
             } else {
                 label.classList.add('active');
             }
 
-            // Listen for changes in the select element
             select.addEventListener('change', function() {
                 if (!this.value || this.value === "") {
                     label.classList.remove('active');
-                    this.blur(); // Blur to trigger the label movement
+                    this.blur();
                 } else {
                     label.classList.add('active');
                 }
             });
 
-            // Optional blur event to ensure label behavior
             select.addEventListener('blur', function() {
                 if (!this.value || this.value === "") {
                     label.classList.remove('active');
@@ -257,7 +257,6 @@
         }
     });
 
-    // Event listener for the previous button to trigger the label reset
     if (prevBtn) {
         prevBtn.addEventListener('click', function() {
             console.log("Previous button clicked");
@@ -281,18 +280,17 @@
             'Name-Couple-3': 'Service-Couple-3-Label'
         };
     
-        // Clear the input fields and revert labels to original text
         Object.keys(inputsToLabels).forEach(nameId => {
             const inputField = document.getElementById(nameId);
             const labelId = inputsToLabels[nameId];
             const labelElement = document.getElementById(labelId);
     
             if (inputField) {
-                inputField.value = ''; // Clear the value of the input field
+                inputField.value = '';
             }
     
             if (labelElement && originalLabelTexts[labelId]) {
-                labelElement.innerText = originalLabelTexts[labelId]; // Revert to the original text
+                labelElement.innerText = originalLabelTexts[labelId];
             }
         });
     }
@@ -303,7 +301,7 @@
         if (form) {
             form.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter') {
-                    event.preventDefault(); // Prevents form submission when Enter is pressed
+                    event.preventDefault();
                 }
             });
         }
@@ -453,7 +451,7 @@
     
         console.log("DOM fully loaded and parsed");
     
-        populateReviewStep(); // Ensure this runs after the DOM is ready
+        populateReviewStep();
     });
     
     function populateReviewStep() {
@@ -483,19 +481,19 @@
                         }
     
                         if (value) {
-                            combinedValue += value + ' '; // Combine values, separate with a space or comma as needed
+                            combinedValue += value + ' ';
                         }
                     }
                 });
     
                 if (combinedValue.trim()) {
                     valueDiv.innerText = combinedValue.trim();
-                    row.style.display = 'flex'; // Ensure the row is displayed
+                    row.style.display = 'flex';
                 } else {
-                    row.style.display = 'none'; // Hide the row if no values are found
+                    row.style.display = 'none';
                 }
             } else {
-                row.style.display = 'none'; // Hide the row if the data-value-id attribute is not found
+                row.style.display = 'none';
             }
         });
     }
@@ -505,10 +503,10 @@
         'step-2': document.getElementById('step-2'),
         'step-3': document.getElementById('step-3'),
         'step-4': document.getElementById('step-4'),
-        'step-5': document.getElementById('step-5'), // review step
+        'step-5': document.getElementById('step-5'),
     };
 
-    // SHOW STEP-8 TEMPLATE SCRIPT
+    // SHOW STEP-4 TEMPLATE SCRIPT
 
     const numberOfGuestsSelect = document.getElementById('Number-of-Guests');
     const guestArrangementSelect2 = document.getElementById('2-Guest-Arrangement');
@@ -626,7 +624,6 @@
         handleTemplateVisibility();
     });
 
-    // Initial setup
     hideAllTemplates();
 
     // NUMBER OF GUESTS CONDITIONALS SCRIPT
@@ -713,7 +710,6 @@
         handleGuestArrangements();
     });
 
-    // Initial setup
     hideAllGuestArrangements();
 
     // REMOVE EMPTY FIELDS SCRIPT
@@ -775,7 +771,6 @@
         });
     }
     
-    // Form submission handling
     var form = document.getElementById('Appointment-Inquiry');
     if (form) {
         console.log("Form element found");
@@ -783,8 +778,8 @@
             event.preventDefault();
             console.log("Form submission handler initialized");
     
-            removeEmptyFields(); // Remove empty fields before submission
-            form.submit(); // Submit the form
+            removeEmptyFields();
+            form.submit();
             console.log("Form submitted via Webflow's native handling");
         });
     } else {
@@ -861,7 +856,6 @@
         };
     });
     
-    // Function to reset fields and hide elements based on the selected parent field for each set
     function resetAndHideChildrenCoupleSet(parentSelect, setId) {
         switch (parentSelect.id) {
             case `Service-${setId}`:
@@ -938,7 +932,6 @@
         }
     }
     
-    // Function to hide all fields for a specific set
     function hideCoupleSetConditionals(setId) {
         elements[setId].couplePackage.style.display = 'none';
         labels[setId].couplePackageLabel.style.display = 'none';
@@ -977,7 +970,6 @@
         elements[setId].otherServicesInfo.style.display = 'none';
     }
     
-    // Function to handle conditional display of elements for a specific set
     function handleCoupleSetConditionals(setId) {
         hideCoupleSetConditionals(setId);
     
@@ -1055,7 +1047,6 @@
         }
     }
     
-    // Add event listeners and handle initial conditions for all sets
     ['Couple', 'Couple-1', 'Couple-2', 'Couple-3'].forEach(setId => {
         document.getElementById(`Service-${setId}`).addEventListener('change', function() {
             resetAndHideChildrenCoupleSet(this, setId);
@@ -1086,7 +1077,7 @@
             handleCoupleSetConditionals(setId);
         });
     
-        hideCoupleSetConditionals(setId); // Initial hide of all elements
+        hideCoupleSetConditionals(setId);
     });
 
     // SINGLE SETS CONDITIONALS SCRIPT
@@ -1121,7 +1112,6 @@
         };
     });
     
-    // Function to reset fields and hide elements based on the selected parent field for each set
     function resetAndHideChildrenSingleSet(parentSelect, setId) {
         switch (parentSelect.id) {
             case `Service-${setId}`:
@@ -1166,7 +1156,6 @@
         }
     }
     
-    // Function to hide all fields for a specific set
     function hideSingleSetConditionals(setId) {
         elementsSingle[setId].singlePackage.style.display = 'none';
         labelsSingle[setId].singlePackageLabel.style.display = 'none';
@@ -1189,7 +1178,6 @@
         elementsSingle[setId].multipleServicesInfo.style.display = 'none';
     }
     
-    // Function to handle conditional display of elements for a specific set
     function handleSingleSetConditionals(setId) {
         hideSingleSetConditionals(setId);
     
@@ -1236,7 +1224,6 @@
         }
     }
     
-    // Add event listeners and handle initial conditions for all sets
     ['Single', 'Single-1', 'Single-2', 'Single-3'].forEach(setId => {
         document.getElementById(`Service-${setId}`).addEventListener('change', function() {
             resetAndHideChildrenSingleSet(this, setId);
@@ -1257,5 +1244,3 @@
     
         hideSingleSetConditionals(setId); // Initial hide of all elements
     });
-
-    
