@@ -1,10 +1,8 @@
-// MAIN STEP HANDLING SCRIPT
+    // MAIN STEP HANDLING SCRIPT
 
-console.log("Script started");
-
-// MAIN STEP HANDLING SCRIPT
-
-document.addEventListener('DOMContentLoaded', function () {
+    console.log("Script started");
+    
+    document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
 
     disableEnterKeySubmission('Appointment-Inquiry');
@@ -31,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'step-4': { next: 'step-5', prev: 'step-3' },
         'step-5': { prev: 'step-4' },
     };
-
+    
     function showStep(step) {
         Object.keys(steps).forEach(key => {
             steps[key].style.display = key === step ? 'block' : 'none';
@@ -50,10 +48,15 @@ document.addEventListener('DOMContentLoaded', function () {
             populateReviewStep();
         }
     }
-
+    
     function validateStep(step) {
-        const inputs = steps[step].querySelectorAll('input, select, textarea');
+    const inputs = steps[step].querySelectorAll('input, select, textarea');
         for (let input of inputs) {
+            // Skip validation for #Additional-Information
+            if (input.id === 'Additional-Information') {
+                continue;
+            }
+            
             // Check if the field is visible and its parent element is visible as well
             if (input.style.display !== 'none' && input.offsetParent !== null) {
                 if (input.type === 'select-one') {
@@ -68,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return true;
     }
 
+    
     nextBtn.addEventListener('click', function () {
         if (validateStep(currentStep)) {
             currentStep = getNextStep(currentStep);
@@ -712,26 +716,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initial setup
     hideAllGuestArrangements();
 
-    // SERVICES CONDITIONALS SCRIPT
-
-    // Define resetField function
-    function resetField(field) {
-        if (field) {
-            if (field.tagName === 'SELECT') {
-                field.selectedIndex = 0;
-            } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
-                field.value = '';
-            }
-        }
-    }
-
-    // Define hideField function
-    function hideField(field) {
-        if (field) {
-            field.style.display = 'none';
-        }
-    }
-
     // REMOVE EMPTY FIELDS SCRIPT
     
     function removeEmptyFields() {
@@ -807,8 +791,25 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("Form element not found");
     }
 
+    // SERVICES CONDITIONALS SCRIPT
 
-    // COUPLE SERVICE ORIGINAL SET CONDITIONALS SCRIPT
+    function resetField(field) {
+        if (field) {
+            if (field.tagName === 'SELECT') {
+                field.selectedIndex = 0;
+            } else if (field.tagName === 'TEXTAREA' || field.tagName === 'INPUT') {
+                field.value = '';
+            }
+        }
+    }
+
+    function hideField(field) {
+        if (field) {
+            field.style.display = 'none';
+        }
+    }
+
+    // COUPLE SETS CONDITIONALS SCRIPT
 
     const elements = {};
     const labels = {};
@@ -1088,7 +1089,7 @@ document.addEventListener('DOMContentLoaded', function () {
         hideCoupleSetConditionals(setId); // Initial hide of all elements
     });
 
-    // SINGLE SERVICE SETS CONDITIONALS SCRIPT
+    // SINGLE SETS CONDITIONALS SCRIPT
 
     const elementsSingle = {};
     const labelsSingle = {};
