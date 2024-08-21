@@ -383,6 +383,13 @@
                 element.style.display = 'none';
             }
         });
+
+        const serviceCoupleElement = document.getElementById('Service-Couple');
+        if (serviceCoupleElement) {
+            serviceCoupleElement.style.display = 'flex';
+        } else {
+            console.warn("Element with ID 'Service-Couple' not found.");
+        }
     
         document.getElementById('Service-Single').style.display = 'flex';
         document.getElementById('Service-Couple').style.display = 'flex';
