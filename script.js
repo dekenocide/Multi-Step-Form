@@ -506,7 +506,7 @@
         'step-5': document.getElementById('step-5'),
     };
 
-    // SHOW STEP-4 TEMPLATE SCRIPT
+    // SHOW STEP-3 TEMPLATE SCRIPT
 
     const numberOfGuestsSelect = document.getElementById('Number-of-Guests');
     const guestArrangementSelect2 = document.getElementById('2-Guest-Arrangement');
